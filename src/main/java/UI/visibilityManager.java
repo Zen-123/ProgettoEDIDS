@@ -9,7 +9,8 @@ public class visibilityManager {
     }
 
     public void showMenuScreen(){
-
+        ui.titleNamePanel.setVisible(true);
+        ui.menuButtonPanel.setVisible(true);
 
         ui.mainTextPanel.setVisible(false);
         ui.mainTextFieldPanel.setVisible(false);
