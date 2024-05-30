@@ -14,14 +14,16 @@ public class visibilityManager {
 
         ui.mainTextPanel.setVisible(false);
         ui.mainTextFieldPanel.setVisible(false);
+        ui.mainCharacterSelectionPanel.setVisible(false);
     }
     public void showStartScreen(){
-
-        ui.titleNamePanel.setVisible(false);
         ui.menuButtonPanel.setVisible(false);
 
+        ui.titleNamePanel.setVisible(true);
         ui.mainTextPanel.setVisible(true);
         ui.mainTextFieldPanel.setVisible(true);
+        ui.mainCharacterSelectionPanel.setVisible(true);
+
     }
 
 
