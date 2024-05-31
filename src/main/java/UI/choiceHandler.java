@@ -1,7 +1,5 @@
 package UI;
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -27,6 +25,9 @@ public class choiceHandler implements ActionListener {
                 break;
             case "Exit":
                 System.exit(0);
+                break;
+            case "Start game":
+                vManager.showGameScreen();
                 break;
         }
     }
