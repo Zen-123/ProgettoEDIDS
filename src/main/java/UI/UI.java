@@ -338,6 +338,8 @@ public class UI {
         commandTextField.setPreferredSize(new Dimension(50, 30));
         commandTextField.setFont(textFont);
         commandTextField.setForeground(Color.white);
+        commandTextField.addActionListener(handler);
+        commandTextField.setActionCommand("save");
         commandPanel.add(commandTextField);
 
     }
@@ -440,7 +442,6 @@ public class UI {
         nameLabel.setBorder(new EmptyBorder(0,10,0,0));
         statPanel.add(nameLabel);
     }
-
     private void setCharacterLabel(){
         characterLabel  = new JLabel("Character: ");
         characterLabel.setForeground(Color.white);
@@ -448,7 +449,6 @@ public class UI {
         characterLabel.setBorder(new EmptyBorder(0,10,0,0));
         statPanel.add(characterLabel);
     }
-
     private void setHpLabel(){
         hpLabel  = new JLabel("HP: ");
         hpLabel.setForeground(Color.white);
@@ -463,7 +463,6 @@ public class UI {
         inventoryWeight.setBorder(new EmptyBorder(0,10,0,0));
         statPanel.add(inventoryWeight);
     }
-
     private void setPotionLabel(){
         potionLabel  = new JLabel("Potion: ");
         potionLabel.setForeground(Color.white);
@@ -478,7 +477,6 @@ public class UI {
         weaponLabel.setBorder(new EmptyBorder(0,10,0,0));
         statPanel.add(weaponLabel);
     }
-
     private void setMoneyLabel(){
         moneyLabel  = new JLabel("Money: ");
         moneyLabel.setForeground(Color.white);
