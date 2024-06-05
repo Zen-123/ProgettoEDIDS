@@ -382,7 +382,8 @@ public class UI {
         mainTextArea.setFont(normalFont);
         mainTextPanel.add(mainTextArea);
     }
-
+    
+    //questo è il pannello dove gestisco l'output delle azioni / racconto la storia
     private void setMessageTextPanel(){
         messageTextPanel = new JPanel();
         messageTextPanel.setBackground(Color.black);
@@ -390,7 +391,7 @@ public class UI {
         messageTextPanel.setBorder(BorderFactory.createLineBorder(Color.darkGray));
 
 
-        messageTextArea = new JTextArea("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        messageTextArea = new JTextArea("Benvenuto in Dungeon Master progetto di EDIDS, bella ziiii");
         messageTextArea.setBounds(0, 0, 750, 50);
         messageTextArea.setBorder(new EmptyBorder(10,0,0,0));
         messageTextArea.setBackground(Color.black);

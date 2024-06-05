@@ -12,7 +12,6 @@ import Board.Board;
 import Board.Cell;
 import Board.reference;
 
-
 public class gameBoard extends JPanel implements KeyListener {
     
 
@@ -32,7 +31,7 @@ public class gameBoard extends JPanel implements KeyListener {
 		g.setColor(Color.BLACK);
         //rettangolo che contiene entrambi i menu stats-map
         g.fillRect(0, 0, 850, 350);
-        g.setColor(Color.GRAY); //devo riuscire a stampare il colore 64 64 64
+        g.setColor(Color.darkGray); //devo riuscire a stampare il colore 64 64 64
         g.drawRect(0, 0, 550, 349);
 		g.drawRect(550, -5, 300, 450);
         //aggiorna ogni volta il menu stats del player
@@ -131,24 +130,31 @@ public class gameBoard extends JPanel implements KeyListener {
     public boolean checkwhatyoubumped(int x, int y){
         switch(reference.currentStanza.getSsymbol(x,y)) {
             case '#':
+                reference.ui.messageTextArea.setText("Hai trovato un muro\n...\n...");
                 return false;
             case '.':
+                reference.ui.messageTextArea.setText("...\n...\n...");
                 return true;
             case 'C':
                 reference.player.setMonete((int)((Math.random() * 15)+3));
+                reference.ui.messageTextArea.setText("Hai trovato delle monete\n...\n...");
                 return true;  
             case 'f':
                 reference.player.setKey();
+                reference.ui.messageTextArea.setText("O O ... Hai trovato una chiave\n...\n...");
                 return true;
             case 'F':
                 reference.player.setGoldKey();
+                reference.ui.messageTextArea.setText("O O ... Hai trovato una chiave d'orata\nchissa che cosa aprirà?\n...");
                 return true;
             case 'H':
                 reference.player.addPozioni();
+                reference.ui.messageTextArea.setText("Hai trovato una pozione\n...\n...");
                 return true;
             case 'N':
                 if(reference.currentStanza.getDrive_to_N() != 0){
                     reference.player.setspawnTo('S');
+                    reference.ui.messageTextArea.setText("Questa è la porta Nord!\nVuoi attraversarla?\n Scrivi Nord per entrare altrimenti no ");
                     reference.filereader.fileToWrite(reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt");
                     changeRoom(reference.currentStanza.getDrive_to_N());
                 }
@@ -156,6 +162,7 @@ public class gameBoard extends JPanel implements KeyListener {
             case 'E':
                 if(reference.currentStanza.getDrive_to_E() != 0){
                     reference.player.setspawnTo('W');
+                    reference.ui.messageTextArea.setText("Questa è la porta Est!\nVuoi attraversarla?\n Scrivi Est per entrare altrimenti no ");
                     reference.filereader.fileToWrite(reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt");
                     changeRoom(reference.currentStanza.getDrive_to_E());
                 }
@@ -163,6 +170,7 @@ public class gameBoard extends JPanel implements KeyListener {
             case 'S':
                 if(reference.currentStanza.getDrive_to_S() != 0){
                     reference.player.setspawnTo('N');
+                    reference.ui.messageTextArea.setText("Questa è la porta Sud!\nVuoi attraversarla?\n Scrivi Sud per entrare altrimenti no ");
                     reference.filereader.fileToWrite(reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt");
                     changeRoom(reference.currentStanza.getDrive_to_S());
                 }
@@ -170,6 +178,7 @@ public class gameBoard extends JPanel implements KeyListener {
             case 'W':
                 if(reference.currentStanza.getDrive_to_W() != 0){
                     reference.player.setspawnTo('E');
+                    reference.ui.messageTextArea.setText("Questa è la porta Ovest!\nVuoi attraversarla?\n Scrivi Ovest per entrare altrimenti no ");
                     reference.filereader.fileToWrite(reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt");
                     changeRoom(reference.currentStanza.getDrive_to_W());
                 }
@@ -178,17 +187,12 @@ public class gameBoard extends JPanel implements KeyListener {
                 for (int i = 0; i < reference.currentStanza.lista_item.size(); i++) {
                     if(x == reference.currentStanza.lista_item.get(i).getX() && y == reference.currentStanza.lista_item.get(i).getY()){
                         //ti sei imbattutto in un item
+                        reference.ui.messageTextArea.setText("Hai trovato un oggetto!\nVuoi raccoglierlo?\n Scrivi take per prenderlo altrimenti no ");
                         if(reference.currentStanza.lista_item.get(i).isIsSword()){
-                            System.out.println("E una spada");
-                            //qui chiedi se lo vuoi prendere o meno se si entri in take item e fai il controllo se puoi farlo
-                            //se puoi ed è ad esempio una spada scambi la spada,raccogli quella nuova e sposti il personaggio
-                            //e l'oggetto che il player teneva lo metti nella posizione vecchia del player e lo aggiungi
-                            //alla lista degli item della stanza e cambi i parametri del player
                             reference.player.takeItem(reference.currentStanza.lista_item.get(i));
                             return true;
                         }
                         else{
-                            System.out.println("E una armatura");
                             reference.player.takeItem(reference.currentStanza.lista_item.get(i));
                             return true;
                         }
@@ -197,25 +201,27 @@ public class gameBoard extends JPanel implements KeyListener {
                 return false;
             case 'P':
                 if(reference.player.getKey() >=1){
+                    reference.ui.messageTextArea.setText("Apri la porta...\n...\n Aperta!");
                     reference.player.removeKey();
                     return true;
                 }else{
-                    System.out.println("Ti serve una chiave per aprire la porta!");
+                    reference.ui.messageTextArea.setText("Questa è una porta!\nTi serve una chiave per aprirla\n ...");
                     return false;
                 }
             case 'G':
                 if(reference.player.getGoldkey() >=1){
                     reference.player.removeGoldKey();
                     reference.player.setspawnTo('G');
+                    reference.ui.messageTextArea.setText("Apri il portone...\n...\n Aperto! Benvenuto nella stanza del Boss!");
                     reference.filereader.fileToWrite(reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt");
                     changeRoom(reference.currentStanza.getDrive_to_boss());                    
                 }else{
-                    System.out.println("Ti serve una chiave per aprire la porta!");
+                    reference.ui.messageTextArea.setText("Che strano portone luminescente...\nNecessiti di qualche tipo di chiave speciale forse...\n ");
                     
                 }
                 break;
             default:
-                System.out.println("non hai trovato niente");
+            reference.ui.messageTextArea.setText("Oooopsss sembra che qualcosa sia andato storto nel gioco\n...\n...");
         }
         return false;
     }

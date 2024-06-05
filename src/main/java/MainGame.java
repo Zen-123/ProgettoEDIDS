@@ -2,17 +2,15 @@ import Board.Board;
 import Board.Readfile;
 import Board.reference;
 import Player.Player;
-import UI.UI;
 import UI.visibilityManager;
 
 public class MainGame {
 
-    UI ui = new UI();
-    visibilityManager manager = new visibilityManager(ui);
+    visibilityManager manager = new visibilityManager(reference.ui);
 
     public MainGame(){
 
-        ui.createUI();
+        reference.ui.createUI();
         manager.showMenuScreen();
 
     }
