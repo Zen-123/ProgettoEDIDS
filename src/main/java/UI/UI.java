@@ -1,10 +1,24 @@
 package UI;
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.metal.MetalToggleButtonUI;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.metal.MetalToggleButtonUI;
+
 
 
 public class UI {
@@ -97,7 +111,7 @@ public class UI {
 
 
     }
-
+    //button start del menu personaggi che ti porta nel pannello di gioco 
     private void setStartGameButton(){
         startGameButton = new JButton("START");
         startGameButton.setBackground(Color.black);
@@ -117,9 +131,10 @@ public class UI {
         });
         mainCharacterSelectionPanel.add(startGameButton);
     }
-
+    //radio button guerriero
     private void setWarriorButton(){
         warriorButton = new JRadioButton("Warrior");
+        warriorButton.setName("Warrior");
         warriorButton.setBackground(Color.black);
         warriorButton.setForeground(Color.WHITE);
         warriorButton.setFont(normalFont);
@@ -146,9 +161,10 @@ public class UI {
         mainCharacterButtonPanel.add(warriorButton);
 
     }
-
+    //radio button arciere
     private void setArcherButton(){
         archerButton = new JRadioButton("Archer");
+        warriorButton.setName("Archer");
         archerButton.setBackground(Color.black);
         archerButton.setForeground(Color.WHITE);
         archerButton.setFont(normalFont);
@@ -176,9 +192,10 @@ public class UI {
         mainCharacterButtonPanel.add(archerButton);
 
     }
-
+    //radio button ladro
     private void setThiefButton(){
         thiefButton = new JRadioButton("Thief");
+        warriorButton.setName("Thief");
         thiefButton.setBackground(Color.black);
         thiefButton.setForeground(Color.WHITE);
         thiefButton.setFont(normalFont);
@@ -249,6 +266,7 @@ public class UI {
     }
     private void setTextField(){
         mainTextFieldPanel = new JPanel();
+        mainTextFieldPanel.setName("namepanel");
         mainTextFieldPanel.setBounds(20, 250, 600, 50);
         mainTextFieldPanel.setBackground(Color.black);
         window.add(mainTextFieldPanel);
@@ -278,19 +296,28 @@ public class UI {
         window.add(commandPanel);
 
     }
+    // questa è la mappa dove è presente il gioco
     private void setMapPanel(){
         mapPanel = new JPanel();
-        mapPanel.setBounds(130,30,300,300);
-        mapPanel.setBackground(Color.black);
-        mapPanel.setBorder(BorderFactory.createLineBorder(Color.darkGray));
-        mapPanel.setLayout(null);
+        mapPanel.setVisible(true);
+		// mapPanel.setResizable(false);
 
-        setSouthLabel();
+        mapPanel.setBounds(0,0,850,350);
+        mapPanel.setBackground(Color.black);
+        // mapPanel.setBorder(BorderFactory.createLineBorder(Color.darkGray));
+        // mapPanel.setLayout(null);
+
+        gameBoard gameB = new gameBoard();
+		mapPanel.add(gameB);
+		gameB.requestFocusInWindow();
+        
+        /* setSouthLabel();
         setNorthLabel();
         setWestLabel();
-        setEastLabel();
-
-        window.add(mapPanel);
+        setEastLabel(); */
+        window.getContentPane().add(mapPanel);
+        mapPanel.setLayout(new GridLayout(1, 0, 0, 0));
+        // window.add(mapPanel);
     }
 
     private void setSouthLabel(){
@@ -405,37 +432,37 @@ public class UI {
         window.add(mainCharacterSelectionPanel);
 
     }
-
+    
+    //pannello di gioco player con tutti i parametri di gioco
     private void setGameScreenPanel(){
         statPanel = new JPanel();
         statPanel.setBounds(550, -5, 300, 455 );
         statPanel.setBackground(Color.black);
         statPanel.setBorder(BorderFactory.createLineBorder(Color.darkGray));
-        statPanel.setLayout(new GridLayout(10,1));
+        statPanel.setLayout(new GridLayout(0,1));
         statLabel  = new JLabel("Stats: ");
         statLabel.setBorder(new EmptyBorder(10,10,0,0));
         statLabel.setForeground(Color.white);
         statLabel.setFont(normalFont);
         statPanel.add(statLabel);
-        setNameLabel();
+        /* setNameLabel();
         setCharacterLabel();
         setHpLabel();
         setInventoryWeight();
         setPotionLabel();
         setWeaponLabel();
         setMoneyLabel();
-        setRoomNumberLabel();
-        setMessageTextPanel();
+        setRoomNumberLabel(); */
+
+        setMessageTextPanel(); 
         setMapPanel();
         window.add(statPanel);
-
-
-
     }
 
     private void setNameLabel(){
         nameLabel  = new JLabel("Name: ");
         nameLabel.setForeground(Color.white);
+        nameLabel.setEnabled(false);
         nameLabel.setFont(normalFont);
         nameLabel.setBorder(new EmptyBorder(0,10,0,0));
         statPanel.add(nameLabel);
@@ -444,6 +471,7 @@ public class UI {
     private void setCharacterLabel(){
         characterLabel  = new JLabel("Character: ");
         characterLabel.setForeground(Color.white);
+        characterLabel.setEnabled(false);
         characterLabel.setFont(normalFont);
         characterLabel.setBorder(new EmptyBorder(0,10,0,0));
         statPanel.add(characterLabel);
@@ -453,12 +481,14 @@ public class UI {
         hpLabel  = new JLabel("HP: ");
         hpLabel.setForeground(Color.white);
         hpLabel.setFont(normalFont);
+        hpLabel.setEnabled(false);
         hpLabel.setBorder(new EmptyBorder(0,10,0,0));
         statPanel.add(hpLabel);
     }
     private void setInventoryWeight(){
         inventoryWeight  = new JLabel("Weight: ");
         inventoryWeight.setForeground(Color.white);
+        inventoryWeight.setEnabled(false);
         inventoryWeight.setFont(normalFont);
         inventoryWeight.setBorder(new EmptyBorder(0,10,0,0));
         statPanel.add(inventoryWeight);
@@ -467,6 +497,7 @@ public class UI {
     private void setPotionLabel(){
         potionLabel  = new JLabel("Potion: ");
         potionLabel.setForeground(Color.white);
+        potionLabel.setEnabled(false);
         potionLabel.setFont(normalFont);
         potionLabel.setBorder(new EmptyBorder(0,10,0,0));
         statPanel.add(potionLabel);
@@ -474,6 +505,7 @@ public class UI {
     private void setWeaponLabel(){
         weaponLabel  = new JLabel("Weapon: ");
         weaponLabel.setForeground(Color.white);
+        weaponLabel.setEnabled(false);
         weaponLabel.setFont(normalFont);
         weaponLabel.setBorder(new EmptyBorder(0,10,0,0));
         statPanel.add(weaponLabel);
@@ -482,6 +514,7 @@ public class UI {
     private void setMoneyLabel(){
         moneyLabel  = new JLabel("Money: ");
         moneyLabel.setForeground(Color.white);
+        moneyLabel.setEnabled(false);
         moneyLabel.setFont(normalFont);
         moneyLabel.setBorder(new EmptyBorder(0,10,0,0));
         statPanel.add(moneyLabel);
@@ -489,6 +522,7 @@ public class UI {
     private void setRoomNumberLabel(){
         roomNumberLabel  = new JLabel("Room: ");
         roomNumberLabel.setForeground(Color.white);
+        roomNumberLabel.setEnabled(false);
         roomNumberLabel.setFont(normalFont);
         roomNumberLabel.setBorder(new EmptyBorder(0,10,0,0));
         statPanel.add(roomNumberLabel);
