@@ -1,4 +1,4 @@
-package UI;
+package ManageFile;
 
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
@@ -17,20 +17,20 @@ public class uploadFile {
     private Regions region = Regions.EU_WEST_3;
 
     public uploadFile(String filename) throws IOException {
-        InputStream object =  new FileInputStream("FileLoad/"+filename);
+        InputStream file =  new FileInputStream("FileLoad/"+filename);
         AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(region).build();
 
         ObjectMetadata metadata  = new ObjectMetadata();
-        metadata.setContentLength(object.available());
+        metadata.setContentLength(file.available());
         metadata.setContentType("file.txt");
         try{
-            PutObjectRequest request = new PutObjectRequest(bucketName, filename, object, metadata);
+            PutObjectRequest request = new PutObjectRequest(bucketName, filename, file, metadata);
             s3Client.putObject(request);
             System.out.println("Salvataggio avvenuto con successo!");
         }catch (AmazonS3Exception e){
             e.printStackTrace();
         } finally {
-            object.close();
+            file.close();
         }
     }
 
