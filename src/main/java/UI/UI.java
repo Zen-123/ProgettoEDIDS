@@ -3,30 +3,33 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.metal.MetalToggleButtonUI;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 
-
+/**
+ * Classe per la gestione della user interface utilizzando la libreria java swing
+ */
 public class UI {
-    JFrame window;
-    JPanel titleNamePanel, menuButtonPanel,  mainTextPanel, mainTextFieldPanel, mainCharacterSelectionPanel, statPanel, messageTextPanel, commandPanel, mapPanel, loadMessagePanel, loadTextFieldPanel;
-    JLabel titleNameLabel,mainTextArea, mainCharacterSelectionLabel, startGameLabel, statLabel, nameLabel, characterLabel, hpLabel, inventoryWeight, potionLabel, weaponLabel, moneyLabel, roomNumberLabel, commandLabel, southLabel, northLabel, eastLabel, westLabel;
+    private JFrame window;
+    public JPanel titleNamePanel, menuButtonPanel,  mainTextPanel, mainTextFieldPanel, mainCharacterSelectionPanel, statPanel, messageTextPanel, commandPanel, mapPanel, loadMessagePanel, loadTextFieldPanel;
+    private JLabel titleNameLabel,mainTextArea, mainCharacterSelectionLabel, startGameLabel, statLabel, nameLabel, characterLabel, hpLabel, inventoryWeight, potionLabel, weaponLabel, moneyLabel, roomNumberLabel, commandLabel, southLabel, northLabel, eastLabel, westLabel;
     public JLabel loadLabel1, loadLabel2, loadLabel3, loadLabel4;
-    JButton startButton, loadButton, exitButton, startGameButton, commandButton, loadMessageButton;
-    JRadioButton warriorButton, archerButton, thiefButton;
-    JTextArea messageTextArea;
-    ButtonGroup mainCharacterButtonPanel;
-    JTextField textField, commandTextField, commandLoadTextField;
-    Font titleFont = new Font("Serif", Font.PLAIN, 70);
-    Font normalFont = new Font("Serif",Font.PLAIN, 26);
-    choiceHandler handler = new choiceHandler(this);
-    String fileName;
-    File fileLoad;
+    private JButton startButton, loadButton, exitButton, startGameButton, commandButton, loadMessageButton;
+    private JRadioButton warriorButton, archerButton, thiefButton;
+    private JTextArea messageTextArea;
+    private ButtonGroup mainCharacterButtonPanel;
+    public JTextField textField, commandTextField, commandLoadTextField;
+    private Font titleFont = new Font("Serif", Font.PLAIN, 70);
+    private  Font normalFont = new Font("Serif",Font.PLAIN, 26);
+    ActionListener handler = new choiceHandler(this);
+    private String fileName;
+    private File fileLoad;
 
-    //Test branch
+    /**
+     * Metodo che permette la crezione della UI
+     */
     public void createUI(){
 
         setWindow();
@@ -42,7 +45,12 @@ public class UI {
 
 
     }
-    //Metodo che gestisce la finestra di gioco
+
+
+    /*
+        Metodo che gestisce la finestra di gioco effettiva
+        creazione e gestione di window
+     */
     private void setWindow(){
         window = new JFrame();
         window.setSize(800, 600);
@@ -50,7 +58,13 @@ public class UI {
         window.getContentPane().setBackground(Color.black);
         window.setLayout(null);
     }
-    //Metodo che gestisce il titolo del gioco
+
+
+    /*
+        Metodo che gestisce il titleNamePanel
+        creazione e gestione di titleNamePanel, titleNameLabel
+        pagina: menuScreen
+     */
     private void setTitle(){
         titleNamePanel = new JPanel();
         titleNamePanel.setBounds(100,50,600,100);
@@ -62,6 +76,12 @@ public class UI {
         window.add(titleNamePanel);
     }
 
+
+    /*
+        Metodo che gestisce il menuButtonPanel che va a contenere i bottoni Start, Load, Save
+        vengono creati i seguenti componenti: menuButtonPanel, startButton, loadButton, exitButton
+        pagina: menuScreen
+     */
     private void setMenuButtonPanel( ) {
         menuButtonPanel = new JPanel();
         menuButtonPanel.setBounds(250, 250, 300, 250);
@@ -73,6 +93,12 @@ public class UI {
         window.add(menuButtonPanel);
     }
 
+
+    /*
+        Metodo per la gestione del ButtonGroup
+        sono creati i componenti:mainCharacterButtonPanel, warriorButton, archerButton, thiefButton
+        pagina: StartScreen
+     */
     private void setMainCharacterButtonPanel(){
         mainCharacterButtonPanel = new ButtonGroup();
         setWarriorButton();
@@ -82,7 +108,10 @@ public class UI {
 
     }
 
-    //metodo che gestisce il bottone Start
+    /*
+        metodo che gestisce il bottone startButton
+        pagina: menuScreen
+     */
     private void setStartButton(){
         startButton = new JButton("START");
         startButton.setBackground(Color.black);
@@ -92,6 +121,7 @@ public class UI {
         startButton.addActionListener(handler);
         startButton.setActionCommand("Start");
 
+        //creazione effetto di hover sul bottone
         startButton.addMouseListener( new MouseAdapter(){
             public void mouseEntered(MouseEvent evt) {
                 startButton.setBackground(Color.blue);
@@ -106,6 +136,10 @@ public class UI {
 
     }
 
+    /*
+        Metodo che gestice il bottone startGameButton
+        pagina: StartScreen
+     */
     private void setStartGameButton(){
         startGameButton = new JButton("START");
         startGameButton.setBackground(Color.black);
@@ -126,6 +160,10 @@ public class UI {
         mainCharacterSelectionPanel.add(startGameButton);
     }
 
+    /*
+        Metodo che gestice il bottone warriorButton
+        pagina: StartScreen
+     */
     private void setWarriorButton(){
         warriorButton = new JRadioButton("Warrior");
         warriorButton.setBackground(Color.black);
@@ -135,6 +173,7 @@ public class UI {
         warriorButton.addActionListener(handler);
         warriorButton.setActionCommand("warrior");
 
+        //hover
         warriorButton.addMouseListener( new MouseAdapter(){
             public void mouseEntered(MouseEvent evt) {
                 warriorButton.setBackground(Color.blue);
@@ -144,6 +183,7 @@ public class UI {
                 warriorButton.setBackground(Color.black);
             }
         });
+        //selezione del bottone
         warriorButton.setUI(new MetalToggleButtonUI() {
             @Override
             protected Color getSelectColor() {
@@ -155,6 +195,11 @@ public class UI {
 
     }
 
+
+    /*
+        Metodo che gestice il bottone archerButton
+        pagina: StartScreen
+    */
     private void setArcherButton(){
         archerButton = new JRadioButton("Archer");
         archerButton.setBackground(Color.black);
@@ -163,7 +208,7 @@ public class UI {
         archerButton.setFocusPainted(false);
         archerButton.addActionListener(handler);
         archerButton.setActionCommand("archer");
-
+        //hover
         archerButton.addMouseListener( new MouseAdapter(){
             public void mouseEntered(MouseEvent evt) {
                 archerButton.setBackground(Color.blue);
@@ -173,6 +218,7 @@ public class UI {
                 archerButton.setBackground(Color.black);
             }
         });
+        //selezione del bottone
         archerButton.setUI(new MetalToggleButtonUI() {
             @Override
             protected Color getSelectColor() {
@@ -180,11 +226,15 @@ public class UI {
             }
         });
         mainCharacterSelectionPanel.add(archerButton);
-
         mainCharacterButtonPanel.add(archerButton);
 
     }
 
+
+    /*
+        Metodo che gestice il bottone thiefButton
+        pagina: StartScreen
+    */
     private void setThiefButton(){
         thiefButton = new JRadioButton("Thief");
         thiefButton.setBackground(Color.black);
@@ -194,6 +244,7 @@ public class UI {
         thiefButton.addActionListener(handler);
         thiefButton.setActionCommand("thief");
 
+        //hover
         thiefButton.addMouseListener( new MouseAdapter(){
             public void mouseEntered(MouseEvent evt) {
                 thiefButton.setBackground(Color.blue);
@@ -203,6 +254,7 @@ public class UI {
                 thiefButton.setBackground(Color.black);
             }
         });
+        //selezione del bottone
         thiefButton.setUI(new MetalToggleButtonUI() {
             @Override
             protected Color getSelectColor() {
@@ -213,7 +265,12 @@ public class UI {
         mainCharacterButtonPanel.add(thiefButton);
 
     }
-    //Metodo che gestice il bottone Exit
+
+
+    /*
+        Metodo che gestice il bottone exitButton
+        pagina: menuScreen
+     */
     private void setExitButton(){
         exitButton = new JButton("EXIT");
         exitButton.setBackground(Color.black);
@@ -234,6 +291,12 @@ public class UI {
         menuButtonPanel.add(exitButton);
 
     }
+
+
+    /*
+        Metodo che gestice il bottone loadButton
+        pagina: menuScreen
+     */
     private void setLoadButton(){
         loadButton = new JButton("LOAD");
         loadButton.setBackground(Color.black);
@@ -255,6 +318,12 @@ public class UI {
         menuButtonPanel.add(loadButton);
 
     }
+
+
+    /*
+        Metodo che gestisce il textField per inserimento di comandi da parte di utente
+        pagina: StartScreen
+     */
     private void setTextField(){
         mainTextFieldPanel = new JPanel();
         mainTextFieldPanel.setBounds(20, 250, 600, 50);
@@ -270,6 +339,12 @@ public class UI {
         mainTextFieldPanel.add(textField);
 
     }
+
+
+    /*
+    * Metodo per la visualizzazione della mappa
+    * pagina: gameScreen
+    * */
     private void setMapPanel(){
         mapPanel = new JPanel();
         mapPanel.setBounds(130,30,300,300);
@@ -277,6 +352,7 @@ public class UI {
         mapPanel.setBorder(BorderFactory.createLineBorder(Color.darkGray));
         mapPanel.setLayout(null);
 
+        //metodi per segnalare le posizioni disponibili
         setSouthLabel();
         setNorthLabel();
         setWestLabel();
@@ -285,6 +361,11 @@ public class UI {
         window.add(mapPanel);
     }
 
+
+    /*
+    Metodo per segnalare la posizione S
+    pagina: gameScreen
+     */
     private void setSouthLabel(){
         southLabel = new JLabel("S");
         southLabel.setForeground(Color.white);
@@ -294,6 +375,11 @@ public class UI {
         mapPanel.add(southLabel);
     }
 
+
+    /*
+       Metodo per segnalare la posizione N
+       pagina: gameScreen
+    */
     private void setNorthLabel(){
         northLabel = new JLabel("N");
         northLabel.setForeground(Color.white);
@@ -303,6 +389,11 @@ public class UI {
         mapPanel.add(northLabel);
     }
 
+
+    /*
+       Metodo per segnalare la posizione W
+       pagina: gameScreen
+    */
     private void setWestLabel(){
         westLabel = new JLabel("W");
         westLabel.setForeground(Color.white);
@@ -312,6 +403,10 @@ public class UI {
         mapPanel.add(westLabel);
     }
 
+    /*
+       Metodo per segnalare la posizione E
+       pagina: gameScreen
+    */
     private void setEastLabel(){
         eastLabel = new JLabel("E");
         eastLabel.setForeground(Color.white);
@@ -321,6 +416,11 @@ public class UI {
         mapPanel.add(eastLabel);
     }
 
+
+    /*
+    Metodo per la gestione del commandTextField, che permette all'utente di giocare inserendo comandi testuali
+    pagina: gameScreen
+     */
     private void setCommandPanel(){
         commandPanel = new JPanel();
         commandPanel.setBounds(-10, 350,560, 100);
@@ -333,9 +433,12 @@ public class UI {
         commandLabel.setForeground(Color.white);
         commandLabel.setFont(normalFont);
         commandPanel.add(commandLabel);
+
+        //metodo per la gestione effettiva del commantTextField
         setCommandTextField();
 
 
+        //visualizzazione gestita in modo migliore tramite GroupLayout
         GroupLayout layout = new GroupLayout(commandPanel);
         commandPanel.setLayout(layout);
         layout.setAutoCreateGaps(true);
@@ -360,6 +463,10 @@ public class UI {
 
     }
 
+    /*
+    Metodo per la gestione  commandTextField e commandButton
+    pagina: gameScreen
+     */
     private void setCommandTextField(){
         Font textFont = new Font("SansSerif", Font.BOLD, 15);
         commandTextField = new JTextField( 20);
@@ -376,6 +483,7 @@ public class UI {
         commandButton.setActionCommand("input");
         commandButton.setFocusPainted(false);
         commandButton.setFont(textFont);
+        //hover
         commandButton.addMouseListener( new MouseAdapter(){
             public void mouseEntered(MouseEvent evt) {
                 commandButton.setBackground(Color.blue);
@@ -389,7 +497,10 @@ public class UI {
 
 
     }
-    //Metodo che gestisce il bottone load
+    /*
+    Metodo per la gestione del mainTextPanel, mainTextArea per mostrare a video un messaggio
+    pagina: startGame
+     */
     private void setMainTextPanel(){
         mainTextPanel = new JPanel();
         mainTextPanel.setBounds(-10, 200, 600, 100);
@@ -404,6 +515,11 @@ public class UI {
         mainTextPanel.add(mainTextArea);
     }
 
+
+    /*
+    Metodo che mostra a video i testi durante il gioco, gestisce i componenti messageTextPanel,messageTextArea
+    pagina: gameScreen
+     */
     private void setMessageTextPanel(){
         messageTextPanel = new JPanel();
         messageTextPanel.setBackground(Color.black);
@@ -428,6 +544,9 @@ public class UI {
 
 
     }
+    /*
+        Metodo per la gestione di interfaccia completa della pagina startScreen
+     */
     private void setMainCharacterSelectionPanel(){
         mainCharacterSelectionPanel = new JPanel();
         mainCharacterSelectionPanel.setBounds(100,300, 400, 400);
@@ -440,20 +559,26 @@ public class UI {
         mainCharacterSelectionLabel.setForeground(Color.white);
         mainCharacterSelectionLabel.setFont(normalFont);
         mainCharacterSelectionPanel.add(mainCharacterSelectionLabel);
+
+        //setta i bottoni warriorButton, archerButton, thiefButton
         setMainCharacterButtonPanel();
+
         startGameLabel = new JLabel("Press START to begin the game.");
         startGameLabel.setBorder(new EmptyBorder(10,0,0,0));
         startGameLabel.setBounds(150, 450, 400, 50);
         startGameLabel.setBackground(Color.black);
         startGameLabel.setForeground(Color.white);
         startGameLabel.setFont(normalFont);
-        mainCharacterSelectionPanel.add(startGameLabel);
+
+        //metodi per la gestione di invio comandi testuali da parte di utente e bottone startButton
         setStartGameButton();
         setCommandPanel();
         window.add(mainCharacterSelectionPanel);
 
     }
-
+    /*
+    Metodo per la gestione di interfaccia completa della pagina gameScreen
+    */
     private void setGameScreenPanel(){
         statPanel = new JPanel();
         statPanel.setBounds(550, -5, 300, 455 );
@@ -465,6 +590,7 @@ public class UI {
         statLabel.setForeground(Color.white);
         statLabel.setFont(normalFont);
         statPanel.add(statLabel);
+        //metodi che vanno ad impostare tutti i dati del giocatore e li mostrano a video
         setNameLabel();
         setCharacterLabel();
         setHpLabel();
@@ -481,6 +607,10 @@ public class UI {
 
     }
 
+    /*
+    metodo che mostra il nome del giocatore
+    pagina: gameScreen
+     */
     private void setNameLabel(){
         nameLabel  = new JLabel("Name: ");
         nameLabel.setForeground(Color.white);
@@ -488,6 +618,11 @@ public class UI {
         nameLabel.setBorder(new EmptyBorder(0,10,0,0));
         statPanel.add(nameLabel);
     }
+
+    /*
+   metodo che mostra il personaggio scelto dal giocatore
+   pagina: gameScreen
+    */
     private void setCharacterLabel(){
         characterLabel  = new JLabel("Character: ");
         characterLabel.setForeground(Color.white);
@@ -495,6 +630,11 @@ public class UI {
         characterLabel.setBorder(new EmptyBorder(0,10,0,0));
         statPanel.add(characterLabel);
     }
+
+    /*
+       metodo che mostra la vita del giocatore
+       pagina: gameScreen
+    */
     private void setHpLabel(){
         hpLabel  = new JLabel("HP: ");
         hpLabel.setForeground(Color.white);
@@ -502,6 +642,11 @@ public class UI {
         hpLabel.setBorder(new EmptyBorder(0,10,0,0));
         statPanel.add(hpLabel);
     }
+
+    /*
+       metodo che mostra il peso dell'inventario del giocatore
+       pagina: gameScreen
+    */
     private void setInventoryWeight(){
         inventoryWeight  = new JLabel("Weight: ");
         inventoryWeight.setForeground(Color.white);
@@ -509,6 +654,11 @@ public class UI {
         inventoryWeight.setBorder(new EmptyBorder(0,10,0,0));
         statPanel.add(inventoryWeight);
     }
+
+    /*
+       metodo che mostra il numero di pozioni del giocatore
+       pagina: gameScreen
+    */
     private void setPotionLabel(){
         potionLabel  = new JLabel("Potion: ");
         potionLabel.setForeground(Color.white);
@@ -516,6 +666,11 @@ public class UI {
         potionLabel.setBorder(new EmptyBorder(0,10,0,0));
         statPanel.add(potionLabel);
     }
+
+    /*
+        metodo che mostra l'arma del giocatore
+        pagina: gameScreen
+    */
     private void setWeaponLabel(){
         weaponLabel  = new JLabel("Weapon: ");
         weaponLabel.setForeground(Color.white);
@@ -523,6 +678,11 @@ public class UI {
         weaponLabel.setBorder(new EmptyBorder(0,10,0,0));
         statPanel.add(weaponLabel);
     }
+
+    /*
+       metodo che mostra i soldi del giocatore
+       pagina: gameScreen
+    */
     private void setMoneyLabel(){
         moneyLabel  = new JLabel("Money: ");
         moneyLabel.setForeground(Color.white);
@@ -530,6 +690,11 @@ public class UI {
         moneyLabel.setBorder(new EmptyBorder(0,10,0,0));
         statPanel.add(moneyLabel);
     }
+
+    /*
+       metodo che mostra la stanza in cui si trova il giocatore
+       pagina: gameScreen
+    */
     private void setRoomNumberLabel(){
         roomNumberLabel  = new JLabel("Room: ");
         roomNumberLabel.setForeground(Color.white);
@@ -538,22 +703,34 @@ public class UI {
         statPanel.add(roomNumberLabel);
     }
 
+    /*
+       metodo che gestisce la pagina di load
+    */
     private void setLoadMessagePanel(){
         loadMessagePanel = new JPanel();
         loadMessagePanel.setBounds(200, 50, 400, 400);
         loadMessagePanel.setBorder(BorderFactory.createLineBorder(Color.darkGray));
         loadMessagePanel.setBackground(Color.black);
         loadMessagePanel.setLayout(new GridLayout(4,1));
+
+        //metodi che vanno ad impostare il contenuto degli slot di salvataggio
         setLoadLabel1();
         setLoadLabel2();
         setLoadLabel3();
         setLoadLabel4();
+
+        //metodo che gestice il commandLoadTextField per inserimento testuale da parte di utente
         setCommandLoadTextField();
+
+        // metodo per la gestione del loadMessageButton
         setLoadMessageButton();
         window.add(loadMessagePanel);
         window.add(loadTextFieldPanel);
     }
-
+    /*
+        Metodo che gestisce il loadMessageButton per inviare i dati al choiceHandler
+        pagina: loadScreen
+     */
     private void setLoadMessageButton() {
         loadMessageButton = new JButton("Enter");
         loadMessageButton.setForeground(Color.white);
@@ -567,7 +744,10 @@ public class UI {
 
 
     }
-
+    /*
+       Metodo che gestisce il commandLoadTextField per fare inserire ad utente i comandi
+       pagina: loadScreen
+    */
     private void setCommandLoadTextField(){
         Font textFont = new Font("SansSerif", Font.BOLD, 15);
         loadTextFieldPanel =  new JPanel();
@@ -582,6 +762,11 @@ public class UI {
         commandLoadTextField.setForeground(Color.white);
         loadTextFieldPanel.add(commandLoadTextField);
     }
+
+    /*
+    metodo per la gestione dello slot di salvataggio 1
+    pagina: loadScreen
+     */
     private void setLoadLabel1(){
 
         loadLabel1 = new JLabel();
@@ -600,6 +785,10 @@ public class UI {
 
     }
 
+    /*
+      metodo per la gestione dello slot di salvataggio 2
+      pagina: loadScreen
+       */
     private void setLoadLabel2(){
 
         loadLabel2 = new JLabel();
@@ -619,6 +808,10 @@ public class UI {
 
     }
 
+    /*
+      metodo per la gestione dello slot di salvataggio 3
+      pagina: loadScreen
+   */
     private void setLoadLabel3(){
 
         loadLabel3 = new JLabel();
@@ -636,6 +829,11 @@ public class UI {
 
 
     }
+
+    /*
+      metodo per la gestione dello slot di salvataggio 4
+      pagina: loadScreen
+   */
     public void setLoadLabel4(){
 
         loadLabel4 = new JLabel();
@@ -653,7 +851,10 @@ public class UI {
 
 
     }
-
+    /*
+      metodo per la gestione degli alert durante il comando "save"
+      pagina: gameScreen
+       */
     public int setAlertMenu(int value){
         if (value == 1){
             JOptionPane.showMessageDialog(commandPanel, "You have run out of available save slots, use \"save (1-4)\" to overwrite the available save slots", "Confirmation", JOptionPane.WARNING_MESSAGE );
