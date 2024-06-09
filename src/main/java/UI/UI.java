@@ -20,7 +20,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.metal.MetalToggleButtonUI;
 
 
-
 public class UI {
     JFrame window;
     JPanel titleNamePanel, menuButtonPanel,  mainTextPanel, mainTextFieldPanel, mainCharacterSelectionPanel, statPanel, messageTextPanel, commandPanel, mapPanel;
@@ -28,11 +27,13 @@ public class UI {
     JButton startButton, loadButton, exitButton, startGameButton;
     JRadioButton warriorButton, archerButton, thiefButton;
     JTextArea messageTextArea;
+    static gameBoard gameB;
     ButtonGroup mainCharacterButtonPanel;
     JTextField textField, commandTextField;
     Font titleFont = new Font("Serif", Font.PLAIN, 70);
     Font normalFont = new Font("Serif",Font.PLAIN, 26);
     choiceHandler handler = new choiceHandler(this);
+    boolean goOn = true;
 
     public void createUI(){
 
@@ -296,18 +297,18 @@ public class UI {
         window.add(commandPanel);
 
     }
+
     // questa è la mappa dove è presente il gioco
     private void setMapPanel(){
         mapPanel = new JPanel();
         mapPanel.setVisible(true);
 		// mapPanel.setResizable(false);
-
         mapPanel.setBounds(0,0,850,350);
         mapPanel.setBackground(Color.black);
         // mapPanel.setBorder(BorderFactory.createLineBorder(Color.darkGray));
         // mapPanel.setLayout(null);
 
-        gameBoard gameB = new gameBoard();
+        gameB = new gameBoard();
 		mapPanel.add(gameB);
 		gameB.requestFocusInWindow();
         

@@ -1,7 +1,5 @@
 package Player;
 
-import Board.reference;
-
 public class Player extends entity{
     private String nome;
     private int vita;
@@ -52,6 +50,7 @@ public class Player extends entity{
     }
     public void removeKey(){
         this.key -= 1;
+        this.peso -= 5;
     }
     public void setspawnTo(char s){
         this.spawnInto = s;
@@ -79,21 +78,26 @@ public class Player extends entity{
     }
     public void addPozioni(){
         num_pozioni++;
-        peso += 5;
+        this.peso += 5;
     }
     public void usePozioni(){
-        num_pozioni--;
-        if(this.vita > 70){
-            this.vita = 100;
-        }else{
-            this.vita += 30;
-        }   
+        if(this.num_pozioni > 0){
+            num_pozioni--;
+            if(this.vita > 70){
+                this.vita = 100;
+                this.peso -= 5;
+            }else{
+                this.vita += 30;
+                this.peso -= 5;
+            }   
+        }
     }
     public void takeItem(Item item){
         //qui decide se raccogliere l'item, se puo farlo e se lo fa cosa gli da è permesso solo una spada o una armatura
-        if(reference.player.hasSword && item != null){
-
-        }
+        if(item != null && item.isSword){
+            this.spada = item;
+        }else
+            this.armatura = item;
     }
     public int getMonete() {
         return monete;
@@ -155,5 +159,13 @@ public class Player extends entity{
 
     public void setHasArmour(boolean hasArmour) {
         this.hasArmour = hasArmour;
+    }
+
+    public void setVita(int vita) {
+        this.vita = vita;
+    }
+    public void takeDamage(int danno){
+        if(danno < 0)
+            this.vita += danno; 
     }
 }

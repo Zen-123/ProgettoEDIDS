@@ -2,7 +2,7 @@ package Board;
 
 import java.util.ArrayList;
 import Player.Item;
-
+import Player.mostro;
 public class Board{
 
     public static int getDrive_to_boss() {
@@ -11,6 +11,7 @@ public class Board{
     public ArrayList<ArrayList<Cell>> cellestanza;
     public ArrayList<String> ss;
     public ArrayList<Item> lista_item;
+    public ArrayList<mostro> lista_mostri;
     private int row;
     private int column;
     private int ID_Stanza;  
@@ -30,10 +31,11 @@ public class Board{
         this.row = ss.get(0).length();
         this.cellestanza = new ArrayList<ArrayList<Cell>>();
         this.lista_item = new ArrayList<Item>();
-        populateBoard(ss);
+        this.lista_mostri = new ArrayList<mostro>();
+        populateBoard(ss,false);
     }
     public Board(int id_stanza, boolean verification){
-        reference.alreadybeen = !verification;
+        reference.alreadybeen = verification;
         this.ss = new ArrayList<String>();
         String temp = "src/main/java/Board/Stanzeold/stanza_"+id_stanza+".txt";
         this.ID_Stanza = id_stanza;
@@ -43,17 +45,16 @@ public class Board{
         this.row = ss.get(0).length();
         this.cellestanza = new ArrayList<ArrayList<Cell>>();
         this.lista_item = new ArrayList<Item>();
-        populateBoard(ss);
+        this.lista_mostri = new ArrayList<mostro>();
+        populateBoard(ss,true);
     }
-    public void populateBoard(ArrayList<String> strings){
+    public void populateBoard(ArrayList<String> strings,boolean ver){
         //serve x assegnare alla stanza presente che porta ti porta nella next stanza
         this.setDrive_to_N(strings.get(strings.size()-1).charAt(0));
         this.setDrive_to_E(strings.get(strings.size()-1).charAt(1));
         this.setDrive_to_W(strings.get(strings.size()-1).charAt(2));
         this.setDrive_to_S(strings.get(strings.size()-1).charAt(3));
         // strings.remove(strings.get(strings.size()-1));
-        int item_iterator = 0;
-        int monster_iterator = 0;
         //riempimento del array di celle dalla stringa del readfile
         for (int i = 0; i < strings.size(); i++) {
             cellestanza.add(new ArrayList<Cell>());
@@ -67,11 +68,9 @@ public class Board{
                         cellestanza.get(i).add(Cell.FREE);
                     break;
                     case 'N':
-                        
                         cellestanza.get(i).add(Cell.NORD);
                     break;
-                    case 'S':
-                    
+                    case 'S':              
                         cellestanza.get(i).add(Cell.SUD);
                     break;
                     case 'W':
@@ -84,19 +83,20 @@ public class Board{
                         cellestanza.get(i).add(Cell.BOSSROOM);
                     break;
                     case 'I':
-                        lista_item.add(func.generateItem(j,i));
-                        lista_item.get(item_iterator).setX(j);
-                        lista_item.get(item_iterator).setY(i);
-                        item_iterator++;
+                        if(ver == false){
+                            lista_item.add(func.generateItem(j,i));
+                        }
                         cellestanza.get(i).add(Cell.ITEM);
                     break;
                     case 'M':
-                        //genero un monster random e lo aggiungo alla lista
-
+                        if(ver == false){
+                            lista_mostri.add(func.generateMonster(j,i));
+                        }
                         cellestanza.get(i).add(Cell.MONSTER);
                     break;
                     case 'B':
                         //è il boss
+                        lista_mostri.add(func.generateBoss(j,i));
                         cellestanza.get(i).add(Cell.BOSS);
                     break;
                     case 'f':
@@ -140,6 +140,9 @@ public class Board{
     
     public char getSsymbol(int x, int y){
         return cellestanza.get(y).get(x).getSymbol();
+    }
+    public void setSsymbol(int x, int y,char simbol){
+        this.cellestanza.get(y).get(x).setSymbol(simbol);
     }
     public int getRow(){
         return row;

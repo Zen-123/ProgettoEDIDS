@@ -3,8 +3,7 @@ package UI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
-public class choiceHandler implements ActionListener {
+public class choiceHandler implements ActionListener{
 
     UI userInterfaceHandler;
     /*
@@ -31,7 +30,6 @@ public class choiceHandler implements ActionListener {
                 break;
         }
     }
-
 }
 
 
