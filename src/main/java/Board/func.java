@@ -18,12 +18,12 @@ public class func{
         int choose = (int)(Math.random() * 7);
         Item a;
         if(choose % 2 == 0){//pari è spada
-            a = new Item("spada", (int)(Math.random() * 15) + 6, (int)(Math.random() * 5) + 3, 0,true,reference.curr_stanza,false);
+            a = new Item("spada", (int)(Math.random() * 25) + 6, (int)(Math.random() * 9) + 2, 0,true,reference.curr_stanza,false);
             a.setX(x);
             a.setY(y);
             a.setSymbol('I');
         }else{//dispari è un armatura
-            a = new Item("armatura", 0, 0, (int)((Math.random() * 15) + 2),false,reference.curr_stanza,false);
+            a = new Item("armatura", 0, 0, (int)((Math.random() * 25) + 2),false,reference.curr_stanza,false);
             a.setX(x);
             a.setY(y);
             a.setSymbol('I');
@@ -52,16 +52,16 @@ public class func{
                 m = new mostro("scheletro",5,1,1,5,reference.curr_stanza);
                 break;
             case 2:
-                m = new mostro("goblin",8,1,2,10,reference.curr_stanza);
+                m = new mostro("goblin",7,1,2,10,reference.curr_stanza);
                 break;
             case 3:
                 m = new mostro("nano",11,3,5,15,reference.curr_stanza);
                 break;
             case 4:
-                m = new mostro("strega",15,5,3,20,reference.curr_stanza);
+                m = new mostro("strega",15,10,3,20,reference.curr_stanza);
                 break;
             default:
-                m= new mostro(); 
+                m = new mostro(); 
         }
         m.setX(x);
         m.setY(y);
@@ -70,7 +70,7 @@ public class func{
     }
     public static mostro generateBoss(int x, int y){
         mostro m;
-        m = new mostro("Piovra",20,10,8,5,reference.curr_stanza);
+        m = new mostro("Piovra",40,15,10,70,reference.curr_stanza);
         m.setX(x);
         m.setY(y);
         m.setSymbol('B');

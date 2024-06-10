@@ -13,10 +13,24 @@ import Board.Board;
 import Board.Cell;
 import Board.reference;
 import Player.Item;
+import Player.mostro;
+
+// risistemare il codice
+//mettere apposto i metodi per togliere righe
+//controllare i vari import
+//togliere tutte le variabili e classi inutilizzate
+//togliere il get symbol utilizzarne uno univoco
+//reset parametri popolare
+//spostare tutti metodi di gestione nella classe func
+//sistemare parametri di gioco dannno difesa e tutto
+//utilizzare un get set univoco
+//manca da sistemare parte grafica con controlli di input
+//file di testo riempirli e cancellarli una volta utilizzati se non li salvi 
+//controllo errore e input del file ecc
+
+//ce un errore nella lista dei mostri quando combattono e vengono uccisi
 
 public class gameBoard extends JPanel implements KeyListener {
-    
-
     public gameBoard(){
         addKeyListener(this);
         this.setFocusable(true);
@@ -135,50 +149,55 @@ public class gameBoard extends JPanel implements KeyListener {
                 reference.ui.messageTextArea.setText("Hai trovato un muro\n...\n...");
                 return false;
             case '.':
-                reference.ui.messageTextArea.setText("...\n...\n...");
-                
+                reference.ui.messageTextArea.setText("...\n...\n...");      
                 return true;
             case 'C':
                 reference.player.setMonete((int)((Math.random() * 15)+3));
                 reference.ui.messageTextArea.setText("Hai raccolto delle monete\n...\n...");
-                updateMonsterPosition();
                 return true;  
             case 'f':
-                reference.player.setKey();
-                reference.ui.messageTextArea.setText("O O ... Hai trovato una chiave\n...\n...");
-                updateMonsterPosition();
-                return true;
+                if(reference.player.getPeso() <= 95){
+                    reference.player.setKey();
+                    reference.ui.messageTextArea.setText("O O ... Hai trovato una chiave\n...\n...");
+                    return true;
+                }else
+                    return false;
+                
             case 'F':
-                reference.player.setGoldKey();
-                reference.ui.messageTextArea.setText("O O ... Hai trovato una chiave d'orata\nchissa che cosa aprirà?\n...");
-                updateMonsterPosition();
-                return true;
+                if(reference.player.getPeso() <= 95){
+                    reference.player.setGoldKey();
+                    reference.ui.messageTextArea.setText("O O ... Hai trovato una chiave d'orata\nchissa che cosa aprirà?\n...");
+                    return true;
+                }else
+                    return false;
             case 'H':
-                reference.player.addPozioni();
-                reference.ui.messageTextArea.setText("Hai trovato una pozione\n...\n...");
-                updateMonsterPosition();
-                return true;
+                if(reference.player.getPeso() <= 95){
+                    reference.player.addPozioni();
+                    reference.ui.messageTextArea.setText("Hai trovato una pozione\nHai raccolto la pozione\n...");
+                    return true;
+                }else
+                    return false;
             case 'N':
                 if(reference.currentStanza.getDrive_to_N() != 0){ 
-                    reference.ui.messageTextArea.setText("Questa è la porta Nord!\nVuoi attraversarla?\n Scrivi Nord per entrare altrimenti no ");
+                    reference.ui.messageTextArea.setText("Questa è la porta Nord!\nVuoi attraversarla?\nScrivi Nord per entrare altrimenti no ");
                     reference.ui.commandTextField.requestFocus();
                 }
                 break;
             case 'E':
                 if(reference.currentStanza.getDrive_to_E() != 0){
-                    reference.ui.messageTextArea.setText("Questa è la porta Est!\nVuoi attraversarla?\n Scrivi Est per entrare altrimenti no ");
+                    reference.ui.messageTextArea.setText("Questa è la porta Est!\nVuoi attraversarla?\nScrivi Est per entrare altrimenti no ");
                     reference.ui.commandTextField.requestFocus();
                 }
                 break;
             case 'S':
                 if(reference.currentStanza.getDrive_to_S() != 0){
-                    reference.ui.messageTextArea.setText("Questa è la porta Sud!\nVuoi attraversarla?\n Scrivi Sud per entrare altrimenti no ");
+                    reference.ui.messageTextArea.setText("Questa è la porta Sud!\nVuoi attraversarla?\nScrivi Sud per entrare altrimenti no ");
                     reference.ui.commandTextField.requestFocus();
                 }
                 break;
             case 'W':
                 if(reference.currentStanza.getDrive_to_W() != 0){
-                    reference.ui.messageTextArea.setText("Questa è la porta Ovest!\nVuoi attraversarla?\n Scrivi Ovest per entrare altrimenti no ");
+                    reference.ui.messageTextArea.setText("Questa è la porta Ovest!\nVuoi attraversarla?\nScrivi Ovest per entrare altrimenti no ");
                     reference.ui.commandTextField.requestFocus();
                 }
                 break;
@@ -212,7 +231,6 @@ public class gameBoard extends JPanel implements KeyListener {
                 if(reference.player.getKey() >=1){
                     reference.ui.messageTextArea.setText("Apri la porta...\n...\n Aperta!");
                     reference.player.removeKey();
-                    updateMonsterPosition();
                     return true;
                 }else{
                     reference.ui.messageTextArea.setText("Questa è una porta!\nTi serve una chiave per aprirla\n ...");
@@ -223,31 +241,31 @@ public class gameBoard extends JPanel implements KeyListener {
                 for (int i = 0; i < reference.currentStanza.lista_mostri.size(); i++) {
                     if(reference.currentStanza.lista_mostri.get(i).getX() == x && reference.currentStanza.lista_mostri.get(i).getY() == y){
                         reference.mostro = reference.currentStanza.lista_mostri.get(i);
-                        reference.ui.messageTextArea.setText("Hai incontrato un "+reference.mostro.getNome()+"!\nVuoi attaccarlo o scappare?\n"+reference.mostro.getNome()+" danno "+reference.mostro.getDanno()+" difesa "+reference.mostro.getDifesa()+" vita "+reference.mostro.getVita()+"");
+                        reference.ui.messageTextArea.setText("Hai incontrato un "+reference.mostro.getNome()+"!\nVuoi attaccarlo o scappare?\n"+reference.mostro.getNome()+" danno "+reference.mostro.getDanno_max()+" - "+reference.mostro.getDanno_min()+" difesa "+reference.mostro.getDifesa()+" vita "+reference.mostro.getVita()+"");
+                        reference.player.setCanAttack(true);
                     }     
                 }
                 reference.ui.commandTextField.requestFocus();
                 return false;
             case 'G':
-                if(reference.player.getGoldkey() >=1){
+                if(reference.player.getGoldkey() == 1){
                     reference.player.removeGoldKey();
                     reference.player.setspawnTo('G');
                     reference.ui.messageTextArea.setText("Apri il portone...\n...\n Aperto! Benvenuto nella stanza del Boss!");
                     reference.filereader.fileToWrite(reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt");
                     changeRoom(reference.currentStanza.getDrive_to_boss());                    
                 }else{
-                    reference.ui.messageTextArea.setText("Che strano portone luminescente...\nNecessiti di qualche tipo di chiave speciale forse...\n ");
-                    
+                    reference.ui.messageTextArea.setText("Che strano portone luminescente...\nNecessiti di qualche tipo di chiave speciale forse...\n ");  
                 }
                 break;
             default:
-            reference.ui.messageTextArea.setText("Oooopsss sembra che qualcosa sia andato storto nel gioco\n...\n...");
+                reference.ui.messageTextArea.setText("Oooopsss sembra che qualcosa sia andato storto nel gioco\n...\n...");
         }
         return false;
     }
     //metodo che gestisce il cambio di stanza se ci sei gia stato preleva dati dal file StanzeOld
     public void changeRoom(int drive_to){
-        resetParameter();
+
         // stanza vecchia prendi dal file 
         for (int i = 0; i < reference.lista_stanze.size(); i++) {
             if(reference.lista_stanze.get(i).getid() == drive_to){
@@ -288,7 +306,6 @@ public class gameBoard extends JPanel implements KeyListener {
                             reference.currentStanza.cellestanza.get(i).set(j-1,Cell.PLAYER);
                             reference.player.setY(i);
                             reference.player.setX(j-1);
-                            
                             reference.player.setspawnTo('/');
                             reference.currentStanza.cellestanza.get(i).set(j,Cell.WALL);
                             break;
@@ -305,14 +322,13 @@ public class gameBoard extends JPanel implements KeyListener {
                             reference.player.setspawnTo('/');
                             break;
                         default:
-                            System.out.println("Porta spawn non trovato");
+                            reference.ui.messageTextArea.setText("Oooopsss sembra che qualcosa sia andato storto nel trovare la porta di accesso\n...\n...");
                     }
                 }
             }
         }
     }
     //resetta tutte le variabili
-
     public void resetParameter(){
 
     }
@@ -327,8 +343,11 @@ public class gameBoard extends JPanel implements KeyListener {
                     int x = reference.currentStanza.lista_mostri.get(i).getX();
                     int y = reference.currentStanza.lista_mostri.get(i).getY();
                     reference.mostro = reference.currentStanza.lista_mostri.get(i);
-                    switch (choose) {
+                    switch(choose) {
                         case 1:
+                        if(reference.currentStanza.cellestanza.get(y).get(x+1) == Cell.WALL){
+
+                        }else{
                             if(reference.currentStanza.cellestanza.get(y).get(x+1) == Cell.FREE){
                                 if(reference.currentStanza.cellestanza.get(y).get(x).getSymbol() == 'M')
                                     reference.currentStanza.cellestanza.get(y).set(x+1,Cell.MONSTER);
@@ -337,15 +356,20 @@ public class gameBoard extends JPanel implements KeyListener {
 
                                 reference.currentStanza.cellestanza.get(y).set(x,Cell.FREE);
                                 reference.currentStanza.lista_mostri.get(i).setX(x + 1);
+                                break;
                             }
                             else if(reference.currentStanza.cellestanza.get(y).get(x+1) == Cell.PLAYER){
                                 reference.ui.messageTextArea.setText("Hai incontrato un "+reference.mostro.getNome()+"!\n...\n...");
                                 monsterEncounter(0,0,true);
-
                                 reference.ui.commandTextField.requestFocus();
-                            }     
-                        break;
+                                break;
+                            } 
+                        }      
                         case 2:
+                        if(reference.currentStanza.cellestanza.get(y).get(x-1) == Cell.WALL){
+
+                        }
+                        else{
                             if(reference.currentStanza.cellestanza.get(y).get(x-1) == Cell.FREE){
                                 if(reference.currentStanza.cellestanza.get(y).get(x).getSymbol() == 'M')
                                     reference.currentStanza.cellestanza.get(y).set(x-1,Cell.MONSTER);
@@ -353,14 +377,19 @@ public class gameBoard extends JPanel implements KeyListener {
                                     reference.currentStanza.cellestanza.get(y).set(x-1,Cell.BOSS);
                                 reference.currentStanza.cellestanza.get(y).set(x,Cell.FREE);
                                 reference.currentStanza.lista_mostri.get(i).setX(x-1);
+                                break;
                             }
                             else if(reference.currentStanza.cellestanza.get(y).get(x-1) == Cell.PLAYER){
                                 reference.ui.messageTextArea.setText("Hai incontrato un "+reference.mostro.getNome()+"!\n...\n...");
                                 monsterEncounter(0,0,true);
                                 reference.ui.commandTextField.requestFocus();
-                            }  
-                            break;
+                                break;
+                            }
+                        }    
                         case 3:
+                        if(reference.currentStanza.cellestanza.get(y+1).get(x) == Cell.WALL){
+
+                        }else{
                             if(reference.currentStanza.cellestanza.get(y+1).get(x) == Cell.FREE){
                                 if(reference.currentStanza.cellestanza.get(y).get(x).getSymbol() == 'M')
                                     reference.currentStanza.cellestanza.get(y+1).set(x,Cell.MONSTER);
@@ -368,14 +397,19 @@ public class gameBoard extends JPanel implements KeyListener {
                                     reference.currentStanza.cellestanza.get(y+1).set(x,Cell.BOSS);
                                 reference.currentStanza.cellestanza.get(y).set(x,Cell.FREE);
                                 reference.currentStanza.lista_mostri.get(i).setY(y + 1);
+                                break;
                             }
                             else if(reference.currentStanza.cellestanza.get(y+1).get(x) == Cell.PLAYER){
                                 reference.ui.messageTextArea.setText("Hai incontrato un "+reference.mostro.getNome()+"!\n...\n...");
                                 monsterEncounter(0,0,true);
                                 reference.ui.commandTextField.requestFocus();
+                                break;
                             }  
-                            break;
+                        }
                         case 4:
+                        if(reference.currentStanza.cellestanza.get(y-1).get(x) == Cell.WALL){
+
+                        }else{
                             if(reference.currentStanza.cellestanza.get(y-1).get(x) == Cell.FREE){
                                 if(reference.currentStanza.cellestanza.get(y).get(x).getSymbol() == 'M')
                                     reference.currentStanza.cellestanza.get(y-1).set(x,Cell.MONSTER);
@@ -383,13 +417,16 @@ public class gameBoard extends JPanel implements KeyListener {
                                     reference.currentStanza.cellestanza.get(y-1).set(x,Cell.BOSS);
                                 reference.currentStanza.cellestanza.get(y).set(x,Cell.FREE);
                                 reference.currentStanza.lista_mostri.get(i).setY(y - 1);
+                                break;
                             }
                             else if(reference.currentStanza.cellestanza.get(y-1).get(x) == Cell.PLAYER){
                                 reference.ui.messageTextArea.setText("Hai incontrato un "+reference.mostro.getNome()+"!\n...\n...");
                                 monsterEncounter(0,0,true);
                                 reference.ui.commandTextField.requestFocus();
+                                break;
                             }
-                            break;     
+                        }
+                            
                     }
                 }
                 
@@ -397,12 +434,12 @@ public class gameBoard extends JPanel implements KeyListener {
         }
     }
    public void makesomething(){
-    reference.ui.commandTextField.requestFocus();
     reference.ui.commandTextField.addKeyListener(new KeyAdapter() {
         public void keyPressed(KeyEvent e) {
             if(e.getKeyCode() == KeyEvent.VK_ENTER) {
                 switch(reference.ui.commandTextField.getText().toLowerCase()) {
                     case "take":
+                    if(reference.item != null){
                         if(reference.item.getNome() == "spada" && reference.player.isHasSword() == true){
                             //allora dovra buttare la sua spada a terra
                             Item spadadaposare = new Item();
@@ -477,7 +514,10 @@ public class gameBoard extends JPanel implements KeyListener {
                             reference.ui.messageTextArea.setText("...\n...\n...");
                         }
                         updateMonsterPosition();
-                        reference.ui.gameB.requestFocus();
+                    }else{
+                        reference.ui.commandTextField.setText(""); 
+                    }
+                    reference.ui.gameB.requestFocus();
                     break;
                     case "no": 
                         reference.ui.commandTextField.setText("");
@@ -485,11 +525,8 @@ public class gameBoard extends JPanel implements KeyListener {
                         reference.ui.messageTextArea.setText("...\n...\n...");
                         reference.ui.gameB.requestFocus();
                     break;
-                    case "board":
-                        reference.ui.commandTextField.setText("");
-                        reference.ui.gameB.requestFocus();
-                    break;
                     case "apri":
+                        updateMonsterPosition();
                         reference.ui.gameB.requestFocus();
                     break;
                     case "non aprire":
@@ -498,8 +535,9 @@ public class gameBoard extends JPanel implements KeyListener {
                     case "pozione":
                         if(reference.player.getNumpozioni() > 0){
                             reference.player.usePozioni();
-                            reference.ui.messageTextArea.setText("Ti stai curando\n...\n...");
+                            reference.ui.messageTextArea.setText("Ti stai curando\nEra molto dissetante!!\nTi senti molto meglio ora");
                             reference.ui.commandTextField.setText("");
+                            updateMonsterPosition();
                         }else{
                             reference.ui.messageTextArea.setText("Hai finito le pozioni\n...\n...");
                             reference.ui.commandTextField.setText("");
@@ -511,59 +549,65 @@ public class gameBoard extends JPanel implements KeyListener {
                         changeRoom(reference.currentStanza.getDrive_to_N());
                         reference.ui.gameB.requestFocus();
                         reference.ui.commandTextField.setText("");
-                        return;
+                        break;
                     case "sud":
                         reference.player.setspawnTo('N');
                         reference.filereader.fileToWrite(reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt");
                         changeRoom(reference.currentStanza.getDrive_to_S());
                         reference.ui.gameB.requestFocus();
                         reference.ui.commandTextField.setText("");
-                        return;
+                        break;
                     case "est":
                         reference.player.setspawnTo('W');
                         reference.filereader.fileToWrite(reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt");                        
                         changeRoom(reference.currentStanza.getDrive_to_E());
                         reference.ui.gameB.requestFocus();
                         reference.ui.commandTextField.setText("");
-                        return;
+                        break;
                     case "ovest":
                         reference.player.setspawnTo('E');
                         reference.filereader.fileToWrite(reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt");  
                         changeRoom(reference.currentStanza.getDrive_to_W());
                         reference.ui.gameB.requestFocus();
                         reference.ui.commandTextField.setText("");
-                        return;
+                        break;
                     case "attack":
-                        int dannoplayer = reference.player.getSpada().getDanno();
-                        int difesomonster = reference.mostro.getDifesa();
-                        reference.mostro.takeDamage(difesomonster - dannoplayer);
-                        
-                        if(reference.mostro.getVita() <=0){
-                            if(reference.mostro.getSymbol() == 'B'){
-                                reference.ui.messageTextArea.setText("Hai ucciso il BOSS! Hai Vinto!!");
-                                reference.player.setVita(0);
+                        if(reference.currentStanza.lista_mostri.size() > 0 && reference.player.canAttack()){
+                            int dannoplayer = reference.player.getSpada().getDanno();
+                            int difesomonster = reference.mostro.getDifesa();
+                            reference.mostro.takeDamage(difesomonster - dannoplayer);
+                            if(reference.mostro.getVita() <=0){
+                                if(reference.mostro.getSymbol() == 'B'){
+                                    reference.ui.messageTextArea.setText("Hai ucciso il BOSS! Hai Vinto!!");
+                                    reference.player.setMostri_uccisi();
+                                    reference.player.setVita(0);
+                                    reference.mostro = new mostro();
+                                    reference.player.setCanAttack(false);
+                                }else{
+                                    reference.player.setMostri_uccisi();
+                                    reference.currentStanza.cellestanza.get(reference.mostro.getY()).set(reference.mostro.getX(), Cell.FREE);
+                                    reference.ui.gameB.requestFocus();
+                                    reference.ui.messageTextArea.setText("Hai sconfitto il "+reference.mostro.getNome());
+                                    reference.mostro = new mostro();
+                                    reference.player.setCanAttack(false);
+                                } 
                             }else{
-                                reference.currentStanza.cellestanza.get(reference.mostro.getY()).set(reference.mostro.getX(), Cell.FREE);
-                                reference.ui.gameB.requestFocus();
-                                reference.ui.messageTextArea.setText("Hai sconfitto il "+reference.mostro.getNome());
-                            } 
+                                monsterEncounter(dannoplayer,difesomonster,false);
+                            }
+                            reference.ui.commandTextField.setText("");
                         }else{
-                            monsterEncounter(dannoplayer,difesomonster,false);
-                        }
-                        
-                        //monster di colpo i viene colpito e in bae ad attacco e difesa perde una certa vita
-                        //poi chiamo l'update del mostro che attacca il player che si difende in base alle sue stats
-                        //si svolge a turni, quando vita finisce sotto lo 0 muore e cambia cella il player se vince il mostro
-                        //lancio window che comunica che player è stato sconfitto e ha perso
-                        // reference.ui.gameB.requestFocus();
-                        reference.ui.commandTextField.setText("");
+                            reference.ui.commandTextField.setText("");
+                        }  
                         break;
                     case "run":
-                        reference.ui.gameB.requestFocus();
-                        reference.ui.commandTextField.setText("");
+                        if(reference.player.canAttack()){
+                            reference.ui.gameB.requestFocus();
+                            reference.ui.messageTextArea.setText("Hai deciso di scappare via\nDov'è fuggi?Cit.Tarducci\nIl mostro ti starà ancora seguendo?");
+                            reference.ui.commandTextField.setText("");
+                        }   
                     break;
                     case "look":
-                        String temp = "";
+                        String temp = "Ti guardi intorno...vedi molte cose sbrillucicare nel buio\n";
                         if(reference.currentStanza.lista_item.size() > 0){
                             //migliorare grafica di stampa
                             for (int i = 0; i < reference.currentStanza.lista_item.size(); i++) {
@@ -577,6 +621,10 @@ public class gameBoard extends JPanel implements KeyListener {
                     default:
                         reference.ui.commandTextField.setText("");
                 }
+            }else if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+                reference.ui.commandTextField.setText("");
+                reference.ui.gameB.requestFocus();
+                reference.ui.messageTextArea.setText("...\n...\n...");
             }
         }
     });
@@ -588,6 +636,7 @@ public class gameBoard extends JPanel implements KeyListener {
         int difeso = reference.player.getArmour().getDifesa();
         //boolean serve se attack_turn è true sta attaccando il mostro perchè player si e mosso
         //se false allora entrambi fermi e tocca al giocatore quindi mostri danni fatti da giocatore
+        reference.player.setCanAttack(true);
         if(attack_turn)
             reference.ui.messageTextArea.setText(reference.mostro.getNome()+" ti ha inflitto "+danno+" danni, hai bloccato "+difeso+" danni\n");
         else
@@ -598,4 +647,5 @@ public class gameBoard extends JPanel implements KeyListener {
             reference.ui.messageTextArea.setText("Sei morto! Hai perso!");
     }  
    }
+   
 }

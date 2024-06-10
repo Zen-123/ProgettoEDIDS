@@ -362,7 +362,7 @@ public class UI {
         Font textFont = new Font("SansSerif", Font.BOLD, 15);
         commandTextField = new JTextField();
         commandTextField = new JTextField( 30);
-        commandTextField.setBackground(Color.darkGray);
+        commandTextField.setBackground(Color.black);
         commandTextField.setPreferredSize(new Dimension(50, 30));
         commandTextField.setFont(textFont);
         commandTextField.setForeground(Color.white);
@@ -392,7 +392,7 @@ public class UI {
         messageTextPanel.setBorder(BorderFactory.createLineBorder(Color.darkGray));
 
 
-        messageTextArea = new JTextArea("Benvenuto in Dungeon Master progetto di EDIDS, bella ziiii");
+        messageTextArea = new JTextArea("Aaaaaaaaaaaahhhhhhhhhh ....  .... .... ....\nCredo sia stata una pessima idea addentrarsi in quella grotta\nSembra molto tranquillo questo posto però allo stesso tempo mi sento osservato...\nProgetto di EDIDS GRUPPO AAAS");
         messageTextArea.setBounds(0, 0, 750, 50);
         messageTextArea.setBorder(new EmptyBorder(10,0,0,0));
         messageTextArea.setBackground(Color.black);

@@ -72,7 +72,7 @@ public class visibilityManager {
                 reference.player.setMonete(20);
                 reference.player.addNum_pozioni(3);
                 reference.player.setKey();
-                reference.player.addSpada( new Item("spada",8,4,0,true,reference.curr_stanza,true));
+                reference.player.addSpada(new Item("spada",8,4,0,true,reference.curr_stanza,true));
                 reference.player.addArmour(new Item("armatura",0,0,0,false,reference.curr_stanza,true));
                 reference.player.setHasArmour(true);
                 break;

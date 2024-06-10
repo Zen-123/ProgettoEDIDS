@@ -16,6 +16,7 @@ public class Player extends entity{
     private int key;
     private int goldkey;
     private char spawnInto;
+    private boolean canAttack;
 
     public Player(){
         this.nome = " ";
@@ -27,7 +28,7 @@ public class Player extends entity{
         this.hasArmour = false;
         this.peso = 0;
         this.monete = 0;
-        this.mostri_uccisi =0;
+        this.mostri_uccisi = 0;
         this.stanza_presente = 1;
         this.key = 0;
         this.goldkey = 0;
@@ -43,9 +44,11 @@ public class Player extends entity{
         return nome;
     }
     public void addSpada(Item item){
+        this.peso += 20;
         this.spada = item;
     }
     public void addArmour(Item item){
+        this.peso += 30;
         this.armatura = item;
     }
     public void removeKey(){
@@ -92,12 +95,21 @@ public class Player extends entity{
             }   
         }
     }
+    public boolean canAttack(){
+        return this.canAttack;
+    }
+    public void setCanAttack(boolean b){
+        this.canAttack = b;
+    }
     public void takeItem(Item item){
         //qui decide se raccogliere l'item, se puo farlo e se lo fa cosa gli da è permesso solo una spada o una armatura
         if(item != null && item.isSword){
+            
             this.spada = item;
-        }else
+        }else{
+            
             this.armatura = item;
+        }      
     }
     public int getMonete() {
         return monete;
@@ -132,6 +144,7 @@ public class Player extends entity{
         peso += 10;
     }
     public void addNum_pozioni(int v) {
+        this.peso += (v*5);
         this.num_pozioni = v;
     }
     public int getKey() {
@@ -140,32 +153,29 @@ public class Player extends entity{
     public int getGoldkey() {
         return goldkey;
     }  
-
     public void setNome(String nome) {
         this.nome = nome;
     }
-
     public String getCategory() {
         return category;
     }
-
     public void setCategory(String category) {
         this.category = category;
     }
-
     public boolean isHasArmour() {
         return hasArmour;
     }
-
     public void setHasArmour(boolean hasArmour) {
         this.hasArmour = hasArmour;
     }
-
     public void setVita(int vita) {
         this.vita = vita;
     }
     public void takeDamage(int danno){
         if(danno < 0)
             this.vita += danno; 
+    }
+    public void setMostri_uccisi() {
+        this.mostri_uccisi ++;
     }
 }
