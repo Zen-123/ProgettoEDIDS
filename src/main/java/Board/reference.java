@@ -15,6 +15,7 @@ public class reference {
     //var temporali x gestione metodi
     public static Item item;
     public static mostro mostro;
+    public static mostro mostrorun;
     //array di stanze serve x mantenere parametri delle stanze gia completate se si ritorna
     public static ArrayList<Board> lista_stanze = new ArrayList<Board>();
     //stanza momentaneamente presente e id della astanza

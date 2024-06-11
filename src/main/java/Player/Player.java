@@ -44,10 +44,12 @@ public class Player extends entity{
         return nome;
     }
     public void addSpada(Item item){
+        item.setCanAttack(true);
         this.peso += 20;
         this.spada = item;
     }
     public void addArmour(Item item){
+        item.setCanAttack(false);
         this.peso += 30;
         this.armatura = item;
     }
@@ -95,7 +97,7 @@ public class Player extends entity{
             }   
         }
     }
-    public boolean canAttack(){
+    public boolean isAttacking(){
         return this.canAttack;
     }
     public void setCanAttack(boolean b){
@@ -104,10 +106,10 @@ public class Player extends entity{
     public void takeItem(Item item){
         //qui decide se raccogliere l'item, se puo farlo e se lo fa cosa gli da è permesso solo una spada o una armatura
         if(item != null && item.isSword){
-            
+            item.setCanAttack(true);
             this.spada = item;
         }else{
-            
+            item.setCanAttack(false);
             this.armatura = item;
         }      
     }

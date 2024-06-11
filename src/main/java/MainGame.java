@@ -2,6 +2,7 @@ import Board.Board;
 import Board.Readfile;
 import Board.reference;
 import Player.Player;
+import Player.mostro;
 import UI.visibilityManager;
 
 public class MainGame {
@@ -23,6 +24,7 @@ public class MainGame {
     private static void initialGame(){
         reference.player = new Player();
         reference.filereader = new Readfile();
+        reference.mostrorun = new mostro();
         reference.currentStanza = new Board(reference.curr_stanza);
     }
 }

@@ -8,6 +8,7 @@ public class Item extends entity{
     boolean isSword;
     int id_stanza;
     boolean hasTake;
+    boolean canAttack;
 
     public Item(){
         this.nome = "";
@@ -17,6 +18,7 @@ public class Item extends entity{
         this.isSword = false;
         this.id_stanza = 0;
         this.hasTake = false;
+        this.canAttack=false;
     }
     public Item(String nome,int attacco_max, int attacco_min, int difesa,boolean sword,int id,boolean preso){
         this.nome = nome;
@@ -26,6 +28,13 @@ public class Item extends entity{
         this.isSword = sword;
         this.id_stanza = id;
         this.hasTake = preso;
+        this.canAttack=false;
+    }
+    public boolean CanAttack(){
+        return this.canAttack;
+    }
+    public void setCanAttack(boolean can){
+        this.canAttack = can;
     }
     public int getDanno(){
         int danno = (int)(Math.random()*(attacco_max - attacco_min) + attacco_min );

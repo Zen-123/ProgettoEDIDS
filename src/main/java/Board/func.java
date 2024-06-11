@@ -70,7 +70,7 @@ public class func{
     }
     public static mostro generateBoss(int x, int y){
         mostro m;
-        m = new mostro("Piovra",40,15,10,70,reference.curr_stanza);
+        m = new mostro("Piovra",40,15,10,100,reference.curr_stanza);
         m.setX(x);
         m.setY(y);
         m.setSymbol('B');

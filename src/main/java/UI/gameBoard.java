@@ -164,7 +164,7 @@ public class gameBoard extends JPanel implements KeyListener {
                     return false;
                 
             case 'F':
-                if(reference.player.getPeso() <= 95){
+                if(reference.player.getPeso() <= 90){
                     reference.player.setGoldKey();
                     reference.ui.messageTextArea.setText("O O ... Hai trovato una chiave d'orata\nchissa che cosa aprirà?\n...");
                     return true;
@@ -242,7 +242,9 @@ public class gameBoard extends JPanel implements KeyListener {
                     if(reference.currentStanza.lista_mostri.get(i).getX() == x && reference.currentStanza.lista_mostri.get(i).getY() == y){
                         reference.mostro = reference.currentStanza.lista_mostri.get(i);
                         reference.ui.messageTextArea.setText("Hai incontrato un "+reference.mostro.getNome()+"!\nVuoi attaccarlo o scappare?\n"+reference.mostro.getNome()+" danno "+reference.mostro.getDanno_max()+" - "+reference.mostro.getDanno_min()+" difesa "+reference.mostro.getDifesa()+" vita "+reference.mostro.getVita()+"");
+                        reference.player.getSpada().setCanAttack(true);
                         reference.player.setCanAttack(true);
+                        reference.mostrorun = reference.currentStanza.lista_mostri.get(i);
                     }     
                 }
                 reference.ui.commandTextField.requestFocus();
@@ -342,8 +344,9 @@ public class gameBoard extends JPanel implements KeyListener {
                     int choose = (int)(Math.random() * 4 + 1);
                     int x = reference.currentStanza.lista_mostri.get(i).getX();
                     int y = reference.currentStanza.lista_mostri.get(i).getY();
+                    reference.mostro = new mostro();
                     reference.mostro = reference.currentStanza.lista_mostri.get(i);
-                    switch(choose) {
+                    switch(choose){
                         case 1:
                         if(reference.currentStanza.cellestanza.get(y).get(x+1) == Cell.WALL){
 
@@ -360,7 +363,9 @@ public class gameBoard extends JPanel implements KeyListener {
                             }
                             else if(reference.currentStanza.cellestanza.get(y).get(x+1) == Cell.PLAYER){
                                 reference.ui.messageTextArea.setText("Hai incontrato un "+reference.mostro.getNome()+"!\n...\n...");
-                                monsterEncounter(0,0,true);
+                                monsterEncounter(0,reference.mostro,true);
+                                reference.mostrorun = reference.mostro;
+                                reference.player.setCanAttack(false);
                                 reference.ui.commandTextField.requestFocus();
                                 break;
                             } 
@@ -381,7 +386,9 @@ public class gameBoard extends JPanel implements KeyListener {
                             }
                             else if(reference.currentStanza.cellestanza.get(y).get(x-1) == Cell.PLAYER){
                                 reference.ui.messageTextArea.setText("Hai incontrato un "+reference.mostro.getNome()+"!\n...\n...");
-                                monsterEncounter(0,0,true);
+                                monsterEncounter(0,reference.mostro,true);
+                                reference.mostrorun = reference.mostro;
+                                reference.player.setCanAttack(false);
                                 reference.ui.commandTextField.requestFocus();
                                 break;
                             }
@@ -401,7 +408,9 @@ public class gameBoard extends JPanel implements KeyListener {
                             }
                             else if(reference.currentStanza.cellestanza.get(y+1).get(x) == Cell.PLAYER){
                                 reference.ui.messageTextArea.setText("Hai incontrato un "+reference.mostro.getNome()+"!\n...\n...");
-                                monsterEncounter(0,0,true);
+                                monsterEncounter(0,reference.mostro,true);
+                                reference.mostrorun = reference.mostro;
+                                reference.player.setCanAttack(false);
                                 reference.ui.commandTextField.requestFocus();
                                 break;
                             }  
@@ -421,7 +430,9 @@ public class gameBoard extends JPanel implements KeyListener {
                             }
                             else if(reference.currentStanza.cellestanza.get(y-1).get(x) == Cell.PLAYER){
                                 reference.ui.messageTextArea.setText("Hai incontrato un "+reference.mostro.getNome()+"!\n...\n...");
-                                monsterEncounter(0,0,true);
+                                monsterEncounter(0,reference.mostro,true);
+                                reference.mostrorun = reference.mostro;
+                                reference.player.setCanAttack(false);
                                 reference.ui.commandTextField.requestFocus();
                                 break;
                             }
@@ -572,7 +583,7 @@ public class gameBoard extends JPanel implements KeyListener {
                         reference.ui.commandTextField.setText("");
                         break;
                     case "attack":
-                        if(reference.currentStanza.lista_mostri.size() > 0 && reference.player.canAttack()){
+                        if(reference.currentStanza.lista_mostri.size() > 0 && reference.player.getSpada().CanAttack()){
                             int dannoplayer = reference.player.getSpada().getDanno();
                             int difesomonster = reference.mostro.getDifesa();
                             reference.mostro.takeDamage(difesomonster - dannoplayer);
@@ -581,18 +592,18 @@ public class gameBoard extends JPanel implements KeyListener {
                                     reference.ui.messageTextArea.setText("Hai ucciso il BOSS! Hai Vinto!!");
                                     reference.player.setMostri_uccisi();
                                     reference.player.setVita(0);
-                                    reference.mostro = new mostro();
-                                    reference.player.setCanAttack(false);
+                                    reference.mostro = null;
+                                    reference.player.getSpada().setCanAttack(false);
                                 }else{
                                     reference.player.setMostri_uccisi();
                                     reference.currentStanza.cellestanza.get(reference.mostro.getY()).set(reference.mostro.getX(), Cell.FREE);
                                     reference.ui.gameB.requestFocus();
                                     reference.ui.messageTextArea.setText("Hai sconfitto il "+reference.mostro.getNome());
-                                    reference.mostro = new mostro();
-                                    reference.player.setCanAttack(false);
+                                    reference.mostro = null;
+                                    reference.player.getSpada().setCanAttack(false);
                                 } 
                             }else{
-                                monsterEncounter(dannoplayer,difesomonster,false);
+                                monsterEncounter(dannoplayer,reference.mostro,false);
                             }
                             reference.ui.commandTextField.setText("");
                         }else{
@@ -600,10 +611,20 @@ public class gameBoard extends JPanel implements KeyListener {
                         }  
                         break;
                     case "run":
-                        if(reference.player.canAttack()){
-                            reference.ui.gameB.requestFocus();
+                        if(reference.player.isAttacking()){
                             reference.ui.messageTextArea.setText("Hai deciso di scappare via\nDov'è fuggi?Cit.Tarducci\nIl mostro ti starà ancora seguendo?");
                             reference.ui.commandTextField.setText("");
+                            //togliere tutti gli 0 del danno player a monsterencounter
+                            monsterEncounter(0,reference.mostrorun,true);
+                            reference.mostro = null;
+                            reference.player.setCanAttack(false);
+                            reference.ui.gameB.requestFocus();
+                        }else{
+                            reference.ui.messageTextArea.setText("Hai deciso di scappare via\nDov'è fuggi?Cit.Tarducci\nIl mostro ti starà ancora seguendo?");
+                            reference.ui.commandTextField.setText("");
+                            reference.mostro = null;
+                            reference.player.setCanAttack(false);
+                            reference.ui.gameB.requestFocus();
                         }   
                     break;
                     case "look":
@@ -629,18 +650,18 @@ public class gameBoard extends JPanel implements KeyListener {
         }
     });
    }
-   public void monsterEncounter(int dannoplayer,int difesomonster, boolean attack_turn){
-    if(reference.mostro.getVita() > 0){
+   public void monsterEncounter(int dannoplayer,mostro monster, boolean attack_turn){
+    if(monster.getVita() > 0){
         reference.ui.commandTextField.requestFocus();
-        int danno = reference.mostro.getDanno();
+        int danno = monster.getDanno();
         int difeso = reference.player.getArmour().getDifesa();
         //boolean serve se attack_turn è true sta attaccando il mostro perchè player si e mosso
         //se false allora entrambi fermi e tocca al giocatore quindi mostri danni fatti da giocatore
-        reference.player.setCanAttack(true);
+        reference.player.getSpada().setCanAttack(true);
         if(attack_turn)
-            reference.ui.messageTextArea.setText(reference.mostro.getNome()+" ti ha inflitto "+danno+" danni, hai bloccato "+difeso+" danni\n");
+            reference.ui.messageTextArea.setText(monster.getNome()+" ti ha inflitto "+danno+" danni, hai bloccato "+difeso+" danni\n");
         else
-            reference.ui.messageTextArea.setText(reference.mostro.getNome()+" ti ha inflitto "+danno+" danni, hai bloccato "+difeso+" danni\nHai inflitto "+dannoplayer+" danni il "+reference.mostro.getNome()+" ha bloccato "+difesomonster+" danni\n"+reference.mostro.getNome()+" vita: "+reference.mostro.getVita());
+            reference.ui.messageTextArea.setText(monster.getNome()+" ti ha inflitto "+danno+" danni, hai bloccato "+difeso+" danni\nHai inflitto "+dannoplayer+" danni il "+monster.getNome()+" ha bloccato "+monster.getDifesa()+" danni\n"+monster.getNome()+" vita: "+monster.getVita());
         
         reference.player.takeDamage(difeso - danno);
         if(reference.player.getVita() <= 0)
