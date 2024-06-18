@@ -36,6 +36,7 @@ public class visibilityManager {
         ui.mainCharacterSelectionPanel.setVisible(false);
         ui.statPanel.setVisible(false);
         ui.messageTextPanel.setVisible(false);
+        ui.winPanel.setVisible(false);
 
     }
     /**
@@ -47,6 +48,7 @@ public class visibilityManager {
         ui.titleNamePanel.setVisible(true);
         ui.mainTextPanel.setVisible(true);
         ui.mainTextFieldPanel.setVisible(true);
+        ui.textField.setVisible(true);
         ui.mainCharacterSelectionPanel.setVisible(true);
 
 
@@ -58,6 +60,7 @@ public class visibilityManager {
         ui.mapPanel.setVisible(false);
         ui.statPanel.setVisible(false);
         ui.messageTextPanel.setVisible(false);
+        ui.winPanel.setVisible(false);
 
 
 
@@ -81,6 +84,7 @@ public class visibilityManager {
         ui.mainTextPanel.setVisible(false);
         ui.mainTextFieldPanel.setVisible(false);
         ui.mainCharacterSelectionPanel.setVisible(false);
+        ui.winPanel.setVisible(false);
     }
     /**
      * Metodo per gestire la schermata di caricamento
@@ -94,6 +98,25 @@ public class visibilityManager {
 
 
         //componenti di altre pagine non visibili
+        ui.menuButtonPanel.setVisible(false);
+        ui.titleNamePanel.setVisible(false);
+        ui.commandPanel.setVisible(false);
+        ui.mapPanel.setVisible(false);
+        ui.mainTextPanel.setVisible(false);
+        ui.mainTextFieldPanel.setVisible(false);
+        ui.mainCharacterSelectionPanel.setVisible(false);
+        ui.statPanel.setVisible(false);
+        ui.messageTextPanel.setVisible(false);
+        ui.winPanel.setVisible(false);
+    }
+
+    public void showWinPanel(){
+        ui.winPanel.setVisible(true);
+
+        //componenti di altre pagine non visibili
+        ui.loadMessagePanel.setVisible(false);
+        ui.commandLoadTextField.setVisible(false);
+        ui.loadTextFieldPanel.setVisible(false);
         ui.menuButtonPanel.setVisible(false);
         ui.titleNamePanel.setVisible(false);
         ui.commandPanel.setVisible(false);

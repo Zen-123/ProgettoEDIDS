@@ -16,8 +16,8 @@ import java.io.InputStream;
  */
 public class uploadFile {
     //variabili private della classe
-    private String bucketName = "test-dungeonunipd";
-    private Regions region = Regions.EU_WEST_3;
+    private final String bucketName = "test-dungeonunipd";
+    private final Regions region = Regions.EU_WEST_3;
 
     /**
      * Costruttore della classe

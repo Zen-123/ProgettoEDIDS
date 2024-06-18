@@ -13,10 +13,10 @@ import java.io.File;
  */
 public class UI {
     private JFrame window;
-    public JPanel titleNamePanel, menuButtonPanel,  mainTextPanel, mainTextFieldPanel, mainCharacterSelectionPanel, statPanel, messageTextPanel, commandPanel, mapPanel, loadMessagePanel, loadTextFieldPanel;
-    private JLabel titleNameLabel,mainTextArea, mainCharacterSelectionLabel, startGameLabel, statLabel, nameLabel, characterLabel, hpLabel, inventoryWeight, potionLabel, weaponLabel, moneyLabel, roomNumberLabel, commandLabel, southLabel, northLabel, eastLabel, westLabel;
-    public JLabel loadLabel1, loadLabel2, loadLabel3, loadLabel4;
-    private JButton startButton, loadButton, exitButton, startGameButton, commandButton, loadMessageButton;
+    public JPanel titleNamePanel, menuButtonPanel,  mainTextPanel, mainTextFieldPanel, mainCharacterSelectionPanel, statPanel, messageTextPanel, commandPanel, mapPanel, loadMessagePanel, loadTextFieldPanel, winPanel;
+    private JLabel titleNameLabel,mainTextArea, mainCharacterSelectionLabel, startGameLabel, statLabel, nameLabel, characterLabel, hpLabel, inventoryWeight, potionLabel, weaponLabel, moneyLabel, roomNumberLabel, commandLabel, southLabel, northLabel, eastLabel, westLabel, monsterLabel, winLabel;
+    public JLabel loadLabel1, loadLabel2, loadLabel3, loadLabel4, counterLoadLabel;
+    private JButton startButton, loadButton, exitButton, startGameButton, commandButton, loadMessageButton, winButton;
     private JRadioButton warriorButton, archerButton, thiefButton;
     private JTextArea messageTextArea;
     private ButtonGroup mainCharacterButtonPanel;
@@ -36,10 +36,10 @@ public class UI {
         setTitle();
         setMenuButtonPanel();
         setMainTextPanel();
-        setTextField();
         setMainCharacterSelectionPanel();
         setGameScreenPanel();
         setLoadMessagePanel();
+        setWinPanel();
         window.setVisible(true);
 
 
@@ -74,6 +74,78 @@ public class UI {
         titleNameLabel.setFont(titleFont);
         titleNamePanel.add(titleNameLabel);
         window.add(titleNamePanel);
+    }
+
+    private void setWinLabel(){
+        Font winFont = new Font("Serif", Font.PLAIN, 50);
+        winLabel = new JLabel("YOU WIN! ");
+        winLabel.setFont(winFont);
+        winLabel.setBorder(new EmptyBorder(10,80,0,0));
+        winLabel.setForeground(Color.white);
+        winPanel.add(winLabel);
+    }
+
+    private void setHpLabelWinPage(){
+        hpLabel = new JLabel("Player: ");
+        hpLabel.setFont(normalFont);
+        hpLabel.setBorder(new EmptyBorder(0,10,0,0));
+        hpLabel.setForeground(Color.white);
+        winPanel.add(hpLabel);
+    }
+
+    private void setMoneyLabelWinPage(){
+        moneyLabel = new JLabel("Experience/money: ");
+        moneyLabel.setFont(normalFont);
+        moneyLabel.setBorder(new EmptyBorder(0,10,0,0));
+        moneyLabel.setForeground(Color.white);
+        winPanel.add(moneyLabel);
+    }
+
+    private void setMonsterLabel(){
+        monsterLabel = new JLabel("Monsters killed: ");
+        monsterLabel.setFont(normalFont);
+        monsterLabel.setBorder(new EmptyBorder(0,10,0,0));
+        monsterLabel.setForeground(Color.white);
+        winPanel.add(monsterLabel);
+    }
+
+    private void setWinButton(){
+
+        winButton = new JButton("RETURN TO MAIN MENU");
+        winButton.setBackground(Color.black);
+        winButton.setForeground(Color.WHITE);
+        winButton.setFont(normalFont);
+        winButton.setFocusPainted(false);
+        winButton.addActionListener(handler);
+        winButton.setActionCommand("returnToMainMenu");
+
+
+
+        //creazione effetto di hover sul bottone
+        winButton.addMouseListener( new MouseAdapter(){
+            public void mouseEntered(MouseEvent evt) {
+                winButton.setBackground(Color.blue);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                winButton.setBackground(Color.black);
+            }
+        });
+        winPanel.add(winButton);
+    }
+
+    private void setWinPanel(){
+        winPanel = new JPanel();
+        winPanel.setBounds(200, 50,400, 400 );
+        winPanel.setBackground(Color.black);
+        winPanel.setBorder(BorderFactory.createLineBorder(Color.darkGray));
+        winPanel.setLayout(new GridLayout(5,1));
+        setWinLabel();
+        setHpLabelWinPage();
+        setMoneyLabelWinPage();
+        setMonsterLabel();
+        setWinButton();
+        window.add(winPanel);
     }
 
 
@@ -427,7 +499,7 @@ public class UI {
         commandPanel.setBackground(Color.black);
         commandPanel.setBorder(BorderFactory.createLineBorder(Color.darkGray));
         commandLabel = new JLabel("Enter the command: ");
-        commandLabel.setBounds(0,350,560,50 );
+        commandLabel.setBounds(0,350,100,50 );
         commandLabel.setBorder(new EmptyBorder(10,10,0,0));
         commandLabel.setBackground(Color.black);
         commandLabel.setForeground(Color.white);
@@ -512,6 +584,8 @@ public class UI {
         mainTextArea.setBackground(Color.black);
         mainTextArea.setForeground(Color.white);
         mainTextArea.setFont(normalFont);
+        setTextField();
+
         mainTextPanel.add(mainTextArea);
     }
 
@@ -584,7 +658,7 @@ public class UI {
         statPanel.setBounds(550, -5, 300, 455 );
         statPanel.setBackground(Color.black);
         statPanel.setBorder(BorderFactory.createLineBorder(Color.darkGray));
-        statPanel.setLayout(new GridLayout(10,1));
+        statPanel.setLayout(new GridLayout(11,1));
         statLabel  = new JLabel("Stats: ");
         statLabel.setBorder(new EmptyBorder(10,10,0,0));
         statLabel.setForeground(Color.white);
@@ -600,6 +674,7 @@ public class UI {
         setMoneyLabel();
         setRoomNumberLabel();
         setMessageTextPanel();
+        setCounterLoadLabel();
         setMapPanel();
         window.add(statPanel);
 
@@ -703,6 +778,13 @@ public class UI {
         statPanel.add(roomNumberLabel);
     }
 
+    private void setCounterLoadLabel(){
+        counterLoadLabel = new JLabel();
+        counterLoadLabel.setBorder(new EmptyBorder(0,10,0,0));
+        counterLoadLabel.setFont(normalFont);
+        counterLoadLabel.setForeground(Color.WHITE);
+        statPanel.add(counterLoadLabel);
+    }
     /*
        metodo che gestisce la pagina di load
     */
@@ -864,5 +946,6 @@ public class UI {
         return JOptionPane.showConfirmDialog(commandPanel, "This slot is already occupied by a previous save, do you want to overwrite?", "Confirmation", JOptionPane.YES_NO_OPTION);
 
     }
+
 
 }

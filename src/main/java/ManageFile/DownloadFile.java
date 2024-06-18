@@ -69,6 +69,8 @@ public class DownloadFile {
                 case "Filesave 4.txt":
                     uiManager.loadLabel4.setText("-");
                     break;
+                default:
+                    throw new IllegalStateException("Unexpected value: ");
             }
         }
 

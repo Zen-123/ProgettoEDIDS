@@ -98,6 +98,11 @@ public class choiceHandler implements ActionListener {
                 if (!Objects.equals(inputText, "")) {
                     manageTextInput(inputText);
                 }
+                break;
+
+            case "returnToMainMenu":
+                vManager.showMenuScreen();
+                break;
 
         }
     }
@@ -123,11 +128,13 @@ public class choiceHandler implements ActionListener {
                 siano inferiori al numero massimo di slot, inoltre controlla che i salvataggi durante
                 la partita non superino i 4.
                  */
+
                 if (counterFileFirstLoad < 4 && counterFile < 4) {
                     //for che scorre i file scaricati da aws
                     for (int i = counterFile; i < fileNameArray.length + 1; i++) {
                         fileLoad = new File("FileDownload/" + fileNameArray[i]);
                         if (fileLoad.exists()) {
+                            userInterfaceHandler.counterLoadLabel.setText("Save n. " + (counterFile+1));
                             /*se lo slot salvataggio è già occupato si chiede all'utente se vuole sovrascriverlo
                             * oppure usare un altro slot disponibile */
                             if (userInterfaceHandler.setAlertMenu(0) == 0) {
@@ -186,6 +193,9 @@ public class choiceHandler implements ActionListener {
 
                 break;
 
+            case "win":
+                vManager.showWinPanel();
+                break;
         }
     }
 
@@ -250,7 +260,7 @@ public class choiceHandler implements ActionListener {
      */
     public void setLoad() {
         File fileLoad;
-
+        userInterfaceHandler.counterLoadLabel.setText("Save n. " + (counterFile+1));
         //array che scorre i nomi di tutti i file di bucket aws
         for (String s : fileNameArray) {
             fileLoad = new File("FileDownload/" + s);
