@@ -55,6 +55,8 @@ public class choiceHandler implements ActionListener {
              */
             case "Start":
                 vManager.showStartScreen();
+                userInterfaceHandler.textField.setText("");
+                userInterfaceHandler.textField.setVisible(true);
                 break;
             /*
                 gestisce il bottone: exitButton,
@@ -69,6 +71,7 @@ public class choiceHandler implements ActionListener {
              */
             case "Start game":
                 vManager.showGameScreen();
+                userInterfaceHandler.commandTextField.setText("");
                 break;
             /*
                 gestisce il bottone: loadButton
