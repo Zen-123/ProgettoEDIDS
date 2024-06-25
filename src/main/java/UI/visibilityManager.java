@@ -115,6 +115,11 @@ public class visibilityManager {
                 reference.player.setHasArmour(true);
                 break;
             default:
+                reference.player.setMonete(0);
+                reference.player.addNum_pozioni(0);
+                reference.player.addSpada( new Item("spada",13,5,0,true,reference.curr_stanza,true));
+                reference.player.addArmour(new Item("armatura",0,0,5,false,reference.curr_stanza,true));
+                reference.player.setHasArmour(true);
                 break;
         }
         reference.player.setCategory(ui.mainCharacterButtonPanel.getSelection().getActionCommand());
@@ -159,6 +164,8 @@ public class visibilityManager {
         ui.mainTextPanel.setVisible(false);
         ui.mainTextFieldPanel.setVisible(false);
         ui.mainCharacterSelectionPanel.setVisible(false);
+        ui.statPanel.setVisible(false);
+        ui.messageTextPanel.setVisible(false);
     }
 
 

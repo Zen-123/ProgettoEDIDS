@@ -3,9 +3,9 @@ import Board.Readfile;
 import Board.reference;
 import Player.Player;
 import Player.mostro;
-import UI.UI;
 import UI.visibilityManager;
 import UI.choiceHandler;
+import UI.UI;
 
 /**
  * Classe MainGame che permette di far partire il software
@@ -13,20 +13,15 @@ import UI.choiceHandler;
  */
 
 public class MainGame {
-    private UI ui = new UI();
-    private visibilityManager manager = new visibilityManager(reference.ui);
-    private choiceHandler handler = new choiceHandler(reference.ui);
+    UI ui = new UI();
+    visibilityManager manager = new visibilityManager(reference.ui);
+    choiceHandler handler = new choiceHandler(reference.ui);
 
-    /**
-     * Funzione main per fare partire il gioco.
-     * Costruisce un oggetto MainGame
-     * @param args
-     * @throws Exception
-     */
-    public static void main(String[] args) throws Exception {
-        new MainGame();
+
+    public static void main(String[] args) {
+        //inizio gioco
         initialGame();
-
+        new MainGame();
     }
 
     /**

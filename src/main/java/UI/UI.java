@@ -1,18 +1,12 @@
 package UI;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.File;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.metal.MetalToggleButtonUI;
-
-
+import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
 
 /**
  * Classe per la gestione della user interface utilizzando la libreria java swing
@@ -45,7 +39,6 @@ public class UI {
         setTitle();
         setMenuButtonPanel();
         setMainTextPanel();
-        setTextField();
         setMainCharacterSelectionPanel();
         setGameScreenPanel();
         setLoadMessagePanel();
@@ -411,13 +404,13 @@ public class UI {
      */
     private void setTextField(){
         mainTextFieldPanel = new JPanel();
-        mainTextFieldPanel.setName("namepanel");
         mainTextFieldPanel.setBounds(20, 250, 600, 50);
         mainTextFieldPanel.setBackground(Color.black);
         window.add(mainTextFieldPanel);
 
         Font textFont = new Font("SansSerif", Font.BOLD, 15);
         textField = new JTextField( 30);
+        textField.setPreferredSize(new Dimension(30, 15));
         textField.setBackground(Color.darkGray);
         textField.setPreferredSize(new Dimension(100, 30));
         textField.setFont(textFont);
@@ -425,24 +418,10 @@ public class UI {
         mainTextFieldPanel.add(textField);
 
     }
-    private void setCommandPanel(){
-        commandPanel = new JPanel();
-        commandPanel.setBounds(-10, 350,560, 100);
-        commandPanel.setBackground(Color.black);
-        commandPanel.setBorder(BorderFactory.createLineBorder(Color.darkGray));
-        commandLabel = new JLabel("Enter the command: ");
-        commandLabel.setBorder(new EmptyBorder(10,20,0,0));
-        commandLabel.setBackground(Color.black);
-        commandLabel.setForeground(Color.white);
-        commandLabel.setFont(normalFont);
-        commandPanel.add(commandLabel);
-        setCommandTextField();
-
-        window.add(commandPanel);
-
-    }
-
-    // questa è la mappa dove è presente il gioco
+    /*
+    * Metodo per la visualizzazione della mappa
+    * pagina: gameScreen
+    * */
     private void setMapPanel(){
         mapPanel = new JPanel();
         mapPanel.setVisible(true);
@@ -465,6 +444,11 @@ public class UI {
         // window.add(mapPanel);
     }
 
+
+    /*
+    Metodo per segnalare la posizione S
+    pagina: gameScreen
+     */
     private void setSouthLabel(){
         southLabel = new JLabel("S");
         southLabel.setForeground(Color.white);
@@ -474,6 +458,11 @@ public class UI {
         mapPanel.add(southLabel);
     }
 
+
+    /*
+       Metodo per segnalare la posizione N
+       pagina: gameScreen
+    */
     private void setNorthLabel(){
         northLabel = new JLabel("N");
         northLabel.setForeground(Color.white);
@@ -483,6 +472,11 @@ public class UI {
         mapPanel.add(northLabel);
     }
 
+
+    /*
+       Metodo per segnalare la posizione W
+       pagina: gameScreen
+    */
     private void setWestLabel(){
         westLabel = new JLabel("W");
         westLabel.setForeground(Color.white);
@@ -492,6 +486,10 @@ public class UI {
         mapPanel.add(westLabel);
     }
 
+    /*
+       Metodo per segnalare la posizione E
+       pagina: gameScreen
+    */
     private void setEastLabel(){
         eastLabel = new JLabel("E");
         eastLabel.setForeground(Color.white);
@@ -502,18 +500,90 @@ public class UI {
     }
 
 
-    private void setCommandTextField(){
-        Font textFont = new Font("SansSerif", Font.BOLD, 15);
-        commandTextField = new JTextField();
-        commandTextField = new JTextField( 30);
-        commandTextField.setBackground(Color.black);
-        commandTextField.setPreferredSize(new Dimension(50, 30));
-        commandTextField.setFont(textFont);
-        commandTextField.setForeground(Color.white);
-        commandPanel.add(commandTextField);
+    /*
+    Metodo per la gestione del commandTextField, che permette all'utente di giocare inserendo comandi testuali
+    pagina: gameScreen
+     */
+    private void setCommandPanel(){
+        commandPanel = new JPanel();
+        commandPanel.setBounds(-10, 350,560, 100);
+        commandPanel.setBackground(Color.black);
+        commandPanel.setBorder(BorderFactory.createLineBorder(Color.darkGray));
+        commandLabel = new JLabel("Enter the command: ");
+        commandLabel.setBounds(0,350,100,50 );
+        commandLabel.setBorder(new EmptyBorder(10,10,0,0));
+        commandLabel.setBackground(Color.black);
+        commandLabel.setForeground(Color.white);
+        commandLabel.setFont(normalFont);
+        commandPanel.add(commandLabel);
+
+        //metodo per la gestione effettiva del commantTextField
+        setCommandTextField();
+
+
+        //visualizzazione gestita in modo migliore tramite GroupLayout
+        GroupLayout layout = new GroupLayout(commandPanel);
+        commandPanel.setLayout(layout);
+        layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
+        layout.setHorizontalGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(commandLabel)
+                        .addGroup(layout.createSequentialGroup()
+                        .addComponent(commandTextField)
+                        .addComponent(commandButton)))
+        );
+
+        layout.setVerticalGroup(
+                layout.createSequentialGroup()
+                .addComponent(commandLabel)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(commandTextField)
+                .addComponent(commandButton))
+        );
+
+        window.add(commandPanel);
 
     }
-    //Metodo che gestisce il bottone load
+
+    /*
+    Metodo per la gestione  commandTextField e commandButton
+    pagina: gameScreen
+     */
+    private void setCommandTextField(){
+        Font textFont = new Font("SansSerif", Font.BOLD, 15);
+        commandTextField = new JTextField( 20);
+        commandTextField.setPreferredSize(new Dimension(50, 30));
+        commandTextField.setBackground(Color.darkGray);
+        commandTextField.setFont(textFont);
+        commandTextField.setForeground(Color.white);
+
+        commandButton = new JButton("Enter");
+        commandButton.setBackground(Color.black);
+        commandButton.setForeground(Color.white);
+        commandButton.setPreferredSize(new Dimension(30, 30));
+        commandButton.addActionListener(handler);
+        commandButton.setActionCommand("input");
+        commandButton.setFocusPainted(false);
+        commandButton.setFont(textFont);
+        //hover
+        commandButton.addMouseListener( new MouseAdapter(){
+            public void mouseEntered(MouseEvent evt) {
+                commandButton.setBackground(Color.blue);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {commandButton.setBackground(Color.black);
+            }
+        });
+        commandPanel.add(commandTextField);
+        commandPanel.add(commandButton);
+
+
+    }
+    /*
+    Metodo per la gestione del mainTextPanel, mainTextArea per mostrare a video un messaggio
+    pagina: startGame
+     */
     private void setMainTextPanel(){
         mainTextPanel = new JPanel();
         mainTextPanel.setBounds(-10, 200, 600, 100);
@@ -525,10 +595,16 @@ public class UI {
         mainTextArea.setBackground(Color.black);
         mainTextArea.setForeground(Color.white);
         mainTextArea.setFont(normalFont);
+        setTextField();
+
         mainTextPanel.add(mainTextArea);
     }
 
-    //questo è il pannello dove gestisco l'output delle azioni / racconto la storia
+
+    /*
+    Metodo che mostra a video i testi durante il gioco, gestisce i componenti messageTextPanel,messageTextArea
+    pagina: gameScreen
+     */
     private void setMessageTextPanel(){
         messageTextPanel = new JPanel();
         messageTextPanel.setBackground(Color.black);
@@ -553,6 +629,9 @@ public class UI {
 
 
     }
+    /*
+        Metodo per la gestione di interfaccia completa della pagina startScreen
+     */
     private void setMainCharacterSelectionPanel(){
         mainCharacterSelectionPanel = new JPanel();
         mainCharacterSelectionPanel.setBounds(100,300, 400, 400);
@@ -565,6 +644,8 @@ public class UI {
         mainCharacterSelectionLabel.setForeground(Color.white);
         mainCharacterSelectionLabel.setFont(normalFont);
         mainCharacterSelectionPanel.add(mainCharacterSelectionLabel);
+
+        //setta i bottoni warriorButton, archerButton, thiefButton
         setMainCharacterButtonPanel();
         startGameLabel = new JLabel("Press START to begin the game.");
         startGameLabel.setBorder(new EmptyBorder(10,0,0,0));
@@ -578,20 +659,22 @@ public class UI {
         window.add(mainCharacterSelectionPanel);
 
     }
-
-    //pannello di gioco player con tutti i parametri di gioco
+    /*
+    Metodo per la gestione di interfaccia completa della pagina gameScreen
+    */
     private void setGameScreenPanel(){
         statPanel = new JPanel();
         statPanel.setBounds(550, -5, 300, 455 );
         statPanel.setBackground(Color.black);
         statPanel.setBorder(BorderFactory.createLineBorder(Color.darkGray));
-        statPanel.setLayout(new GridLayout(0,1));
+        statPanel.setLayout(new GridLayout(1,1));
         statLabel  = new JLabel("Stats: ");
         statLabel.setBorder(new EmptyBorder(10,10,0,0));
         statLabel.setForeground(Color.white);
         statLabel.setFont(normalFont);
         statPanel.add(statLabel);
-        /* setNameLabel();
+        /*
+         setNameLabel();
         setCharacterLabel();
         setHpLabel();
         setInventoryWeight();
@@ -601,10 +684,15 @@ public class UI {
         setRoomNumberLabel(); */
 
         setMessageTextPanel();
+        setCounterLoadLabel();
         setMapPanel();
         window.add(statPanel);
     }
 
+    /*
+    metodo che mostra il nome del giocatore
+    pagina: gameScreen
+     */
     private void setNameLabel(){
         nameLabel  = new JLabel("Name: ");
         nameLabel.setForeground(Color.white);
@@ -614,6 +702,10 @@ public class UI {
         statPanel.add(nameLabel);
     }
 
+    /*
+   metodo che mostra il personaggio scelto dal giocatore
+   pagina: gameScreen
+    */
     private void setCharacterLabel(){
         characterLabel  = new JLabel("Character: ");
         characterLabel.setForeground(Color.white);
@@ -623,6 +715,10 @@ public class UI {
         statPanel.add(characterLabel);
     }
 
+    /*
+       metodo che mostra la vita del giocatore
+       pagina: gameScreen
+    */
     private void setHpLabel(){
         hpLabel  = new JLabel("HP: ");
         hpLabel.setForeground(Color.white);
@@ -631,6 +727,11 @@ public class UI {
         hpLabel.setBorder(new EmptyBorder(0,10,0,0));
         statPanel.add(hpLabel);
     }
+
+    /*
+       metodo che mostra il peso dell'inventario del giocatore
+       pagina: gameScreen
+    */
     private void setInventoryWeight(){
         inventoryWeight  = new JLabel("Weight: ");
         inventoryWeight.setForeground(Color.white);
@@ -640,6 +741,10 @@ public class UI {
         statPanel.add(inventoryWeight);
     }
 
+    /*
+       metodo che mostra il numero di pozioni del giocatore
+       pagina: gameScreen
+    */
     private void setPotionLabel(){
         potionLabel  = new JLabel("Potion: ");
         potionLabel.setForeground(Color.white);
@@ -648,6 +753,11 @@ public class UI {
         potionLabel.setBorder(new EmptyBorder(0,10,0,0));
         statPanel.add(potionLabel);
     }
+
+    /*
+        metodo che mostra l'arma del giocatore
+        pagina: gameScreen
+    */
     private void setWeaponLabel(){
         weaponLabel  = new JLabel("Weapon: ");
         weaponLabel.setForeground(Color.white);
@@ -657,6 +767,10 @@ public class UI {
         statPanel.add(weaponLabel);
     }
 
+    /*
+       metodo che mostra i soldi del giocatore
+       pagina: gameScreen
+    */
     private void setMoneyLabel(){
         moneyLabel  = new JLabel("Money: ");
         moneyLabel.setForeground(Color.white);
@@ -665,6 +779,11 @@ public class UI {
         moneyLabel.setBorder(new EmptyBorder(0,10,0,0));
         statPanel.add(moneyLabel);
     }
+
+    /*
+       metodo che mostra la stanza in cui si trova il giocatore
+       pagina: gameScreen
+    */
     private void setRoomNumberLabel(){
         roomNumberLabel  = new JLabel("Room: ");
         roomNumberLabel.setForeground(Color.white);
@@ -674,139 +793,139 @@ public class UI {
         statPanel.add(roomNumberLabel);
     }
 
-        private void setCounterLoadLabel () {
-            counterLoadLabel = new JLabel();
-            counterLoadLabel.setBorder(new EmptyBorder(0, 10, 0, 0));
-            counterLoadLabel.setFont(normalFont);
-            counterLoadLabel.setForeground(Color.WHITE);
-            statPanel.add(counterLoadLabel);
-        }
+    private void setCounterLoadLabel(){
+        counterLoadLabel = new JLabel();
+        counterLoadLabel.setBorder(new EmptyBorder(0,10,0,0));
+        counterLoadLabel.setFont(normalFont);
+        counterLoadLabel.setForeground(Color.WHITE);
+        statPanel.add(counterLoadLabel);
+    }
     /*
        metodo che gestisce la pagina di load
     */
-        private void setLoadMessagePanel () {
-            loadMessagePanel = new JPanel();
-            loadMessagePanel.setBounds(200, 50, 400, 400);
-            loadMessagePanel.setBorder(BorderFactory.createLineBorder(Color.darkGray));
-            loadMessagePanel.setBackground(Color.black);
-            loadMessagePanel.setLayout(new GridLayout(4, 1));
+    private void setLoadMessagePanel(){
+        loadMessagePanel = new JPanel();
+        loadMessagePanel.setBounds(200, 50, 400, 400);
+        loadMessagePanel.setBorder(BorderFactory.createLineBorder(Color.darkGray));
+        loadMessagePanel.setBackground(Color.black);
+        loadMessagePanel.setLayout(new GridLayout(4,1));
 
-            //metodi che vanno ad impostare il contenuto degli slot di salvataggio
-            setLoadLabel1();
-            setLoadLabel2();
-            setLoadLabel3();
-            setLoadLabel4();
+        //metodi che vanno ad impostare il contenuto degli slot di salvataggio
+        setLoadLabel1();
+        setLoadLabel2();
+        setLoadLabel3();
+        setLoadLabel4();
 
-            //metodo che gestice il commandLoadTextField per inserimento testuale da parte di utente
-            setCommandLoadTextField();
+        //metodo che gestice il commandLoadTextField per inserimento testuale da parte di utente
+        setCommandLoadTextField();
 
-            // metodo per la gestione del loadMessageButton
-            setLoadMessageButton();
-            window.add(loadMessagePanel);
-            window.add(loadTextFieldPanel);
-        }
+        // metodo per la gestione del loadMessageButton
+        setLoadMessageButton();
+        window.add(loadMessagePanel);
+        window.add(loadTextFieldPanel);
+    }
     /*
         Metodo che gestisce il loadMessageButton per inviare i dati al choiceHandler
         pagina: loadScreen
      */
-        private void setLoadMessageButton () {
-            loadMessageButton = new JButton("Enter");
-            loadMessageButton.setForeground(Color.white);
-            loadMessageButton.setBackground(Color.black);
-            loadMessageButton.setFont(normalFont);
-            loadMessageButton.setFocusPainted(false);
-            loadMessageButton.addActionListener(handler);
-            loadMessageButton.setActionCommand("backToMenu");
+    private void setLoadMessageButton() {
+        loadMessageButton = new JButton("Enter");
+        loadMessageButton.setForeground(Color.white);
+        loadMessageButton.setBackground(Color.black);
+        loadMessageButton.setFont(normalFont);
+        loadMessageButton.setFocusPainted(false);
+        loadMessageButton.addActionListener(handler);
+        loadMessageButton.setActionCommand("backToMenu");
 
-            loadTextFieldPanel.add(loadMessageButton);
+        loadTextFieldPanel.add(loadMessageButton);
 
 
-        }
+    }
     /*
        Metodo che gestisce il commandLoadTextField per fare inserire ad utente i comandi
        pagina: loadScreen
     */
-        private void setCommandLoadTextField () {
-            Font textFont = new Font("SansSerif", Font.BOLD, 15);
-            loadTextFieldPanel = new JPanel();
-            loadTextFieldPanel.setBackground(Color.black);
-            loadTextFieldPanel.setLayout(new GridLayout(1, 2));
-            loadTextFieldPanel.setBounds(200, 450, 400, 50);
+    private void setCommandLoadTextField(){
+        Font textFont = new Font("SansSerif", Font.BOLD, 15);
+        loadTextFieldPanel =  new JPanel();
+        loadTextFieldPanel.setBackground(Color.black);
+        loadTextFieldPanel.setLayout(new GridLayout(1, 2));
+        loadTextFieldPanel.setBounds(200, 450,400, 50);
 
-            commandLoadTextField = new JTextField(30);
-            commandLoadTextField.setBounds(200, 480, 400, 30);
-            commandLoadTextField.setBackground(Color.darkGray);
-            commandLoadTextField.setFont(textFont);
-            commandLoadTextField.setForeground(Color.white);
-            loadTextFieldPanel.add(commandLoadTextField);
-        }
+        commandLoadTextField = new JTextField( 30);
+        commandLoadTextField.setBounds(200, 480, 400, 30);
+        commandLoadTextField.setBackground(Color.darkGray);
+        commandLoadTextField.setFont(textFont);
+        commandLoadTextField.setForeground(Color.white);
+        loadTextFieldPanel.add(commandLoadTextField);
+    }
 
     /*
     metodo per la gestione dello slot di salvataggio 1
     pagina: loadScreen
      */
-        private void setLoadLabel1 () {
+    private void setLoadLabel1(){
 
-            loadLabel1 = new JLabel();
-            fileName = "Filesave 1.txt";
-            fileLoad = new File("FileDownload/" + fileName);
-            if (fileLoad.exists()) {
-                loadLabel1.setText("Save slot 1");
-            }
-            loadLabel1.setBounds(300, 150, 400, 100);
-            loadLabel1.setBackground(Color.black);
-            loadLabel1.setForeground(Color.white);
-            loadLabel1.setFont(normalFont);
-            loadLabel1.setBorder(BorderFactory.createLineBorder(Color.darkGray));
-            loadMessagePanel.add(loadLabel1);
-
-
+        loadLabel1 = new JLabel();
+        fileName = "Filesave 1.txt";
+        fileLoad = new File("FileDownload/" + fileName);
+        if(fileLoad.exists()){
+            loadLabel1.setText("Save slot 1");
         }
+        loadLabel1.setBounds(300, 150, 400, 100);
+        loadLabel1.setBackground(Color.black);
+        loadLabel1.setForeground(Color.white);
+        loadLabel1.setFont(normalFont);
+        loadLabel1.setBorder(BorderFactory.createLineBorder(Color.darkGray));
+        loadMessagePanel.add(loadLabel1);
+
+
+    }
 
     /*
       metodo per la gestione dello slot di salvataggio 2
       pagina: loadScreen
        */
-        private void setLoadLabel2 () {
+    private void setLoadLabel2(){
 
-            loadLabel2 = new JLabel();
-            fileName = "Filesave 2.txt";
-            fileLoad = new File("FileDownload/" + fileName);
-            if (fileLoad.exists()) {
-                loadLabel2.setText("Save slot 2");
-            }
-            loadLabel2.setBounds(300, 150, 400, 100);
-            loadLabel2.setBackground(Color.black);
-            loadLabel2.setForeground(Color.white);
-            loadLabel2.setFont(normalFont);
-
-            loadLabel2.setBorder(BorderFactory.createLineBorder(Color.darkGray));
-            loadMessagePanel.add(loadLabel2);
-
-
+        loadLabel2 = new JLabel();
+        fileName = "Filesave 2.txt";
+        fileLoad = new File("FileDownload/" + fileName);
+        if(fileLoad.exists()){
+            loadLabel2.setText("Save slot 2");
         }
+        loadLabel2.setBounds(300, 150, 400, 100);
+        loadLabel2.setBackground(Color.black);
+        loadLabel2.setForeground(Color.white);
+        loadLabel2.setFont(normalFont);
+
+        loadLabel2.setBorder(BorderFactory.createLineBorder(Color.darkGray));
+        loadMessagePanel.add(loadLabel2);
+
+
+    }
 
     /*
       metodo per la gestione dello slot di salvataggio 3
       pagina: loadScreen
    */
-        private void setLoadLabel3 () {
+    private void setLoadLabel3(){
 
-            loadLabel3 = new JLabel();
-            fileName = "Filesave 3.txt";
-            fileLoad = new File("FileDownload/" + fileName);
-            if (fileLoad.exists()) {
-                loadLabel3.setText("Save slot 3");
-            }
-            loadLabel3.setBounds(300, 150, 400, 100);
-            loadLabel3.setBackground(Color.black);
-            loadLabel3.setForeground(Color.white);
-            loadLabel3.setFont(normalFont);
-            loadLabel3.setBorder(BorderFactory.createLineBorder(Color.darkGray));
-            loadMessagePanel.add(loadLabel3);
-
-
+        loadLabel3 = new JLabel();
+        fileName = "Filesave 3.txt";
+        fileLoad = new File("FileDownload/" + fileName);
+        if(fileLoad.exists()){
+            loadLabel3.setText("Save slot 3");
         }
+        loadLabel3.setBounds(300, 150, 400, 100);
+        loadLabel3.setBackground(Color.black);
+        loadLabel3.setForeground(Color.white);
+        loadLabel3.setFont(normalFont);
+        loadLabel3.setBorder(BorderFactory.createLineBorder(Color.darkGray));
+        loadMessagePanel.add(loadLabel3);
+
+
+    }
 
     /*
       metodo per la gestione dello slot di salvataggio 4
@@ -814,34 +933,34 @@ public class UI {
    */
         public void setLoadLabel4 () {
 
-            loadLabel4 = new JLabel();
-            fileName = "Filesave 4.txt";
-            fileLoad = new File("FileDownload/" + fileName);
-            if (fileLoad.exists()) {
-                loadLabel4.setText("Save slot 4");
-            }
-            loadLabel4.setBounds(300, 150, 400, 100);
-            loadLabel4.setBackground(Color.black);
-            loadLabel4.setForeground(Color.white);
-            loadLabel4.setFont(normalFont);
-            loadLabel4.setBorder(BorderFactory.createLineBorder(Color.darkGray));
-            loadMessagePanel.add(loadLabel4);
-
-
+        loadLabel4 = new JLabel();
+        fileName = "Filesave 4.txt";
+        fileLoad = new File("FileDownload/" + fileName);
+        if(fileLoad.exists()){
+            loadLabel4.setText("Save slot 4");
         }
+        loadLabel4.setBounds(300, 150, 400, 100);
+        loadLabel4.setBackground(Color.black);
+        loadLabel4.setForeground(Color.white);
+        loadLabel4.setFont(normalFont);
+        loadLabel4.setBorder(BorderFactory.createLineBorder(Color.darkGray));
+        loadMessagePanel.add(loadLabel4);
+
+
+    }
     /*
       metodo per la gestione degli alert durante il comando "save"
       pagina: gameScreen
        */
-        public int setAlertMenu ( int value){
-            if (value == 1) {
-                JOptionPane.showMessageDialog(commandPanel, "You have run out of available save slots, use \"save (1-4)\" to overwrite the available save slots", "Confirmation", JOptionPane.WARNING_MESSAGE);
-                return -1;
-            }
-
-            return JOptionPane.showConfirmDialog(commandPanel, "This slot is already occupied by a previous save, do you want to overwrite?", "Confirmation", JOptionPane.YES_NO_OPTION);
-
+    public int setAlertMenu(int value){
+        if (value == 1){
+            JOptionPane.showMessageDialog(commandPanel, "You have run out of available save slots, use \"save (1-4)\" to overwrite the available save slots", "Confirmation", JOptionPane.WARNING_MESSAGE );
+            return -1;
         }
+
+        return JOptionPane.showConfirmDialog(commandPanel, "This slot is already occupied by a previous save, do you want to overwrite?", "Confirmation", JOptionPane.YES_NO_OPTION);
+
+    }
 
 
 }
