@@ -6,35 +6,39 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.metal.MetalToggleButtonUI;
 
 
+
+/**
+ * Classe per la gestione della user interface utilizzando la libreria java swing
+ */
 public class UI {
-    JFrame window;
-    JPanel titleNamePanel, menuButtonPanel,  mainTextPanel, mainTextFieldPanel, mainCharacterSelectionPanel, statPanel, messageTextPanel, commandPanel, mapPanel;
-    JLabel titleNameLabel,mainTextArea, mainCharacterSelectionLabel, startGameLabel, statLabel, nameLabel, characterLabel, hpLabel, inventoryWeight, potionLabel, weaponLabel, moneyLabel, roomNumberLabel, commandLabel, southLabel, northLabel, eastLabel, westLabel;
-    JButton startButton, loadButton, exitButton, startGameButton;
-    JRadioButton warriorButton, archerButton, thiefButton;
-    JTextArea messageTextArea;
-    static gameBoard gameB;
-    ButtonGroup mainCharacterButtonPanel;
-    JTextField textField, commandTextField;
-    Font titleFont = new Font("Serif", Font.PLAIN, 70);
-    Font normalFont = new Font("Serif",Font.PLAIN, 26);
+    private JFrame window;
+    public JPanel titleNamePanel, menuButtonPanel,  mainTextPanel, mainTextFieldPanel, mainCharacterSelectionPanel, statPanel, messageTextPanel, commandPanel, mapPanel, loadMessagePanel, loadTextFieldPanel, winPanel;
+    private JLabel titleNameLabel,mainTextArea, mainCharacterSelectionLabel, startGameLabel, statLabel, nameLabel, characterLabel, hpLabel, inventoryWeight, potionLabel, weaponLabel, moneyLabel, roomNumberLabel, commandLabel, southLabel, northLabel, eastLabel, westLabel, monsterLabel, winLabel;
+    public JLabel loadLabel1, loadLabel2, loadLabel3, loadLabel4, counterLoadLabel;
+    private JButton startButton, loadButton, exitButton, startGameButton, commandButton, loadMessageButton, winButton;
+    private JRadioButton warriorButton, archerButton, thiefButton;
+    public JTextArea messageTextArea;
+    public ButtonGroup mainCharacterButtonPanel;
+    public JTextField textField, commandTextField, commandLoadTextField;
+    private Font titleFont = new Font("Serif", Font.PLAIN, 70);
+    private  Font normalFont = new Font("Serif",Font.PLAIN, 26);
     choiceHandler handler = new choiceHandler(this);
+    private String fileName;
+    private File fileLoad;
+
+    static gameBoard gameB;
     boolean goOn = true;
 
+    /**
+     * Metodo che permette la crezione della UI
+     */
     public void createUI(){
 
         setWindow();
@@ -44,12 +48,19 @@ public class UI {
         setTextField();
         setMainCharacterSelectionPanel();
         setGameScreenPanel();
+        setLoadMessagePanel();
+        setWinPanel();
         window.setVisible(true);
 
 
 
     }
-    //Metodo che gestisce la finestra di gioco
+
+
+    /*
+        Metodo che gestisce la finestra di gioco effettiva
+        creazione e gestione di window
+     */
     private void setWindow(){
         window = new JFrame();
         window.setSize(800, 600);
@@ -57,7 +68,13 @@ public class UI {
         window.getContentPane().setBackground(Color.black);
         window.setLayout(null);
     }
-    //Metodo che gestisce il titolo del gioco
+
+
+    /*
+        Metodo che gestisce il titleNamePanel
+        creazione e gestione di titleNamePanel, titleNameLabel
+        pagina: menuScreen
+     */
     private void setTitle(){
         titleNamePanel = new JPanel();
         titleNamePanel.setBounds(100,50,600,100);
@@ -69,6 +86,84 @@ public class UI {
         window.add(titleNamePanel);
     }
 
+    private void setWinLabel(){
+        Font winFont = new Font("Serif", Font.PLAIN, 50);
+        winLabel = new JLabel("YOU WIN! ");
+        winLabel.setFont(winFont);
+        winLabel.setBorder(new EmptyBorder(10,80,0,0));
+        winLabel.setForeground(Color.white);
+        winPanel.add(winLabel);
+    }
+
+    private void setHpLabelWinPage(){
+        hpLabel = new JLabel("Player: ");
+        hpLabel.setFont(normalFont);
+        hpLabel.setBorder(new EmptyBorder(0,10,0,0));
+        hpLabel.setForeground(Color.white);
+        winPanel.add(hpLabel);
+    }
+
+    private void setMoneyLabelWinPage(){
+        moneyLabel = new JLabel("Experience/money: ");
+        moneyLabel.setFont(normalFont);
+        moneyLabel.setBorder(new EmptyBorder(0,10,0,0));
+        moneyLabel.setForeground(Color.white);
+        winPanel.add(moneyLabel);
+    }
+
+    private void setMonsterLabel(){
+        monsterLabel = new JLabel("Monsters killed: ");
+        monsterLabel.setFont(normalFont);
+        monsterLabel.setBorder(new EmptyBorder(0,10,0,0));
+        monsterLabel.setForeground(Color.white);
+        winPanel.add(monsterLabel);
+    }
+
+    private void setWinButton(){
+
+        winButton = new JButton("RETURN TO MAIN MENU");
+        winButton.setBackground(Color.black);
+        winButton.setForeground(Color.WHITE);
+        winButton.setFont(normalFont);
+        winButton.setFocusPainted(false);
+        winButton.addActionListener(handler);
+        winButton.setActionCommand("returnToMainMenu");
+
+
+
+        //creazione effetto di hover sul bottone
+        winButton.addMouseListener( new MouseAdapter(){
+            public void mouseEntered(MouseEvent evt) {
+                winButton.setBackground(Color.blue);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                winButton.setBackground(Color.black);
+            }
+        });
+        winPanel.add(winButton);
+    }
+
+    private void setWinPanel(){
+        winPanel = new JPanel();
+        winPanel.setBounds(200, 50,400, 400 );
+        winPanel.setBackground(Color.black);
+        winPanel.setBorder(BorderFactory.createLineBorder(Color.darkGray));
+        winPanel.setLayout(new GridLayout(5,1));
+        setWinLabel();
+        setHpLabelWinPage();
+        setMoneyLabelWinPage();
+        setMonsterLabel();
+        setWinButton();
+        window.add(winPanel);
+    }
+
+
+    /*
+        Metodo che gestisce il menuButtonPanel che va a contenere i bottoni Start, Load, Save
+        vengono creati i seguenti componenti: menuButtonPanel, startButton, loadButton, exitButton
+        pagina: menuScreen
+     */
     private void setMenuButtonPanel( ) {
         menuButtonPanel = new JPanel();
         menuButtonPanel.setBounds(250, 250, 300, 250);
@@ -80,6 +175,12 @@ public class UI {
         window.add(menuButtonPanel);
     }
 
+
+    /*
+        Metodo per la gestione del ButtonGroup
+        sono creati i componenti:mainCharacterButtonPanel, warriorButton, archerButton, thiefButton
+        pagina: StartScreen
+     */
     private void setMainCharacterButtonPanel(){
         mainCharacterButtonPanel = new ButtonGroup();
         setWarriorButton();
@@ -89,7 +190,10 @@ public class UI {
 
     }
 
-    //metodo che gestisce il bottone Start
+    /*
+        metodo che gestisce il bottone startButton
+        pagina: menuScreen
+     */
     private void setStartButton(){
         startButton = new JButton("START");
         startButton.setBackground(Color.black);
@@ -99,6 +203,7 @@ public class UI {
         startButton.addActionListener(handler);
         startButton.setActionCommand("Start");
 
+        //creazione effetto di hover sul bottone
         startButton.addMouseListener( new MouseAdapter(){
             public void mouseEntered(MouseEvent evt) {
                 startButton.setBackground(Color.blue);
@@ -112,7 +217,11 @@ public class UI {
 
 
     }
-    //button start del menu personaggi che ti porta nel pannello di gioco 
+
+    /*
+        Metodo che gestice il bottone startGameButton
+        pagina: StartScreen
+     */
     private void setStartGameButton(){
         startGameButton = new JButton("START");
         startGameButton.setBackground(Color.black);
@@ -132,7 +241,11 @@ public class UI {
         });
         mainCharacterSelectionPanel.add(startGameButton);
     }
-    //radio button guerriero
+
+    /*
+        Metodo che gestice il bottone warriorButton
+        pagina: StartScreen
+     */
     private void setWarriorButton(){
         warriorButton = new JRadioButton("Warrior");
         warriorButton.setName("Warrior");
@@ -143,6 +256,7 @@ public class UI {
         warriorButton.addActionListener(handler);
         warriorButton.setActionCommand("warrior");
 
+        //hover
         warriorButton.addMouseListener( new MouseAdapter(){
             public void mouseEntered(MouseEvent evt) {
                 warriorButton.setBackground(Color.blue);
@@ -152,6 +266,7 @@ public class UI {
                 warriorButton.setBackground(Color.black);
             }
         });
+        //selezione del bottone
         warriorButton.setUI(new MetalToggleButtonUI() {
             @Override
             protected Color getSelectColor() {
@@ -162,7 +277,12 @@ public class UI {
         mainCharacterButtonPanel.add(warriorButton);
 
     }
-    //radio button arciere
+
+
+    /*
+        Metodo che gestice il bottone archerButton
+        pagina: StartScreen
+    */
     private void setArcherButton(){
         archerButton = new JRadioButton("Archer");
         warriorButton.setName("Archer");
@@ -172,7 +292,7 @@ public class UI {
         archerButton.setFocusPainted(false);
         archerButton.addActionListener(handler);
         archerButton.setActionCommand("archer");
-
+        //hover
         archerButton.addMouseListener( new MouseAdapter(){
             public void mouseEntered(MouseEvent evt) {
                 archerButton.setBackground(Color.blue);
@@ -182,6 +302,7 @@ public class UI {
                 archerButton.setBackground(Color.black);
             }
         });
+        //selezione del bottone
         archerButton.setUI(new MetalToggleButtonUI() {
             @Override
             protected Color getSelectColor() {
@@ -189,11 +310,15 @@ public class UI {
             }
         });
         mainCharacterSelectionPanel.add(archerButton);
-
         mainCharacterButtonPanel.add(archerButton);
 
     }
-    //radio button ladro
+
+
+    /*
+        Metodo che gestice il bottone thiefButton
+        pagina: StartScreen
+    */
     private void setThiefButton(){
         thiefButton = new JRadioButton("Thief");
         warriorButton.setName("Thief");
@@ -204,6 +329,7 @@ public class UI {
         thiefButton.addActionListener(handler);
         thiefButton.setActionCommand("thief");
 
+        //hover
         thiefButton.addMouseListener( new MouseAdapter(){
             public void mouseEntered(MouseEvent evt) {
                 thiefButton.setBackground(Color.blue);
@@ -213,6 +339,7 @@ public class UI {
                 thiefButton.setBackground(Color.black);
             }
         });
+        //selezione del bottone
         thiefButton.setUI(new MetalToggleButtonUI() {
             @Override
             protected Color getSelectColor() {
@@ -223,7 +350,12 @@ public class UI {
         mainCharacterButtonPanel.add(thiefButton);
 
     }
-    //Metodo che gestice il bottone Exit
+
+
+    /*
+        Metodo che gestice il bottone exitButton
+        pagina: menuScreen
+     */
     private void setExitButton(){
         exitButton = new JButton("EXIT");
         exitButton.setBackground(Color.black);
@@ -244,6 +376,12 @@ public class UI {
         menuButtonPanel.add(exitButton);
 
     }
+
+
+    /*
+        Metodo che gestice il bottone loadButton
+        pagina: menuScreen
+     */
     private void setLoadButton(){
         loadButton = new JButton("LOAD");
         loadButton.setBackground(Color.black);
@@ -265,6 +403,12 @@ public class UI {
         menuButtonPanel.add(loadButton);
 
     }
+
+
+    /*
+        Metodo che gestisce il textField per inserimento di comandi da parte di utente
+        pagina: StartScreen
+     */
     private void setTextField(){
         mainTextFieldPanel = new JPanel();
         mainTextFieldPanel.setName("namepanel");
@@ -311,7 +455,7 @@ public class UI {
         gameB = new gameBoard();
 		mapPanel.add(gameB);
 		gameB.requestFocusInWindow();
-        
+
         /* setSouthLabel();
         setNorthLabel();
         setWestLabel();
@@ -383,7 +527,7 @@ public class UI {
         mainTextArea.setFont(normalFont);
         mainTextPanel.add(mainTextArea);
     }
-    
+
     //questo è il pannello dove gestisco l'output delle azioni / racconto la storia
     private void setMessageTextPanel(){
         messageTextPanel = new JPanel();
@@ -434,7 +578,7 @@ public class UI {
         window.add(mainCharacterSelectionPanel);
 
     }
-    
+
     //pannello di gioco player con tutti i parametri di gioco
     private void setGameScreenPanel(){
         statPanel = new JPanel();
@@ -456,7 +600,7 @@ public class UI {
         setMoneyLabel();
         setRoomNumberLabel(); */
 
-        setMessageTextPanel(); 
+        setMessageTextPanel();
         setMapPanel();
         window.add(statPanel);
     }
@@ -530,7 +674,174 @@ public class UI {
         statPanel.add(roomNumberLabel);
     }
 
+        private void setCounterLoadLabel () {
+            counterLoadLabel = new JLabel();
+            counterLoadLabel.setBorder(new EmptyBorder(0, 10, 0, 0));
+            counterLoadLabel.setFont(normalFont);
+            counterLoadLabel.setForeground(Color.WHITE);
+            statPanel.add(counterLoadLabel);
+        }
+    /*
+       metodo che gestisce la pagina di load
+    */
+        private void setLoadMessagePanel () {
+            loadMessagePanel = new JPanel();
+            loadMessagePanel.setBounds(200, 50, 400, 400);
+            loadMessagePanel.setBorder(BorderFactory.createLineBorder(Color.darkGray));
+            loadMessagePanel.setBackground(Color.black);
+            loadMessagePanel.setLayout(new GridLayout(4, 1));
 
+            //metodi che vanno ad impostare il contenuto degli slot di salvataggio
+            setLoadLabel1();
+            setLoadLabel2();
+            setLoadLabel3();
+            setLoadLabel4();
+
+            //metodo che gestice il commandLoadTextField per inserimento testuale da parte di utente
+            setCommandLoadTextField();
+
+            // metodo per la gestione del loadMessageButton
+            setLoadMessageButton();
+            window.add(loadMessagePanel);
+            window.add(loadTextFieldPanel);
+        }
+    /*
+        Metodo che gestisce il loadMessageButton per inviare i dati al choiceHandler
+        pagina: loadScreen
+     */
+        private void setLoadMessageButton () {
+            loadMessageButton = new JButton("Enter");
+            loadMessageButton.setForeground(Color.white);
+            loadMessageButton.setBackground(Color.black);
+            loadMessageButton.setFont(normalFont);
+            loadMessageButton.setFocusPainted(false);
+            loadMessageButton.addActionListener(handler);
+            loadMessageButton.setActionCommand("backToMenu");
+
+            loadTextFieldPanel.add(loadMessageButton);
+
+
+        }
+    /*
+       Metodo che gestisce il commandLoadTextField per fare inserire ad utente i comandi
+       pagina: loadScreen
+    */
+        private void setCommandLoadTextField () {
+            Font textFont = new Font("SansSerif", Font.BOLD, 15);
+            loadTextFieldPanel = new JPanel();
+            loadTextFieldPanel.setBackground(Color.black);
+            loadTextFieldPanel.setLayout(new GridLayout(1, 2));
+            loadTextFieldPanel.setBounds(200, 450, 400, 50);
+
+            commandLoadTextField = new JTextField(30);
+            commandLoadTextField.setBounds(200, 480, 400, 30);
+            commandLoadTextField.setBackground(Color.darkGray);
+            commandLoadTextField.setFont(textFont);
+            commandLoadTextField.setForeground(Color.white);
+            loadTextFieldPanel.add(commandLoadTextField);
+        }
+
+    /*
+    metodo per la gestione dello slot di salvataggio 1
+    pagina: loadScreen
+     */
+        private void setLoadLabel1 () {
+
+            loadLabel1 = new JLabel();
+            fileName = "Filesave 1.txt";
+            fileLoad = new File("FileDownload/" + fileName);
+            if (fileLoad.exists()) {
+                loadLabel1.setText("Save slot 1");
+            }
+            loadLabel1.setBounds(300, 150, 400, 100);
+            loadLabel1.setBackground(Color.black);
+            loadLabel1.setForeground(Color.white);
+            loadLabel1.setFont(normalFont);
+            loadLabel1.setBorder(BorderFactory.createLineBorder(Color.darkGray));
+            loadMessagePanel.add(loadLabel1);
+
+
+        }
+
+    /*
+      metodo per la gestione dello slot di salvataggio 2
+      pagina: loadScreen
+       */
+        private void setLoadLabel2 () {
+
+            loadLabel2 = new JLabel();
+            fileName = "Filesave 2.txt";
+            fileLoad = new File("FileDownload/" + fileName);
+            if (fileLoad.exists()) {
+                loadLabel2.setText("Save slot 2");
+            }
+            loadLabel2.setBounds(300, 150, 400, 100);
+            loadLabel2.setBackground(Color.black);
+            loadLabel2.setForeground(Color.white);
+            loadLabel2.setFont(normalFont);
+
+            loadLabel2.setBorder(BorderFactory.createLineBorder(Color.darkGray));
+            loadMessagePanel.add(loadLabel2);
+
+
+        }
+
+    /*
+      metodo per la gestione dello slot di salvataggio 3
+      pagina: loadScreen
+   */
+        private void setLoadLabel3 () {
+
+            loadLabel3 = new JLabel();
+            fileName = "Filesave 3.txt";
+            fileLoad = new File("FileDownload/" + fileName);
+            if (fileLoad.exists()) {
+                loadLabel3.setText("Save slot 3");
+            }
+            loadLabel3.setBounds(300, 150, 400, 100);
+            loadLabel3.setBackground(Color.black);
+            loadLabel3.setForeground(Color.white);
+            loadLabel3.setFont(normalFont);
+            loadLabel3.setBorder(BorderFactory.createLineBorder(Color.darkGray));
+            loadMessagePanel.add(loadLabel3);
+
+
+        }
+
+    /*
+      metodo per la gestione dello slot di salvataggio 4
+      pagina: loadScreen
+   */
+        public void setLoadLabel4 () {
+
+            loadLabel4 = new JLabel();
+            fileName = "Filesave 4.txt";
+            fileLoad = new File("FileDownload/" + fileName);
+            if (fileLoad.exists()) {
+                loadLabel4.setText("Save slot 4");
+            }
+            loadLabel4.setBounds(300, 150, 400, 100);
+            loadLabel4.setBackground(Color.black);
+            loadLabel4.setForeground(Color.white);
+            loadLabel4.setFont(normalFont);
+            loadLabel4.setBorder(BorderFactory.createLineBorder(Color.darkGray));
+            loadMessagePanel.add(loadLabel4);
+
+
+        }
+    /*
+      metodo per la gestione degli alert durante il comando "save"
+      pagina: gameScreen
+       */
+        public int setAlertMenu ( int value){
+            if (value == 1) {
+                JOptionPane.showMessageDialog(commandPanel, "You have run out of available save slots, use \"save (1-4)\" to overwrite the available save slots", "Confirmation", JOptionPane.WARNING_MESSAGE);
+                return -1;
+            }
+
+            return JOptionPane.showConfirmDialog(commandPanel, "This slot is already occupied by a previous save, do you want to overwrite?", "Confirmation", JOptionPane.YES_NO_OPTION);
+
+        }
 
 
 }
