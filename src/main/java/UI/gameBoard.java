@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Objects;
 
 import javax.swing.JPanel;
 
@@ -31,10 +32,17 @@ import Player.mostro;
 //ce un errore nella lista dei mostri quando combattono e vengono uccisi
 
 public class gameBoard extends JPanel implements KeyListener {
-    public gameBoard(){
+    private choiceHandler handler;
+    private visibilityManager vManager;
+    private UI userInterface;
+    public gameBoard(UI ui){
         addKeyListener(this);
         this.setFocusable(true);
         makesomething();
+        handler =  new choiceHandler(ui);
+        vManager = new visibilityManager(ui);
+        userInterface = ui;
+
     }
 
     @Override
@@ -447,7 +455,7 @@ public class gameBoard extends JPanel implements KeyListener {
    public void makesomething(){
     reference.ui.commandTextField.addKeyListener(new KeyAdapter() {
         public void keyPressed(KeyEvent e) {
-            if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+            if(e.getKeyCode() == KeyEvent.VK_ENTER ) {
                 switch(reference.ui.commandTextField.getText().toLowerCase()) {
                     case "take":
                     if(reference.item != null){
@@ -589,11 +597,11 @@ public class gameBoard extends JPanel implements KeyListener {
                             reference.mostro.takeDamage(difesomonster - dannoplayer);
                             if(reference.mostro.getVita() <=0){
                                 if(reference.mostro.getSymbol() == 'B'){
-                                    reference.ui.messageTextArea.setText("Hai ucciso il BOSS! Hai Vinto!!");
                                     reference.player.setMostri_uccisi();
                                     reference.player.setVita(0);
                                     reference.mostro = null;
                                     reference.player.getSpada().setCanAttack(false);
+                                    vManager.showWinPanel();
                                 }else{
                                     reference.player.setMostri_uccisi();
                                     reference.currentStanza.cellestanza.get(reference.mostro.getY()).set(reference.mostro.getX(), Cell.FREE);
@@ -640,8 +648,10 @@ public class gameBoard extends JPanel implements KeyListener {
                         reference.ui.commandTextField.setText("");
                     break;
                     default:
+                        handler.manageTextInput(reference.ui.commandTextField.getText().toLowerCase());
                         reference.ui.commandTextField.setText("");
                 }
+
             }else if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
                 reference.ui.commandTextField.setText("");
                 reference.ui.gameB.requestFocus();
@@ -665,7 +675,7 @@ public class gameBoard extends JPanel implements KeyListener {
         
         reference.player.takeDamage(difeso - danno);
         if(reference.player.getVita() <= 0)
-            reference.ui.messageTextArea.setText("Sei morto! Hai perso!");
+            vManager.showWinPanel();
     }  
    }
    

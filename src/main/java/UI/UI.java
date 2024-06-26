@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import Board.reference;
 
 /**
  * Classe per la gestione della user interface utilizzando la libreria java swing
@@ -14,8 +15,8 @@ import java.io.File;
 public class UI {
     private JFrame window;
     public JPanel titleNamePanel, menuButtonPanel,  mainTextPanel, mainTextFieldPanel, mainCharacterSelectionPanel, statPanel, messageTextPanel, commandPanel, mapPanel, loadMessagePanel, loadTextFieldPanel, winPanel;
-    private JLabel titleNameLabel,mainTextArea, mainCharacterSelectionLabel, startGameLabel, statLabel, nameLabel, characterLabel, hpLabel, inventoryWeight, potionLabel, weaponLabel, moneyLabel, roomNumberLabel, commandLabel, southLabel, northLabel, eastLabel, westLabel, monsterLabel, winLabel;
-    public JLabel loadLabel1, loadLabel2, loadLabel3, loadLabel4, counterLoadLabel;
+    private JLabel titleNameLabel,mainTextArea, mainCharacterSelectionLabel, startGameLabel, statLabel, nameLabel, characterLabel, hpLabel, inventoryWeight, potionLabel, weaponLabel, roomNumberLabel, commandLabel, southLabel, northLabel, eastLabel, westLabel;
+    public JLabel loadLabel1, loadLabel2, loadLabel3, loadLabel4, counterLoadLabel, winLabel, namePlayerLabel, monsterLabel, moneyLabel;
     private JButton startButton, loadButton, exitButton, startGameButton, commandButton, loadMessageButton, winButton;
     private JRadioButton warriorButton, archerButton, thiefButton;
     public JTextArea messageTextArea;
@@ -79,25 +80,25 @@ public class UI {
         window.add(titleNamePanel);
     }
 
-    private void setWinLabel(){
+    public void setWinLabel(){
         Font winFont = new Font("Serif", Font.PLAIN, 50);
-        winLabel = new JLabel("YOU WIN! ");
+        winLabel = new JLabel();
         winLabel.setFont(winFont);
-        winLabel.setBorder(new EmptyBorder(10,80,0,0));
+        winLabel.setBorder(new EmptyBorder(10,10,0,0));
         winLabel.setForeground(Color.white);
         winPanel.add(winLabel);
     }
 
     private void setHpLabelWinPage(){
-        hpLabel = new JLabel("Player: ");
-        hpLabel.setFont(normalFont);
-        hpLabel.setBorder(new EmptyBorder(0,10,0,0));
-        hpLabel.setForeground(Color.white);
-        winPanel.add(hpLabel);
+        namePlayerLabel = new JLabel();
+        namePlayerLabel.setFont(normalFont);
+        namePlayerLabel.setBorder(new EmptyBorder(0,10,0,0));
+        namePlayerLabel.setForeground(Color.white);
+        winPanel.add(namePlayerLabel);
     }
 
     private void setMoneyLabelWinPage(){
-        moneyLabel = new JLabel("Experience/money: ");
+        moneyLabel = new JLabel("Experience/money: " + reference.player.getMonete());
         moneyLabel.setFont(normalFont);
         moneyLabel.setBorder(new EmptyBorder(0,10,0,0));
         moneyLabel.setForeground(Color.white);
@@ -105,7 +106,7 @@ public class UI {
     }
 
     private void setMonsterLabel(){
-        monsterLabel = new JLabel("Monsters killed: ");
+        monsterLabel = new JLabel("Monsters killed: " + reference.player.getMostriuccisi());
         monsterLabel.setFont(normalFont);
         monsterLabel.setBorder(new EmptyBorder(0,10,0,0));
         monsterLabel.setForeground(Color.white);
@@ -431,7 +432,7 @@ public class UI {
         // mapPanel.setBorder(BorderFactory.createLineBorder(Color.darkGray));
         // mapPanel.setLayout(null);
 
-        gameB = new gameBoard();
+        gameB = new gameBoard(reference.ui);
 		mapPanel.add(gameB);
 		gameB.requestFocusInWindow();
 

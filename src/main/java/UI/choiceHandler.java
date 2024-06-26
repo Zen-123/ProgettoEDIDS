@@ -1,8 +1,11 @@
 package UI;
-
+import Board.Board;
+import Board.Readfile;
 import ManageFile.DownloadFile;
 import ManageFile.uploadFile;
-
+import Board.reference;
+import Player.Player;
+import Player.mostro;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -54,9 +57,10 @@ public class choiceHandler implements ActionListener {
                 apre il menù di selezione del personaggio
              */
             case "Start":
+                setNewGame();
                 vManager.showStartScreen();
-                userInterfaceHandler.textField.setText("");
-                userInterfaceHandler.textField.setVisible(true);
+
+
                 break;
             /*
                 gestisce il bottone: exitButton,
@@ -70,8 +74,8 @@ public class choiceHandler implements ActionListener {
                 mostra la schermata di gioco effettiva
              */
             case "Start game":
-                vManager.showGameScreen();
                 userInterfaceHandler.commandTextField.setText("");
+                vManager.showGameScreen();
                 break;
             /*
                 gestisce il bottone: loadButton
@@ -96,12 +100,13 @@ public class choiceHandler implements ActionListener {
                 gestisce il bottone: commandButton
                 gestisce gli input scritti dall'utente sul commandTextField presente nel MainCharacterSelectionPanel
              */
+            /*
             case "input":
                 String inputText = userInterfaceHandler.commandTextField.getText();
                 if (!Objects.equals(inputText, "")) {
                     manageTextInput(inputText);
                 }
-                break;
+                break;*/
 
             case "returnToMainMenu":
                 vManager.showMenuScreen();
@@ -123,6 +128,7 @@ public class choiceHandler implements ActionListener {
         "save 1-4" permettono di salvare la partita in uno specifico slot, usati solo per sovrascrivere altri salvataggi precedenti
          */
         switch (textInput) {
+
             case "save":
 
                 File fileLoad;
@@ -278,6 +284,14 @@ public class choiceHandler implements ActionListener {
 
         }
 
+    }
+
+    private void setNewGame(){
+        userInterfaceHandler.textField.setText("");
+        reference.player = new Player();
+        reference.filereader = new Readfile();
+        reference.mostrorun = new mostro();
+        reference.currentStanza = new Board(1);
     }
 }
 
