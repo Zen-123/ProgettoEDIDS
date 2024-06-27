@@ -75,7 +75,6 @@ public class gameBoard extends JPanel implements KeyListener {
         g.drawString("Inventario: "+reference.player.getPeso()+" / 100", 560, 180);
 		g.drawString("Weapon Equipped: "+reference.player.getSpada().getNome(), 560, 200);
 		g.drawString("Armor Equipped: "+reference.player.getArmour().getNome(), 560, 220);
-
 		//Floor color e riempimento grafico della mappa
 		g.setColor(Color.WHITE);
         g.setFont(new Font("arial", Font.PLAIN, 15));
@@ -165,7 +164,7 @@ public class gameBoard extends JPanel implements KeyListener {
                 return true;  
             case 'f':
                 if(reference.player.getPeso() <= 95){
-                    reference.player.setKey();
+                    reference.player.setKey(0);
                     reference.ui.messageTextArea.setText("O O ... Hai trovato una chiave\n...\n...");
                     return true;
                 }else
@@ -597,13 +596,13 @@ public class gameBoard extends JPanel implements KeyListener {
                             reference.mostro.takeDamage(difesomonster - dannoplayer);
                             if(reference.mostro.getVita() <=0){
                                 if(reference.mostro.getSymbol() == 'B'){
-                                    reference.player.setMostri_uccisi();
+                                    vManager.showWinPanel();
+                                    reference.player.setMostri_uccisi(0);
                                     reference.player.setVita(0);
                                     reference.mostro = null;
                                     reference.player.getSpada().setCanAttack(false);
-                                    vManager.showWinPanel();
                                 }else{
-                                    reference.player.setMostri_uccisi();
+                                    reference.player.setMostri_uccisi(0);
                                     reference.currentStanza.cellestanza.get(reference.mostro.getY()).set(reference.mostro.getX(), Cell.FREE);
                                     reference.ui.gameB.requestFocus();
                                     reference.ui.messageTextArea.setText("Hai sconfitto il "+reference.mostro.getNome());

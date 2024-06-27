@@ -6,12 +6,16 @@ import ManageFile.uploadFile;
 import Board.reference;
 import Player.Player;
 import Player.mostro;
+import Board.Cell;
+import Player.Item;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Classe che gestice gli eventi sulla UI, implementa la classe astratta ActionListener per la gestione degli eventi
@@ -29,6 +33,7 @@ public class choiceHandler implements ActionListener {
     private File fileSave;
     private PrintWriter printWriter;
     private final String[] fileNameArray = {"Filesave 1.txt", "Filesave 2.txt", "Filesave 3.txt", "Filesave 4.txt"};
+    public boolean reloadFile = false;
 
     /**
      * Costruttore parametrizzato della classe choiceHandler
@@ -58,6 +63,7 @@ public class choiceHandler implements ActionListener {
              */
             case "Start":
                 setNewGame();
+                vManager.checkLoad = false;
                 vManager.showStartScreen();
 
 
@@ -214,10 +220,33 @@ public class choiceHandler implements ActionListener {
      */
     private void manageLoadTextInput(String input) {
 
+        userInterfaceHandler.commandLoadTextField.setText("");
         //torna alla pagina iniziale
         if (input.equals("back")) {
             vManager.showMenuScreen();
         }
+
+        if(input.equals("slot 1")){
+            setupLoad(1);
+            vManager.checkLoad = true;
+            vManager.showGameScreen();
+        }
+        if(input.equals("slot 2")){
+            setupLoad(2);
+            vManager.checkLoad = true;
+            vManager.showGameScreen();
+        }
+        if(input.equals("slot 3")){
+            setupLoad(3);
+            vManager.checkLoad = true;
+            vManager.showGameScreen();
+        }
+        if(input.equals("slot 4")){
+            setupLoad(4);
+            vManager.checkLoad = true;
+            vManager.showGameScreen();
+        }
+
     }
 
     /**
@@ -232,7 +261,21 @@ public class choiceHandler implements ActionListener {
             fileSave.createNewFile();
             printWriter = new PrintWriter(fileSave);
             //scrittura sul file
-            printWriter.println("Save n. " + counterFile + "\n");
+            printWriter.println(
+                    "Player: " + reference.player.getNome() + "\n" +
+                    "Health: " + reference.player.getVita()+ "\n" +
+                    "Money: " + reference.player.getMonete()+ "\n" +
+                    "Monster_killed: " + reference.player.getMostriuccisi()+ "\n" +
+                    "Category: " + reference.player.getCategory()+ "\n" +
+                    "Weapon: " + reference.player.getSpadaName()+ "\n" +
+                    "Potions: " + reference.player.getNumpozioni() + "\n" +
+                    "Weight_Inventory: " + reference.player.getPeso() + "\n" +
+                    "Armour: " + reference.player.getArmourName() + "\n" +
+                    "key: " + reference.player.getGoldkey()+ "\n" +
+                    "Max_damage: " + reference.player.getDannoMaxSpada() + "\n" +
+                    "Min_damage: " + reference.player.getDannoMinSpada() + "\n" +
+                    "Current_room: " + reference.player.getStanzapresente()
+            );
             printWriter.close();
             //caricamento del nuovo file su aws
             upload = new uploadFile(fileName);
@@ -253,11 +296,27 @@ public class choiceHandler implements ActionListener {
             fileSave = new File("FileLoad/" + name);
             printWriter = new PrintWriter(fileSave);
             //scrittura su file
-            printWriter.println("Sovrascitto " + counterFile + "\n");
+            printWriter.println(
+                    "Player: " + reference.player.getNome() + "\n" +
+                            "Health: " + reference.player.getVita()+ "\n" +
+                            "Money: " + reference.player.getMonete()+ "\n" +
+                            "Monster_killed: " + reference.player.getMostriuccisi()+ "\n" +
+                            "Category: " + reference.player.getCategory()+ "\n" +
+                            "Weapon: " + reference.player.getSpadaName()+ "\n" +
+                            "Potions: " + reference.player.getNumpozioni() + "\n" +
+                            "Weight_Inventory: " + reference.player.getPeso() + "\n" +
+                            "Armour: " + reference.player.getArmourName() + "\n" +
+                            "key: " + reference.player.getGoldkey()+ "\n" +
+                            "Max_damage: " + reference.player.getDannoMaxSpada() + "\n" +
+                            "Min_damage: " + reference.player.getDannoMinSpada() + "\n" +
+                            "Current_room: " + reference.player.getStanzapresente()
+            );
             printWriter.close();
             //caricamento del file sovrascritto
             upload = new uploadFile(name);
             System.out.println("File sovrascritto");
+            reloadFile = true;
+            setLoad();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -269,19 +328,88 @@ public class choiceHandler implements ActionListener {
      */
     public void setLoad() {
         File fileLoad;
+        int i=1;
         userInterfaceHandler.counterLoadLabel.setText("Save n. " + (counterFile+1));
         //array che scorre i nomi di tutti i file di bucket aws
         for (String s : fileNameArray) {
             fileLoad = new File("FileDownload/" + s);
 
             //se un file non esiste in locale ma è presente nel bucket viene scaricato
-            if (!fileLoad.exists()) {
+            if (!fileLoad.exists() || reloadFile) {
+                if(reloadFile){
+                    fileLoad.delete();
+                    reloadFile = false;
+                }
                 DownloadFile downloadFIle = new DownloadFile(s, userInterfaceHandler);
             } else {
+
                 counterFileFirstLoad++;
                 System.out.println("File " + s + " già presente!");
+                i++;
             }
 
+        }
+
+        reloadFile = false;
+
+    }
+
+    public void setupLoad(int i)  {
+
+        try {
+            int counter = 1;
+            File file = new File("FileDownload/Filesave "+i+".txt");
+            Pattern pattern = Pattern.compile(": (.+)");
+            BufferedReader br = new BufferedReader(new FileReader(file));
+                String line;
+                while ((line = br.readLine()) != null) {
+                    Matcher matcher = pattern.matcher(line);
+                    if (matcher.find()) {
+
+                        if(counter == 1)
+                            reference.player.setNome(matcher.group(1));
+                        else if(counter == 2)
+                            reference.player.setVita(Integer.parseInt(matcher.group(1)));
+                        else if(counter == 3)
+                            reference.player.setMoneteLoad(Integer.parseInt(matcher.group(1)));
+                        else if(counter == 4)
+                            reference.player.setMostri_uccisi(Integer.parseInt(matcher.group(1)));
+                        else if(counter == 5)
+                            reference.player.setCategory(matcher.group(1));
+                        else if(counter == 6)
+                            reference.player.setSpadaName(matcher.group(1));
+                        else if(counter == 7)
+                            reference.player.setNum_pozioni(Integer.parseInt(matcher.group(1)));
+                        else if(counter == 8)
+                            reference.player.setPeso(Integer.parseInt(matcher.group(1)));
+                        else if(counter == 9)
+                            reference.player.setArmourName((matcher.group(1)));
+                        else if(counter == 10)
+                            reference.player.setKey(Integer.parseInt((matcher.group(1))));
+                        else if(counter == 11)
+                            reference.player.setMaxDamage(Integer.parseInt((matcher.group(1))));
+                        else if(counter == 12)
+                            reference.player.setMinDamage(Integer.parseInt((matcher.group(1))));
+                        else if(counter == 13){
+                            String temp = "src/main/java/Board/Stanzeold/stanza_"+Integer.parseInt((matcher.group(1)))+".txt";
+                            reference.currentStanza.ss = new ArrayList<String>();
+                            reference.currentStanza.ID_Stanza = Integer.parseInt((matcher.group(1)));
+                            reference.curr_stanza = Integer.parseInt((matcher.group(1)));
+                            reference.currentStanza.ss = reference.filereader.fileToRead(temp);
+                            reference.currentStanza.column = reference.currentStanza.ss.size()-1;
+                            reference.currentStanza.row = reference.currentStanza.ss.get(0).length();
+                            reference.currentStanza.cellestanza = new ArrayList<ArrayList<Cell>>();
+                            reference.currentStanza.lista_item = new ArrayList<Item>();
+                            reference.currentStanza.lista_mostri = new ArrayList<mostro>();
+                            reference.currentStanza.populateBoard(reference.currentStanza.ss,false);
+                        }
+
+                        counter++;
+                    }
+                }
+
+        }catch (Exception e){
+            e.printStackTrace();
         }
 
     }
@@ -294,5 +422,3 @@ public class choiceHandler implements ActionListener {
         reference.currentStanza = new Board(1);
     }
 }
-
-

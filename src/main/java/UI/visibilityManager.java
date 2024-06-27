@@ -10,7 +10,7 @@ import Player.Item;
 public class visibilityManager {
 
     UI ui;
-
+    public boolean checkLoad = false;
     /**
      * Costruttore della classe visibilityManager
      * @param userInterface  oggetto della classe UI usato nel MainGame per la gestione delle schermate
@@ -92,36 +92,38 @@ public class visibilityManager {
 
         //riemptio giocatore con tutti i dati prelevati dal menu di selezione personaggio
         try{
-            switch(ui.mainCharacterButtonPanel.getSelection().getActionCommand()) {
-                case "warrior":
-                    reference.player.setMonete(0);
-                    reference.player.addNum_pozioni(0);
-                    reference.player.addSpada( new Item("spada",13,5,0,true,reference.curr_stanza,true));
-                    reference.player.addArmour(new Item("armatura",0,0,5,false,reference.curr_stanza,true));
-                    reference.player.setHasArmour(true);
-                    break;
-                case "archer":
-                    reference.player.setMonete(10);
-                    reference.player.addNum_pozioni(2);
-                    reference.player.addSpada( new Item("spada",10,3,0,true,reference.curr_stanza,true));
-                    reference.player.addArmour(new Item("armatura",0,0,1,false,reference.curr_stanza,true));
-                    reference.player.setHasArmour(true);
-                    break;
-                case "thief":
-                    reference.player.setMonete(20);
-                    reference.player.addNum_pozioni(3);
-                    reference.player.setKey();
-                    reference.player.addSpada(new Item("spada",8,4,0,true,reference.curr_stanza,true));
-                    reference.player.addArmour(new Item("armatura",0,0,0,false,reference.curr_stanza,true));
-                    reference.player.setHasArmour(true);
-                    break;
-                default:
-                    break;
-            }
+            if(checkLoad == false) {
+                switch (ui.mainCharacterButtonPanel.getSelection().getActionCommand()) {
+                    case "warrior":
+                        reference.player.setMonete(0);
+                        reference.player.addNum_pozioni(0);
+                        reference.player.addSpada(new Item("spada", 13, 5, 0, true, reference.curr_stanza, true));
+                        reference.player.addArmour(new Item("armatura", 0, 0, 5, false, reference.curr_stanza, true));
+                        reference.player.setHasArmour(true);
+                        break;
+                    case "archer":
+                        reference.player.setMonete(10);
+                        reference.player.addNum_pozioni(2);
+                        reference.player.addSpada(new Item("spada", 10, 3, 0, true, reference.curr_stanza, true));
+                        reference.player.addArmour(new Item("armatura", 0, 0, 1, false, reference.curr_stanza, true));
+                        reference.player.setHasArmour(true);
+                        break;
+                    case "thief":
+                        reference.player.setMonete(20);
+                        reference.player.addNum_pozioni(3);
+                        reference.player.setKey(0);
+                        reference.player.addSpada(new Item("spada", 8, 4, 0, true, reference.curr_stanza, true));
+                        reference.player.addArmour(new Item("armatura", 0, 0, 0, false, reference.curr_stanza, true));
+                        reference.player.setHasArmour(true);
+                        break;
+                    default:
+                        break;
+                }
 
-            reference.player.setCategory(ui.mainCharacterButtonPanel.getSelection().getActionCommand());
+
+             reference.player.setCategory(ui.mainCharacterButtonPanel.getSelection().getActionCommand());
             reference.player.setNome(ui.textField.getText());
-
+            }
         }catch (NullPointerException e){
             System.out.println("Inserisci tutti i dati!");
             showMenuScreen();

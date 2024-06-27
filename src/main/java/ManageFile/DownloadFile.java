@@ -1,9 +1,15 @@
 package ManageFile;
+import Board.reference;
 import UI.UI;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
 /**
  * Classe che gestisce il download di file dal bucket di aws S3
@@ -32,6 +38,7 @@ public class DownloadFile {
 
             //Service client per accedere ad aws s3
             s3.getObject(getObjectRequest, Paths.get(downloadDir, fileName));
+
 
             /*
             Switch usato per la gestione dei file scaricati da aws s3.
@@ -74,5 +81,9 @@ public class DownloadFile {
             }
         }
 
+
     }
+
+
+
 }

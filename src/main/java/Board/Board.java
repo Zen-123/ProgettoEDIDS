@@ -12,9 +12,9 @@ public class Board{
     public ArrayList<String> ss;
     public ArrayList<Item> lista_item;
     public ArrayList<mostro> lista_mostri;
-    private int row;
-    private int column;
-    private int ID_Stanza;  
+    public int row;
+    public int column;
+    public int ID_Stanza;
     private int drive_to_N; 
     private int drive_to_E;
     private int drive_to_W; 

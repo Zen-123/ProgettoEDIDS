@@ -1,4 +1,5 @@
 package Player;
+import Board.reference;
 
 public class Player extends entity{
     private String nome;
@@ -21,9 +22,9 @@ public class Player extends entity{
     public Player(){
         this.nome = " ";
         this.category = " ";
-        this.spada = null;
+        this.spada = new Item();
         this.vita = 100;
-        this.armatura = null;
+        this.armatura = new Item();
         this.hasSword = true;
         this.hasArmour = false;
         this.peso = 0;
@@ -69,6 +70,29 @@ public class Player extends entity{
     public Item getSpada(){
         return spada;
     }
+
+    public String getSpadaName(){
+        return spada.nome;
+    }
+
+    public String getArmourName(){
+        return armatura.nome;
+    }
+    public void setSpadaName(String name){
+        spada.nome = name;
+    }
+
+    public void setArmourName(String name){
+        armatura.nome = name;
+    }
+
+    public void setMaxDamage(int damage){
+        spada.attacco_max = damage;
+    }
+
+    public void setMinDamage(int damage){
+        spada.attacco_min = damage;
+    }
     public Item getArmour(){
         return armatura;
     }
@@ -78,6 +102,9 @@ public class Player extends entity{
     public int getPeso() {
         return peso;
     }
+    public void setPeso(int peso){
+        this.peso = peso;
+    }
     public int getNumpozioni() {
         return num_pozioni;
     }
@@ -85,6 +112,7 @@ public class Player extends entity{
         num_pozioni++;
         this.peso += 5;
     }
+
     public void usePozioni(){
         if(this.num_pozioni > 0){
             num_pozioni--;
@@ -120,8 +148,9 @@ public class Player extends entity{
         return mostri_uccisi;
     }
     public int getStanzapresente() {
-        return stanza_presente;
+        return reference.curr_stanza;
     }
+
     public boolean isHasSword() {
         return hasSword;
     }
@@ -134,11 +163,20 @@ public class Player extends entity{
     public void setStanza_presente(int stanza_presente) {
         this.stanza_presente = stanza_presente;
     }
+
+    public void setMoneteLoad(int money){
+        this.monete = money;
+    }
     public void setMonete(int amount) {
         this.monete += amount;
     }
-    public void setKey(){
-        this.key +=1;
+    public void setKey(int key){
+        if(key != 0)
+            this.key = key;
+        else
+            this.key +=1;
+
+
         peso += 5;
     }
     public void setGoldKey(){
@@ -158,6 +196,7 @@ public class Player extends entity{
     public void setNome(String nome) {
         this.nome = nome;
     }
+    public void setNum_pozioni(int pozioni) {this.num_pozioni = pozioni;}
     public String getCategory() {
         return category;
     }
@@ -177,7 +216,10 @@ public class Player extends entity{
         if(danno < 0)
             this.vita += danno; 
     }
-    public void setMostri_uccisi() {
-        this.mostri_uccisi ++;
+    public void setMostri_uccisi(int mostri_uccisi) {
+        if(mostri_uccisi != 0)
+            this.mostri_uccisi = mostri_uccisi;
+        else
+            this.mostri_uccisi ++;
     }
 }

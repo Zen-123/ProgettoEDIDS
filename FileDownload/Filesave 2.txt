@@ -1,2 +1,13 @@
-Save n. 1
-
+Player: room2
+Health: 100
+Money: 28
+Monster_killed: 0
+Category: archer
+Weapon: spada
+Potions: 3
+Weight_Inventory: 65
+Armour: armatura
+key: 0
+Max_damage: 10
+Min_damage: 3
+Current_room: 2
