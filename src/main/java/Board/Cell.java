@@ -1,8 +1,8 @@
 package Board;
 
-//classe gestisce singola cella della mia scacchiera
+//classe gestisce singola cella della mia scacchiera sono presenti tutti i simboli che si trovano nel gioco
+//se si aggiungono simboli sul textfile bisogna aggiungerli in questa classe
 public enum Cell{
-
     FREE('.'),
     WALL('#'),
     NORD('N'),

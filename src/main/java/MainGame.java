@@ -1,11 +1,12 @@
 import Board.Board;
 import Board.Readfile;
+import Board.func;
 import Board.reference;
 import Player.Player;
 import Player.mostro;
-import UI.visibilityManager;
-import UI.choiceHandler;
 import UI.UI;
+import UI.choiceHandler;
+import UI.visibilityManager;
 
 /**
  * Classe MainGame che permette di far partire il software
@@ -34,11 +35,12 @@ public class MainGame {
         handler.setLoad();
     }
 
-    //assegnazione var globali
+    //inizializzazione var globali
     private static void initialGame(){
         reference.player = new Player();
         reference.filereader = new Readfile();
         reference.mostrorun = new mostro();
         reference.currentStanza = new Board(reference.curr_stanza);
+        reference.functions = new func();
     }
 }

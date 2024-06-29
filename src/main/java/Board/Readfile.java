@@ -13,7 +13,7 @@ public class Readfile {
     public ArrayList<String> fileToRead(String filename){
         
         String str="";
-        ArrayList<String> strings = new ArrayList <String>();
+        ArrayList<String> strings = new ArrayList<String>();
         try{
             if(filename.length() > 0){      
             FileReader fr = new FileReader(filename);
