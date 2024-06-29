@@ -37,15 +37,15 @@ public class Readfile {
             writer = new FileWriter(filename);
             for (int i = 0; i <= stanza.size()-1; i++) {
                 for (int j = 0; j < stanza.get(0).size(); j++) {
-                    if(i == (stanza.size()-1))
+                    if(i == (stanza.size()-1)) {
                         writer.write(reference.currentStanza.ss.get(i).charAt(j));
-                    else if(stanza.get(i).get(j).getSymbol() == 'A'){
+                    }else if(stanza.get(i).get(j).getSymbol() == 'A'){
                         writer.write('.');
                     }else{
                         writer.write(stanza.get(i).get(j).getSymbol());
-                    }   
+                    }
                 }
-                writer.write("\n");   
+                writer.write("\n");
             }
             writer.close();
         }catch(Exception e){

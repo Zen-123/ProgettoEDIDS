@@ -35,10 +35,10 @@ public class MainGame {
     }
 
     //assegnazione var globali
-    private static void initialGame(){
+    static void initialGame(){
         reference.player = new Player();
         reference.filereader = new Readfile();
         reference.mostrorun = new mostro();
-        reference.currentStanza = new Board(reference.curr_stanza);
+        reference.currentStanza = new Board(1);
     }
 }

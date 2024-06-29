@@ -148,7 +148,7 @@ public class Player extends entity{
         return mostri_uccisi;
     }
     public int getStanzapresente() {
-        return reference.curr_stanza;
+        return stanza_presente;
     }
 
     public boolean isHasSword() {
@@ -171,13 +171,8 @@ public class Player extends entity{
         this.monete += amount;
     }
     public void setKey(int key){
-        if(key != 0)
-            this.key = key;
-        else
-            this.key +=1;
-
-
-        peso += 5;
+        this.key +=key;
+        peso += (this.key) * 5;
     }
     public void setGoldKey(){
         this.goldkey +=1;

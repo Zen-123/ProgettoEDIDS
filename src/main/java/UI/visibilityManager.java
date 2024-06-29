@@ -3,6 +3,8 @@ package UI;
 import Board.reference;
 import Player.Item;
 
+import java.awt.*;
+
 /**
  * Classe che gestisce la visibilità o meno di certi componenti nella user interface
  * permette di cambiare da una schermata ad un altra
@@ -52,6 +54,8 @@ public class visibilityManager {
         ui.mainTextPanel.setVisible(true);
         ui.mainTextFieldPanel.setVisible(true);
         ui.textField.setVisible(true);
+        ui.textField.setText("");
+        ui.textField.setSelectedTextColor(Color.darkGray);
         ui.mainCharacterSelectionPanel.setVisible(true);
 
 

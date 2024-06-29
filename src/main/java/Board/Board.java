@@ -48,6 +48,8 @@ public class Board{
         this.lista_mostri = new ArrayList<mostro>();
         populateBoard(ss,true);
     }
+
+
     public void populateBoard(ArrayList<String> strings,boolean ver){
         //serve x assegnare alla stanza presente che porta ti porta nella next stanza
         this.setDrive_to_N(strings.get(strings.size()-1).charAt(0));

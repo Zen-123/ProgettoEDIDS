@@ -3,7 +3,6 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.metal.MetalToggleButtonUI;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -12,8 +11,9 @@ import Board.reference;
 /**
  * Classe per la gestione della user interface utilizzando la libreria java swing
  */
+
 public class UI {
-    private JFrame window;
+    JFrame window;
     public JPanel titleNamePanel, menuButtonPanel,  mainTextPanel, mainTextFieldPanel, mainCharacterSelectionPanel, statPanel, messageTextPanel, commandPanel, mapPanel, loadMessagePanel, loadTextFieldPanel, winPanel;
     private JLabel titleNameLabel,mainTextArea, mainCharacterSelectionLabel, startGameLabel, statLabel, nameLabel, characterLabel, hpLabel, inventoryWeight, potionLabel, weaponLabel, roomNumberLabel, commandLabel, southLabel, northLabel, eastLabel, westLabel;
     public JLabel loadLabel1, loadLabel2, loadLabel3, loadLabel4, counterLoadLabel, winLabel, namePlayerLabel, monsterLabel, moneyLabel;
@@ -29,8 +29,6 @@ public class UI {
     private File fileLoad;
 
     static gameBoard gameB;
-    boolean goOn = true;
-
     /**
      * Metodo che permette la crezione della UI
      */
@@ -45,9 +43,6 @@ public class UI {
         setLoadMessagePanel();
         setWinPanel();
         window.setVisible(true);
-
-
-
     }
 
 
@@ -55,7 +50,8 @@ public class UI {
         Metodo che gestisce la finestra di gioco effettiva
         creazione e gestione di window
      */
-    private void setWindow(){
+
+    void setWindow(){
         window = new JFrame();
         window.setSize(800, 600);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -405,15 +401,14 @@ public class UI {
      */
     private void setTextField(){
         mainTextFieldPanel = new JPanel();
-        mainTextFieldPanel.setBounds(20, 250, 600, 50);
+        mainTextFieldPanel.setBounds(20, 250, 600, 100);
         mainTextFieldPanel.setBackground(Color.black);
         window.add(mainTextFieldPanel);
 
         Font textFont = new Font("SansSerif", Font.BOLD, 15);
         textField = new JTextField( 30);
-        textField.setPreferredSize(new Dimension(30, 15));
+        textField.setPreferredSize(new Dimension(50, 30));
         textField.setBackground(Color.darkGray);
-        textField.setPreferredSize(new Dimension(100, 30));
         textField.setFont(textFont);
         textField.setForeground(Color.white);
         mainTextFieldPanel.add(textField);
@@ -423,7 +418,7 @@ public class UI {
     * Metodo per la visualizzazione della mappa
     * pagina: gameScreen
     * */
-    private void setMapPanel(){
+    public void setMapPanel(){
         mapPanel = new JPanel();
         mapPanel.setVisible(true);
 		// mapPanel.setResizable(false);
@@ -532,16 +527,14 @@ public class UI {
                         .addComponent(commandLabel)
                         .addGroup(layout.createSequentialGroup()
                         .addComponent(commandTextField)
-                        .addComponent(commandButton)))
-        );
+        )));
 
         layout.setVerticalGroup(
                 layout.createSequentialGroup()
                 .addComponent(commandLabel)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                 .addComponent(commandTextField)
-                .addComponent(commandButton))
-        );
+        ));
 
         window.add(commandPanel);
 
@@ -559,25 +552,7 @@ public class UI {
         commandTextField.setFont(textFont);
         commandTextField.setForeground(Color.white);
 
-        commandButton = new JButton("Enter");
-        commandButton.setBackground(Color.black);
-        commandButton.setForeground(Color.white);
-        commandButton.setPreferredSize(new Dimension(30, 30));
-        commandButton.addActionListener(handler);
-        commandButton.setActionCommand("input");
-        commandButton.setFocusPainted(false);
-        commandButton.setFont(textFont);
-        //hover
-        commandButton.addMouseListener( new MouseAdapter(){
-            public void mouseEntered(MouseEvent evt) {
-                commandButton.setBackground(Color.blue);
-            }
-
-            public void mouseExited(java.awt.event.MouseEvent evt) {commandButton.setBackground(Color.black);
-            }
-        });
         commandPanel.add(commandTextField);
-        commandPanel.add(commandButton);
 
 
     }

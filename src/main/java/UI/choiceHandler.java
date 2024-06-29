@@ -8,14 +8,19 @@ import Player.Player;
 import Player.mostro;
 import Board.Cell;
 import Player.Item;
+import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static UI.UI.gameB;
 
 /**
  * Classe che gestice gli eventi sulla UI, implementa la classe astratta ActionListener per la gestione degli eventi
@@ -28,9 +33,10 @@ public class choiceHandler implements ActionListener {
     //contatore che va a contare i file già scaricati al primo caricamento del gioco
     private int counterFileFirstLoad = 0;
     private final UI userInterfaceHandler;
-    private final visibilityManager vManager;
-    private uploadFile upload;
+    visibilityManager vManager;
+    uploadFile upload;
     private File fileSave;
+
     private PrintWriter printWriter;
     private final String[] fileNameArray = {"Filesave 1.txt", "Filesave 2.txt", "Filesave 3.txt", "Filesave 4.txt"};
     public boolean reloadFile = false;
@@ -133,6 +139,7 @@ public class choiceHandler implements ActionListener {
         "exit" permette di tornare alla pagina di menu
         "save 1-4" permettono di salvare la partita in uno specifico slot, usati solo per sovrascrivere altri salvataggi precedenti
          */
+        String temp;
         switch (textInput) {
 
             case "save":
@@ -177,6 +184,7 @@ public class choiceHandler implements ActionListener {
                     userInterfaceHandler.setAlertMenu(1);
                 }
                 //finite le operazioni si ritorna alla schermata iniziale
+
                 vManager.showMenuScreen();
                 break;
 
@@ -185,24 +193,32 @@ public class choiceHandler implements ActionListener {
                 break;
 
             case "save 1":
+                temp = "src/main/java/Board/Stanzeold/stanza_"+reference.currentStanza.ID_Stanza+".txt";
+                reference.filereader.fileToWrite(reference.currentStanza.cellestanza, temp );
                 setFileSaveOverwrite(fileNameArray[0]);
                 vManager.showMenuScreen();
 
                 break;
 
             case "save 2":
+                temp = "src/main/java/Board/Stanzeold/stanza_"+reference.currentStanza.ID_Stanza+".txt";
+                reference.filereader.fileToWrite(reference.currentStanza.cellestanza, temp );
                 setFileSaveOverwrite(fileNameArray[1]);
                 vManager.showMenuScreen();
 
                 break;
 
             case "save 3":
+                temp = "src/main/java/Board/Stanzeold/stanza_"+reference.currentStanza.ID_Stanza+".txt";
+                reference.filereader.fileToWrite(reference.currentStanza.cellestanza, temp );
                 setFileSaveOverwrite(fileNameArray[2]);
                 vManager.showMenuScreen();
 
                 break;
 
             case "save 4":
+                temp = "src/main/java/Board/Stanzeold/stanza_"+reference.currentStanza.ID_Stanza+".txt";
+                reference.filereader.fileToWrite(reference.currentStanza.cellestanza, temp );
                 setFileSaveOverwrite(fileNameArray[3]);
                 vManager.showMenuScreen();
 
@@ -218,7 +234,7 @@ public class choiceHandler implements ActionListener {
      * Metodo che gestice gli input testuali nella pagina di load dei salvataggi
      * @param input stringa di testo che contiene i comandi
      */
-    private void manageLoadTextInput(String input) {
+    void manageLoadTextInput(String input) {
 
         userInterfaceHandler.commandLoadTextField.setText("");
         //torna alla pagina iniziale
@@ -253,7 +269,7 @@ public class choiceHandler implements ActionListener {
      * Metodo che gestice il salvataggio dei dati in un nuovo file
      * @param fileName nome del file di salvataggio
      */
-    private void setFileSave(String fileName) {
+    void setFileSave(String fileName) {
         try {
             //salvataggio del file sulla cartella FileLoad
             fileSave = new File("FileLoad/" + fileName);
@@ -274,12 +290,13 @@ public class choiceHandler implements ActionListener {
                     "key: " + reference.player.getGoldkey()+ "\n" +
                     "Max_damage: " + reference.player.getDannoMaxSpada() + "\n" +
                     "Min_damage: " + reference.player.getDannoMinSpada() + "\n" +
-                    "Current_room: " + reference.player.getStanzapresente()
+                            "Pos_x: " + reference.player.getX() +"\n"+
+                            "Pos_y: " + reference.player.getY() + "\n"+
+                            "Current_room: " + reference.player.getStanzapresente()
             );
             printWriter.close();
             //caricamento del nuovo file su aws
             upload = new uploadFile(fileName);
-            System.out.println("Nuovo file creato!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -309,7 +326,9 @@ public class choiceHandler implements ActionListener {
                             "key: " + reference.player.getGoldkey()+ "\n" +
                             "Max_damage: " + reference.player.getDannoMaxSpada() + "\n" +
                             "Min_damage: " + reference.player.getDannoMinSpada() + "\n" +
-                            "Current_room: " + reference.player.getStanzapresente()
+                            "Pos_x: " + reference.player.getX() +"\n"+
+                            "Pos_y: " + reference.player.getY() + "\n"+
+                            "Current_room: " + reference.currentStanza.ID_Stanza
             );
             printWriter.close();
             //caricamento del file sovrascritto
@@ -391,17 +410,11 @@ public class choiceHandler implements ActionListener {
                         else if(counter == 12)
                             reference.player.setMinDamage(Integer.parseInt((matcher.group(1))));
                         else if(counter == 13){
-                            String temp = "src/main/java/Board/Stanzeold/stanza_"+Integer.parseInt((matcher.group(1)))+".txt";
-                            reference.currentStanza.ss = new ArrayList<String>();
-                            reference.currentStanza.ID_Stanza = Integer.parseInt((matcher.group(1)));
-                            reference.curr_stanza = Integer.parseInt((matcher.group(1)));
-                            reference.currentStanza.ss = reference.filereader.fileToRead(temp);
-                            reference.currentStanza.column = reference.currentStanza.ss.size()-1;
-                            reference.currentStanza.row = reference.currentStanza.ss.get(0).length();
-                            reference.currentStanza.cellestanza = new ArrayList<ArrayList<Cell>>();
-                            reference.currentStanza.lista_item = new ArrayList<Item>();
-                            reference.currentStanza.lista_mostri = new ArrayList<mostro>();
-                            reference.currentStanza.populateBoard(reference.currentStanza.ss,false);
+
+                            System.out.println(reference.player.getX());
+
+                        } else if(counter == 14){
+                            System.out.println(reference.player.getY());
                         }
 
                         counter++;
