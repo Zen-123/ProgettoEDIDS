@@ -20,7 +20,7 @@ public class Board{
     private int drive_to_W; 
     private int drive_to_S;
     private static int drive_to_boss=0;
-    
+
     public Board(int id_stanza){
         this.ss = new ArrayList<String>();
         String temp = "src/main/java/Board/Stanze/stanza_"+id_stanza+".txt";
@@ -48,6 +48,8 @@ public class Board{
         this.lista_mostri = new ArrayList<mostro>();
         populateBoard(ss,true);
     }
+    //riempie la board=arraylist di celle,che poi verra stampata da printcomponent
+    //ver == false allora viene letto da un nuovo file , ver == true controlla file vecchio
     public void populateBoard(ArrayList<String> strings,boolean ver){
         //serve x assegnare alla stanza presente che porta ti porta nella next stanza
         this.setDrive_to_N(strings.get(strings.size()-1).charAt(0));
@@ -137,7 +139,7 @@ public class Board{
     public Cell getCella(int x,int y){
         return cellestanza.get(y).get(x);
     }
-    
+
     public char getSsymbol(int x, int y){
         return cellestanza.get(y).get(x).getSymbol();
     }
