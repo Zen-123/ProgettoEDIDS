@@ -37,8 +37,7 @@ public class Item extends entity{
         this.canAttack = can;
     }
     public int getDanno(){
-        int danno = (int)(Math.random()*(attacco_max - attacco_min) + attacco_min );
-        return danno;
+        return (int)(Math.random()*(attacco_max - attacco_min) + attacco_min );
     }
     public String getNome(){
         return nome;

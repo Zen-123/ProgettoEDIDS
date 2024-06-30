@@ -10,7 +10,6 @@ import java.io.File;
 
 import javax.swing.JPanel;
 
-import UI.visibilityManager;
 import Board.Cell;
 import Board.reference;
 
@@ -158,7 +157,7 @@ public class gameBoard extends JPanel implements KeyListener {
                         }
                     break;
                     case "apri":
-                    reference.functions.updateMonsterPosition();
+                        reference.functions.updateMonsterPosition();
                         reference.ui.gameB.requestFocus();
                     break;
                     case "non aprire":
@@ -197,7 +196,6 @@ public class gameBoard extends JPanel implements KeyListener {
                     case "look":
                         reference.functions.playerIsLooking();
                     break;
-
                     case "save":
                         File fileLoad;
                         if(handler.counterFileFirstLoad<4 && choiceHandler.counterFile<4){

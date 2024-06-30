@@ -1,8 +1,8 @@
 package Board;
 
-import UI.visibilityManager;
 import Player.Item;
 import Player.mostro;
+import UI.visibilityManager;
 
 //classe x gestire metodi globali per il funzionamento del gioco
 public class func{
@@ -12,15 +12,15 @@ public class func{
     }
     //genera un item e lo aggiunge alla lista della stanza, chiamato in fase di lettura del file, return item generato
     public static Item generateItem(int x, int y){
-        int choose = (int)(Math.random() * 7);
+        int choose = (int)(Math.random() * 99);
         Item a;
         if(choose % 2 == 0){//pari è spada
-            a = new Item("spada", (int)(Math.random() * 25) + 6, (int)(Math.random() * 9) + 2, 0,true,reference.curr_stanza,false);
+            a = new Item("spada", (int)(Math.random() * 20) + 6, (int)(Math.random() * 4) + 2, 0,true,reference.curr_stanza,false);
             a.setX(x);
             a.setY(y);
             a.setSymbol('I');
         }else{//dispari è un armatura
-            a = new Item("armatura", 0, 0, (int)((Math.random() * 25) + 2),false,reference.curr_stanza,false);
+            a = new Item("armatura", 0, 0, (int)((Math.random() * 20) + 5),false,reference.curr_stanza,false);
             a.setX(x);
             a.setY(y);
             a.setSymbol('I');
@@ -56,7 +56,7 @@ public class func{
                             }
                             else if(reference.currentStanza.cellestanza.get(y).get(x+1) == Cell.PLAYER){
                                 reference.ui.messageTextArea.setText("Hai incontrato un "+reference.mostro.getNome()+"!\n...\n...");
-                                monsterEncounter(0,reference.mostro,true);
+                                monsterEncounter(0,reference.mostro,0,true);
                                 reference.mostrorun = reference.mostro;
                                 reference.player.setCanAttack(false);
                                 reference.ui.commandTextField.requestFocus();
@@ -79,7 +79,7 @@ public class func{
                             }
                             else if(reference.currentStanza.cellestanza.get(y).get(x-1) == Cell.PLAYER){
                                 reference.ui.messageTextArea.setText("Hai incontrato un "+reference.mostro.getNome()+"!\n...\n...");
-                                monsterEncounter(0,reference.mostro,true);
+                                monsterEncounter(0,reference.mostro,0,true);
                                 reference.mostrorun = reference.mostro;
                                 reference.player.setCanAttack(false);
                                 reference.ui.commandTextField.requestFocus();
@@ -103,7 +103,7 @@ public class func{
                             }
                             else if(reference.currentStanza.cellestanza.get(y+1).get(x) == Cell.PLAYER){
                                 reference.ui.messageTextArea.setText("Hai incontrato un "+reference.mostro.getNome()+"!\n...\n...");
-                                monsterEncounter(0,reference.mostro,true);
+                                monsterEncounter(0,reference.mostro,0,true);
                                 reference.mostrorun = reference.mostro;
                                 reference.player.setCanAttack(false);
                                 reference.ui.commandTextField.requestFocus();
@@ -125,7 +125,7 @@ public class func{
                             }
                             else if(reference.currentStanza.cellestanza.get(y-1).get(x) == Cell.PLAYER){
                                 reference.ui.messageTextArea.setText("Hai incontrato un "+reference.mostro.getNome()+"!\n...\n...");
-                                monsterEncounter(0,reference.mostro,true);
+                                monsterEncounter(0,reference.mostro,0,true);
                                 reference.mostrorun = reference.mostro;
                                 reference.player.setCanAttack(false);
                                 reference.ui.commandTextField.requestFocus();
@@ -279,7 +279,7 @@ public class func{
         int choose = (int)(Math.random() * 5);
         switch(choose) {
             case 0:
-                m = new mostro("vampiro",18,5,7,30,reference.curr_stanza);
+                m = new mostro("vampiro",15,5,7,30,reference.curr_stanza);
                 break;
             case 1:
                 m = new mostro("scheletro",5,1,1,5,reference.curr_stanza);
@@ -291,7 +291,7 @@ public class func{
                 m = new mostro("nano",11,3,5,15,reference.curr_stanza);
                 break;
             case 4:
-                m = new mostro("strega",15,10,3,20,reference.curr_stanza);
+                m = new mostro("strega",13,10,3,20,reference.curr_stanza);
                 break;
             default:
                 m = new mostro();
@@ -304,7 +304,7 @@ public class func{
     //genera boss preso dalla stringa letta dal textfile
     public static mostro generateBoss(int x, int y){
         mostro m;
-        m = new mostro("Piovra",40,15,10,100,reference.curr_stanza);
+        m = new mostro("Piovra",30,15,10,50,reference.curr_stanza);
         m.setX(x);
         m.setY(y);
         m.setSymbol('B');
@@ -313,29 +313,34 @@ public class func{
     //metodo che gestisce turno del player quando sta attaccando dal commandtextfield
     public void playerIsAttacking(){
         int dannoplayer = reference.player.getSpada().getDanno();
-                            int difesomonster = reference.mostrorun.getDifesa();
-                            reference.mostrorun.takeDamage(difesomonster - dannoplayer);
-                            if(reference.mostrorun.getVita() <=0){
-                                if(reference.mostrorun.getSymbol() == 'B'){
-                                    reference.ui.messageTextArea.setText("Hai ucciso il BOSS! Hai Vinto!!");
-                                    reference.player.setMostri_uccisi();
-                                    reference.mostrorun = null;
-                                    reference.player.getSpada().setCanAttack(false);
-                                    reference.player.setCanAttack(false);
-                                    vManager.showWinPanel();
-                                }else{
-                                    reference.player.setMostri_uccisi();
-                                    reference.currentStanza.cellestanza.get(reference.mostrorun.getY()).set(reference.mostrorun.getX(), Cell.FREE);
-                                    reference.ui.gameB.requestFocus();
-                                    reference.ui.messageTextArea.setText("Hai sconfitto il "+reference.mostrorun.getNome());
-                                    reference.mostrorun = null;
-                                    reference.player.getSpada().setCanAttack(false);
-                                    reference.player.setCanAttack(false);
-                                }
-                            }else{
-                                monsterEncounter(dannoplayer,reference.mostrorun,false);
-                            }
-                            reference.ui.commandTextField.setText("");
+        int blockprobability;
+            if((int)(Math.random()*99) % 2 == 0)
+                blockprobability = 0;
+            else
+                blockprobability = reference.mostrorun.getDifesa();
+        reference.mostrorun.takeDamage(blockprobability - dannoplayer);
+
+        if(reference.mostrorun.getVita() <=0){
+            if(reference.mostrorun.getSymbol() == 'B'){
+                reference.ui.messageTextArea.setText("Hai ucciso il BOSS! Hai Vinto!!");
+                reference.player.setMostri_uccisi();
+                reference.mostrorun = null;
+                reference.player.getSpada().setCanAttack(false);
+                reference.player.setCanAttack(false);
+                vManager.showWinPanel();
+            }else{
+                reference.player.setMostri_uccisi();
+                reference.currentStanza.cellestanza.get(reference.mostrorun.getY()).set(reference.mostrorun.getX(), Cell.FREE);
+                reference.ui.gameB.requestFocus();
+                reference.ui.messageTextArea.setText("Hai sconfitto il "+reference.mostrorun.getNome());
+                reference.mostrorun = null;
+                reference.player.getSpada().setCanAttack(false);
+                reference.player.setCanAttack(false);
+            }
+        }else{
+            monsterEncounter(dannoplayer,reference.mostrorun,blockprobability,false);
+        }
+        reference.ui.commandTextField.setText("");
     }
     //metodo che gestisce turno del player quando sta scappando dal commandtextfield
     public void playerIsRunning(){
@@ -344,7 +349,7 @@ public class func{
             reference.ui.messageTextArea.setText("Hai deciso di scappare via\n...\nIl mostro è ancora nelle vicinanze");
             reference.ui.commandTextField.setText("");
             //togliere tutti gli 0 del danno player a monsterencounter
-            monsterEncounter(0,reference.mostrorun,true);
+            monsterEncounter(0,reference.mostrorun,0,true);
             reference.mostrorun = null;
             reference.player.setCanAttack(false);
             reference.player.getSpada().setCanAttack(false);
@@ -391,7 +396,7 @@ public class func{
                 reference.player.usePozioni();
                 reference.ui.messageTextArea.setText("Bevi l'intruglio magico\n...\nTi senti molto meglio ora");
                 reference.ui.commandTextField.setText("");
-                monsterEncounter(0, reference.mostrorun, true);
+                monsterEncounter(0, reference.mostrorun,0, true);
             }else{
                 reference.player.usePozioni();
                 reference.ui.messageTextArea.setText("Bevi l'intruglio magico\n...\nTi senti molto meglio ora");
@@ -530,20 +535,26 @@ public class func{
     }
     //gestisce l'eventualità del encounter con mostro, viene richiamato sia nel turno del player che del mostro
     //a seconda che è chiamato in playerIsAttacking || updateMonsterPosition
-    public void monsterEncounter(int dannoplayer,mostro monster, boolean attack_turn){
+    public void monsterEncounter(int dannoplayer,mostro monster,int blockprobabilitymonster, boolean attack_turn){
         if(monster.getVita() > 0){
             reference.ui.commandTextField.requestFocus();
             int danno = monster.getDanno();
-            int difeso = reference.player.getArmour().getDifesa();
             //boolean serve se attack_turn è true sta attaccando il mostro perchè player si e mosso
             //se false allora entrambi fermi e tocca al giocatore quindi mostri danni fatti da giocatore
             reference.player.getSpada().setCanAttack(true);
-            if(attack_turn)
-                reference.ui.messageTextArea.setText(monster.getNome()+" ti ha inflitto "+danno+" danni, hai bloccato "+difeso+" danni\n");
-            else
-                reference.ui.messageTextArea.setText(monster.getNome()+" ti ha inflitto "+danno+" danni, hai bloccato "+difeso+" danni\nHai inflitto "+dannoplayer+" danni il "+monster.getNome()+" ha bloccato "+monster.getDifesa()+" danni\n"+monster.getNome()+" vita: "+monster.getVita());
 
-            reference.player.takeDamage(difeso - danno);
+            int blockprobability;
+            if((int)(Math.random()* 99) % 2 == 0)
+                blockprobability = 0;
+            else
+                blockprobability = reference.player.getArmour().getDifesa();
+
+            if(attack_turn)
+                reference.ui.messageTextArea.setText(monster.getNome()+" ti ha inflitto "+danno+" danni, hai bloccato "+blockprobability+" danni\n");
+            else
+                reference.ui.messageTextArea.setText(monster.getNome()+" ti ha inflitto "+danno+" danni, hai bloccato "+blockprobability+" danni\nHai inflitto "+dannoplayer+" danni il "+monster.getNome()+" ha bloccato "+blockprobabilitymonster+" danni\n"+monster.getNome()+" vita: "+monster.getVita());
+
+            reference.player.takeDamage(blockprobability - danno);
 
             if(reference.player.getVita() <= 0)
                 vManager.showWinPanel();

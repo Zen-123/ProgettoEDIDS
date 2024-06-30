@@ -27,7 +27,7 @@ public class mostro extends entity{
     }
 
     public int getDanno() {
-        return (int)(Math.random() % danno_max + danno_min);
+        return (int)((Math.random() * (danno_max - danno_min)) + danno_min);
     }
     public int getDifesa() {
         return difesa;

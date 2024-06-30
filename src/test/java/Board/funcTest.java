@@ -160,7 +160,7 @@ class funcTest {
         reference.player.addSpada(new Item("spadagiocatore", 8, 8, 0, true, 12, true));
         reference.player.addArmour(new Item("armaturagiocatore", 0, 0, 1, false, 12, true));
         reference.player.setVita(100);
-        reference.functions.monsterEncounter(2, monster, true);
+        reference.functions.monsterEncounter(2, monster,0, true);
         assertEquals(83, reference.player.getVita());
     }
     @Test

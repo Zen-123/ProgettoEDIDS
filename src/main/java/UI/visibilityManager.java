@@ -1,9 +1,9 @@
 package UI;
 
+import java.awt.Color;
+
 import Board.reference;
 import Player.Item;
-
-import java.awt.*;
 
 /**
  * Classe che gestisce la visibilità o meno di certi componenti nella user interface
@@ -181,7 +181,7 @@ public class visibilityManager {
         ui.winPanel.setVisible(true);
         reference.ui.namePlayerLabel.setText("Player: " + reference.player.getNome());
         reference.ui.monsterLabel.setText("Monsters killed: " + reference.player.getMostriuccisi());
-        reference.ui.moneyLabel.setText("Money: " + reference.player.getMostriuccisi());
+        reference.ui.moneyLabel.setText("Money: " + reference.player.getMonete());
         if(reference.player.getVita() <= 0){
             ui.winLabel.setText("YOU DIED!");
         }else{

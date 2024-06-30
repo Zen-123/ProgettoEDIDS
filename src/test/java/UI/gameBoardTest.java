@@ -1,19 +1,21 @@
 package UI;
-import Player.mostro;
-import Board.Board;
-import  Board.Cell;
-import Board.reference;
-import Player.Player;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import  javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
+
+import Board.Board;
 import Board.Readfile;
-import javax.swing.*;
-
-import java.awt.event.KeyEvent;
-
-import static Board.reference.player;
+import Board.reference;
 import static Board.reference.ui;
-import static org.junit.Assert.*;
+import Player.Player;
+import Player.mostro;
 
 public class gameBoardTest {
 
@@ -103,7 +105,7 @@ public class gameBoardTest {
         monster.setDanno_min(5);
 
         //chiamate al metodo da testare, con parametri personalizzati
-        reference.functions.monsterEncounter(20, monster, false);
+        reference.functions.monsterEncounter(20, monster,0, false);
 
         //ci aspettiamo che dopo che il giocatore ha incontrato il mostro, subisca dei danni generati in modo casuale
         assertTrue(reference.player.getVita() <= 100);
