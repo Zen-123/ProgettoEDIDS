@@ -27,5 +27,5 @@ public class reference {
     //variabili di controllo x fare check se si è stati gia in una stanza o meno(se si load dei parametri vecchi)
     public static boolean alreadybeen = false;
     public static boolean startGame = false;
-    
+
 }

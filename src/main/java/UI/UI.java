@@ -1,4 +1,6 @@
 package UI;
+import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.metal.MetalToggleButtonUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -25,11 +27,12 @@ import javax.swing.plaf.metal.MetalToggleButtonUI;
 /**
  * Classe per la gestione della user interface utilizzando la libreria java swing
  */
+
 public class UI {
-    private JFrame window;
+    public JFrame window;
     public JPanel titleNamePanel, menuButtonPanel,  mainTextPanel, mainTextFieldPanel, mainCharacterSelectionPanel, statPanel, messageTextPanel, commandPanel, mapPanel, loadMessagePanel, loadTextFieldPanel, winPanel;
-    private JLabel titleNameLabel,mainTextArea, mainCharacterSelectionLabel, startGameLabel, statLabel, hpLabel, moneyLabel, commandLabel, monsterLabel, winLabel;
-    public JLabel loadLabel1, loadLabel2, loadLabel3, loadLabel4, counterLoadLabel;
+    private JLabel titleNameLabel,mainTextArea, mainCharacterSelectionLabel, startGameLabel, statLabel, nameLabel, characterLabel, hpLabel, inventoryWeight, potionLabel, weaponLabel, roomNumberLabel, commandLabel, southLabel, northLabel, eastLabel, westLabel ;
+    public JLabel loadLabel1, loadLabel2, loadLabel3, loadLabel4, counterLoadLabel,monsterLabel,winLabel,namePlayerLabel,moneyLabel;
     private JButton startButton, loadButton, exitButton, startGameButton, commandButton, loadMessageButton, winButton;
     private JRadioButton warriorButton, archerButton, thiefButton;
     public JTextArea messageTextArea;
@@ -42,7 +45,6 @@ public class UI {
     private File fileLoad;
 
     public static gameBoard gameB;
-
     /**
      * Metodo che permette la crezione della UI
      */
@@ -64,7 +66,8 @@ public class UI {
         Metodo che gestisce la finestra di gioco effettiva
         creazione e gestione di window
      */
-    private void setWindow(){
+
+    void setWindow(){
         window = new JFrame();
         window.setSize(800, 600);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -99,11 +102,11 @@ public class UI {
     }
 
     private void setHpLabelWinPage(){
-        hpLabel = new JLabel("Player: ");
-        hpLabel.setFont(normalFont);
-        hpLabel.setBorder(new EmptyBorder(0,10,0,0));
-        hpLabel.setForeground(Color.white);
-        winPanel.add(hpLabel);
+        namePlayerLabel = new JLabel("Player: ");
+        namePlayerLabel.setFont(normalFont);
+        namePlayerLabel.setBorder(new EmptyBorder(0,10,0,0));
+        namePlayerLabel.setForeground(Color.white);
+        winPanel.add(namePlayerLabel);
     }
 
     private void setMoneyLabelWinPage(){
@@ -432,7 +435,7 @@ public class UI {
     * Metodo per la visualizzazione della mappa
     * pagina: gameScreen
     * */
-    private void setMapPanel(){
+    public void setMapPanel(){
         mapPanel = new JPanel();
         mapPanel.setVisible(true);
         mapPanel.setBounds(0,0,850,350);
@@ -442,7 +445,64 @@ public class UI {
 		gameB.requestFocusInWindow();
         window.getContentPane().add(mapPanel);
         mapPanel.setLayout(new GridLayout(1, 0, 0, 0));
+        // window.add(mapPanel);
     }
+
+
+    /*
+    Metodo per segnalare la posizione S
+    pagina: gameScreen
+     */
+    private void setSouthLabel(){
+        southLabel = new JLabel("S");
+        southLabel.setForeground(Color.white);
+        southLabel.setBackground(Color.black);
+        southLabel.setFont(normalFont);
+        southLabel.setBounds(145,140,mapPanel.getWidth(),mapPanel.getHeight() );
+        mapPanel.add(southLabel);
+    }
+
+
+    /*
+       Metodo per segnalare la posizione N
+       pagina: gameScreen
+    */
+    private void setNorthLabel(){
+        northLabel = new JLabel("N");
+        northLabel.setForeground(Color.white);
+        northLabel.setBackground(Color.black);
+        northLabel.setFont(normalFont);
+        northLabel.setBounds(145,0,50,50);
+        mapPanel.add(northLabel);
+    }
+
+
+    /*
+       Metodo per segnalare la posizione W
+       pagina: gameScreen
+    */
+    private void setWestLabel(){
+        westLabel = new JLabel("W");
+        westLabel.setForeground(Color.white);
+        westLabel.setBackground(Color.black);
+        westLabel.setFont(normalFont);
+        westLabel.setBounds(0,130,50,50 );
+        mapPanel.add(westLabel);
+    }
+
+    /*
+       Metodo per segnalare la posizione E
+       pagina: gameScreen
+    */
+    private void setEastLabel(){
+        eastLabel = new JLabel("E");
+        eastLabel.setForeground(Color.white);
+        eastLabel.setBackground(Color.black);
+        eastLabel.setFont(normalFont);
+        eastLabel.setBounds(280,130,50,50 );
+        mapPanel.add(eastLabel);
+    }
+
 
     /*
     Metodo per la gestione del commandTextField, che permette all'utente di giocare inserendo comandi testuali
@@ -475,16 +535,16 @@ public class UI {
                         .addComponent(commandLabel)
                         .addGroup(layout.createSequentialGroup()
                         .addComponent(commandTextField)
-                        .addComponent(commandButton)))
-        );
+                                //eventuale bottone commandButton
+        )));
 
         layout.setVerticalGroup(
                 layout.createSequentialGroup()
                 .addComponent(commandLabel)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                 .addComponent(commandTextField)
-                .addComponent(commandButton))
-        );
+                        //eventuale bottone commandButton
+        ));
 
         window.add(commandPanel);
 
@@ -501,26 +561,8 @@ public class UI {
         commandTextField.setBackground(Color.darkGray);
         commandTextField.setFont(textFont);
         commandTextField.setForeground(Color.white);
-
-        commandButton = new JButton("Enter");
-        commandButton.setBackground(Color.black);
-        commandButton.setForeground(Color.white);
-        commandButton.setPreferredSize(new Dimension(30, 30));
-        commandButton.addActionListener(handler);
-        commandButton.setActionCommand("input");
-        commandButton.setFocusPainted(false);
-        commandButton.setFont(textFont);
-        //hover
-        commandButton.addMouseListener( new MouseAdapter(){
-            public void mouseEntered(MouseEvent evt) {
-                commandButton.setBackground(Color.blue);
-            }
-
-            public void mouseExited(java.awt.event.MouseEvent evt) {commandButton.setBackground(Color.black);
-            }
-        });
+        //setting button commandButton
         commandPanel.add(commandTextField);
-        commandPanel.add(commandButton);
 
 
     }
@@ -617,6 +659,7 @@ public class UI {
         statLabel.setForeground(Color.white);
         statLabel.setFont(normalFont);
         statPanel.add(statLabel);
+
         setMessageTextPanel();
         setCounterLoadLabel();
         setMapPanel();

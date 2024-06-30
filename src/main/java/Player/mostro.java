@@ -27,7 +27,7 @@ public class mostro extends entity{
     }
 
     public int getDanno() {
-        return (int)(Math.random() * danno_max + danno_min);
+        return (int)(Math.random() % danno_max + danno_min);
     }
     public int getDifesa() {
         return difesa;
@@ -36,9 +36,11 @@ public class mostro extends entity{
     public void setDifesa(int difesa) {
         this.difesa = difesa;
     }
+
     public int getVita() {
         return vita;
     }
+
     public void setVita(int vita) {
         this.vita = vita;
     }
@@ -49,6 +51,7 @@ public class mostro extends entity{
     public int getIdstanza() {
         return idstanza;
     }
+
     public void setIdstanza(int idstanza) {
         this.idstanza = idstanza;
     }
@@ -56,12 +59,15 @@ public class mostro extends entity{
     public int getDanno_max() {
         return danno_max;
     }
+
     public void setDanno_max(int danno_max) {
         this.danno_max = danno_max;
     }
+
     public int getDanno_min() {
         return danno_min;
     }
+
     public void setDanno_min(int danno_min) {
         this.danno_min = danno_min;
     }

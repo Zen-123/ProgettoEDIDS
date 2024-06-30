@@ -9,10 +9,15 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 
+import UI.visibilityManager;
 import Board.Cell;
 import Board.reference;
 
 public class gameBoard extends JPanel implements KeyListener {
+    private visibilityManager vManager = new visibilityManager(reference.ui);
+    private choiceHandler handler = new choiceHandler(reference.ui);
+    private final String[] fileNameArray = {"Filesave 1.txt", "Filesave 2.txt", "Filesave 3.txt", "Filesave 4.txt"};
+
     public gameBoard(){
         addKeyListener(this);
         this.setFocusable(true);
@@ -119,6 +124,7 @@ public class gameBoard extends JPanel implements KeyListener {
     }
     @Override
     public void keyReleased(KeyEvent e){
+
     }
     @Override
     public void keyTyped(KeyEvent e){
@@ -127,6 +133,8 @@ public class gameBoard extends JPanel implements KeyListener {
    public void makesomething(){
     reference.ui.commandTextField.addKeyListener(new KeyAdapter() {
         public void keyPressed(KeyEvent e) {
+            String temp;
+
             if(e.getKeyCode() == KeyEvent.VK_ENTER) {
                 switch(reference.ui.commandTextField.getText().toLowerCase()) {
                     case "take":
@@ -188,6 +196,43 @@ public class gameBoard extends JPanel implements KeyListener {
                     case "look":
                         reference.functions.playerIsLooking();
                     break;
+
+                    case "exit":
+                        vManager.showMenuScreen();
+                        break;
+
+                    case "save 1":
+                        temp = "src/main/java/Board/Stanzeold/stanza_"+reference.currentStanza.ID_Stanza+".txt";
+                        reference.filereader.fileToWrite(reference.currentStanza.cellestanza, temp );
+                        handler.setFileSaveOverwrite(fileNameArray[0]);
+                        vManager.showMenuScreen();
+
+                        break;
+
+                    case "save 2":
+                        temp = "src/main/java/Board/Stanzeold/stanza_"+reference.currentStanza.ID_Stanza+".txt";
+                        reference.filereader.fileToWrite(reference.currentStanza.cellestanza, temp );
+                        handler.setFileSaveOverwrite(fileNameArray[1]);
+                        vManager.showMenuScreen();
+
+                        break;
+
+                    case "save 3":
+                        temp = "src/main/java/Board/Stanzeold/stanza_"+reference.currentStanza.ID_Stanza+".txt";
+                        reference.filereader.fileToWrite(reference.currentStanza.cellestanza, temp );
+                        handler.setFileSaveOverwrite(fileNameArray[2]);
+                        vManager.showMenuScreen();
+
+                        break;
+
+                    case "save 4":
+                        temp = "src/main/java/Board/Stanzeold/stanza_"+reference.currentStanza.ID_Stanza+".txt";
+                        reference.filereader.fileToWrite(reference.currentStanza.cellestanza, temp );
+                        handler.setFileSaveOverwrite(fileNameArray[3]);
+                        vManager.showMenuScreen();
+
+                        break;
+
                     default:
                         reference.ui.commandTextField.setText("");
                 }
@@ -199,9 +244,10 @@ public class gameBoard extends JPanel implements KeyListener {
                     reference.ui.gameB.requestFocus();
                     reference.ui.messageTextArea.setText("...\n...\n...");
                 }
-                
+
             }
         }
     });
    }
+   
 }

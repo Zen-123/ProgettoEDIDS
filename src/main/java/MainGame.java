@@ -4,9 +4,10 @@ import Board.func;
 import Board.reference;
 import Player.Player;
 import Player.mostro;
-import UI.UI;
-import UI.choiceHandler;
 import UI.visibilityManager;
+import UI.choiceHandler;
+import UI.UI;
+
 
 /**
  * Classe MainGame che permette di far partire il software
@@ -36,7 +37,7 @@ public class MainGame {
     }
 
     //inizializzazione var globali
-    private static void initialGame(){
+    public static void initialGame(){
         reference.player = new Player();
         reference.filereader = new Readfile();
         reference.mostrorun = new mostro();

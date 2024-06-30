@@ -1,11 +1,13 @@
 package Board;
 
+import UI.visibilityManager;
 import Player.Item;
 import Player.mostro;
 
 //classe x gestire metodi globali per il funzionamento del gioco
 public class func{
-    
+
+    private visibilityManager vManager = new visibilityManager(reference.ui);
     public func(){
     }
     //genera un item e lo aggiunge alla lista della stanza, chiamato in fase di lettura del file, return item generato
@@ -59,8 +61,8 @@ public class func{
                                 reference.player.setCanAttack(false);
                                 reference.ui.commandTextField.requestFocus();
                                 break;
-                            } 
-                        }      
+                            }
+                        }
                         case 2:
                         if(reference.currentStanza.cellestanza.get(y).get(x-1) == Cell.WALL){
 
@@ -83,7 +85,7 @@ public class func{
                                 reference.ui.commandTextField.requestFocus();
                                 break;
                             }
-                        }    
+                        }
                         case 3:
                         if(reference.currentStanza.cellestanza.get(y+1).get(x) == Cell.WALL){
 
@@ -106,7 +108,7 @@ public class func{
                                 reference.player.setCanAttack(false);
                                 reference.ui.commandTextField.requestFocus();
                                 break;
-                            }  
+                            }
                         }
                         case 4:
                         if(reference.currentStanza.cellestanza.get(y-1).get(x) == Cell.WALL){
@@ -129,12 +131,12 @@ public class func{
                                 reference.ui.commandTextField.requestFocus();
                                 break;
                             }
-                        } 
+                        }
                         default: i--;
-                        //gli fa ripetere la scelta finchè non compie un movement   
+                        //gli fa ripetere la scelta finchè non compie un movement
                         //consuma molte risorse essendo random non mi piace
                     }
-                }   
+                }
             }
         }
     }
@@ -143,7 +145,7 @@ public class func{
         if(reference.item.getNome() == "spada" && reference.player.isHasSword()){
             //allora dovra buttare la sua spada a terra
             Item spadadaposare;
-            reference.currentStanza.cellestanza.get(reference.item.getY()).set(reference.item.getX(),Cell.PLAYER);   
+            reference.currentStanza.cellestanza.get(reference.item.getY()).set(reference.item.getX(),Cell.PLAYER);
             reference.currentStanza.cellestanza.get(reference.player.getY()).set(reference.player.getX(),Cell.ITEM);
             reference.player.getSpada().setX(reference.player.getX());
             reference.player.getSpada().setY(reference.player.getY());
@@ -154,8 +156,8 @@ public class func{
             reference.player.setCoordinate(reference.item.getX(), reference.item.getY());
             reference.item.setHasTake(true);
             reference.player.takeItem(reference.item);
-            reference.ui.commandTextField.setText("");  
-            reference.item = new Item();   
+            reference.ui.commandTextField.setText("");
+            reference.item = new Item();
             reference.ui.messageTextArea.setText("...\n...\n...");
             for (int i = 0; i < reference.currentStanza.lista_item.size(); i++) {
                 if(reference.currentStanza.lista_item.get(i).isHasTake())
@@ -163,18 +165,18 @@ public class func{
             }
             reference.currentStanza.lista_item.add(spadadaposare);
         }else if(reference.item.getNome() == "spada" && reference.player.isHasSword() == false){
-            reference.player.takeItem(reference.item);   
-            reference.currentStanza.cellestanza.get(reference.item.getY()).set(reference.item.getX(),Cell.PLAYER);   
+            reference.player.takeItem(reference.item);
+            reference.currentStanza.cellestanza.get(reference.item.getY()).set(reference.item.getX(),Cell.PLAYER);
             reference.currentStanza.cellestanza.get(reference.player.getY()).set(reference.player.getX(),Cell.FREE);
-            reference.player.setCoordinate(reference.item.getX(), reference.item.getY());  
-            reference.ui.commandTextField.setText(""); 
-            reference.item = new Item();   
+            reference.player.setCoordinate(reference.item.getX(), reference.item.getY());
+            reference.ui.commandTextField.setText("");
+            reference.item = new Item();
             reference.ui.messageTextArea.setText("...\n...\n...");
         }
         if(reference.item.getNome() == "armatura" && reference.player.isHasArmour() == true){
             //allora dovra buttare la sua spada a terra
             Item armaturadaposare = new Item();
-            reference.currentStanza.cellestanza.get(reference.item.getY()).set(reference.item.getX(),Cell.PLAYER);   
+            reference.currentStanza.cellestanza.get(reference.item.getY()).set(reference.item.getX(),Cell.PLAYER);
             reference.currentStanza.cellestanza.get(reference.player.getY()).set(reference.player.getX(),Cell.ITEM);
             reference.player.getArmour().setX(reference.player.getX());
             reference.player.getArmour().setY(reference.player.getY());
@@ -182,11 +184,11 @@ public class func{
             armaturadaposare.setSymbol('I');
             armaturadaposare.setHasTake(false);
             armaturadaposare.setId_stanza(reference.curr_stanza);
-            reference.player.setCoordinate(reference.item.getX(), reference.item.getY()); 
+            reference.player.setCoordinate(reference.item.getX(), reference.item.getY());
             reference.item.setHasTake(true);
             reference.player.takeItem(reference.item);
-            reference.ui.commandTextField.setText("");  
-            reference.item = new Item();   
+            reference.ui.commandTextField.setText("");
+            reference.item = new Item();
             reference.ui.messageTextArea.setText("...\n...\n...");
             for (int i = 0; i < reference.currentStanza.lista_item.size(); i++) {
                 if(reference.currentStanza.lista_item.get(i).isHasTake())
@@ -194,12 +196,12 @@ public class func{
             }
             reference.currentStanza.lista_item.add(armaturadaposare);
         }else if(reference.item.getNome() == "armatura" && reference.player.isHasArmour() == false){
-            reference.player.takeItem(reference.item);   
-            reference.currentStanza.cellestanza.get(reference.item.getY()).set(reference.item.getX(),Cell.PLAYER);   
+            reference.player.takeItem(reference.item);
+            reference.currentStanza.cellestanza.get(reference.item.getY()).set(reference.item.getX(),Cell.PLAYER);
             reference.currentStanza.cellestanza.get(reference.player.getY()).set(reference.player.getX(),Cell.FREE);
-            reference.player.setCoordinate(reference.item.getX(), reference.item.getY());    
-            reference.ui.commandTextField.setText("");  
-            reference.item = new Item();   
+            reference.player.setCoordinate(reference.item.getX(), reference.item.getY());
+            reference.ui.commandTextField.setText("");
+            reference.item = new Item();
             reference.ui.messageTextArea.setText("...\n...\n...");
         }
         reference.ui.gameB.requestFocus();
@@ -210,7 +212,7 @@ public class func{
     public void changeRoomAndWriteToFile(int drive_to){
         reference.filereader.fileToWrite(reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt");
 
-         // stanza vecchia prendi dal file 
+         // stanza vecchia prendi dal file
          for (int i = 0; i < reference.lista_stanze.size(); i++) {
             if(reference.lista_stanze.get(i).getid() == drive_to){
                 reference.currentStanza = new Board(drive_to,true);
@@ -219,7 +221,7 @@ public class func{
                 reference.alreadybeen = true;
                 reference.ui.messageTextArea.setText("Sei già stato qui...\n...\nMa qualcosa ti sembra cambiato....");
                 reference.ui.commandTextField.setText("");
-            }   
+            }
         }
         //se stanza è nuova prendila dal file
         if(reference.alreadybeen == false){
@@ -242,9 +244,9 @@ public class func{
                     switch (reference.player.spawnTo()) {
                         case 'N':
                             reference.currentStanza.cellestanza.get(i+1).set(j,Cell.PLAYER);
-                            reference.player.setCoordinate(j, i+1);                           
-                            break;     
-                        case 'E': 
+                            reference.player.setCoordinate(j, i+1);
+                            break;
+                        case 'E':
                             reference.currentStanza.cellestanza.get(i).set(j-1,Cell.PLAYER);
                             reference.player.setCoordinate(j-1, i);
                             break;
@@ -269,7 +271,7 @@ public class func{
             }
         }
         reference.ui.gameB.requestFocus();
-        
+
     }
     //genera mostri presi dalla stringa letta dal textfile
     public static mostro generateMonster(int x, int y){
@@ -292,7 +294,7 @@ public class func{
                 m = new mostro("strega",15,10,3,20,reference.curr_stanza);
                 break;
             default:
-                m = new mostro(); 
+                m = new mostro();
         }
         m.setX(x);
         m.setY(y);
@@ -317,10 +319,10 @@ public class func{
                                 if(reference.mostrorun.getSymbol() == 'B'){
                                     reference.ui.messageTextArea.setText("Hai ucciso il BOSS! Hai Vinto!!");
                                     reference.player.setMostri_uccisi();
-                                    reference.player.setVita(0);
                                     reference.mostrorun = null;
                                     reference.player.getSpada().setCanAttack(false);
                                     reference.player.setCanAttack(false);
+                                    vManager.showWinPanel();
                                 }else{
                                     reference.player.setMostri_uccisi();
                                     reference.currentStanza.cellestanza.get(reference.mostrorun.getY()).set(reference.mostrorun.getX(), Cell.FREE);
@@ -329,7 +331,7 @@ public class func{
                                     reference.mostrorun = null;
                                     reference.player.getSpada().setCanAttack(false);
                                     reference.player.setCanAttack(false);
-                                } 
+                                }
                             }else{
                                 monsterEncounter(dannoplayer,reference.mostrorun,false);
                             }
@@ -358,7 +360,7 @@ public class func{
         }else{
             reference.ui.commandTextField.setText("");
             reference.ui.gameB.requestFocus();
-        }   
+        }
     }
     //metodo che gestisce turno del player quando sta controllando item nella stanza dal commandtextfield
     //inclusi solo oggetti I quindi spade e armature
@@ -409,12 +411,12 @@ public class func{
                 reference.ui.messageTextArea.setText("Hai trovato un muro\n...\n...");
                 return false;
             case '.':
-                reference.ui.messageTextArea.setText("...\n...\n...");      
+                reference.ui.messageTextArea.setText("...\n...\n...");
                 return true;
             case 'C':
                 reference.player.setMonete((int)((Math.random() * 15)+3));
                 reference.ui.messageTextArea.setText("Hai raccolto delle monete\n...\n...");
-                return true;  
+                return true;
             case 'f':
                 if(reference.player.getPeso() <= 95){
                     reference.player.setKey();
@@ -422,7 +424,7 @@ public class func{
                     return true;
                 }else
                     return false;
-                
+
             case 'F':
                 if(reference.player.getPeso() <= 90){
                     reference.player.setGoldKey();
@@ -438,7 +440,7 @@ public class func{
                 }else
                     return false;
             case 'N':
-                if(reference.currentStanza.getDrive_to_N() != 0){ 
+                if(reference.currentStanza.getDrive_to_N() != 0){
                     reference.ui.messageTextArea.setText("Questa è la porta Nord!\nVuoi attraversarla?\nScrivi [Nord] per entrare altrimenti [no] ");
                     reference.ui.commandTextField.requestFocus();
                 }
@@ -483,9 +485,9 @@ public class func{
                             reference.item = reference.currentStanza.lista_item.get(i);
                             reference.ui.commandTextField.requestFocus();
                             return false;
-                        }  
+                        }
                     }
-                }    
+                }
                 return false;
             case 'P':
                 if(reference.player.getKey() >=1){
@@ -505,7 +507,7 @@ public class func{
                         reference.player.getSpada().setCanAttack(true);
                         reference.player.setCanAttack(true);
                         reference.mostrorun = reference.currentStanza.lista_mostri.get(i);
-                    }     
+                    }
                 }
                 reference.ui.commandTextField.requestFocus();
                 return false;
@@ -514,12 +516,13 @@ public class func{
                     reference.player.removeGoldKey();
                     reference.player.setspawnTo('G');
                     reference.ui.messageTextArea.setText("Apri il portone...\n...\nAperto! Benvenuto nella stanza del Boss!");
-                    changeRoomAndWriteToFile(reference.currentStanza.getDrive_to_boss()); 
-                    //ridare priorita alla board                   
+                    changeRoomAndWriteToFile(reference.currentStanza.getDrive_to_boss());
+                    //ridare priorita alla board
                 }else{
-                    reference.ui.messageTextArea.setText("Che strano portone luminescente...\nHai bisogno di qualche tipo di chiave speciale forse...\n ");  
+                    reference.ui.messageTextArea.setText("Che strano portone luminescente...\nHai bisogno di qualche tipo di chiave speciale forse...\n ");
                 }
                 break;
+
             default:
                 reference.ui.messageTextArea.setText("Oooopsss sembra che qualcosa sia andato storto nel gioco\n...\n...");
         }
@@ -539,12 +542,12 @@ public class func{
                 reference.ui.messageTextArea.setText(monster.getNome()+" ti ha inflitto "+danno+" danni, hai bloccato "+difeso+" danni\n");
             else
                 reference.ui.messageTextArea.setText(monster.getNome()+" ti ha inflitto "+danno+" danni, hai bloccato "+difeso+" danni\nHai inflitto "+dannoplayer+" danni il "+monster.getNome()+" ha bloccato "+monster.getDifesa()+" danni\n"+monster.getNome()+" vita: "+monster.getVita());
-            
+
             reference.player.takeDamage(difeso - danno);
-            if(reference.player.getVita() <= 0){
-                reference.player.setVita(0);
-                reference.ui.messageTextArea.setText("Sei morto! Hai perso!");
-            }   
-        }  
+
+            if(reference.player.getVita() <= 0)
+                vManager.showWinPanel();
+        }
+
        }
 }

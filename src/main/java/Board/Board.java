@@ -10,7 +10,7 @@ public class Board{
     public ArrayList<mostro> lista_mostri;
     private int row;
     private int column;
-    private int ID_Stanza;  
+    public int ID_Stanza;
     private int drive_to_N; 
     private int drive_to_E;
     private int drive_to_W; 
@@ -46,7 +46,7 @@ public class Board{
         populateBoard(ss,true);
     }
     //riempie la board=arraylist di celle,che poi verra stampata da printcomponent
-    //ver == false allora viene letto da un nuovo file , ver == true controlla file vecchio 
+    //ver == false allora viene letto da un nuovo file , ver == true controlla file vecchio
     public void populateBoard(ArrayList<String> strings,boolean ver){
         //serve x assegnare alla stanza presente che porta ti porta nella next stanza
         this.setDrive_to_N(strings.get(strings.size()-1).charAt(0));
@@ -128,9 +128,12 @@ public class Board{
                 }   
             } 
         }   
-    }  
+    }
     public char getSsymbol(int x, int y){
         return cellestanza.get(y).get(x).getSymbol();
+    }
+    public void setSsymbol(int x, int y,char simbol){
+        this.cellestanza.get(y).get(x).setSymbol(simbol);
     }
     public int getRow(){
         return row;
@@ -160,12 +163,15 @@ public class Board{
     public void setDrive_to_N(int drive_to_N) {
         this.drive_to_N = convertASCIItoNumber(drive_to_N);
     }
+
     public void setDrive_to_E(int drive_to_E) {
         this.drive_to_E = convertASCIItoNumber(drive_to_E);
     }
+
     public void setDrive_to_W(int drive_to_W) {
         this.drive_to_W = convertASCIItoNumber(drive_to_W);
     }
+
     public void setDrive_to_S(int drive_to_S) {
         this.drive_to_S = convertASCIItoNumber(drive_to_S);
     }
@@ -207,6 +213,12 @@ public class Board{
                 break;
         }
         return converted;
+    }
+    public void setRow(int row) {
+        this.row = row;
+    }
+    public void setColumn(int column) {
+        this.column = column;
     }
 }
 

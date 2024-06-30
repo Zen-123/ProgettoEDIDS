@@ -3,6 +3,8 @@ package UI;
 import Board.reference;
 import Player.Item;
 
+import java.awt.*;
+
 /**
  * Classe che gestisce la visibilità o meno di certi componenti nella user interface
  * permette di cambiare da una schermata ad un altra
@@ -10,13 +12,14 @@ import Player.Item;
 public class visibilityManager {
 
     UI ui;
-
+    public boolean checkLoad = false;
     /**
      * Costruttore della classe visibilityManager
      * @param userInterface  oggetto della classe UI usato nel MainGame per la gestione delle schermate
      */
     public visibilityManager(UI userInterface) {
         ui = userInterface;
+
     }
 
     /**
@@ -52,6 +55,8 @@ public class visibilityManager {
         ui.mainTextPanel.setVisible(true);
         ui.mainTextFieldPanel.setVisible(true);
         ui.textField.setVisible(true);
+        ui.textField.setText("");
+        ui.textField.setSelectedTextColor(Color.darkGray);
         ui.mainCharacterSelectionPanel.setVisible(true);
 
 
@@ -92,43 +97,55 @@ public class visibilityManager {
 
         //riemptio giocatore con tutti i dati prelevati dal menu di selezione personaggio
         try {
-            switch(ui.mainCharacterButtonPanel.getSelection().getActionCommand()) {
-                case "archer":
-                    reference.player.setCategory("archer");
-                    reference.player.setMonete(10);
-                    reference.player.addNum_pozioni(2);
-                    reference.player.addSpada(new Item("spada",10,3,0,true,reference.curr_stanza,true));
-                    reference.player.addArmour(new Item("armatura",0,0,1,false,reference.curr_stanza,true));
-                    reference.player.setHasArmour(true);
-                    break;
-                case "thief":
-                    reference.player.setCategory("thief");
-                    reference.player.setMonete(20);
-                    reference.player.addNum_pozioni(3);
-                    reference.player.setKey();
-                    reference.player.addSpada(new Item("spada",8,4,0,true,reference.curr_stanza,true));
-                    reference.player.addArmour(new Item("armatura",0,0,0,false,reference.curr_stanza,true));
-                    reference.player.setHasArmour(true);
-                    break;
-                default:
-                    reference.player.setCategory("warrior");
-                    reference.player.setMonete(0);
-                    reference.player.addNum_pozioni(0);
-                    reference.player.addSpada(new Item("spada",13,5,0,true,reference.curr_stanza,true));
-                    reference.player.addArmour(new Item("armatura",0,0,5,false,reference.curr_stanza,true));
-                    reference.player.setHasArmour(true);
-                    break;
+            if(checkLoad == false) {
+                switch (ui.mainCharacterButtonPanel.getSelection().getActionCommand()) {
+                    case "warrior":
+                        reference.player.setMonete(0);
+                        reference.player.addNum_pozioni(0);
+                        reference.player.addSpada(new Item("spada", 13, 5, 0, true, reference.curr_stanza, true));
+                        reference.player.addArmour(new Item("armatura", 0, 0, 5, false, reference.curr_stanza, true));
+                        reference.player.setHasArmour(true);
+                        break;
+                    case "archer":
+                        reference.player.setCategory("archer");
+                        reference.player.setMonete(10);
+                        reference.player.addNum_pozioni(2);
+                        reference.player.addSpada(new Item("spada", 10, 3, 0, true, reference.curr_stanza, true));
+                        reference.player.addArmour(new Item("armatura", 0, 0, 1, false, reference.curr_stanza, true));
+                        reference.player.setHasArmour(true);
+                        break;
+                    case "thief":
+                        reference.player.setCategory("thief");
+                        reference.player.setMonete(20);
+                        reference.player.addNum_pozioni(3);
+                        reference.player.setKey();
+                        reference.player.addSpada(new Item("spada", 8, 4, 0, true, reference.curr_stanza, true));
+                        reference.player.addArmour(new Item("armatura", 0, 0, 0, false, reference.curr_stanza, true));
+                        reference.player.setHasArmour(true);
+                        break;
+                    default:
+                        reference.player.setCategory("warrior");
+                        reference.player.setMonete(0);
+                        reference.player.addNum_pozioni(0);
+                        reference.player.addSpada(new Item("spada", 13, 5, 0, true, reference.curr_stanza, true));
+                        reference.player.addArmour(new Item("armatura", 0, 0, 5, false, reference.curr_stanza, true));
+                        reference.player.setHasArmour(true);
+                        break;
+                }
             }
+            reference.player.setCategory(ui.mainCharacterButtonPanel.getSelection().getActionCommand());
+            reference.player.setNome(ui.textField.getText());
         } catch (Exception e) {
             System.out.println("Guarda che non hai selezionato una categoria: default warrior");
             reference.player.setCategory("warrior");
-                    reference.player.setMonete(0);
-                    reference.player.addNum_pozioni(0);
-                    reference.player.addSpada(new Item("spada",13,5,0,true,reference.curr_stanza,true));
-                    reference.player.addArmour(new Item("armatura",0,0,5,false,reference.curr_stanza,true));
-                    reference.player.setHasArmour(true);
+            reference.player.setMonete(0);
+            reference.player.setPeso(0);
+            reference.player.addNum_pozioni(0);
+            reference.player.addSpada(new Item("spada",13,5,0,true,reference.curr_stanza,true));
+            reference.player.addArmour(new Item("armatura",0,0,5,false,reference.curr_stanza,true));
+            reference.player.setHasArmour(true);
         }
-        
+
         reference.player.setNome(ui.textField.getText());
     }
 
@@ -158,6 +175,14 @@ public class visibilityManager {
 
     public void showWinPanel(){
         ui.winPanel.setVisible(true);
+        reference.ui.namePlayerLabel.setText("Player: " + reference.player.getNome());
+        reference.ui.monsterLabel.setText("Monsters killed: " + reference.player.getMostriuccisi());
+        reference.ui.moneyLabel.setText("Money: " + reference.player.getMostriuccisi());
+        if(reference.player.getVita() <= 0){
+            ui.winLabel.setText("YOU DIED!");
+        }else{
+            ui.winLabel.setText("YOU WIN!");
+        }
 
         //componenti di altre pagine non visibili
         ui.loadMessagePanel.setVisible(false);

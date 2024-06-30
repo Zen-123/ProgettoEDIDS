@@ -1,14 +1,26 @@
 package UI;
-
+import Board.Board;
+import Board.Readfile;
 import ManageFile.DownloadFile;
 import ManageFile.uploadFile;
-
+import Board.reference;
+import Player.Player;
+import Player.mostro;
+import Board.Cell;
+import Player.Item;
+import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static UI.UI.gameB;
 
 /**
  * Classe che gestice gli eventi sulla UI, implementa la classe astratta ActionListener per la gestione degli eventi
@@ -21,11 +33,13 @@ public class choiceHandler implements ActionListener {
     //contatore che va a contare i file già scaricati al primo caricamento del gioco
     private int counterFileFirstLoad = 0;
     private final UI userInterfaceHandler;
-    private final visibilityManager vManager;
-    private uploadFile upload;
+    visibilityManager vManager;
+    uploadFile upload;
     private File fileSave;
+
     private PrintWriter printWriter;
     private final String[] fileNameArray = {"Filesave 1.txt", "Filesave 2.txt", "Filesave 3.txt", "Filesave 4.txt"};
+    public boolean reloadFile = false;
 
     /**
      * Costruttore parametrizzato della classe choiceHandler
@@ -54,9 +68,11 @@ public class choiceHandler implements ActionListener {
                 apre il menù di selezione del personaggio
              */
             case "Start":
+                setNewGame();
+                vManager.checkLoad = false;
                 vManager.showStartScreen();
-                userInterfaceHandler.textField.setText("");
-                userInterfaceHandler.textField.setVisible(true);
+
+
                 break;
             /*
                 gestisce il bottone: exitButton,
@@ -70,8 +86,8 @@ public class choiceHandler implements ActionListener {
                 mostra la schermata di gioco effettiva
              */
             case "Start game":
-                vManager.showGameScreen();
                 userInterfaceHandler.commandTextField.setText("");
+                vManager.showGameScreen();
                 break;
             /*
                 gestisce il bottone: loadButton
@@ -96,12 +112,13 @@ public class choiceHandler implements ActionListener {
                 gestisce il bottone: commandButton
                 gestisce gli input scritti dall'utente sul commandTextField presente nel MainCharacterSelectionPanel
              */
+            /*
             case "input":
                 String inputText = userInterfaceHandler.commandTextField.getText();
                 if (!Objects.equals(inputText, "")) {
                     manageTextInput(inputText);
                 }
-                break;
+                break;*/
 
             case "returnToMainMenu":
                 vManager.showMenuScreen();
@@ -122,7 +139,9 @@ public class choiceHandler implements ActionListener {
         "exit" permette di tornare alla pagina di menu
         "save 1-4" permettono di salvare la partita in uno specifico slot, usati solo per sovrascrivere altri salvataggi precedenti
          */
+        String temp;
         switch (textInput) {
+
             case "save":
 
                 File fileLoad;
@@ -139,7 +158,7 @@ public class choiceHandler implements ActionListener {
                         if (fileLoad.exists()) {
                             userInterfaceHandler.counterLoadLabel.setText("Save n. " + (counterFile+1));
                             /*se lo slot salvataggio è già occupato si chiede all'utente se vuole sovrascriverlo
-                            * oppure usare un altro slot disponibile */
+                             * oppure usare un altro slot disponibile */
                             if (userInterfaceHandler.setAlertMenu(0) == 0) {
                                 //utente decide tramite l'alert di sovrascrivere il salvataggio precedente
                                 setFileSaveOverwrite(fileNameArray[i]);
@@ -165,6 +184,7 @@ public class choiceHandler implements ActionListener {
                     userInterfaceHandler.setAlertMenu(1);
                 }
                 //finite le operazioni si ritorna alla schermata iniziale
+
                 vManager.showMenuScreen();
                 break;
 
@@ -173,24 +193,32 @@ public class choiceHandler implements ActionListener {
                 break;
 
             case "save 1":
+                temp = "src/main/java/Board/Stanzeold/stanza_"+reference.currentStanza.ID_Stanza+".txt";
+                reference.filereader.fileToWrite(reference.currentStanza.cellestanza, temp );
                 setFileSaveOverwrite(fileNameArray[0]);
                 vManager.showMenuScreen();
 
                 break;
 
             case "save 2":
+                temp = "src/main/java/Board/Stanzeold/stanza_"+reference.currentStanza.ID_Stanza+".txt";
+                reference.filereader.fileToWrite(reference.currentStanza.cellestanza, temp );
                 setFileSaveOverwrite(fileNameArray[1]);
                 vManager.showMenuScreen();
 
                 break;
 
             case "save 3":
+                temp = "src/main/java/Board/Stanzeold/stanza_"+reference.currentStanza.ID_Stanza+".txt";
+                reference.filereader.fileToWrite(reference.currentStanza.cellestanza, temp );
                 setFileSaveOverwrite(fileNameArray[2]);
                 vManager.showMenuScreen();
 
                 break;
 
             case "save 4":
+                temp = "src/main/java/Board/Stanzeold/stanza_"+reference.currentStanza.ID_Stanza+".txt";
+                reference.filereader.fileToWrite(reference.currentStanza.cellestanza, temp );
                 setFileSaveOverwrite(fileNameArray[3]);
                 vManager.showMenuScreen();
 
@@ -206,19 +234,49 @@ public class choiceHandler implements ActionListener {
      * Metodo che gestice gli input testuali nella pagina di load dei salvataggi
      * @param input stringa di testo che contiene i comandi
      */
-    private void manageLoadTextInput(String input) {
+    void manageLoadTextInput(String input) {
 
+        userInterfaceHandler.commandLoadTextField.setText("");
         //torna alla pagina iniziale
         if (input.equals("back")) {
             vManager.showMenuScreen();
         }
+
+        if(input.equals("slot 1")){
+            setupLoad(1);
+            vManager.checkLoad = true;
+            reference.ui.commandTextField.setText("");
+
+            vManager.showGameScreen();
+        }
+        if(input.equals("slot 2")){
+            setupLoad(2);
+            vManager.checkLoad = true;
+            reference.ui.commandTextField.setText("");
+            vManager.showGameScreen();
+        }
+        if(input.equals("slot 3")){
+            setupLoad(3);
+            vManager.checkLoad = true;
+            reference.ui.commandTextField.setText("");
+
+            vManager.showGameScreen();
+        }
+        if(input.equals("slot 4")){
+            setupLoad(4);
+            vManager.checkLoad = true;
+            reference.ui.commandTextField.setText("");
+
+            vManager.showGameScreen();
+        }
+
     }
 
     /**
      * Metodo che gestice il salvataggio dei dati in un nuovo file
      * @param fileName nome del file di salvataggio
      */
-    private void setFileSave(String fileName) {
+    void setFileSave(String fileName) {
         try {
             //salvataggio del file sulla cartella FileLoad
             fileSave = new File("FileLoad/" + fileName);
@@ -226,11 +284,23 @@ public class choiceHandler implements ActionListener {
             fileSave.createNewFile();
             printWriter = new PrintWriter(fileSave);
             //scrittura sul file
-            printWriter.println("Save n. " + counterFile + "\n");
+            printWriter.println(
+                    "Player: " + reference.player.getNome() + "\n" +
+                            "Health: " + reference.player.getVita()+ "\n" +
+                            "Money: " + reference.player.getMonete()+ "\n" +
+                            "Monster_killed: " + reference.player.getMostriuccisi()+ "\n" +
+                            "Category: " + reference.player.getCategory()+ "\n" +
+                            "Weapon: " + reference.player.getSpadaName()+ "\n" +
+                            "Potions: " + reference.player.getNumpozioni() + "\n" +
+                            "Weight_Inventory: " + reference.player.getPeso() + "\n" +
+                            "Armour: " + reference.player.getArmourName() + "\n" +
+                            "key: " + reference.player.getGoldkey()+ "\n" +
+                            "Max_damage: " + reference.player.getDannoMaxSpada() + "\n" +
+                            "Min_damage: " + reference.player.getDannoMinSpada()
+            );
             printWriter.close();
             //caricamento del nuovo file su aws
             upload = new uploadFile(fileName);
-            System.out.println("Nuovo file creato!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -241,17 +311,32 @@ public class choiceHandler implements ActionListener {
      * Metodo che gestisce la sovrascrittura di file già esistenti
      * @param name  nome del file da sovrascrivere
      */
-    private void setFileSaveOverwrite(String name) {
+    void setFileSaveOverwrite(String name) {
         try {
 
             fileSave = new File("FileLoad/" + name);
             printWriter = new PrintWriter(fileSave);
             //scrittura su file
-            printWriter.println("Sovrascitto " + counterFile + "\n");
+            printWriter.println(
+                    "Player: " + reference.player.getNome() + "\n" +
+                            "Health: " + reference.player.getVita()+ "\n" +
+                            "Money: " + reference.player.getMonete()+ "\n" +
+                            "Monster_killed: " + reference.player.getMostriuccisi()+ "\n" +
+                            "Category: " + reference.player.getCategory()+ "\n" +
+                            "Weapon: " + reference.player.getSpadaName()+ "\n" +
+                            "Potions: " + reference.player.getNumpozioni() + "\n" +
+                            "Weight_Inventory: " + reference.player.getPeso() + "\n" +
+                            "Armour: " + reference.player.getArmourName() + "\n" +
+                            "key: " + reference.player.getGoldkey()+ "\n" +
+                            "Max_damage: " + reference.player.getDannoMaxSpada() + "\n" +
+                            "Min_damage: " + reference.player.getDannoMinSpada()
+            );
             printWriter.close();
             //caricamento del file sovrascritto
             upload = new uploadFile(name);
             System.out.println("File sovrascritto");
+            reloadFile = true;
+            setLoad();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -263,22 +348,91 @@ public class choiceHandler implements ActionListener {
      */
     public void setLoad() {
         File fileLoad;
+        int i=1;
         userInterfaceHandler.counterLoadLabel.setText("Save n. " + (counterFile+1));
         //array che scorre i nomi di tutti i file di bucket aws
         for (String s : fileNameArray) {
             fileLoad = new File("FileDownload/" + s);
 
             //se un file non esiste in locale ma è presente nel bucket viene scaricato
-            if (!fileLoad.exists()) {
+            if (!fileLoad.exists() || reloadFile) {
+                if(reloadFile){
+                    fileLoad.delete();
+                    reloadFile = false;
+                }
                 DownloadFile downloadFIle = new DownloadFile(s, userInterfaceHandler);
             } else {
+
                 counterFileFirstLoad++;
                 System.out.println("File " + s + " già presente!");
+                i++;
             }
 
         }
 
+        reloadFile = false;
+
+    }
+
+    public void setupLoad(int i)  {
+
+        try {
+            int counter = 1;
+            File file = new File("FileDownload/Filesave "+i+".txt");
+            Pattern pattern = Pattern.compile(": (.+)");
+            BufferedReader br = new BufferedReader(new FileReader(file));
+                String line;
+                while ((line = br.readLine()) != null) {
+                    Matcher matcher = pattern.matcher(line);
+                    if (matcher.find()) {
+
+                    if(counter == 1)
+                        reference.player.setNome(matcher.group(1));
+                    else if(counter == 2)
+                        reference.player.setVita(Integer.parseInt(matcher.group(1)));
+                    else if(counter == 3)
+                        reference.player.setMoneteLoad(Integer.parseInt(matcher.group(1)));
+                    else if(counter == 4)
+                        reference.player.setMostriUccisiLoad(Integer.parseInt(matcher.group(1)));
+                    else if(counter == 5)
+                        reference.player.setCategory(matcher.group(1));
+                    else if(counter == 6)
+                        reference.player.setSpadaName(matcher.group(1));
+                    else if(counter == 7)
+                        reference.player.setNum_pozioni(Integer.parseInt(matcher.group(1)));
+                    else if(counter == 8)
+                        reference.player.setPeso(Integer.parseInt(matcher.group(1)));
+                    else if(counter == 9)
+                        reference.player.setArmourName((matcher.group(1)));
+                    else if(counter == 10)
+                        reference.player.setKeyLoad(Integer.parseInt((matcher.group(1))));
+                    else if(counter == 11)
+                        reference.player.setMaxDamage(Integer.parseInt((matcher.group(1))));
+                    else if(counter == 12)
+                        reference.player.setMinDamage(Integer.parseInt((matcher.group(1))));
+                    else if(counter == 13){
+
+                        System.out.println(reference.player.getX());
+
+                    } else if(counter == 14){
+                        System.out.println(reference.player.getY());
+                    }
+
+                    counter++;
+                }
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    private void setNewGame(){
+        userInterfaceHandler.textField.setText("");
+        reference.player = new Player();
+        reference.filereader = new Readfile();
+        reference.mostrorun = new mostro();
+        reference.currentStanza = new Board(1);
     }
 }
-
-

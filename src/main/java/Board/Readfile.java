@@ -44,9 +44,9 @@ public class Readfile {
                         writer.write('.');
                     }else{
                         writer.write(stanza.get(i).get(j).getSymbol());
-                    }   
+                    }
                 }
-                writer.write("\n");   
+                writer.write("\n");
             }
             writer.close();
         }catch(Exception e){
