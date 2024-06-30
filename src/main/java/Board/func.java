@@ -384,10 +384,19 @@ public class func{
     //metodo che gestisce turno del player quando sta usado pozione dal commandtextfield
     public void playerUsingPotion(){
         if(reference.player.getNumpozioni() > 0){
-            reference.player.usePozioni();
-            reference.ui.messageTextArea.setText("Bevi l'intruglio magico\n...\nTi senti molto meglio ora");
-            reference.ui.commandTextField.setText("");
-            reference.functions.updateMonsterPosition();
+            //se è true è il turno del player bevi pozione ma vieni attaccato e torna il tuo turno,non muovi gli altri mostri
+            if(reference.player.getSpada().CanAttack() || reference.player.isAttacking()){
+                reference.player.usePozioni();
+                reference.ui.messageTextArea.setText("Bevi l'intruglio magico\n...\nTi senti molto meglio ora");
+                reference.ui.commandTextField.setText("");
+                monsterEncounter(0, reference.mostrorun, true);
+            }else{
+                reference.player.usePozioni();
+                reference.ui.messageTextArea.setText("Bevi l'intruglio magico\n...\nTi senti molto meglio ora");
+                reference.ui.commandTextField.setText("");
+                reference.functions.updateMonsterPosition();
+            }
+            
         }else{
             reference.ui.messageTextArea.setText("Hai finito le pozioni\n...\n...");
             reference.ui.commandTextField.setText("");
@@ -532,8 +541,10 @@ public class func{
                 reference.ui.messageTextArea.setText(monster.getNome()+" ti ha inflitto "+danno+" danni, hai bloccato "+difeso+" danni\nHai inflitto "+dannoplayer+" danni il "+monster.getNome()+" ha bloccato "+monster.getDifesa()+" danni\n"+monster.getNome()+" vita: "+monster.getVita());
             
             reference.player.takeDamage(difeso - danno);
-            if(reference.player.getVita() <= 0)
+            if(reference.player.getVita() <= 0){
+                reference.player.setVita(0);
                 reference.ui.messageTextArea.setText("Sei morto! Hai perso!");
+            }   
         }  
        }
 }
