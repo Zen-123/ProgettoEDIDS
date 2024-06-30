@@ -1,6 +1,6 @@
-Player: testSave2
+Player: t2
 Health: 100
-Money: 10
+Money: 18
 Monster_killed: 0
 Category: archer
 Weapon: spada
@@ -10,4 +10,4 @@ Armour: armatura
 key: 0
 Max_damage: 10
 Min_damage: 3
-Current_room: 1
+Current_room: 3

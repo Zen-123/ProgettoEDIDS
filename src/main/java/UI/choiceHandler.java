@@ -10,8 +10,10 @@ import Player.mostro;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import Player.Item;
 
 import static UI.UI.gameB;
 
@@ -286,7 +288,6 @@ public class choiceHandler implements ActionListener {
      */
     void setFileSaveOverwrite(String name) {
         try {
-
             fileSave = new File("FileLoad/" + name);
             printWriter = new PrintWriter(fileSave);
             //scrittura su file
@@ -302,7 +303,8 @@ public class choiceHandler implements ActionListener {
                     "Armour: " + reference.player.getArmourName() + "\n" +
                     "key: " + reference.player.getGoldkey()+ "\n" +
                     "Max_damage: " + reference.player.getDannoMaxSpada() + "\n" +
-                    "Min_damage: " + reference.player.getDannoMinSpada()
+                    "Min_damage: " + reference.player.getDannoMinSpada() + "\n" +
+                    "Current_room: " + reference.currentStanza.ID_Stanza
             );
             printWriter.close();
             //caricamento del file sovrascritto
@@ -385,11 +387,139 @@ public class choiceHandler implements ActionListener {
                     else if(counter == 12)
                         reference.player.setMinDamage(Integer.parseInt((matcher.group(1))));
                     else if(counter == 13){
-                        reference.currentStanza.ID_Stanza = Integer.parseInt((matcher.group(1)));
+
+                        reference.currentStanza = new Board(Integer.parseInt((matcher.group(1))), true);
+                        //Forse problema con board parametrizzata con flag
+                        //se si usa board senza flag problema: non salva i file stanza_n.txt ma salva le statistiche del giocatore
+                        reference.curr_stanza = Integer.parseInt((matcher.group(1)));
+                        if( reference.curr_stanza == 2){
+                            for (int row = 0; row < reference.currentStanza.cellestanza.size(); row++) {
+                                for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
+                                    Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
+                                    if (cell.getSymbol() == 'E' ) {
+                                        reference.player.setX(col-1);
+                                        reference.player.setY(row);
+                                        reference.player.setspawnTo('E');
+                                        reference.currentStanza.cellestanza.get(row).set(col-1,Cell.PLAYER);
+                                        break;
+                                    }
+                                }
+                            }
+                        }else if( reference.curr_stanza == 3){
+                            for (int row = 0; row < reference.currentStanza.cellestanza.size(); row++) {
+                                for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
+                                    Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
+                                    if (cell.getSymbol() == 'S' ) {
+                                        reference.player.setX(col);
+                                        reference.player.setY(row-1);
+                                        reference.player.setspawnTo('S');
+                                        reference.currentStanza.cellestanza.get(row-1).set(col,Cell.PLAYER);
+
+                                        break;
+                                    }
+                                }
+                            }
+                        }else if( reference.curr_stanza == 4){
+                            for (int row = 0; row < reference.currentStanza.cellestanza.size(); row++) {
+                                for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
+                                    Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
+                                    if (cell.getSymbol() == 'E' ) {
+                                        reference.player.setX(col-1);
+                                        reference.player.setY(row);
+                                        reference.player.setspawnTo('E');
+                                        reference.currentStanza.cellestanza.get(row).set(col-1,Cell.PLAYER);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        else if( reference.curr_stanza == 5){
+                            for (int row = 0; row < reference.currentStanza.cellestanza.size(); row++) {
+                                for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
+                                    Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
+                                    if (cell.getSymbol() == 'S' ) {
+                                        reference.player.setX(col);
+                                        reference.player.setY(row-1);
+                                        reference.player.setspawnTo('S');
+                                        reference.currentStanza.cellestanza.get(row-1).set(col,Cell.PLAYER);
+                                        break;
+                                    }
+                                }
+                            }
+                        }else if( reference.curr_stanza == 6){
+                            for (int row = 0; row < reference.currentStanza.cellestanza.size(); row++) {
+                                for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
+                                    Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
+                                    if (cell.getSymbol() == 'E' ) {
+                                        reference.player.setX(col-1);
+                                        reference.player.setY(row);
+                                        reference.player.setspawnTo('E');
+                                        reference.currentStanza.cellestanza.get(row).set(col-1,Cell.PLAYER);
+                                        break;
+                                    }
+                                }
+                            }
+                        }else if( reference.curr_stanza == 7){
+                            for (int row = 0; row < reference.currentStanza.cellestanza.size(); row++) {
+                                for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
+                                    Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
+                                    if (cell.getSymbol() == 'E' ) {
+                                        reference.player.setX(col-1);
+                                        reference.player.setY(row);
+                                        reference.player.setspawnTo('E');
+                                        reference.currentStanza.cellestanza.get(row).set(col-1,Cell.PLAYER);
+                                        break;
+                                    }
+                                }
+                            }
+                        }else if( reference.curr_stanza == 8){
+                            for (int row = 0; row < reference.currentStanza.cellestanza.size(); row++) {
+                                for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
+                                    Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
+                                    if (cell.getSymbol() == 'S' ) {
+                                        reference.player.setX(col);
+                                        reference.player.setY(row-1);
+                                        reference.player.setspawnTo('S');
+                                        reference.currentStanza.cellestanza.get(row-1).set(col,Cell.PLAYER);
+                                        break;
+                                    }
+                                }
+                            }
+                        }else if( reference.curr_stanza == 9){
+                            for (int row = 0; row < reference.currentStanza.cellestanza.size(); row++) {
+                                for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
+                                    Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
+                                    if (cell.getSymbol() == 'S' ) {
+                                        reference.player.setX(col-1);
+                                        reference.player.setY(row-1);
+                                        reference.player.setspawnTo('S');
+                                        reference.currentStanza.cellestanza.get(row-1).set(col-1,Cell.PLAYER);
+                                        break;
+                                    }
+                                }
+                            }
+                        }else if( reference.curr_stanza == 0){
+                            for (int row = 0; row < reference.currentStanza.cellestanza.size(); row++) {
+                                for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
+                                    Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
+                                    if (cell.getSymbol() == 'G' ) {
+                                        reference.player.setX(col-1);
+                                        reference.player.setY(row);
+                                        reference.player.setspawnTo('G');
+                                        reference.currentStanza.cellestanza.get(row).set(col-1,Cell.PLAYER);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        System.out.println("final room: " + reference.currentStanza.ID_Stanza);
+
+
                     }
                     counter++;
                 }
             }
+        reference.functions.updateMonsterPosition();
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -241,32 +241,24 @@ public class gameBoard extends JPanel implements KeyListener {
                         break;
 
                     case "save 1":
-                        temp = "src/main/java/Board/Stanzeold/stanza_"+reference.currentStanza.ID_Stanza+".txt";
-                        reference.filereader.fileToWrite(reference.currentStanza.cellestanza, temp );
                         handler.setFileSaveOverwrite(fileNameArray[0]);
                         vManager.showMenuScreen();
 
                         break;
 
                     case "save 2":
-                        temp = "src/main/java/Board/Stanzeold/stanza_"+reference.currentStanza.ID_Stanza+".txt";
-                        reference.filereader.fileToWrite(reference.currentStanza.cellestanza, temp );
                         handler.setFileSaveOverwrite(fileNameArray[1]);
                         vManager.showMenuScreen();
 
                         break;
 
                     case "save 3":
-                        temp = "src/main/java/Board/Stanzeold/stanza_"+reference.currentStanza.ID_Stanza+".txt";
-                        reference.filereader.fileToWrite(reference.currentStanza.cellestanza, temp );
                         handler.setFileSaveOverwrite(fileNameArray[2]);
                         vManager.showMenuScreen();
 
                         break;
 
                     case "save 4":
-                        temp = "src/main/java/Board/Stanzeold/stanza_"+reference.currentStanza.ID_Stanza+".txt";
-                        reference.filereader.fileToWrite(reference.currentStanza.cellestanza, temp );
                         handler.setFileSaveOverwrite(fileNameArray[3]);
                         vManager.showMenuScreen();
 
