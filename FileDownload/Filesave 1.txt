@@ -1,0 +1,15 @@
+Player: t1
+Health: 100
+Money: 0
+Monster_killed: 0
+Category: warrior
+Weapon: spada
+Potions: 0
+Weight_Inventory: 50
+Armour: armatura
+key: 0
+Max_damage: 13
+Min_damage: 5
+Pos_x: 1
+Pos_y: 3
+Current_room: 1

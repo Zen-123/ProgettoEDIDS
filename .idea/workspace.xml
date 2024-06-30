@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="79dd6b0e-7354-4f9b-a84b-c31fb9c82a4c" name="Changes" comment="Sistemato problema bottoni nel menu">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Board/Board.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Board/Cell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Board/Readfile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Board/Stanze/stanza_3.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Board/Stanzeold/stanza_1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Board/Stanzeold/stanza_2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Board/Stanzeold/stanza_3.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Board/func.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Board/reference.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/MainGame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Player/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Player/entity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Player/mostro.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/UI/UI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/UI/gameBoard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/UI/visibilityManager.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$/ProgettoEDIDS" value="GambeBoardImplementation&amp;Test" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;history&quot;: [
+    {
+      &quot;state&quot;: &quot;OPEN&quot;,
+      &quot;assignee&quot;: &quot;Zen-123&quot;,
+      &quot;author&quot;: &quot;Zen-123&quot;
+    }
+  ],
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Zen-123&quot;,
+    &quot;author&quot;: &quot;Zen-123&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://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@github.com/Zen-123/ProgettoEDIDS&quot;,
+    &quot;accountId&quot;: &quot;9f3277bf-c7d7-4a44-b31b-943dd4d0b0e4&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///DungeonUnipd-effective-pom.xml" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2gpcC9t5VTUAanvbkk67aSj7Nlk" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="flattenModules" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.MainGame.executor": "Run",
+    "JAR Application.DungeonUnipd-1.0-SNAPSHOT.jar.executor": "Run",
+    "JUnit.BoardTest.executor": "Run",
+    "JUnit.BoardTest.testConstructorWithId.executor": "Run",
+    "JUnit.BoardTest.testConstructorWithIdAndVerification.executor": "Run",
+    "JUnit.BoardTest.testPopulateBoard.executor": "Run",
+    "JUnit.CellTest.executor": "Run",
+    "JUnit.CellTest.testGetSymbol.executor": "Run",
+    "JUnit.DownloadFileTest.executor": "Run",
+    "JUnit.DownloadFileTest.testBucketNameAndDownloadDir.executor": "Run",
+    "JUnit.DownloadFileTest.testConstructorWithAllValidFileNames.executor": "Run",
+    "JUnit.DownloadFileTest.testConstructorWithValidFileName.executor": "Run",
+    "JUnit.DownloadFileTest.testDownloadFileSuccess.executor": "Run",
+    "JUnit.ItemTest.executor": "Run",
+    "JUnit.MainGameTest.executor": "Run",
+    "JUnit.MainGameTest.testMainGameConstructor.executor": "Run",
+    "JUnit.MostroTest.executor": "Run",
+    "JUnit.MostroTest.testGetDanno.executor": "Run",
+    "JUnit.MostroTest.testTakeDamage.executor": "Run",
+    "JUnit.PlayerTest.executor": "Run",
+    "JUnit.PlayerTest.testConstructor.executor": "Run",
+    "JUnit.PlayerTest.testSetAndGetKey.executor": "Run",
+    "JUnit.PlayerTest.testUsePozioni.executor": "Run",
+    "JUnit.ReadfileTest.executor": "Run",
+    "JUnit.ReadfileTest.testFileToWrite.executor": "Run",
+    "JUnit.ReferenceTest.executor": "Run",
+    "JUnit.UITest.executor": "Run",
+    "JUnit.UITest.testTitleCreation.executor": "Run",
+    "JUnit.UITest.testWindowCreation.executor": "Run",
+    "JUnit.UploadFileTest.executor": "Run",
+    "JUnit.VisibilityManagerTest.executor": "Run",
+    "JUnit.choiceHandlerTest (1).executor": "Run",
+    "JUnit.choiceHandlerTest.executor": "Run",
+    "JUnit.choiceHandlerTest.testActionPerformedExitButton.executor": "Run",
+    "JUnit.choiceHandlerTest.testActionPerformedStartButton.executor": "Debug",
+    "JUnit.choiceHandlerTest.testActionPerformedStartGameButton.executor": "Run",
+    "JUnit.choiceHandlerTest.testManageTextInput_Save.executor": "Run",
+    "JUnit.choiceHandlerTest.testSetFileSave.executor": "Run",
+    "JUnit.choiceHandlerTest.testSetLoad.executor": "Run",
+    "JUnit.entityTest.executor": "Run",
+    "JUnit.funcTest.executor": "Run",
+    "JUnit.funcTest.testGenerateBoss.executor": "Run",
+    "JUnit.funcTest.testGenerateItem.executor": "Run",
+    "JUnit.gameBoardTest.executor": "Run",
+    "JUnit.gameBoardTest.testCheckWhatYouBumped_FreeSpace.executor": "Run",
+    "JUnit.gameBoardTest.testCheckWhatYouBumped_Wall.executor": "Run",
+    "JUnit.gameBoardTest.testMonsterEncounter.executor": "Run",
+    "JUnit.gameBoardTest.testUpdateMonsterPosition.executor": "Run",
+    "JUnit.java in DungeonUnipd.executor": "Run",
+    "JUnit.referenceTest.executor": "Run",
+    "JUnit.referenceTest.testModifyValues.executor": "Run",
+    "JUnit.visibilityManagerTest.executor": "Run",
+    "JUnit.visibilityManagerTest.testShowGameScreen.executor": "Run",
+    "JUnit.visibilityManagerTest.testShowWinPanel.executor": "Run",
+    "Maven.DungeonUnipd [appenginge:run].executor": "Run",
+    "Maven.DungeonUnipd [clean,compile,-jar...].executor": "Run",
+    "Maven.DungeonUnipd [clean,compile,DungeonUnipd...].executor": "Run",
+    "Maven.DungeonUnipd [clean,compile,exec:java].executor": "Run",
+    "Maven.DungeonUnipd [clean,compile,jar...].executor": "Run",
+    "Maven.DungeonUnipd [clean,compile,jar].executor": "Run",
+    "Maven.DungeonUnipd [clean,compile...].executor": "Run",
+    "Maven.DungeonUnipd [clean,compile:...].executor": "Run",
+    "Maven.DungeonUnipd [clean,compile].executor": "Run",
+    "Maven.DungeonUnipd [clean,install].executor": "Run",
+    "Maven.DungeonUnipd [clean,test].executor": "Run",
+    "Maven.DungeonUnipd [clean...].executor": "Run",
+    "Maven.DungeonUnipd [clean].executor": "Run",
+    "Maven.DungeonUnipd [compile].executor": "Run",
+    "Maven.DungeonUnipd [exec:java...].executor": "Run",
+    "Maven.DungeonUnipd [exec:java].executor": "Run",
+    "Maven.DungeonUnipd [install].executor": "Run",
+    "Maven.DungeonUnipd [package].executor": "Run",
+    "Maven.DungeonUnipd [test].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "Merging main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/andreazanin/IdeaProjects/DungeonUnipd/src/main/java/Board/Stanze",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
+    "two.files.diff.last.used.file": "/home/andreazanin/Downloads/ProgettoEDIDS-TestLoadAndSave/src/main/java/MainGame.java"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/Board/Stanze" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/FileLoad" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="UI" />
+      <recent name="Player" />
+      <recent name="" />
+      <recent name="Board" />
+      <recent name="ManageFile" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean compile jar " />
+      <command value="mvn clean compile " />
+      <command value="mvn clean compile assembly:single &amp;&amp; java -jar target" />
+      <command value="mvn clean compile assembly:single &amp;&amp; java -jar target/DungeonUnipd-1.0-SNAPSHOT.jar" />
+      <command value="mvn clean compile assembly:single &amp;&amp; java jar target/DungeonUnipd-1.0-SNAPSHOT.jar" />
+      <command value="mvn clean compile jar target/DungeonUnipd-1.0-SNAPSHOT.jar" />
+      <command value="mvn clean compile -jar target/DungeonUnipd-1.0-SNAPSHOT.jar" />
+      <command value="mvn clean compile DungeonUnipd -jar target/DungeonUnipd-1.0-SNAPSHOT.jar" />
+      <command value="mvn clean compile target/DungeonUnipd-1.0-SNAPSHOT.jar" />
+      <command value="mvn clean compile jar:target/DungeonUnipd-1.0-SNAPSHOT.jar" />
+      <command value="mvn clean compile jar /home/andreazanin/IdeaProjects/DungeonUnipd/target/DungeonUnipd-1.0-SNAPSHOT.jar" />
+      <command value="mvn clean compile  /home/andreazanin/IdeaProjects/DungeonUnipd/target/DungeonUnipd-1.0-SNAPSHOT.jar" />
+      <command value="mvn clean compile: /home/andreazanin/IdeaProjects/DungeonUnipd/target/DungeonUnipd-1.0-SNAPSHOT.jar" />
+      <command value="mvn clean compile -jar:/home/andreazanin/IdeaProjects/DungeonUnipd/target/DungeonUnipd-1.0-SNAPSHOT.jar" />
+      <command value="mvn clean compile jar:/home/andreazanin/IdeaProjects/DungeonUnipd/target/DungeonUnipd-1.0-SNAPSHOT.jar" />
+      <command value="mvn clean compile assembly:single &amp;&amp; java -jar:/home/andreazanin/IdeaProjects/DungeonUnipd/target/DungeonUnipd-1.0-SNAPSHOT.jar" />
+      <command value="mvn clean compile assembly:single &amp;&amp; java jar:/home/andreazanin/IdeaProjects/DungeonUnipd/target/DungeonUnipd-1.0-SNAPSHOT.jar" />
+      <command value="mvn clean compile assembly:single &amp;&amp; java -jar /home/andreazanin/IdeaProjects/DungeonUnipd/target/DungeonUnipd-1.0-SNAPSHOT.jar" />
+      <command value="mvn clean compile exec:MainGame.java" />
+      <command value="mvn clean compile exec:java" />
+      <command value="mvn exec:java -Dexec.mainClass=com.kub.App" />
+      <command value="mvn clean install" />
+      <command value="mvn package" />
+      <command value="mvn appenginge:run" />
+      <command value="mvn clean compile" />
+      <command value="mvn exec:java" />
+      <command value="mvn clean" />
+      <command value="mvn test" />
+      <command value="mvn clean target/classes/MainGame" />
+      <command value="mvn clean test" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.MainGame">
+    <configuration name="MainGame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MainGame" />
+      <module name="DungeonUnipd" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainGameTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DungeonUnipd" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="MainGameTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="choiceHandlerTest.testSetLoad" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DungeonUnipd" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="UI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="UI" />
+      <option name="MAIN_CLASS_NAME" value="UI.choiceHandlerTest" />
+      <option name="METHOD_NAME" value="testSetLoad" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="gameBoardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DungeonUnipd" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="UI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="UI" />
+      <option name="MAIN_CLASS_NAME" value="UI.gameBoardTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="java in DungeonUnipd" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DungeonUnipd" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MainGame" />
+        <item itemvalue="JUnit.MainGameTest" />
+        <item itemvalue="JUnit.java in DungeonUnipd" />
+        <item itemvalue="JUnit.gameBoardTest" />
+        <item itemvalue="JUnit.choiceHandlerTest.testSetLoad" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="79dd6b0e-7354-4f9b-a84b-c31fb9c82a4c" name="Changes" comment="" />
+      <created>1716397829662</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1716397829662</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Sistemato problema bottoni nel menu">
+      <option name="closed" value="true" />
+      <created>1717081594589</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1717081594589</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="ff827c93-69a0-4d0b-ae99-71014a1123a0" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="ff827c93-69a0-4d0b-ae99-71014a1123a0">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Sistemato problema bottoni nel menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="Sistemato problema bottoni nel menu" />
+  </component>
+</project>
