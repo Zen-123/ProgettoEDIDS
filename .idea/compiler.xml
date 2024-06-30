@@ -9,8 +9,5 @@
         <module name="DungeonUnipd" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="DungeonUnipd" target="22" />
-    </bytecodeTargetLevel>
   </component>
 </project>

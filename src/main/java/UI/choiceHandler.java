@@ -1,22 +1,15 @@
 package UI;
 import Board.Board;
 import Board.Readfile;
+import Board.Cell;
 import ManageFile.DownloadFile;
 import ManageFile.uploadFile;
 import Board.reference;
 import Player.Player;
 import Player.mostro;
-import Board.Cell;
-import Player.Item;
-import java.awt.Graphics;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,9 +22,9 @@ public class choiceHandler implements ActionListener {
     //variabili private
 
     //contatore generale per i 4 slot di salvataggio
-    private static int counterFile = 0;
+    public static int counterFile = 0;
     //contatore che va a contare i file già scaricati al primo caricamento del gioco
-    private int counterFileFirstLoad = 0;
+    public int counterFileFirstLoad = 0;
     private final UI userInterfaceHandler;
     visibilityManager vManager;
     uploadFile upload;
@@ -235,39 +228,27 @@ public class choiceHandler implements ActionListener {
      * @param input stringa di testo che contiene i comandi
      */
     void manageLoadTextInput(String input) {
-
+        File fileExistCheck;
         userInterfaceHandler.commandLoadTextField.setText("");
         //torna alla pagina iniziale
-        if (input.equals("back")) {
+        if (input.toLowerCase().equals("back") || input.toLowerCase().equals("exit")) {
             vManager.showMenuScreen();
         }
 
-        if(input.equals("slot 1")){
-            setupLoad(1);
-            vManager.checkLoad = true;
-            reference.ui.commandTextField.setText("");
+        if(input.toLowerCase().equals("slot 1")){
+            checkSlotExistence(fileNameArray[0], 1);
 
-            vManager.showGameScreen();
-        }
-        if(input.equals("slot 2")){
-            setupLoad(2);
-            vManager.checkLoad = true;
-            reference.ui.commandTextField.setText("");
-            vManager.showGameScreen();
-        }
-        if(input.equals("slot 3")){
-            setupLoad(3);
-            vManager.checkLoad = true;
-            reference.ui.commandTextField.setText("");
 
-            vManager.showGameScreen();
         }
-        if(input.equals("slot 4")){
-            setupLoad(4);
-            vManager.checkLoad = true;
-            reference.ui.commandTextField.setText("");
+        if(input.toLowerCase().equals("slot 2")){
+            checkSlotExistence(fileNameArray[1], 2);
+        }
+        if(input.toLowerCase().equals("slot 3")){
+            checkSlotExistence(fileNameArray[2],3);
 
-            vManager.showGameScreen();
+        }
+        if(input.toLowerCase().equals("slot 4")){
+            checkSlotExistence(fileNameArray[3],4);
         }
 
     }
@@ -286,17 +267,18 @@ public class choiceHandler implements ActionListener {
             //scrittura sul file
             printWriter.println(
                     "Player: " + reference.player.getNome() + "\n" +
-                            "Health: " + reference.player.getVita()+ "\n" +
-                            "Money: " + reference.player.getMonete()+ "\n" +
-                            "Monster_killed: " + reference.player.getMostriuccisi()+ "\n" +
-                            "Category: " + reference.player.getCategory()+ "\n" +
-                            "Weapon: " + reference.player.getSpadaName()+ "\n" +
-                            "Potions: " + reference.player.getNumpozioni() + "\n" +
-                            "Weight_Inventory: " + reference.player.getPeso() + "\n" +
-                            "Armour: " + reference.player.getArmourName() + "\n" +
-                            "key: " + reference.player.getGoldkey()+ "\n" +
-                            "Max_damage: " + reference.player.getDannoMaxSpada() + "\n" +
-                            "Min_damage: " + reference.player.getDannoMinSpada()
+                    "Health: " + reference.player.getVita()+ "\n" +
+                    "Money: " + reference.player.getMonete()+ "\n" +
+                    "Monster_killed: " + reference.player.getMostriuccisi()+ "\n" +
+                    "Category: " + reference.player.getCategory()+ "\n" +
+                    "Weapon: " + reference.player.getSpadaName()+ "\n" +
+                    "Potions: " + reference.player.getNumpozioni() + "\n" +
+                    "Weight_Inventory: " + reference.player.getPeso() + "\n" +
+                    "Armour: " + reference.player.getArmourName() + "\n" +
+                    "key: " + reference.player.getGoldkey()+ "\n" +
+                    "Max_damage: " + reference.player.getDannoMaxSpada() + "\n" +
+                    "Min_damage: " + reference.player.getDannoMinSpada() + "\n" +
+                    "Current_room: " + reference.currentStanza.ID_Stanza
             );
             printWriter.close();
             //caricamento del nuovo file su aws
@@ -319,17 +301,18 @@ public class choiceHandler implements ActionListener {
             //scrittura su file
             printWriter.println(
                     "Player: " + reference.player.getNome() + "\n" +
-                            "Health: " + reference.player.getVita()+ "\n" +
-                            "Money: " + reference.player.getMonete()+ "\n" +
-                            "Monster_killed: " + reference.player.getMostriuccisi()+ "\n" +
-                            "Category: " + reference.player.getCategory()+ "\n" +
-                            "Weapon: " + reference.player.getSpadaName()+ "\n" +
-                            "Potions: " + reference.player.getNumpozioni() + "\n" +
-                            "Weight_Inventory: " + reference.player.getPeso() + "\n" +
-                            "Armour: " + reference.player.getArmourName() + "\n" +
-                            "key: " + reference.player.getGoldkey()+ "\n" +
-                            "Max_damage: " + reference.player.getDannoMaxSpada() + "\n" +
-                            "Min_damage: " + reference.player.getDannoMinSpada()
+                    "Health: " + reference.player.getVita()+ "\n" +
+                    "Money: " + reference.player.getMonete()+ "\n" +
+                    "Monster_killed: " + reference.player.getMostriuccisi()+ "\n" +
+                    "Category: " + reference.player.getCategory()+ "\n" +
+                    "Weapon: " + reference.player.getSpadaName()+ "\n" +
+                    "Potions: " + reference.player.getNumpozioni() + "\n" +
+                    "Weight_Inventory: " + reference.player.getPeso() + "\n" +
+                    "Armour: " + reference.player.getArmourName() + "\n" +
+                    "key: " + reference.player.getGoldkey()+ "\n" +
+                    "Max_damage: " + reference.player.getDannoMaxSpada() + "\n" +
+                    "Min_damage: " + reference.player.getDannoMinSpada()+ "\n" +
+                    "Current_room: " + reference.currentStanza.ID_Stanza
             );
             printWriter.close();
             //caricamento del file sovrascritto
@@ -373,15 +356,16 @@ public class choiceHandler implements ActionListener {
         reloadFile = false;
 
     }
-
-    public void setupLoad(int i)  {
+//metodo per salvare i dati ottenuti dai file scaricati dal bucket aws
+    public void setupLoad(int k)  {
 
         try {
             int counter = 1;
-            File file = new File("FileDownload/Filesave "+i+".txt");
+            File file = new File("FileLoad/Filesave "+k+".txt");
             Pattern pattern = Pattern.compile(": (.+)");
             BufferedReader br = new BufferedReader(new FileReader(file));
                 String line;
+                //viene letta ogni riga del file e per ogni riga viene settato il valore corrispondente nelle stats del player
                 while ((line = br.readLine()) != null) {
                     Matcher matcher = pattern.matcher(line);
                     if (matcher.find()) {
@@ -411,17 +395,11 @@ public class choiceHandler implements ActionListener {
                     else if(counter == 12)
                         reference.player.setMinDamage(Integer.parseInt((matcher.group(1))));
                     else if(counter == 13){
-
-                        System.out.println(reference.player.getX());
-
-                    } else if(counter == 14){
-                        System.out.println(reference.player.getY());
+                        reference.currentStanza.ID_Stanza = Integer.parseInt((matcher.group(1)));
                     }
-
                     counter++;
                 }
             }
-
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -434,5 +412,23 @@ public class choiceHandler implements ActionListener {
         reference.filereader = new Readfile();
         reference.mostrorun = new mostro();
         reference.currentStanza = new Board(1);
+    }
+
+    private void checkSlotExistence(String fileName, int i){
+        File fileExistCheck = new File("FileLoad/" + fileName);
+        try {
+            if(fileExistCheck.exists()){
+                vManager.checkLoad = true;
+                reference.ui.commandTextField.setText("");
+                setupLoad(i);
+                vManager.showGameScreen();
+            }else{
+                reference.ui.setAlertNoSaveSlot();
+            }
+
+        }catch (Exception e){
+            System.out.println("File non trovato!");
+            vManager.showMenuScreen();
+        }
     }
 }

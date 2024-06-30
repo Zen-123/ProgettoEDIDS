@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 
 import javax.swing.JPanel;
 
@@ -197,6 +198,44 @@ public class gameBoard extends JPanel implements KeyListener {
                         reference.functions.playerIsLooking();
                     break;
 
+                    case "save":
+                        File fileLoad;
+                        if(handler.counterFileFirstLoad<4 && choiceHandler.counterFile<4){
+                            //for che scorre i file scaricati da aws
+                            for (int i = choiceHandler.counterFile; i < fileNameArray.length + 1; i++) {
+                                fileLoad = new File("FileDownload/" + fileNameArray[i]);
+                                if (fileLoad.exists()) {
+                                    reference.ui.counterLoadLabel.setText("Save n. " + (choiceHandler.counterFile+1));
+                                    /*se lo slot salvataggio è già occupato si chiede all'utente se vuole sovrascriverlo
+                                     * oppure usare un altro slot disponibile */
+                                    if (reference.ui.setAlertMenu(0) == 0) {
+                                        //utente decide tramite l'alert di sovrascrivere il salvataggio precedente
+                                        handler.setFileSaveOverwrite(fileNameArray[i]);
+                                        vManager.showMenuScreen();
+                                        break;
+                                    } else {
+                                        //utente decide di non sovrascrivere salvataggio precedente
+                                        vManager.showGameScreen();
+                                        break;
+                                    }
+
+                                } else {
+                            /*se lo slot è libero, ovvero non è stato trovato tra i file scaricati da aws un file
+                            con il nome cercato, allora viene creato un nuovo file salvataggio
+                            * */
+                                    handler.setFileSave(fileNameArray[i]);
+                                    break;
+                                }
+                            }
+                            choiceHandler.counterFile++;
+                        } else {
+                            //l'utente viene informato che gli slot salvataggio sono finiti tramite un alert
+                            reference.ui.setAlertMenu(1);
+                        }
+                        //finite le operazioni si ritorna alla schermata iniziale
+
+                        vManager.showMenuScreen();
+                        break;
                     case "exit":
                         vManager.showMenuScreen();
                         break;

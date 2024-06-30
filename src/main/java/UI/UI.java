@@ -834,5 +834,9 @@ public class UI {
 
     }
 
+    public void setAlertNoSaveSlot(){
+         JOptionPane.showMessageDialog(commandPanel, "This save slot does not exist! ", "Confirmation", JOptionPane.OK_OPTION);
+    }
+
 
 }
