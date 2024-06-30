@@ -7,6 +7,7 @@ public class Item extends entity{
     int difesa;
     boolean isSword;
     int id_stanza;
+    int peso;
     boolean hasTake;
     boolean canAttack;
 
@@ -15,12 +16,13 @@ public class Item extends entity{
         this.attacco_max = 0;
         this.attacco_min = 0;
         this.difesa = 0;
+        this.peso = 0;
         this.isSword = false;
         this.id_stanza = 0;
         this.hasTake = false;
         this.canAttack=false;
     }
-    public Item(String nome,int attacco_max, int attacco_min, int difesa,boolean sword,int id,boolean preso){
+    public Item(String nome,int attacco_max, int attacco_min, int difesa,boolean sword,int id,boolean preso,int peso){
         this.nome = nome;
         this.attacco_max = attacco_max;
         this.attacco_min = attacco_min;
@@ -29,6 +31,7 @@ public class Item extends entity{
         this.id_stanza = id;
         this.hasTake = preso;
         this.canAttack=false;
+        this.peso = peso;
     }
     public boolean CanAttack(){
         return this.canAttack;
@@ -65,5 +68,13 @@ public class Item extends entity{
     }
     public void setHasTake(boolean hasTake) {
         this.hasTake = hasTake;
+    }
+
+    public int getPeso() {
+        return peso;
+    }
+
+    public void setPeso(int peso) {
+        this.peso = peso;
     }
 }

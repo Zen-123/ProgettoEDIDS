@@ -21,7 +21,7 @@ public class gameBoard extends JPanel implements KeyListener {
     public gameBoard(){
         addKeyListener(this);
         this.setFocusable(true);
-        makesomething();
+        MakeaMove();
     }
     //metodo che colora la mappa ogni volta che cè un cambiamento
     @Override
@@ -130,7 +130,7 @@ public class gameBoard extends JPanel implements KeyListener {
     public void keyTyped(KeyEvent e){
     }
     //gestisce movimento mostri e interazioni del player sul commandtext
-   public void makesomething(){
+   public void MakeaMove(){
     reference.ui.commandTextField.addKeyListener(new KeyAdapter() {
         public void keyPressed(KeyEvent e) {
             String temp;

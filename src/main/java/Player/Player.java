@@ -1,5 +1,4 @@
 package Player;
-import Board.reference;
 
 public class Player extends entity{
     private String nome;
@@ -44,12 +43,12 @@ public class Player extends entity{
     }
     public void addSpada(Item item){
         item.setCanAttack(false);
-        this.peso += 20;
+        this.peso += item.getPeso();
         this.spada = item;
     }
     public void addArmour(Item item){
         item.setCanAttack(false);
-        this.peso += 30;
+        this.peso += item.getPeso();
         this.armatura = item;
     }
     public void removeKey(){

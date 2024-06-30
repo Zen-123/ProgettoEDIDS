@@ -106,16 +106,16 @@ public class visibilityManager {
                         case "warrior":
                             reference.player.setMonete(0);
                             reference.player.addNum_pozioni(0);
-                            reference.player.addSpada(new Item("spada", 13, 5, 0, true, reference.curr_stanza, true));
-                            reference.player.addArmour(new Item("armatura", 0, 0, 5, false, reference.curr_stanza, true));
+                            reference.player.addSpada(new Item("spada", 13, 5, 0, true, reference.curr_stanza, true,20));
+                            reference.player.addArmour(new Item("armatura", 0, 0, 5, false, reference.curr_stanza, true,30));
                             reference.player.setHasArmour(true);
                             break;
                         case "archer":
                             reference.player.setCategory("archer");
                             reference.player.setMonete(10);
                             reference.player.addNum_pozioni(2);
-                            reference.player.addSpada(new Item("spada", 10, 3, 0, true, reference.curr_stanza, true));
-                            reference.player.addArmour(new Item("armatura", 0, 0, 1, false, reference.curr_stanza, true));
+                            reference.player.addSpada(new Item("spada", 10, 3, 0, true, reference.curr_stanza, true,20));
+                            reference.player.addArmour(new Item("armatura", 0, 0, 1, false, reference.curr_stanza, true,30));
                             reference.player.setHasArmour(true);
                             break;
                         case "thief":
@@ -123,16 +123,16 @@ public class visibilityManager {
                             reference.player.setMonete(20);
                             reference.player.addNum_pozioni(3);
                             reference.player.setKey();
-                            reference.player.addSpada(new Item("spada", 8, 4, 0, true, reference.curr_stanza, true));
-                            reference.player.addArmour(new Item("armatura", 0, 0, 0, false, reference.curr_stanza, true));
+                            reference.player.addSpada(new Item("spada", 8, 4, 0, true, reference.curr_stanza, true,20));
+                            reference.player.addArmour(new Item("armatura", 0, 0, 0, false, reference.curr_stanza, true,30));
                             reference.player.setHasArmour(true);
                             break;
                         default:
                             reference.player.setCategory("warrior");
                             reference.player.setMonete(0);
                             reference.player.addNum_pozioni(0);
-                            reference.player.addSpada(new Item("spada", 13, 5, 0, true, reference.curr_stanza, true));
-                            reference.player.addArmour(new Item("armatura", 0, 0, 5, false, reference.curr_stanza, true));
+                            reference.player.addSpada(new Item("spada", 13, 5, 0, true, reference.curr_stanza, true,20));
+                            reference.player.addArmour(new Item("armatura", 0, 0, 5, false, reference.curr_stanza, true,30));
                             reference.player.setHasArmour(true);
                             break;
                     }
@@ -145,8 +145,8 @@ public class visibilityManager {
                     reference.player.setMonete(0);
                     reference.player.setPeso(0);
                     reference.player.addNum_pozioni(0);
-                    reference.player.addSpada(new Item("spada", 13, 5, 0, true, reference.curr_stanza, true));
-                    reference.player.addArmour(new Item("armatura", 0, 0, 5, false, reference.curr_stanza, true));
+                    reference.player.addSpada(new Item("spada", 13, 5, 0, true, reference.curr_stanza, true,20));
+                    reference.player.addArmour(new Item("armatura", 0, 0, 5, false, reference.curr_stanza, true,30));
                     reference.player.setHasArmour(true);
                 }
             }

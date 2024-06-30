@@ -15,12 +15,12 @@ public class func{
         int choose = (int)(Math.random() * 99);
         Item a;
         if(choose % 2 == 0){//pari è spada
-            a = new Item("spada", (int)(Math.random() * 20) + 6, (int)(Math.random() * 4) + 2, 0,true,reference.curr_stanza,false);
+            a = new Item("spada", (int)(Math.random() * 20) + 6, (int)(Math.random() * 4) + 2, 0,true,reference.curr_stanza,false,20);
             a.setX(x);
             a.setY(y);
             a.setSymbol('I');
         }else{//dispari è un armatura
-            a = new Item("armatura", 0, 0, (int)((Math.random() * 20) + 5),false,reference.curr_stanza,false);
+            a = new Item("armatura", 0, 0, (int)((Math.random() * 20) + 5),false,reference.curr_stanza,false,30);
             a.setX(x);
             a.setY(y);
             a.setSymbol('I');
