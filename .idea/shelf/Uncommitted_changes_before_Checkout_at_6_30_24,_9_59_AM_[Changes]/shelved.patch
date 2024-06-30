@@ -1,0 +1,54 @@
+Index: src/main/java/Board/Stanzeold/stanza_2.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>###N#\n#...#\n#I..#\n#.M.#\nW...#\n#...#\n#.C.#\n#...#\n#...E\n#####\n31400\n
+===================================================================
+diff --git a/src/main/java/Board/Stanzeold/stanza_2.txt b/src/main/java/Board/Stanzeold/stanza_2.txt
+--- a/src/main/java/Board/Stanzeold/stanza_2.txt	
++++ b/src/main/java/Board/Stanzeold/stanza_2.txt	
+@@ -1,10 +1,10 @@
+ ###N#
+ #...#
+ #I..#
+-#.M.#
+-W...#
++#...#
++W..M#
+ #...#
+-#.C.#
++#...#
+ #...#
+ #...E
+ #####
+Index: src/main/java/Board/Stanzeold/stanza_3.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>##N###########\n#M.....#.H.MI#\n#......#.....#\n#......#....H#\n#.C....#I....#\n#......####P##\n#............#\n#.C..........#\n#.MI.....M...#\n#............#\n#..C.........#\n#.........M..#\n#............#\n######S#######\n90020000000000\n
+===================================================================
+diff --git a/src/main/java/Board/Stanzeold/stanza_3.txt b/src/main/java/Board/Stanzeold/stanza_3.txt
+--- a/src/main/java/Board/Stanzeold/stanza_3.txt	
++++ b/src/main/java/Board/Stanzeold/stanza_3.txt	
+@@ -1,15 +1,15 @@
+ ##N###########
+-#M.....#.H.MI#
++#......#....I#
++#......#.....#
+ #......#.....#
+-#......#....H#
+-#.C....#I....#
+-#......####P##
++#......#.I...#
++#......####.##
++#............#
++#............#
++#.I..........#
+ #............#
+-#.C..........#
+-#.MI.....M...#
+ #............#
+-#..C.........#
+-#.........M..#
++#............#
+ #............#
+ ######S#######
+ 90020000000000

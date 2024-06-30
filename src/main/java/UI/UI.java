@@ -27,7 +27,7 @@ public class UI {
     private String fileName;
     private File fileLoad;
 
-    static gameBoard gameB;
+    public static gameBoard gameB;
     boolean goOn = true;
 
     /**

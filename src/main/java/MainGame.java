@@ -6,6 +6,7 @@ import Player.mostro;
 import UI.visibilityManager;
 import UI.choiceHandler;
 import UI.UI;
+import Board.func;
 
 /**
  * Classe MainGame che permette di far partire il software
