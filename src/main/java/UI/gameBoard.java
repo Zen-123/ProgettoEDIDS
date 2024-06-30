@@ -54,6 +54,7 @@ public class gameBoard extends JPanel implements KeyListener {
         g.drawString("Inventario: "+reference.player.getPeso()+" / 100", 560, 180);
 		g.drawString("Weapon Equipped: "+reference.player.getSpada().getNome(), 560, 200);
 		g.drawString("Armor Equipped: "+reference.player.getArmour().getNome(), 560, 220);
+        g.drawString("Monster killed: "+reference.player.getMostriuccisi(), 560, 240);
 
 		//Floor color e riempimento grafico della mappa
 		g.setColor(Color.WHITE);
