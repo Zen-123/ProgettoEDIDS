@@ -42,5 +42,6 @@ public class MainGame {
         reference.mostrorun = new mostro();
         reference.currentStanza = new Board(reference.curr_stanza);
         reference.functions = new func();
+        reference.filereader.ResetDirectory();
     }
 }

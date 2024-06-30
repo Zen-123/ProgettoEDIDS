@@ -1,6 +1,7 @@
 package Board;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -50,6 +51,24 @@ public class Readfile {
             writer.close();
         }catch(Exception e){
             e.getStackTrace();
+        }
+    }
+    //elimina tutti i file nella cartella stanzeold, solo all'avvio del gioco, server per pulire i dati
+    public void ResetDirectory(){
+
+        File path = new File("src/main/java/Board/Stanzeold/");
+        if (!path.exists())
+            throw new IllegalArgumentException("La Directory non esiste: ");
+        
+        File []allfiles = path.listFiles();
+        if(allfiles.length > 0){
+            for(int i = 0; i < allfiles.length; i++) {
+                if(allfiles[i].isDirectory()){
+                    throw new IllegalArgumentException("E presente una directory illegale: ");
+                }else{
+                    allfiles[i].delete();
+                }    
+            }
         }
     }
 }

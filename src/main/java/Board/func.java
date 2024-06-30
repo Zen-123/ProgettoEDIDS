@@ -217,6 +217,8 @@ public class func{
                 reference.currentStanza.lista_item = reference.lista_stanze.get(i).lista_item;
                 reference.currentStanza.lista_mostri = reference.lista_stanze.get(i).lista_mostri;
                 reference.alreadybeen = true;
+                reference.ui.messageTextArea.setText("Sei già stato qui...\n...\nMa qualcosa ti sembra cambiato....");
+                reference.ui.commandTextField.setText("");
             }   
         }
         //se stanza è nuova prendila dal file
@@ -224,9 +226,13 @@ public class func{
             if(reference.startGame == false){
                 reference.lista_stanze.add(reference.currentStanza);
                 reference.startGame = true;
+                reference.ui.messageTextArea.setText("Una nuova stanza...\n...\nHai la sensazione di non trovarti da solo....");
+                reference.ui.commandTextField.setText("");
             }
             reference.currentStanza = new Board(drive_to);
             reference.lista_stanze.add(reference.currentStanza);
+            reference.ui.messageTextArea.setText("Una nuova stanza...\n...\nHai la sensazione di non trovarti da solo....");
+            reference.ui.commandTextField.setText("");
         }
         reference.alreadybeen = false;
         //serve per mettere il player davanti alla porta della nuova stanza e resetta movimenti
@@ -263,8 +269,7 @@ public class func{
             }
         }
         reference.ui.gameB.requestFocus();
-        reference.ui.messageTextArea.setText("Una nuova stanza...\n...\nHai la sensazione di non trovarti da solo....");
-        reference.ui.commandTextField.setText("");
+        
     }
     //genera mostri presi dalla stringa letta dal textfile
     public static mostro generateMonster(int x, int y){

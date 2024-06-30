@@ -46,6 +46,7 @@ public class Board{
         populateBoard(ss,true);
     }
     //riempie la board=arraylist di celle,che poi verra stampata da printcomponent
+    //ver == false allora viene letto da un nuovo file , ver == true controlla file vecchio 
     public void populateBoard(ArrayList<String> strings,boolean ver){
         //serve x assegnare alla stanza presente che porta ti porta nella next stanza
         this.setDrive_to_N(strings.get(strings.size()-1).charAt(0));
