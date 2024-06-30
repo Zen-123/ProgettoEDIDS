@@ -23,8 +23,6 @@ public class referenceTest {
         reference.currentStanza = new Board(reference.curr_stanza);
         reference.alreadybeen = false;
         reference.startGame = false;
-        reference.posX = 0;
-        reference.posY = 0;
     }
 
     @Test
@@ -41,19 +39,15 @@ public class referenceTest {
         assertEquals(1, reference.curr_stanza);
         assertFalse(reference.alreadybeen);
         assertFalse(reference.startGame);
-        assertEquals(0, reference.posX);
-        assertEquals(0, reference.posY);
+
     }
 
     @Test
     //test per verificare se inizializzazione/assegnazione viene eseguita correttamente
     public void testModifyValues() {
         reference.curr_stanza = 2;
-        reference.posX = 10;
-        reference.posY = 20;
 
         assertEquals(2, reference.curr_stanza);
-        assertEquals(10, reference.posX);
-        assertEquals(20, reference.posY);
+
     }
 }

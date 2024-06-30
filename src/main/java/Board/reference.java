@@ -21,11 +21,11 @@ public class reference {
     //stanza momentaneamente presente e id della astanza
     public static Board currentStanza;
     public static int curr_stanza = 1;
+    // functions gestisce tutti i metodi implementati che servono per lo sviluppo e le interazioni di gioco
+    public static func functions;
 
     //variabili di controllo x fare check se si è stati gia in una stanza o meno(se si load dei parametri vecchi)
     public static boolean alreadybeen = false;
     public static boolean startGame = false;
-    public static int posX;
-    public static int posY;
-    
+
 }

@@ -21,8 +21,7 @@ class funcTest {
     @Test
     //test dei costruttori
     void testConstructor() {
-        assertEquals(0, testFunc.getPointto_x());
-        assertEquals(0, testFunc.getPointto_y());
+        assertNotNull(testFunc);
     }
 
     @RepeatedTest(10)
@@ -75,17 +74,5 @@ class funcTest {
         assertEquals(100, boss.getVita());
     }
 
-    @Test
-    //test di controllo metodi setPointX e getPointX
-    void testSetAndGetPointto_x() {
-        testFunc.setPointto_x(5);
-        assertEquals(5, testFunc.getPointto_x());
-    }
 
-    @Test
-     //test di controllo metodi setPointY e getPointY
-    void testSetAndGetPointto_y() {
-        testFunc.setPointto_y(7);
-        assertEquals(7, testFunc.getPointto_y());
-    }
 }

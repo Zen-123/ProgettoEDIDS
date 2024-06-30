@@ -84,7 +84,6 @@ public class visibilityManagerTest {
     //testing per verificare se viene mostrato correttamente la finestra di gioco
     public void testShowGameScreen() {
         //test dati già inseriti
-        visibilityManager.checkLoad = true;
         reference.player = new Player();
         reference.player.setNome("test");
         reference.player.setCategory("warrior");

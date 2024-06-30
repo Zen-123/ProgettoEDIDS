@@ -1,15 +1,15 @@
 package ManageFile;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.AmazonS3Exception;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * Classe utilizzata per la gestione del caricamento di file di salvataggio sul bucket di aws s3
@@ -28,6 +28,7 @@ public class uploadFile {
      */
     public uploadFile(String filename) throws IOException {
         //oggetto che prende i dati contenuti da un file nel file system
+        System.out.print(filename);
         InputStream file =  new FileInputStream("FileLoad/"+filename);
         //Interfaccia che permette di accedere ai web service di aws s3
         AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(region).build();

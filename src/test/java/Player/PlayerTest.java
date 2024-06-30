@@ -12,7 +12,6 @@ class PlayerTest {
     //creazione oggetto di tipo Player
     void setUp() {
         player = new Player();
-        player.setStanza_presente(1);
     }
 
     @Test
@@ -26,7 +25,6 @@ class PlayerTest {
         assertEquals(0, player.getPeso());
         assertEquals(0, player.getMonete());
         assertEquals(0, player.getMostriuccisi());
-        assertEquals(1, player.getStanzapresente());
         assertEquals(0, player.getKey());
         assertEquals(0, player.getGoldkey());
         assertEquals(0, player.getNumpozioni());
@@ -41,7 +39,7 @@ class PlayerTest {
         player.addSpada(spada);
         //verifica se peso di inventario giocatore aggiornato dopo aver raccolto la spada
         assertEquals(20, player.getPeso());
-        assertTrue(spada.CanAttack());
+        assertFalse(spada.CanAttack());
         //controlla se giocatore possiede tra gli oggetti la spada
         assertEquals(spada, player.getSpada());
     }
@@ -104,7 +102,7 @@ class PlayerTest {
     @Test
     //test di setkey e getkey
     void testSetAndGetKey() {
-        player.setKey(2);
+        player.setKeyLoad(2);
         assertEquals(2, player.getKey());
         assertEquals(10, player.getPeso(), "una volta aggiunte 2 chiavi all inventario il peso dovrebbe aumentare di 5 per chiave");
     }
@@ -127,10 +125,10 @@ class PlayerTest {
     @Test
     //test di setMostriUccisi e getMostriUccisi
     void testSetAndGetMostriUccisi() {
-        player.setMostri_uccisi(5);
+        player.setMostriUccisiLoad(5);
         assertEquals(5, player.getMostriuccisi());
         //setMostri_uccisi con parametro 0 incrementa di 1 il numero di mostri uccisi, ci aspettiamo di avere 6 mostri uccisi dopo aver chiamato la funzione
-        player.setMostri_uccisi(0);
+        player.setMostri_uccisi();
         assertEquals(6, player.getMostriuccisi());
     }
 }

@@ -23,7 +23,7 @@ public class gameBoardTest {
     //setting di tutti gli oggetti usati per il testing
     public void setUp() {
         reference.ui.commandTextField = new JTextField();
-        board = new gameBoard(reference.ui);
+        board = new gameBoard();
         reference.filereader = new Readfile();
         reference.player = new Player();
 
@@ -54,7 +54,7 @@ public class gameBoardTest {
         reference.currentStanza.setSsymbol(0, 0, '#');
 
         //il metodo CheckWhatYouBumped restituisce false quando si incontra un muro, ci aspettiamo un valore booleano false
-        assertFalse(board.checkwhatyoubumped(0, 0));
+        assertFalse(reference.functions.checkwhatyoubumped(0, 0));
     }
 
     @Test
@@ -64,7 +64,7 @@ public class gameBoardTest {
         reference.currentStanza = new Board(1);
         reference.currentStanza.setSsymbol(0, 0, '.');
         //il metodo CheckWhatYouBumped restituisce true quando si trova spazio libero, segnalando che il giocatore può muoversi in quella casella
-        assertTrue(board.checkwhatyoubumped(0, 0));
+        assertTrue(reference.functions.checkwhatyoubumped(0, 0));
     }
 
     @Test
@@ -75,7 +75,7 @@ public class gameBoardTest {
         reference.player = new Player();
         int initialCoins = reference.player.getMonete();
         //il metodo CheckWhatYouBumped restituisce true quando si trova  una moneta, segnalando che il giocatore può raccogliere la moneta e avanzare nella casella
-        assertTrue(board.checkwhatyoubumped(0, 0));
+        assertTrue(reference.functions.checkwhatyoubumped(0, 0));
         //una volta raccolta la moneta ci aspettiamo che il giocatore aumenti il proprio numero di monete
         assertTrue(reference.player.getMonete() >= initialCoins);
     }
@@ -87,7 +87,7 @@ public class gameBoardTest {
         reference.currentStanza.setDrive_to_N(2);
         reference.player = new Player();
         //chiamata del metodo che si vuole testare
-        board.changeRoom(2);
+        reference.functions.changeRoomAndWriteToFile(2);
         //ci aspettiamo che la stanza corrente in cui si trova il giocatore sia quella settata dal metodo changeRoom
         assertEquals(2, reference.currentStanza.getid());
     }
@@ -103,7 +103,7 @@ public class gameBoardTest {
         monster.setDanno_min(5);
 
         //chiamate al metodo da testare, con parametri personalizzati
-        board.monsterEncounter(20, monster, false);
+        reference.functions.monsterEncounter(20, monster, false);
 
         //ci aspettiamo che dopo che il giocatore ha incontrato il mostro, subisca dei danni generati in modo casuale
         assertTrue(reference.player.getVita() <= 100);

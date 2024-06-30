@@ -1,0 +1,815 @@
+Index: src/main/java/Board/func.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Board;\n\nimport Player.Item;\nimport Player.mostro;\n//classe x gestire metodi globali per il funzionamento del gicoo\npublic class func{\n    \n    public int pointto_x;\n    public int pointto_y;   \n\n    public func(){\n        this.pointto_x=0;\n        this.pointto_y=0;\n        \n    }\n    //genera un item e lo aggiunge alla lista della stanza, chiamato in fase di lettura del file\n    public static Item generateItem(int x, int y){\n        int choose = (int)(Math.random() * 7);\n        Item a;\n        if(choose % 2 == 0){//pari è spada\n            a = new Item(\"spada\", (int)(Math.random() * 25) + 6, (int)(Math.random() * 9) + 2, 0,true,reference.curr_stanza,false);\n            a.setX(x);\n            a.setY(y);\n            a.setSymbol('I');\n        }else{//dispari è un armatura\n            a = new Item(\"armatura\", 0, 0, (int)((Math.random() * 25) + 2),false,reference.curr_stanza,false);\n            a.setX(x);\n            a.setY(y);\n            a.setSymbol('I');\n        }\n        return a;\n    }\n    //metodo per spostare mostri, var check per disattivare o attivare metodo\n    //se non siamo presenti nella stanza del boss questo metodo è attivo = evitiamo nullp updateBossPos\n    public void updateMonsterPos(boolean check){\n\n    }\n    //metodo per spostare boss, var check per disattivare o attivare metodo\n    //se siamo presenti nella stanza del boss questo metodo è attivo = evitiamo nullp in updateMonsterPos\n    public void updateBossPos(boolean check){\n\n    }\n\n    public static mostro generateMonster(int x, int y){\n        mostro m;\n        int choose = (int)(Math.random() * 5);\n        switch(choose) {\n            case 0:\n                m = new mostro(\"vampiro\",18,5,7,30,reference.curr_stanza);\n                break;\n            case 1:\n                m = new mostro(\"scheletro\",5,1,1,5,reference.curr_stanza);\n                break;\n            case 2:\n                m = new mostro(\"goblin\",7,1,2,10,reference.curr_stanza);\n                break;\n            case 3:\n                m = new mostro(\"nano\",11,3,5,15,reference.curr_stanza);\n                break;\n            case 4:\n                m = new mostro(\"strega\",15,10,3,20,reference.curr_stanza);\n                break;\n            default:\n                m = new mostro(); \n        }\n        m.setX(x);\n        m.setY(y);\n        m.setSymbol('M');\n        return m;\n    }\n    public static mostro generateBoss(int x, int y){\n        mostro m;\n        m = new mostro(\"Piovra\",40,15,10,100,reference.curr_stanza);\n        m.setX(x);\n        m.setY(y);\n        m.setSymbol('B');\n        return m;\n    }\n    public int getPointto_x() {\n        return pointto_x;\n    }\n\n    public void setPointto_x(int pointto_x) {\n        this.pointto_x = pointto_x;\n    }\n\n    public int getPointto_y() {\n        return pointto_y;\n    }\n\n    public void setPointto_y(int pointto_y) {\n        this.pointto_y = pointto_y;\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Board/func.java b/src/main/java/Board/func.java
+--- a/src/main/java/Board/func.java	
++++ b/src/main/java/Board/func.java	
+@@ -2,18 +2,13 @@
+ 
+ import Player.Item;
+ import Player.mostro;
+-//classe x gestire metodi globali per il funzionamento del gicoo
++
++//classe x gestire metodi globali per il funzionamento del gioco
+ public class func{
+     
+-    public int pointto_x;
+-    public int pointto_y;   
+-
+     public func(){
+-        this.pointto_x=0;
+-        this.pointto_y=0;
+-        
+     }
+-    //genera un item e lo aggiunge alla lista della stanza, chiamato in fase di lettura del file
++    //genera un item e lo aggiunge alla lista della stanza, chiamato in fase di lettura del file, return item generato
+     public static Item generateItem(int x, int y){
+         int choose = (int)(Math.random() * 7);
+         Item a;
+@@ -30,17 +25,248 @@
+         }
+         return a;
+     }
+-    //metodo per spostare mostri, var check per disattivare o attivare metodo
+-    //se non siamo presenti nella stanza del boss questo metodo è attivo = evitiamo nullp updateBossPos
+-    public void updateMonsterPos(boolean check){
++    //sposta tutti i mostri nella stanza di una coordinata random,richiamato ad ogni azione
++    public void updateMonsterPosition(){
++        if(reference.currentStanza.lista_mostri.size() > 0){
++            for (int i = 0; i < reference.currentStanza.lista_mostri.size(); i++) {
++                if(reference.currentStanza.lista_mostri.get(i).getVita() <= 0)
++                    reference.currentStanza.lista_mostri.remove(i);
++                else{
++                    int choose = (int)(Math.random() * 4 + 1);
++                    int x = reference.currentStanza.lista_mostri.get(i).getX();
++                    int y = reference.currentStanza.lista_mostri.get(i).getY();
++                    reference.mostro = new mostro();
++                    reference.mostro = reference.currentStanza.lista_mostri.get(i);
++                    switch(choose){
++                        case 1:
++                        if(reference.currentStanza.cellestanza.get(y).get(x+1) == Cell.WALL){
++
++                        }else{
++                            if(reference.currentStanza.cellestanza.get(y).get(x+1) == Cell.FREE){
++                                if(reference.currentStanza.cellestanza.get(y).get(x).getSymbol() == 'M')
++                                    reference.currentStanza.cellestanza.get(y).set(x+1,Cell.MONSTER);
++                                else if(reference.currentStanza.cellestanza.get(y).get(x).getSymbol() == 'B')
++                                    reference.currentStanza.cellestanza.get(y).set(x+1,Cell.BOSS);
+ 
+-    }
+-    //metodo per spostare boss, var check per disattivare o attivare metodo
+-    //se siamo presenti nella stanza del boss questo metodo è attivo = evitiamo nullp in updateMonsterPos
+-    public void updateBossPos(boolean check){
++                                reference.currentStanza.cellestanza.get(y).set(x,Cell.FREE);
++                                reference.currentStanza.lista_mostri.get(i).setCoordinate(x+1, y);
++                                break;
++                            }
++                            else if(reference.currentStanza.cellestanza.get(y).get(x+1) == Cell.PLAYER){
++                                reference.ui.messageTextArea.setText("Hai incontrato un "+reference.mostro.getNome()+"!\n...\n...");
++                                monsterEncounter(0,reference.mostro,true);
++                                reference.mostrorun = reference.mostro;
++                                reference.player.setCanAttack(false);
++                                reference.ui.commandTextField.requestFocus();
++                                break;
++                            } 
++                        }      
++                        case 2:
++                        if(reference.currentStanza.cellestanza.get(y).get(x-1) == Cell.WALL){
+ 
+-    }
++                        }
++                        else{
++                            if(reference.currentStanza.cellestanza.get(y).get(x-1) == Cell.FREE){
++                                if(reference.currentStanza.cellestanza.get(y).get(x).getSymbol() == 'M')
++                                    reference.currentStanza.cellestanza.get(y).set(x-1,Cell.MONSTER);
++                                else if(reference.currentStanza.cellestanza.get(y).get(x).getSymbol() == 'B')
++                                    reference.currentStanza.cellestanza.get(y).set(x-1,Cell.BOSS);
++                                reference.currentStanza.cellestanza.get(y).set(x,Cell.FREE);
++                                reference.currentStanza.lista_mostri.get(i).setCoordinate(x-1, y);
++                                break;
++                            }
++                            else if(reference.currentStanza.cellestanza.get(y).get(x-1) == Cell.PLAYER){
++                                reference.ui.messageTextArea.setText("Hai incontrato un "+reference.mostro.getNome()+"!\n...\n...");
++                                monsterEncounter(0,reference.mostro,true);
++                                reference.mostrorun = reference.mostro;
++                                reference.player.setCanAttack(false);
++                                reference.ui.commandTextField.requestFocus();
++                                break;
++                            }
++                        }    
++                        case 3:
++                        if(reference.currentStanza.cellestanza.get(y+1).get(x) == Cell.WALL){
+ 
++                        }else{
++                            if(reference.currentStanza.cellestanza.get(y+1).get(x) == Cell.FREE){
++                                if(reference.currentStanza.cellestanza.get(y).get(x).getSymbol() == 'M')
++                                    reference.currentStanza.cellestanza.get(y+1).set(x,Cell.MONSTER);
++                                else if(reference.currentStanza.cellestanza.get(y).get(x).getSymbol() == 'B')
++                                    reference.currentStanza.cellestanza.get(y+1).set(x,Cell.BOSS);
++                                reference.currentStanza.cellestanza.get(y).set(x,Cell.FREE);
++                                //useremo il setcoordinate
++                                reference.currentStanza.lista_mostri.get(i).setCoordinate(x, y + 1);
++                                // reference.currentStanza.lista_mostri.get(i).setY();
++                                break;
++                            }
++                            else if(reference.currentStanza.cellestanza.get(y+1).get(x) == Cell.PLAYER){
++                                reference.ui.messageTextArea.setText("Hai incontrato un "+reference.mostro.getNome()+"!\n...\n...");
++                                monsterEncounter(0,reference.mostro,true);
++                                reference.mostrorun = reference.mostro;
++                                reference.player.setCanAttack(false);
++                                reference.ui.commandTextField.requestFocus();
++                                break;
++                            }  
++                        }
++                        case 4:
++                        if(reference.currentStanza.cellestanza.get(y-1).get(x) == Cell.WALL){
++
++                        }else{
++                            if(reference.currentStanza.cellestanza.get(y-1).get(x) == Cell.FREE){
++                                if(reference.currentStanza.cellestanza.get(y).get(x).getSymbol() == 'M')
++                                    reference.currentStanza.cellestanza.get(y-1).set(x,Cell.MONSTER);
++                                else if(reference.currentStanza.cellestanza.get(y).get(x).getSymbol() == 'B')
++                                    reference.currentStanza.cellestanza.get(y-1).set(x,Cell.BOSS);
++                                reference.currentStanza.cellestanza.get(y).set(x,Cell.FREE);
++                                reference.currentStanza.lista_mostri.get(i).setCoordinate(x, y - 1);
++                                break;
++                            }
++                            else if(reference.currentStanza.cellestanza.get(y-1).get(x) == Cell.PLAYER){
++                                reference.ui.messageTextArea.setText("Hai incontrato un "+reference.mostro.getNome()+"!\n...\n...");
++                                monsterEncounter(0,reference.mostro,true);
++                                reference.mostrorun = reference.mostro;
++                                reference.player.setCanAttack(false);
++                                reference.ui.commandTextField.requestFocus();
++                                break;
++                            }
++                        } 
++                        default: i--;
++                        //gli fa ripetere la scelta finchè non compie un movement   
++                        //consuma molte risorse essendo random non mi piace
++                    }
++                }   
++            }
++        }
++    }
++    //metodo che gestisce l'azione di quando player ha deciso di raccogliere item armatura o spada
++    public void takeItem(){
++        if(reference.item.getNome() == "spada" && reference.player.isHasSword()){
++            //allora dovra buttare la sua spada a terra
++            Item spadadaposare;
++            reference.currentStanza.cellestanza.get(reference.item.getY()).set(reference.item.getX(),Cell.PLAYER);   
++            reference.currentStanza.cellestanza.get(reference.player.getY()).set(reference.player.getX(),Cell.ITEM);
++            reference.player.getSpada().setX(reference.player.getX());
++            reference.player.getSpada().setY(reference.player.getY());
++            spadadaposare = reference.player.getSpada();
++            spadadaposare.setSymbol('I');
++            spadadaposare.setHasTake(false);
++            spadadaposare.setId_stanza(reference.curr_stanza);
++            reference.player.setCoordinate(reference.item.getX(), reference.item.getY());
++            reference.item.setHasTake(true);
++            reference.player.takeItem(reference.item);
++            reference.ui.commandTextField.setText("");  
++            reference.item = new Item();   
++            reference.ui.messageTextArea.setText("...\n...\n...");
++            for (int i = 0; i < reference.currentStanza.lista_item.size(); i++) {
++                if(reference.currentStanza.lista_item.get(i).isHasTake())
++                    reference.currentStanza.lista_item.remove(i);
++            }
++            reference.currentStanza.lista_item.add(spadadaposare);
++        }else if(reference.item.getNome() == "spada" && reference.player.isHasSword() == false){
++            reference.player.takeItem(reference.item);   
++            reference.currentStanza.cellestanza.get(reference.item.getY()).set(reference.item.getX(),Cell.PLAYER);   
++            reference.currentStanza.cellestanza.get(reference.player.getY()).set(reference.player.getX(),Cell.FREE);
++            reference.player.setCoordinate(reference.item.getX(), reference.item.getY());  
++            reference.ui.commandTextField.setText(""); 
++            reference.item = new Item();   
++            reference.ui.messageTextArea.setText("...\n...\n...");
++        }
++        if(reference.item.getNome() == "armatura" && reference.player.isHasArmour() == true){
++            //allora dovra buttare la sua spada a terra
++            Item armaturadaposare = new Item();
++            reference.currentStanza.cellestanza.get(reference.item.getY()).set(reference.item.getX(),Cell.PLAYER);   
++            reference.currentStanza.cellestanza.get(reference.player.getY()).set(reference.player.getX(),Cell.ITEM);
++            reference.player.getArmour().setX(reference.player.getX());
++            reference.player.getArmour().setY(reference.player.getY());
++            armaturadaposare = reference.player.getArmour();
++            armaturadaposare.setSymbol('I');
++            armaturadaposare.setHasTake(false);
++            armaturadaposare.setId_stanza(reference.curr_stanza);
++            reference.player.setCoordinate(reference.item.getX(), reference.item.getY()); 
++            reference.item.setHasTake(true);
++            reference.player.takeItem(reference.item);
++            reference.ui.commandTextField.setText("");  
++            reference.item = new Item();   
++            reference.ui.messageTextArea.setText("...\n...\n...");
++            for (int i = 0; i < reference.currentStanza.lista_item.size(); i++) {
++                if(reference.currentStanza.lista_item.get(i).isHasTake())
++                    reference.currentStanza.lista_item.remove(i);
++            }
++            reference.currentStanza.lista_item.add(armaturadaposare);
++        }else if(reference.item.getNome() == "armatura" && reference.player.isHasArmour() == false){
++            reference.player.takeItem(reference.item);   
++            reference.currentStanza.cellestanza.get(reference.item.getY()).set(reference.item.getX(),Cell.PLAYER);   
++            reference.currentStanza.cellestanza.get(reference.player.getY()).set(reference.player.getX(),Cell.FREE);
++            reference.player.setCoordinate(reference.item.getX(), reference.item.getY());    
++            reference.ui.commandTextField.setText("");  
++            reference.item = new Item();   
++            reference.ui.messageTextArea.setText("...\n...\n...");
++        }
++        reference.ui.gameB.requestFocus();
++        updateMonsterPosition();
++    }
++    //cambia stanza e applica modifiche al file della stanza in qui era presente || new crea file
++    //controllo se new stanza in qui sta andando è gia presente o meno
++    public void changeRoomAndWriteToFile(int drive_to){
++        reference.filereader.fileToWrite(reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt");
++
++         // stanza vecchia prendi dal file 
++         for (int i = 0; i < reference.lista_stanze.size(); i++) {
++            if(reference.lista_stanze.get(i).getid() == drive_to){
++                reference.currentStanza = new Board(drive_to,true);
++                reference.currentStanza.lista_item = reference.lista_stanze.get(i).lista_item;
++                reference.currentStanza.lista_mostri = reference.lista_stanze.get(i).lista_mostri;
++                reference.alreadybeen = true;
++            }
++        }
++        //se stanza è nuova prendila dal file
++        if(reference.alreadybeen == false){
++            if(reference.startGame == false){
++                reference.lista_stanze.add(reference.currentStanza);
++                reference.startGame = true;
++            }
++            reference.currentStanza = new Board(drive_to);
++            reference.lista_stanze.add(reference.currentStanza);
++        }
++        reference.alreadybeen = false;
++        //serve per mettere il player davanti alla porta della nuova stanza e resetta movimenti
++        for (int i = 0; i < reference.currentStanza.getColumn(); i++) {
++            for (int j = 0; j < reference.currentStanza.getRow(); j++) {
++                if(reference.currentStanza.getSsymbol(j , i) == reference.player.spawnTo()) {
++                    switch (reference.player.spawnTo()) {
++                        case 'N':
++                            reference.currentStanza.cellestanza.get(i+1).set(j,Cell.PLAYER);
++                            reference.player.setCoordinate(j, i+1);
++                            break;
++                        case 'E':
++                            reference.currentStanza.cellestanza.get(i).set(j-1,Cell.PLAYER);
++                            reference.player.setCoordinate(j-1, i);
++                            break;
++                        case 'G':
++                            reference.currentStanza.cellestanza.get(i).set(j-1,Cell.PLAYER);
++                            reference.player.setCoordinate(j-1, i);
++                            reference.currentStanza.cellestanza.get(i).set(j,Cell.WALL);
++                            break;
++                        case 'W':
++                            reference.currentStanza.cellestanza.get(i).set(j+1,Cell.PLAYER);
++                            reference.player.setCoordinate(j+1, i);
++                            break;
++                        case 'S':
++                            reference.currentStanza.cellestanza.get(i-1).set(j,Cell.PLAYER);
++                            reference.player.setCoordinate(j, i-1);
++                            break;
++                        default:
++                            reference.ui.messageTextArea.setText("Oooopsss sembra che qualcosa sia andato storto nel trovare la porta di accesso\n...\n...");
++                    }
++                    reference.player.setspawnTo('/');
++                }
++            }
++        }
++        reference.ui.gameB.requestFocus();
++        reference.ui.messageTextArea.setText("Una nuova stanza...\n...\nHai la sensazione di non trovarti da solo....");
++        reference.ui.commandTextField.setText("");
++    }
++    //genera mostri presi dalla stringa letta dal textfile
+     public static mostro generateMonster(int x, int y){
+         mostro m;
+         int choose = (int)(Math.random() * 5);
+@@ -68,6 +294,7 @@
+         m.setSymbol('M');
+         return m;
+     }
++    //genera boss preso dalla stringa letta dal textfile
+     public static mostro generateBoss(int x, int y){
+         mostro m;
+         m = new mostro("Piovra",40,15,10,100,reference.curr_stanza);
+@@ -76,19 +303,232 @@
+         m.setSymbol('B');
+         return m;
+     }
+-    public int getPointto_x() {
+-        return pointto_x;
++    //metodo che gestisce turno del player quando sta attaccando dal commandtextfield
++    public void playerIsAttacking(){
++        int dannoplayer = reference.player.getSpada().getDanno();
++                            int difesomonster = reference.mostrorun.getDifesa();
++                            reference.mostrorun.takeDamage(difesomonster - dannoplayer);
++                            if(reference.mostrorun.getVita() <=0){
++                                if(reference.mostrorun.getSymbol() == 'B'){
++                                    reference.ui.messageTextArea.setText("Hai ucciso il BOSS! Hai Vinto!!");
++                                    reference.player.setMostri_uccisi();
++                                    reference.player.setVita(0);
++                                    reference.mostrorun = null;
++                                    reference.player.getSpada().setCanAttack(false);
++                                    reference.player.setCanAttack(false);
++                                }else{
++                                    reference.player.setMostri_uccisi();
++                                    reference.currentStanza.cellestanza.get(reference.mostrorun.getY()).set(reference.mostrorun.getX(), Cell.FREE);
++                                    reference.ui.gameB.requestFocus();
++                                    reference.ui.messageTextArea.setText("Hai sconfitto il "+reference.mostrorun.getNome());
++                                    reference.mostrorun = null;
++                                    reference.player.getSpada().setCanAttack(false);
++                                    reference.player.setCanAttack(false);
++                                } 
++                            }else{
++                                monsterEncounter(dannoplayer,reference.mostrorun,false);
++                            }
++                            reference.ui.commandTextField.setText("");
++    }
++    //metodo che gestisce turno del player quando sta scappando dal commandtextfield
++    public void playerIsRunning(){
++        if(reference.player.isAttacking() && reference.player.getSpada().CanAttack()){
++            //se io incontro mostro e decido di scappare ricevo danni
++            reference.ui.messageTextArea.setText("Hai deciso di scappare via\n...\nIl mostro è ancora nelle vicinanze");
++            reference.ui.commandTextField.setText("");
++            //togliere tutti gli 0 del danno player a monsterencounter
++            monsterEncounter(0,reference.mostrorun,true);
++            reference.mostrorun = null;
++            reference.player.setCanAttack(false);
++            reference.player.getSpada().setCanAttack(false);
++            reference.ui.gameB.requestFocus();
++        }else if(reference.player.getSpada().CanAttack()){
++            // mostro mi ha incontrato e mi ha gia fatto danni, se scappo non ne ricevo
++            reference.ui.messageTextArea.setText("Hai deciso di scappare via\n...\nIl mostro ti starà ancora seguendo?");
++            reference.ui.commandTextField.setText("");
++            reference.mostrorun = null;
++            reference.player.setCanAttack(false);
++            reference.player.getSpada().setCanAttack(false);
++            reference.ui.gameB.requestFocus();
++        }else{
++            reference.ui.commandTextField.setText("");
++            reference.ui.gameB.requestFocus();
++        }   
+     }
++    //metodo che gestisce turno del player quando sta controllando item nella stanza dal commandtextfield
++    //inclusi solo oggetti I quindi spade e armature
++    public void playerIsLooking(){
++        String temp = "Ti guardi intorno...\n";
++                        if(reference.currentStanza.lista_item.size() > 0){
++                            //migliorare grafica di stampa
++                            temp = temp + "{ ";
++                            for (int i = 0; i < reference.currentStanza.lista_item.size(); i++) {
++                                if((i+1) == reference.currentStanza.lista_item.size())
++                                    temp = temp + reference.currentStanza.lista_item.get(i).getNome();
+ 
+-    public void setPointto_x(int pointto_x) {
+-        this.pointto_x = pointto_x;
++                                temp = temp + reference.currentStanza.lista_item.get(i).getNome() + ", ";
++                            }
++                            reference.ui.messageTextArea.setText(temp);
++                        }else{
++                            temp = temp + "\npurtroppo non noti niente di interessante";
++                        }
++                        reference.functions.updateMonsterPosition();
++                        reference.ui.gameB.requestFocus();
++                        reference.ui.commandTextField.setText("");
+     }
+-
+-    public int getPointto_y() {
+-        return pointto_y;
+-    }
+-
+-    public void setPointto_y(int pointto_y) {
+-        this.pointto_y = pointto_y;
+-    }
++    //metodo che gestisce turno del player quando sta usado pozione dal commandtextfield
++    public void playerUsingPotion(){
++        if(reference.player.getNumpozioni() > 0){
++            reference.player.usePozioni();
++            reference.ui.messageTextArea.setText("Bevi l'intruglio magico\n...\nTi senti molto meglio ora");
++            reference.ui.commandTextField.setText("");
++            reference.functions.updateMonsterPosition();
++        }else{
++            reference.ui.messageTextArea.setText("Hai finito le pozioni\n...\n...");
++            reference.ui.commandTextField.setText("");
++        }
++    }
++    //metodo che gestisce turno del player quando si imbatte in una cella,return true allora player si puo spostare altrimenti no
++    public boolean checkwhatyoubumped(int x, int y){
++        switch(reference.currentStanza.getSsymbol(x,y)) {
++            case '#':
++                reference.ui.messageTextArea.setText("Hai trovato un muro\n...\n...");
++                return false;
++            case '.':
++                reference.ui.messageTextArea.setText("...\n...\n...");      
++                return true;
++            case 'C':
++                reference.player.setMonete((int)((Math.random() * 15)+3));
++                reference.ui.messageTextArea.setText("Hai raccolto delle monete\n...\n...");
++                return true;  
++            case 'f':
++                if(reference.player.getPeso() <= 95){
++                    reference.player.setKey();
++                    reference.ui.messageTextArea.setText("Uno strano luccichio ... hai trovato una chiave\n...\n...");
++                    return true;
++                }else
++                    return false;
++                
++            case 'F':
++                if(reference.player.getPeso() <= 90){
++                    reference.player.setGoldKey();
++                    reference.ui.messageTextArea.setText("Uno strano luccichio ... hai trovato una chiave d'orata\nchissa che cosa aprirà?\n...");
++                    return true;
++                }else
++                    return false;
++            case 'H':
++                if(reference.player.getPeso() <= 95){
++                    reference.player.addPozioni();
++                    reference.ui.messageTextArea.setText("Hai trovato una pozione\nHai raccolto la pozione\n...");
++                    return true;
++                }else
++                    return false;
++            case 'N':
++                if(reference.currentStanza.getDrive_to_N() != 0){ 
++                    reference.ui.messageTextArea.setText("Questa è la porta Nord!\nVuoi attraversarla?\nScrivi [Nord] per entrare altrimenti [no] ");
++                    reference.ui.commandTextField.requestFocus();
++                }
++                break;
++            case 'E':
++                if(reference.currentStanza.getDrive_to_E() != 0){
++                    reference.ui.messageTextArea.setText("Questa è la porta Est!\nVuoi attraversarla?\nScrivi [Est] per entrare altrimenti [no] ");
++                    reference.ui.commandTextField.requestFocus();
++                }
++                break;
++            case 'S':
++                if(reference.currentStanza.getDrive_to_S() != 0){
++                    reference.ui.messageTextArea.setText("Questa è la porta Sud!\nVuoi attraversarla?\nScrivi [Sud] per entrare altrimenti [no] ");
++                    reference.ui.commandTextField.requestFocus();
++                }
++                break;
++            case 'W':
++                if(reference.currentStanza.getDrive_to_W() != 0){
++                    reference.ui.messageTextArea.setText("Questa è la porta Ovest!\nVuoi attraversarla?\nScrivi [Ovest] per entrare altrimenti [no] ");
++                    reference.ui.commandTextField.requestFocus();
++                }
++                break;
++            case 'I':
++                for (int i = 0; i < reference.currentStanza.lista_item.size(); i++) {
++                    if(x == reference.currentStanza.lista_item.get(i).getX() && y == reference.currentStanza.lista_item.get(i).getY() && reference.curr_stanza == reference.currentStanza.lista_item.get(i).getId_stanza()){
++                        //ti sei imbattutto in un item
++                        if(reference.currentStanza.lista_item.get(i).isIsSword() ){
++                            if(reference.player.isHasSword())
++                                reference.ui.messageTextArea.setText("Hai trovato una spada! "+reference.currentStanza.lista_item.get(i).getAttacco_max()+" - "+reference.currentStanza.lista_item.get(i).getAttacco_min()+" \nNe possiedi già una. Vuoi scambiarla?\nScrivi [take] per prenderla altrimenti [no] per lasciarla a terra");
++                            else{
++                                reference.ui.messageTextArea.setText("Hai trovato una spada!Ti servirà per affrontare i mille pericoli "+reference.currentStanza.lista_item.get(i).getAttacco_max()+" - "+reference.currentStanza.lista_item.get(i).getAttacco_min()+"\nVuoi raccoglierla?\nScrivi [take] per prenderla altrimenti [no] per lasciarla a terra ");
++                            }
++                            reference.item = reference.currentStanza.lista_item.get(i);
++                            reference.ui.commandTextField.requestFocus();
++                            return false;
++                        }else{
++                            if(reference.player.isHasArmour())
++                                reference.ui.messageTextArea.setText("Hai trovato una armatura! "+reference.currentStanza.lista_item.get(i).getDifesa()+"\nNe possiedi già una. Vuoi scambiarla?\nScrivi [take] per prenderla altrimenti [no] per lasciarla a terra");
++                            else{
++                                reference.ui.messageTextArea.setText("Hai trovato una armatura!Ti servirà per proteggerti da quelle lancie goblin "+reference.currentStanza.lista_item.get(i).getDifesa()+"\nVuoi raccoglierla?\nScrivi [take] per prenderla altrimenti [no] per lasciarla a terra ");
++                            }
++                            reference.item = reference.currentStanza.lista_item.get(i);
++                            reference.ui.commandTextField.requestFocus();
++                            return false;
++                        }  
++                    }
++                }    
++                return false;
++            case 'P':
++                if(reference.player.getKey() >=1){
++                    reference.ui.messageTextArea.setText("Apri la porta...\n...\nAperta!");
++                    reference.player.removeKey();
++                    return true;
++                }else{
++                    reference.ui.messageTextArea.setText("Questa è una porta!\nTi serve una chiave per aprirla\n ...");
++                    return false;
++                }
++            case 'B':
++            case 'M':
++                for (int i = 0; i < reference.currentStanza.lista_mostri.size(); i++) {
++                    if(reference.currentStanza.lista_mostri.get(i).getX() == x && reference.currentStanza.lista_mostri.get(i).getY() == y){
++                        reference.mostro = reference.currentStanza.lista_mostri.get(i);
++                        reference.ui.messageTextArea.setText("Hai incontrato un "+reference.mostro.getNome()+"!\nVuoi attaccarlo o scappare?\n"+reference.mostro.getNome()+" danno "+reference.mostro.getDanno_max()+" - "+reference.mostro.getDanno_min()+" difesa "+reference.mostro.getDifesa()+" vita "+reference.mostro.getVita()+"");
++                        reference.player.getSpada().setCanAttack(true);
++                        reference.player.setCanAttack(true);
++                        reference.mostrorun = reference.currentStanza.lista_mostri.get(i);
++                    }     
++                }
++                reference.ui.commandTextField.requestFocus();
++                return false;
++            case 'G':
++                if(reference.player.getGoldkey() == 1){
++                    reference.player.removeGoldKey();
++                    reference.player.setspawnTo('G');
++                    reference.ui.messageTextArea.setText("Apri il portone...\n...\nAperto! Benvenuto nella stanza del Boss!");
++                    changeRoomAndWriteToFile(reference.currentStanza.getDrive_to_boss()); 
++                    //ridare priorita alla board                   
++                }else{
++                    reference.ui.messageTextArea.setText("Che strano portone luminescente...\nHai bisogno di qualche tipo di chiave speciale forse...\n ");  
++                }
++                break;
++            default:
++                reference.ui.messageTextArea.setText("Oooopsss sembra che qualcosa sia andato storto nel gioco\n...\n...");
++        }
++        return false;
++    }
++    //gestisce l'eventualità del encounter con mostro, viene richiamato sia nel turno del player che del mostro
++    //a seconda che è chiamato in playerIsAttacking || updateMonsterPosition
++    public void monsterEncounter(int dannoplayer,mostro monster, boolean attack_turn){
++        if(monster.getVita() > 0){
++            reference.ui.commandTextField.requestFocus();
++            int danno = monster.getDanno();
++            int difeso = reference.player.getArmour().getDifesa();
++            //boolean serve se attack_turn è true sta attaccando il mostro perchè player si e mosso
++            //se false allora entrambi fermi e tocca al giocatore quindi mostri danni fatti da giocatore
++            reference.player.getSpada().setCanAttack(true);
++            if(attack_turn)
++                reference.ui.messageTextArea.setText(monster.getNome()+" ti ha inflitto "+danno+" danni, hai bloccato "+difeso+" danni\n");
++            else
++                reference.ui.messageTextArea.setText(monster.getNome()+" ti ha inflitto "+danno+" danni, hai bloccato "+difeso+" danni\nHai inflitto "+dannoplayer+" danni il "+monster.getNome()+" ha bloccato "+monster.getDifesa()+" danni\n"+monster.getNome()+" vita: "+monster.getVita());
++            
++            reference.player.takeDamage(difeso - danno);
++            if(reference.player.getVita() <= 0)
++                reference.ui.messageTextArea.setText("Sei morto! Hai perso!");
++        }  
++       }
+ }
+Index: src/main/java/MainGame.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import Board.Board;\nimport Board.Readfile;\nimport Board.reference;\nimport Player.Player;\nimport Player.mostro;\nimport UI.visibilityManager;\nimport UI.choiceHandler;\nimport UI.UI;\n\n/**\n * Classe MainGame che permette di far partire il software\n * Utilizza altre classi presenti nel pacchetto UI per generare la user interface\n */\n\npublic class MainGame {\n    UI ui = new UI();\n    visibilityManager manager = new visibilityManager(reference.ui);\n    choiceHandler handler = new choiceHandler(reference.ui);\n\n\n    public static void main(String[] args) {\n        //inizio gioco\n        initialGame();\n        new MainGame();\n    }\n\n    /**\n     * Costruttore della classe MainGame\n     * permette di settare la user interface e il menu di gioco, inoltre scarica tutti i salvataggi presenti su aws\n     */\n    public MainGame(){\n        reference.ui.createUI();\n        manager.showMenuScreen();\n        handler.setLoad();\n    }\n\n    //assegnazione var globali\n    private static void initialGame(){\n        reference.player = new Player();\n        reference.filereader = new Readfile();\n        reference.mostrorun = new mostro();\n        reference.currentStanza = new Board(reference.curr_stanza);\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/MainGame.java b/src/main/java/MainGame.java
+--- a/src/main/java/MainGame.java	
++++ b/src/main/java/MainGame.java	
+@@ -1,11 +1,12 @@
+ import Board.Board;
+ import Board.Readfile;
++import Board.func;
+ import Board.reference;
+ import Player.Player;
+ import Player.mostro;
+-import UI.visibilityManager;
+-import UI.choiceHandler;
+ import UI.UI;
++import UI.choiceHandler;
++import UI.visibilityManager;
+ 
+ /**
+  * Classe MainGame che permette di far partire il software
+@@ -34,11 +35,13 @@
+         handler.setLoad();
+     }
+ 
+-    //assegnazione var globali
++    //inizializzazione var globali
+     private static void initialGame(){
+         reference.player = new Player();
+         reference.filereader = new Readfile();
+         reference.mostrorun = new mostro();
+         reference.currentStanza = new Board(reference.curr_stanza);
++        reference.functions = new func();
++        reference.filereader.ResetDirectory();
+     }
+ }
+Index: src/main/java/Board/Board.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Board;\n\nimport java.util.ArrayList;\nimport Player.Item;\nimport Player.mostro;\npublic class Board{\n\n    public static int getDrive_to_boss() {\n        return drive_to_boss;\n    }\n    public ArrayList<ArrayList<Cell>> cellestanza;\n    public ArrayList<String> ss;\n    public ArrayList<Item> lista_item;\n    public ArrayList<mostro> lista_mostri;\n    private int row;\n    private int column;\n    public int ID_Stanza;\n    private int drive_to_N; \n    private int drive_to_E;\n    private int drive_to_W; \n    private int drive_to_S;\n    private static int drive_to_boss=0;\n    \n    public Board(int id_stanza){\n        this.ss = new ArrayList<String>();\n        String temp = \"src/main/java/Board/Stanze/stanza_\"+id_stanza+\".txt\";\n        this.ID_Stanza = id_stanza;\n        reference.curr_stanza = id_stanza;\n        ss = reference.filereader.fileToRead(temp); \n        this.column = ss.size()-1;\n        this.row = ss.get(0).length();\n        this.cellestanza = new ArrayList<ArrayList<Cell>>();\n        this.lista_item = new ArrayList<Item>();\n        this.lista_mostri = new ArrayList<mostro>();\n        populateBoard(ss,false);\n    }\n    public Board(int id_stanza, boolean verification){\n        reference.alreadybeen = verification;\n        this.ss = new ArrayList<String>();\n        String temp = \"src/main/java/Board/Stanzeold/stanza_\"+id_stanza+\".txt\";\n        this.ID_Stanza = id_stanza;\n        reference.curr_stanza = id_stanza;\n        ss = reference.filereader.fileToRead(temp); \n        this.column = ss.size()-1;\n        this.row = ss.get(0).length();\n        this.cellestanza = new ArrayList<ArrayList<Cell>>();\n        this.lista_item = new ArrayList<Item>();\n        this.lista_mostri = new ArrayList<mostro>();\n        populateBoard(ss,true);\n    }\n    public void populateBoard(ArrayList<String> strings,boolean ver){\n        //serve x assegnare alla stanza presente che porta ti porta nella next stanza\n        this.setDrive_to_N(strings.get(strings.size()-1).charAt(0));\n        this.setDrive_to_E(strings.get(strings.size()-1).charAt(1));\n        this.setDrive_to_W(strings.get(strings.size()-1).charAt(2));\n        this.setDrive_to_S(strings.get(strings.size()-1).charAt(3));\n        // strings.remove(strings.get(strings.size()-1));\n        //riempimento del array di celle dalla stringa del readfile\n        for (int i = 0; i < strings.size(); i++) {\n            cellestanza.add(new ArrayList<Cell>());\n            char[] array = strings.get(i).toCharArray();\n            for (int j = 0; j < array.length; j++) {\n                switch(array[j]) {\n                    case '#':\n                        cellestanza.get(i).add(Cell.WALL);\n                    break;\n                    case '.':\n                        cellestanza.get(i).add(Cell.FREE);\n                    break;\n                    case 'N':\n                        cellestanza.get(i).add(Cell.NORD);\n                    break;\n                    case 'S':              \n                        cellestanza.get(i).add(Cell.SUD);\n                    break;\n                    case 'W':\n                        cellestanza.get(i).add(Cell.OVEST);\n                    break;\n                    case 'E':\n                        cellestanza.get(i).add(Cell.EST);\n                    break;\n                    case 'G':\n                        cellestanza.get(i).add(Cell.BOSSROOM);\n                    break;\n                    case 'I':\n                        if(ver == false){\n                            lista_item.add(func.generateItem(j,i));\n                        }\n                        cellestanza.get(i).add(Cell.ITEM);\n                    break;\n                    case 'M':\n                        if(ver == false){\n                            lista_mostri.add(func.generateMonster(j,i));\n                        }\n                        cellestanza.get(i).add(Cell.MONSTER);\n                    break;\n                    case 'B':\n                        //è il boss\n                        lista_mostri.add(func.generateBoss(j,i));\n                        cellestanza.get(i).add(Cell.BOSS);\n                    break;\n                    case 'f':\n                        //chiave x porte\n                        cellestanza.get(i).add(Cell.KEY);\n                    break;\n                    case 'F':\n                        //chiave oro per porta oro\n                        cellestanza.get(i).add(Cell.GOLDKEY);\n                    break;\n                    case 'P':\n                        //trovato porta di una stanza\n                        cellestanza.get(i).add(Cell.PORTA);\n                    break;\n                    case 'H':\n                        //trovato porta di una stanza\n                        cellestanza.get(i).add(Cell.POZIONE);\n                    break;\n                    case 'C':\n                        //trovato porta di una stanza\n                        cellestanza.get(i).add(Cell.COIN);\n                    break;\n                    case 'A':\n                        reference.player.setX(j);\n                        reference.player.setY(i);\n                        reference.player.setStanza_presente(reference.curr_stanza);\n                        cellestanza.get(i).add(Cell.PLAYER);\n                    break;\n                    default:\n                        break;\n                }   \n            } \n        }   \n    }\n    public Cell getPortaNord(int x,int y){\n        return cellestanza.get(x).get(y);\n    }\n    public Cell getCella(int x,int y){\n        return cellestanza.get(y).get(x);\n    }\n    \n    public char getSsymbol(int x, int y){\n        return cellestanza.get(y).get(x).getSymbol();\n    }\n    public void setSsymbol(int x, int y,char simbol){\n        this.cellestanza.get(y).get(x).setSymbol(simbol);\n    }\n    public int getRow(){\n        return row;\n    }\n    public int getColumn(){\n        return column;\n    }\n    public int getid(){\n        return ID_Stanza;\n    }\n    public int getDrive_to_N() {\n        return drive_to_N;\n    }\n    public int getDrive_to_E() {\n        return drive_to_E;\n    }\n    public int getDrive_to_S() {\n        return drive_to_S;\n    }\n    public int getDrive_to_W() {\n        return drive_to_W;\n    }\n    public void setID_Stanza(int ID_Stanza) {\n        this.ID_Stanza = ID_Stanza;\n    }\n    //metodi che ti dicono in quale stanza deve spostarsi player\n    public void setDrive_to_N(int drive_to_N) {\n        this.drive_to_N = convertASCIItoNumber(drive_to_N);\n    }\n\n    public void setDrive_to_E(int drive_to_E) {\n        this.drive_to_E = convertASCIItoNumber(drive_to_E);\n    }\n\n    public void setDrive_to_W(int drive_to_W) {\n        this.drive_to_W = convertASCIItoNumber(drive_to_W);\n    }\n\n    public void setDrive_to_S(int drive_to_S) {\n        this.drive_to_S = convertASCIItoNumber(drive_to_S);\n    }\n    public int convertASCIItoNumber(int asciinumber){\n        int converted;\n        switch(asciinumber) {\n            case 48:\n                converted=0;\n                break;\n            case 49:\n                converted=1;   \n                break;\n            case 50:\n                converted=2;    \n                break;\n            case 51:\n                converted=3;    \n                break;\n            case 52:\n                converted=4;    \n                break;\n            case 53:\n                converted=5;    \n                break;\n            case 54:\n                converted=6;    \n                break;\n            case 55:\n                converted=7;    \n                break;\n            case 56:\n                converted=8;    \n                break;\n            case 57:\n                converted=9;    \n                break;\n            default:\n                converted = 0;\n                break;\n        }\n        return converted;\n    }\n    public void setRow(int row) {\n        this.row = row;\n    }\n    public void setColumn(int column) {\n        this.column = column;\n    }\n}\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Board/Board.java b/src/main/java/Board/Board.java
+--- a/src/main/java/Board/Board.java	
++++ b/src/main/java/Board/Board.java	
+@@ -4,23 +4,19 @@
+ import Player.Item;
+ import Player.mostro;
+ public class Board{
+-
+-    public static int getDrive_to_boss() {
+-        return drive_to_boss;
+-    }
+     public ArrayList<ArrayList<Cell>> cellestanza;
+     public ArrayList<String> ss;
+     public ArrayList<Item> lista_item;
+     public ArrayList<mostro> lista_mostri;
+     private int row;
+     private int column;
+-    public int ID_Stanza;
++    private int ID_Stanza;  
+     private int drive_to_N; 
+     private int drive_to_E;
+     private int drive_to_W; 
+     private int drive_to_S;
+     private static int drive_to_boss=0;
+-    
++    //questo costruttore è per i file nuovi che vengono aperti
+     public Board(int id_stanza){
+         this.ss = new ArrayList<String>();
+         String temp = "src/main/java/Board/Stanze/stanza_"+id_stanza+".txt";
+@@ -34,6 +30,7 @@
+         this.lista_mostri = new ArrayList<mostro>();
+         populateBoard(ss,false);
+     }
++    //questo costruttore è per i file vecchi, ossia le stanze che abbiamo già visitato e che hanno subito modifiche
+     public Board(int id_stanza, boolean verification){
+         reference.alreadybeen = verification;
+         this.ss = new ArrayList<String>();
+@@ -48,13 +45,15 @@
+         this.lista_mostri = new ArrayList<mostro>();
+         populateBoard(ss,true);
+     }
++    //riempie la board=arraylist di celle,che poi verra stampata da printcomponent
++    //ver == false allora viene letto da un nuovo file , ver == true controlla file vecchio
+     public void populateBoard(ArrayList<String> strings,boolean ver){
+         //serve x assegnare alla stanza presente che porta ti porta nella next stanza
+         this.setDrive_to_N(strings.get(strings.size()-1).charAt(0));
+         this.setDrive_to_E(strings.get(strings.size()-1).charAt(1));
+         this.setDrive_to_W(strings.get(strings.size()-1).charAt(2));
+         this.setDrive_to_S(strings.get(strings.size()-1).charAt(3));
+-        // strings.remove(strings.get(strings.size()-1));
++
+         //riempimento del array di celle dalla stringa del readfile
+         for (int i = 0; i < strings.size(); i++) {
+             cellestanza.add(new ArrayList<Cell>());
+@@ -122,7 +121,6 @@
+                     case 'A':
+                         reference.player.setX(j);
+                         reference.player.setY(i);
+-                        reference.player.setStanza_presente(reference.curr_stanza);
+                         cellestanza.get(i).add(Cell.PLAYER);
+                     break;
+                     default:
+@@ -130,20 +128,10 @@
+                 }   
+             } 
+         }   
+-    }
+-    public Cell getPortaNord(int x,int y){
+-        return cellestanza.get(x).get(y);
+-    }
+-    public Cell getCella(int x,int y){
+-        return cellestanza.get(y).get(x);
+-    }
+-    
++    }  
+     public char getSsymbol(int x, int y){
+         return cellestanza.get(y).get(x).getSymbol();
+     }
+-    public void setSsymbol(int x, int y,char simbol){
+-        this.cellestanza.get(y).get(x).setSymbol(simbol);
+-    }
+     public int getRow(){
+         return row;
+     }
+@@ -165,22 +153,19 @@
+     public int getDrive_to_W() {
+         return drive_to_W;
+     }
+-    public void setID_Stanza(int ID_Stanza) {
+-        this.ID_Stanza = ID_Stanza;
++    public static int getDrive_to_boss() {
++        return drive_to_boss;
+     }
+     //metodi che ti dicono in quale stanza deve spostarsi player
+     public void setDrive_to_N(int drive_to_N) {
+         this.drive_to_N = convertASCIItoNumber(drive_to_N);
+     }
+-
+     public void setDrive_to_E(int drive_to_E) {
+         this.drive_to_E = convertASCIItoNumber(drive_to_E);
+     }
+-
+     public void setDrive_to_W(int drive_to_W) {
+         this.drive_to_W = convertASCIItoNumber(drive_to_W);
+     }
+-
+     public void setDrive_to_S(int drive_to_S) {
+         this.drive_to_S = convertASCIItoNumber(drive_to_S);
+     }
+@@ -223,12 +208,6 @@
+         }
+         return converted;
+     }
+-    public void setRow(int row) {
+-        this.row = row;
+-    }
+-    public void setColumn(int column) {
+-        this.column = column;
+-    }
+ }
+ 
+ 
+Index: FileLoad/Filesave 4.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/FileLoad/Filesave 4.txt b/FileLoad/Filesave 4.txt
+new file mode 100644
+--- /dev/null	
++++ b/FileLoad/Filesave 4.txt	
+@@ -0,0 +1,2 @@
++Save n. 3
++
+Index: FileLoad/Filesave 2.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/FileLoad/Filesave 2.txt b/FileLoad/Filesave 2.txt
+new file mode 100644
+--- /dev/null	
++++ b/FileLoad/Filesave 2.txt	
+@@ -0,0 +1,2 @@
++Sovrascitto 1
++
+Index: src/main/java/Board/Readfile.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Board;\n\nimport java.io.BufferedReader;\nimport java.io.FileReader;\nimport java.io.FileWriter;\nimport java.util.ArrayList;\n\n//gestisce lettura e scrittura del file e li salva nella cartella Stanze & Stanzeold\npublic class Readfile {\n\n    private static BufferedReader reader;\n    FileWriter writer;\n    public ArrayList<String> fileToRead(String filename){\n        \n        String str=\"\";\n        ArrayList<String> strings = new ArrayList <String>();\n        try{\n            if(filename.length() > 0){      \n            FileReader fr = new FileReader(filename);\n            reader = new BufferedReader(fr);\n            if(reader.ready()){\n                while(str != null){\n                    str = reader.readLine();\n                    if(str != null){\n                        strings.add(str);                \n                    }\n                }     \n            }\n        }\n        }catch(Exception FileNotFoundException){\n            System.out.println(\"\\n Oooops qualcosa è andato storto con il file!\\n\");\n        }\n        return strings;\n    }\n    public void fileToWrite(ArrayList<ArrayList<Cell>> stanza, String filename){\n        try{\n            writer = new FileWriter(filename);\n            for (int i = 0; i <= stanza.size()-1; i++) {\n                for (int j = 0; j < stanza.get(0).size(); j++) {\n                    if(i == (stanza.size()-1))\n                        writer.write(reference.currentStanza.ss.get(i).charAt(j));\n                    else if(stanza.get(i).get(j).getSymbol() == 'A'){\n                        writer.write('.');\n                    }else{\n                        writer.write(stanza.get(i).get(j).getSymbol());\n                    }   \n                }\n                writer.write(\"\\n\");   \n            }\n            writer.close();\n        }catch(Exception e){\n            e.getStackTrace();\n        }\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Board/Readfile.java b/src/main/java/Board/Readfile.java
+--- a/src/main/java/Board/Readfile.java	
++++ b/src/main/java/Board/Readfile.java	
+@@ -1,6 +1,7 @@
+ package Board;
+ 
+ import java.io.BufferedReader;
++import java.io.File;
+ import java.io.FileReader;
+ import java.io.FileWriter;
+ import java.util.ArrayList;
+@@ -52,4 +53,22 @@
+             e.getStackTrace();
+         }
+     }
++    //elimina tutti i file nella cartella stanzeold, solo all'avvio del gioco, server per pulire i dati
++    public void ResetDirectory(){
++
++        File path = new File("src/main/java/Board/Stanzeold/");
++        if (!path.exists())
++            throw new IllegalArgumentException("La Directory non esiste: ");
++        
++        File []allfiles = path.listFiles();
++        if(allfiles.length > 0){
++            for(int i = 0; i < allfiles.length; i++) {
++                if(allfiles[i].isDirectory()){
++                    throw new IllegalArgumentException("E presente una directory illegale: ");
++                }else{
++                    allfiles[i].delete();
++                }    
++            }
++        }
++    }
+ }
+Index: src/main/java/ManageFile/uploadFile.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ManageFile;\n\nimport com.amazonaws.regions.Regions;\nimport com.amazonaws.services.s3.AmazonS3;\nimport com.amazonaws.services.s3.AmazonS3ClientBuilder;\nimport com.amazonaws.services.s3.model.AmazonS3Exception;\nimport com.amazonaws.services.s3.model.ObjectMetadata;\nimport com.amazonaws.services.s3.model.PutObjectRequest;\n\nimport java.io.FileInputStream;\nimport java.io.IOException;\nimport java.io.InputStream;\n\n/**\n * Classe utilizzata per la gestione del caricamento di file di salvataggio sul bucket di aws s3\n */\npublic class uploadFile {\n    //variabili private della classe\n    private final String bucketName = \"test-dungeonunipd\";\n    private final Regions region = Regions.EU_WEST_3;\n\n    /**\n     * Costruttore della classe\n     * Il caricamento sul bucket aws dei file di salvataggio viene gestito con una cartella di supporto FileLoad in cui\n     * sono contenuti i dati in locale prima di essere caricati.\n     * @param filename nome del file da scaricare\n     * @throws IOException\n     */\n    public uploadFile(String filename) throws IOException {\n        //oggetto che prende i dati contenuti da un file nel file system\n        InputStream file =  new FileInputStream(\"FileLoad/\"+filename);\n        //Interfaccia che permette di accedere ai web service di aws s3\n        AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(region).build();\n\n        //Rappresenta i metadata che sono salvati con aws s3\n        ObjectMetadata metadata  = new ObjectMetadata();\n        metadata.setContentLength(file.available());\n        metadata.setContentType(\"file.txt\");\n\n        /*\n        Gestione delle eccezioni che possono essere lanciate da s3Client\n         */\n        try{\n            //Carica il file fileName.txt nel bucket aws\n            PutObjectRequest request = new PutObjectRequest(bucketName, filename, file, metadata);\n            s3Client.putObject(request);\n\n            System.out.println(\"Salvataggio avvenuto con successo!\");\n        }catch (AmazonS3Exception e){\n            e.printStackTrace();\n        } finally {\n            file.close();\n        }\n    }\n\n\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ManageFile/uploadFile.java b/src/main/java/ManageFile/uploadFile.java
+--- a/src/main/java/ManageFile/uploadFile.java	
++++ b/src/main/java/ManageFile/uploadFile.java	
+@@ -1,5 +1,9 @@
+ package ManageFile;
+ 
++import java.io.FileInputStream;
++import java.io.IOException;
++import java.io.InputStream;
++
+ import com.amazonaws.regions.Regions;
+ import com.amazonaws.services.s3.AmazonS3;
+ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+@@ -7,10 +11,6 @@
+ import com.amazonaws.services.s3.model.ObjectMetadata;
+ import com.amazonaws.services.s3.model.PutObjectRequest;
+ 
+-import java.io.FileInputStream;
+-import java.io.IOException;
+-import java.io.InputStream;
+-
+ /**
+  * Classe utilizzata per la gestione del caricamento di file di salvataggio sul bucket di aws s3
+  */
+@@ -28,6 +28,7 @@
+      */
+     public uploadFile(String filename) throws IOException {
+         //oggetto che prende i dati contenuti da un file nel file system
++        System.out.print(filename);
+         InputStream file =  new FileInputStream("FileLoad/"+filename);
+         //Interfaccia che permette di accedere ai web service di aws s3
+         AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(region).build();

@@ -19,11 +19,9 @@ public class mostro extends entity{
         this.vita = vita;
         this.idstanza= id_stanza;
     }
-
     public String getNome() {
         return nome;
     }
-
     public void setNome(String nome) {
         this.nome = nome;
     }

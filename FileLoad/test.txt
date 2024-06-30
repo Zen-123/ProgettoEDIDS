@@ -10,6 +10,3 @@ Armour:
 key: 0
 Max_damage: 0
 Min_damage: 0
-Pos_x: 0
-Pos_y: 0
-Current_room: 1

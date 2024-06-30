@@ -4,23 +4,19 @@ import java.util.ArrayList;
 import Player.Item;
 import Player.mostro;
 public class Board{
-
-    public static int getDrive_to_boss() {
-        return drive_to_boss;
-    }
     public ArrayList<ArrayList<Cell>> cellestanza;
     public ArrayList<String> ss;
     public ArrayList<Item> lista_item;
     public ArrayList<mostro> lista_mostri;
-    public int row;
-    public int column;
+    private int row;
+    private int column;
     public int ID_Stanza;
     private int drive_to_N; 
     private int drive_to_E;
     private int drive_to_W; 
     private int drive_to_S;
     private static int drive_to_boss=0;
-    
+    //questo costruttore è per i file nuovi che vengono aperti
     public Board(int id_stanza){
         this.ss = new ArrayList<String>();
         String temp = "src/main/java/Board/Stanze/stanza_"+id_stanza+".txt";
@@ -34,6 +30,7 @@ public class Board{
         this.lista_mostri = new ArrayList<mostro>();
         populateBoard(ss,false);
     }
+    //questo costruttore è per i file vecchi, ossia le stanze che abbiamo già visitato e che hanno subito modifiche
     public Board(int id_stanza, boolean verification){
         reference.alreadybeen = verification;
         this.ss = new ArrayList<String>();
@@ -48,15 +45,15 @@ public class Board{
         this.lista_mostri = new ArrayList<mostro>();
         populateBoard(ss,true);
     }
-
-
+    //riempie la board=arraylist di celle,che poi verra stampata da printcomponent
+    //ver == false allora viene letto da un nuovo file , ver == true controlla file vecchio
     public void populateBoard(ArrayList<String> strings,boolean ver){
         //serve x assegnare alla stanza presente che porta ti porta nella next stanza
         this.setDrive_to_N(strings.get(strings.size()-1).charAt(0));
         this.setDrive_to_E(strings.get(strings.size()-1).charAt(1));
         this.setDrive_to_W(strings.get(strings.size()-1).charAt(2));
         this.setDrive_to_S(strings.get(strings.size()-1).charAt(3));
-        // strings.remove(strings.get(strings.size()-1));
+
         //riempimento del array di celle dalla stringa del readfile
         for (int i = 0; i < strings.size(); i++) {
             cellestanza.add(new ArrayList<Cell>());
@@ -124,7 +121,6 @@ public class Board{
                     case 'A':
                         reference.player.setX(j);
                         reference.player.setY(i);
-                        reference.player.setStanza_presente(reference.curr_stanza);
                         cellestanza.get(i).add(Cell.PLAYER);
                     break;
                     default:
@@ -133,13 +129,6 @@ public class Board{
             } 
         }   
     }
-    public Cell getPortaNord(int x,int y){
-        return cellestanza.get(x).get(y);
-    }
-    public Cell getCella(int x,int y){
-        return cellestanza.get(y).get(x);
-    }
-    
     public char getSsymbol(int x, int y){
         return cellestanza.get(y).get(x).getSymbol();
     }
@@ -167,8 +156,8 @@ public class Board{
     public int getDrive_to_W() {
         return drive_to_W;
     }
-    public void setID_Stanza(int ID_Stanza) {
-        this.ID_Stanza = ID_Stanza;
+    public static int getDrive_to_boss() {
+        return drive_to_boss;
     }
     //metodi che ti dicono in quale stanza deve spostarsi player
     public void setDrive_to_N(int drive_to_N) {

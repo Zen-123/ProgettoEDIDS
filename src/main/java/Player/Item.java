@@ -47,7 +47,7 @@ public class Item extends entity{
         return attacco_max;
     }
     public int getAttacco_min(){
-        return attacco_min;    
+        return attacco_min;
     }
     public int getDifesa(){
         return difesa;

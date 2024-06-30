@@ -158,7 +158,7 @@ public class choiceHandler implements ActionListener {
                         if (fileLoad.exists()) {
                             userInterfaceHandler.counterLoadLabel.setText("Save n. " + (counterFile+1));
                             /*se lo slot salvataggio è già occupato si chiede all'utente se vuole sovrascriverlo
-                            * oppure usare un altro slot disponibile */
+                             * oppure usare un altro slot disponibile */
                             if (userInterfaceHandler.setAlertMenu(0) == 0) {
                                 //utente decide tramite l'alert di sovrascrivere il salvataggio precedente
                                 setFileSaveOverwrite(fileNameArray[i]);
@@ -245,21 +245,28 @@ public class choiceHandler implements ActionListener {
         if(input.equals("slot 1")){
             setupLoad(1);
             vManager.checkLoad = true;
+            reference.ui.commandTextField.setText("");
+
             vManager.showGameScreen();
         }
         if(input.equals("slot 2")){
             setupLoad(2);
             vManager.checkLoad = true;
+            reference.ui.commandTextField.setText("");
             vManager.showGameScreen();
         }
         if(input.equals("slot 3")){
             setupLoad(3);
             vManager.checkLoad = true;
+            reference.ui.commandTextField.setText("");
+
             vManager.showGameScreen();
         }
         if(input.equals("slot 4")){
             setupLoad(4);
             vManager.checkLoad = true;
+            reference.ui.commandTextField.setText("");
+
             vManager.showGameScreen();
         }
 
@@ -279,20 +286,17 @@ public class choiceHandler implements ActionListener {
             //scrittura sul file
             printWriter.println(
                     "Player: " + reference.player.getNome() + "\n" +
-                    "Health: " + reference.player.getVita()+ "\n" +
-                    "Money: " + reference.player.getMonete()+ "\n" +
-                    "Monster_killed: " + reference.player.getMostriuccisi()+ "\n" +
-                    "Category: " + reference.player.getCategory()+ "\n" +
-                    "Weapon: " + reference.player.getSpadaName()+ "\n" +
-                    "Potions: " + reference.player.getNumpozioni() + "\n" +
-                    "Weight_Inventory: " + reference.player.getPeso() + "\n" +
-                    "Armour: " + reference.player.getArmourName() + "\n" +
-                    "key: " + reference.player.getGoldkey()+ "\n" +
-                    "Max_damage: " + reference.player.getDannoMaxSpada() + "\n" +
-                    "Min_damage: " + reference.player.getDannoMinSpada() + "\n" +
-                            "Pos_x: " + reference.player.getX() +"\n"+
-                            "Pos_y: " + reference.player.getY() + "\n"+
-                            "Current_room: " + reference.player.getStanzapresente()
+                            "Health: " + reference.player.getVita()+ "\n" +
+                            "Money: " + reference.player.getMonete()+ "\n" +
+                            "Monster_killed: " + reference.player.getMostriuccisi()+ "\n" +
+                            "Category: " + reference.player.getCategory()+ "\n" +
+                            "Weapon: " + reference.player.getSpadaName()+ "\n" +
+                            "Potions: " + reference.player.getNumpozioni() + "\n" +
+                            "Weight_Inventory: " + reference.player.getPeso() + "\n" +
+                            "Armour: " + reference.player.getArmourName() + "\n" +
+                            "key: " + reference.player.getGoldkey()+ "\n" +
+                            "Max_damage: " + reference.player.getDannoMaxSpada() + "\n" +
+                            "Min_damage: " + reference.player.getDannoMinSpada()
             );
             printWriter.close();
             //caricamento del nuovo file su aws
@@ -307,7 +311,7 @@ public class choiceHandler implements ActionListener {
      * Metodo che gestisce la sovrascrittura di file già esistenti
      * @param name  nome del file da sovrascrivere
      */
-    private void setFileSaveOverwrite(String name) {
+    void setFileSaveOverwrite(String name) {
         try {
 
             fileSave = new File("FileLoad/" + name);
@@ -325,10 +329,7 @@ public class choiceHandler implements ActionListener {
                             "Armour: " + reference.player.getArmourName() + "\n" +
                             "key: " + reference.player.getGoldkey()+ "\n" +
                             "Max_damage: " + reference.player.getDannoMaxSpada() + "\n" +
-                            "Min_damage: " + reference.player.getDannoMinSpada() + "\n" +
-                            "Pos_x: " + reference.player.getX() +"\n"+
-                            "Pos_y: " + reference.player.getY() + "\n"+
-                            "Current_room: " + reference.currentStanza.ID_Stanza
+                            "Min_damage: " + reference.player.getDannoMinSpada()
             );
             printWriter.close();
             //caricamento del file sovrascritto
@@ -385,41 +386,41 @@ public class choiceHandler implements ActionListener {
                     Matcher matcher = pattern.matcher(line);
                     if (matcher.find()) {
 
-                        if(counter == 1)
-                            reference.player.setNome(matcher.group(1));
-                        else if(counter == 2)
-                            reference.player.setVita(Integer.parseInt(matcher.group(1)));
-                        else if(counter == 3)
-                            reference.player.setMoneteLoad(Integer.parseInt(matcher.group(1)));
-                        else if(counter == 4)
-                            reference.player.setMostri_uccisi(Integer.parseInt(matcher.group(1)));
-                        else if(counter == 5)
-                            reference.player.setCategory(matcher.group(1));
-                        else if(counter == 6)
-                            reference.player.setSpadaName(matcher.group(1));
-                        else if(counter == 7)
-                            reference.player.setNum_pozioni(Integer.parseInt(matcher.group(1)));
-                        else if(counter == 8)
-                            reference.player.setPeso(Integer.parseInt(matcher.group(1)));
-                        else if(counter == 9)
-                            reference.player.setArmourName((matcher.group(1)));
-                        else if(counter == 10)
-                            reference.player.setKey(Integer.parseInt((matcher.group(1))));
-                        else if(counter == 11)
-                            reference.player.setMaxDamage(Integer.parseInt((matcher.group(1))));
-                        else if(counter == 12)
-                            reference.player.setMinDamage(Integer.parseInt((matcher.group(1))));
-                        else if(counter == 13){
+                    if(counter == 1)
+                        reference.player.setNome(matcher.group(1));
+                    else if(counter == 2)
+                        reference.player.setVita(Integer.parseInt(matcher.group(1)));
+                    else if(counter == 3)
+                        reference.player.setMoneteLoad(Integer.parseInt(matcher.group(1)));
+                    else if(counter == 4)
+                        reference.player.setMostriUccisiLoad(Integer.parseInt(matcher.group(1)));
+                    else if(counter == 5)
+                        reference.player.setCategory(matcher.group(1));
+                    else if(counter == 6)
+                        reference.player.setSpadaName(matcher.group(1));
+                    else if(counter == 7)
+                        reference.player.setNum_pozioni(Integer.parseInt(matcher.group(1)));
+                    else if(counter == 8)
+                        reference.player.setPeso(Integer.parseInt(matcher.group(1)));
+                    else if(counter == 9)
+                        reference.player.setArmourName((matcher.group(1)));
+                    else if(counter == 10)
+                        reference.player.setKeyLoad(Integer.parseInt((matcher.group(1))));
+                    else if(counter == 11)
+                        reference.player.setMaxDamage(Integer.parseInt((matcher.group(1))));
+                    else if(counter == 12)
+                        reference.player.setMinDamage(Integer.parseInt((matcher.group(1))));
+                    else if(counter == 13){
 
-                            System.out.println(reference.player.getX());
+                        System.out.println(reference.player.getX());
 
-                        } else if(counter == 14){
-                            System.out.println(reference.player.getY());
-                        }
-
-                        counter++;
+                    } else if(counter == 14){
+                        System.out.println(reference.player.getY());
                     }
+
+                    counter++;
                 }
+            }
 
         }catch (Exception e){
             e.printStackTrace();

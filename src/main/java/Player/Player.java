@@ -9,7 +9,6 @@ public class Player extends entity{
     private int num_pozioni;
     private int monete;
     private int mostri_uccisi;
-    private int stanza_presente;
     private Item spada;
     private Item armatura;
     private boolean hasSword;
@@ -30,7 +29,6 @@ public class Player extends entity{
         this.peso = 0;
         this.monete = 0;
         this.mostri_uccisi = 0;
-        this.stanza_presente = 1;
         this.key = 0;
         this.goldkey = 0;
         this.num_pozioni = 0;
@@ -45,7 +43,7 @@ public class Player extends entity{
         return nome;
     }
     public void addSpada(Item item){
-        item.setCanAttack(true);
+        item.setCanAttack(false);
         this.peso += 20;
         this.spada = item;
     }
@@ -100,7 +98,7 @@ public class Player extends entity{
         return vita;
     }
     public int getPeso() {
-        return peso;
+        return this.peso;
     }
     public void setPeso(int peso){
         this.peso = peso;
@@ -132,7 +130,6 @@ public class Player extends entity{
         this.canAttack = b;
     }
     public void takeItem(Item item){
-        //qui decide se raccogliere l'item, se puo farlo e se lo fa cosa gli da è permesso solo una spada o una armatura
         if(item != null && item.isSword){
             item.setCanAttack(true);
             this.spada = item;
@@ -147,10 +144,6 @@ public class Player extends entity{
     public int getMostriuccisi() {
         return mostri_uccisi;
     }
-    public int getStanzapresente() {
-        return stanza_presente;
-    }
-
     public boolean isHasSword() {
         return hasSword;
     }
@@ -160,19 +153,23 @@ public class Player extends entity{
         else
             return true;    
     }
-    public void setStanza_presente(int stanza_presente) {
-        this.stanza_presente = stanza_presente;
-    }
-
     public void setMoneteLoad(int money){
         this.monete = money;
     }
     public void setMonete(int amount) {
         this.monete += amount;
     }
-    public void setKey(int key){
-        this.key +=key;
-        peso += (this.key) * 5;
+    public void setKey(){
+        this.key +=1;
+        peso += 5;
+    }
+
+    public void setKeyLoad(int key){
+        if(this.peso == 0){
+            this.peso += 5*key;
+        }
+        this.key = key;
+
     }
     public void setGoldKey(){
         this.goldkey +=1;
@@ -193,7 +190,7 @@ public class Player extends entity{
     }
     public void setNum_pozioni(int pozioni) {this.num_pozioni = pozioni;}
     public String getCategory() {
-        return category;
+        return this.category;
     }
     public void setCategory(String category) {
         this.category = category;
@@ -211,10 +208,12 @@ public class Player extends entity{
         if(danno < 0)
             this.vita += danno; 
     }
-    public void setMostri_uccisi(int mostri_uccisi) {
-        if(mostri_uccisi != 0)
-            this.mostri_uccisi = mostri_uccisi;
-        else
-            this.mostri_uccisi ++;
+    public void setMostri_uccisi() {
+        this.mostri_uccisi ++;
     }
+
+    public void setMostriUccisiLoad(int killed) {
+        this.mostri_uccisi = killed;
+    }
+
 }

@@ -1,6 +1,7 @@
 package Board;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class Readfile {
     public ArrayList<String> fileToRead(String filename){
         
         String str="";
-        ArrayList<String> strings = new ArrayList <String>();
+        ArrayList<String> strings = new ArrayList<String>();
         try{
             if(filename.length() > 0){      
             FileReader fr = new FileReader(filename);
@@ -37,9 +38,9 @@ public class Readfile {
             writer = new FileWriter(filename);
             for (int i = 0; i <= stanza.size()-1; i++) {
                 for (int j = 0; j < stanza.get(0).size(); j++) {
-                    if(i == (stanza.size()-1)) {
+                    if(i == (stanza.size()-1))
                         writer.write(reference.currentStanza.ss.get(i).charAt(j));
-                    }else if(stanza.get(i).get(j).getSymbol() == 'A'){
+                    else if(stanza.get(i).get(j).getSymbol() == 'A'){
                         writer.write('.');
                     }else{
                         writer.write(stanza.get(i).get(j).getSymbol());
@@ -50,6 +51,24 @@ public class Readfile {
             writer.close();
         }catch(Exception e){
             e.getStackTrace();
+        }
+    }
+    //elimina tutti i file nella cartella stanzeold, solo all'avvio del gioco, server per pulire i dati
+    public void ResetDirectory(){
+
+        File path = new File("src/main/java/Board/Stanzeold/");
+        if (!path.exists())
+            throw new IllegalArgumentException("La Directory non esiste: ");
+        
+        File []allfiles = path.listFiles();
+        if(allfiles.length > 0){
+            for(int i = 0; i < allfiles.length; i++) {
+                if(allfiles[i].isDirectory()){
+                    throw new IllegalArgumentException("E presente una directory illegale: ");
+                }else{
+                    allfiles[i].delete();
+                }    
+            }
         }
     }
 }

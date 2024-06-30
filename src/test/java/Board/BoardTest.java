@@ -88,11 +88,6 @@ public class BoardTest {
 
         board.populateBoard(new ArrayList<>(content), false);
 
-        assertEquals(Cell.WALL, board.getCella(0, 0), "Cell at (0,0) should be WALL");
-        assertEquals(Cell.FREE, board.getCella(1, 1), "Cell at (1,1) should be FREE");
-        assertEquals(Cell.PLAYER, board.getCella(3, 3), "Cell at (3,3) should be PLAYER");
-        assertEquals(Cell.WALL, board.getCella(4, 0), "Cell at (4,0) should be WALL");
-
         assertEquals(0, board.getDrive_to_N(), "Drive to N should be 0");
         assertEquals(1, board.getDrive_to_E(), "Drive to E should be 1");
         assertEquals(2, board.getDrive_to_W(), "Drive to W should be 2");

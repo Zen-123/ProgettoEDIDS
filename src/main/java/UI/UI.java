@@ -1,22 +1,38 @@
 package UI;
-import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.metal.MetalToggleButtonUI;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import Board.reference;
+
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.metal.MetalToggleButtonUI;
 
 /**
  * Classe per la gestione della user interface utilizzando la libreria java swing
  */
 
 public class UI {
-    JFrame window;
+    public JFrame window;
     public JPanel titleNamePanel, menuButtonPanel,  mainTextPanel, mainTextFieldPanel, mainCharacterSelectionPanel, statPanel, messageTextPanel, commandPanel, mapPanel, loadMessagePanel, loadTextFieldPanel, winPanel;
-    private JLabel titleNameLabel,mainTextArea, mainCharacterSelectionLabel, startGameLabel, statLabel, nameLabel, characterLabel, hpLabel, inventoryWeight, potionLabel, weaponLabel, roomNumberLabel, commandLabel, southLabel, northLabel, eastLabel, westLabel;
-    public JLabel loadLabel1, loadLabel2, loadLabel3, loadLabel4, counterLoadLabel, winLabel, namePlayerLabel, monsterLabel, moneyLabel;
+    private JLabel titleNameLabel,mainTextArea, mainCharacterSelectionLabel, startGameLabel, statLabel, nameLabel, characterLabel, hpLabel, inventoryWeight, potionLabel, weaponLabel, roomNumberLabel, commandLabel, southLabel, northLabel, eastLabel, westLabel ;
+    public JLabel loadLabel1, loadLabel2, loadLabel3, loadLabel4, counterLoadLabel,monsterLabel,winLabel,namePlayerLabel,moneyLabel;
     private JButton startButton, loadButton, exitButton, startGameButton, commandButton, loadMessageButton, winButton;
     private JRadioButton warriorButton, archerButton, thiefButton;
     public JTextArea messageTextArea;
@@ -28,7 +44,7 @@ public class UI {
     private String fileName;
     private File fileLoad;
 
-    static gameBoard gameB;
+    public static gameBoard gameB;
     /**
      * Metodo che permette la crezione della UI
      */
@@ -76,17 +92,17 @@ public class UI {
         window.add(titleNamePanel);
     }
 
-    public void setWinLabel(){
+    private void setWinLabel(){
         Font winFont = new Font("Serif", Font.PLAIN, 50);
-        winLabel = new JLabel();
+        winLabel = new JLabel("YOU WIN! ");
         winLabel.setFont(winFont);
-        winLabel.setBorder(new EmptyBorder(10,10,0,0));
+        winLabel.setBorder(new EmptyBorder(10,80,0,0));
         winLabel.setForeground(Color.white);
         winPanel.add(winLabel);
     }
 
     private void setHpLabelWinPage(){
-        namePlayerLabel = new JLabel();
+        namePlayerLabel = new JLabel("Player: ");
         namePlayerLabel.setFont(normalFont);
         namePlayerLabel.setBorder(new EmptyBorder(0,10,0,0));
         namePlayerLabel.setForeground(Color.white);
@@ -94,7 +110,7 @@ public class UI {
     }
 
     private void setMoneyLabelWinPage(){
-        moneyLabel = new JLabel("Experience/money: " + reference.player.getMonete());
+        moneyLabel = new JLabel("Experience/money: ");
         moneyLabel.setFont(normalFont);
         moneyLabel.setBorder(new EmptyBorder(0,10,0,0));
         moneyLabel.setForeground(Color.white);
@@ -102,7 +118,7 @@ public class UI {
     }
 
     private void setMonsterLabel(){
-        monsterLabel = new JLabel("Monsters killed: " + reference.player.getMostriuccisi());
+        monsterLabel = new JLabel("Monsters killed: ");
         monsterLabel.setFont(normalFont);
         monsterLabel.setBorder(new EmptyBorder(0,10,0,0));
         monsterLabel.setForeground(Color.white);
@@ -401,14 +417,15 @@ public class UI {
      */
     private void setTextField(){
         mainTextFieldPanel = new JPanel();
-        mainTextFieldPanel.setBounds(20, 250, 600, 100);
+        mainTextFieldPanel.setBounds(20, 250, 600, 50);
         mainTextFieldPanel.setBackground(Color.black);
         window.add(mainTextFieldPanel);
 
         Font textFont = new Font("SansSerif", Font.BOLD, 15);
         textField = new JTextField( 30);
-        textField.setPreferredSize(new Dimension(50, 30));
+        textField.setPreferredSize(new Dimension(30, 15));
         textField.setBackground(Color.darkGray);
+        textField.setPreferredSize(new Dimension(100, 30));
         textField.setFont(textFont);
         textField.setForeground(Color.white);
         mainTextFieldPanel.add(textField);
@@ -421,20 +438,11 @@ public class UI {
     public void setMapPanel(){
         mapPanel = new JPanel();
         mapPanel.setVisible(true);
-		// mapPanel.setResizable(false);
         mapPanel.setBounds(0,0,850,350);
         mapPanel.setBackground(Color.black);
-        // mapPanel.setBorder(BorderFactory.createLineBorder(Color.darkGray));
-        // mapPanel.setLayout(null);
-
-        gameB = new gameBoard(reference.ui);
+        gameB = new gameBoard();
 		mapPanel.add(gameB);
 		gameB.requestFocusInWindow();
-
-        /* setSouthLabel();
-        setNorthLabel();
-        setWestLabel();
-        setEastLabel(); */
         window.getContentPane().add(mapPanel);
         mapPanel.setLayout(new GridLayout(1, 0, 0, 0));
         // window.add(mapPanel);
@@ -527,6 +535,7 @@ public class UI {
                         .addComponent(commandLabel)
                         .addGroup(layout.createSequentialGroup()
                         .addComponent(commandTextField)
+                                //eventuale bottone commandButton
         )));
 
         layout.setVerticalGroup(
@@ -534,6 +543,7 @@ public class UI {
                 .addComponent(commandLabel)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                 .addComponent(commandTextField)
+                        //eventuale bottone commandButton
         ));
 
         window.add(commandPanel);
@@ -551,7 +561,7 @@ public class UI {
         commandTextField.setBackground(Color.darkGray);
         commandTextField.setFont(textFont);
         commandTextField.setForeground(Color.white);
-
+        //setting button commandButton
         commandPanel.add(commandTextField);
 
 
@@ -588,7 +598,7 @@ public class UI {
         messageTextPanel.setBorder(BorderFactory.createLineBorder(Color.darkGray));
 
 
-        messageTextArea = new JTextArea("Aaaaaaaaaaaahhhhhhhhhh ....  .... .... ....\nCredo sia stata una pessima idea addentrarsi in quella grotta\nSembra molto tranquillo questo posto però allo stesso tempo mi sento osservato...\nProgetto di EDIDS GRUPPO AAAS");
+        messageTextArea = new JTextArea("Aaaaaaaaaaaahhhhhhhhhh ....  .... .... ....\nCredo sia stata una pessima idea addentrarsi in quella grotta....\nSento dei rumori provenire da laggiù\nProgetto di EDIDS UNIPD-GRUPPO AAAS");
         messageTextArea.setBounds(0, 0, 750, 50);
         messageTextArea.setBorder(new EmptyBorder(10,0,0,0));
         messageTextArea.setBackground(Color.black);
@@ -649,126 +659,12 @@ public class UI {
         statLabel.setForeground(Color.white);
         statLabel.setFont(normalFont);
         statPanel.add(statLabel);
-        /*
-         setNameLabel();
-        setCharacterLabel();
-        setHpLabel();
-        setInventoryWeight();
-        setPotionLabel();
-        setWeaponLabel();
-        setMoneyLabel();
-        setRoomNumberLabel(); */
 
         setMessageTextPanel();
         setCounterLoadLabel();
         setMapPanel();
         window.add(statPanel);
     }
-
-    /*
-    metodo che mostra il nome del giocatore
-    pagina: gameScreen
-     */
-    private void setNameLabel(){
-        nameLabel  = new JLabel("Name: ");
-        nameLabel.setForeground(Color.white);
-        nameLabel.setEnabled(false);
-        nameLabel.setFont(normalFont);
-        nameLabel.setBorder(new EmptyBorder(0,10,0,0));
-        statPanel.add(nameLabel);
-    }
-
-    /*
-   metodo che mostra il personaggio scelto dal giocatore
-   pagina: gameScreen
-    */
-    private void setCharacterLabel(){
-        characterLabel  = new JLabel("Character: ");
-        characterLabel.setForeground(Color.white);
-        characterLabel.setEnabled(false);
-        characterLabel.setFont(normalFont);
-        characterLabel.setBorder(new EmptyBorder(0,10,0,0));
-        statPanel.add(characterLabel);
-    }
-
-    /*
-       metodo che mostra la vita del giocatore
-       pagina: gameScreen
-    */
-    private void setHpLabel(){
-        hpLabel  = new JLabel("HP: ");
-        hpLabel.setForeground(Color.white);
-        hpLabel.setFont(normalFont);
-        hpLabel.setEnabled(false);
-        hpLabel.setBorder(new EmptyBorder(0,10,0,0));
-        statPanel.add(hpLabel);
-    }
-
-    /*
-       metodo che mostra il peso dell'inventario del giocatore
-       pagina: gameScreen
-    */
-    private void setInventoryWeight(){
-        inventoryWeight  = new JLabel("Weight: ");
-        inventoryWeight.setForeground(Color.white);
-        inventoryWeight.setEnabled(false);
-        inventoryWeight.setFont(normalFont);
-        inventoryWeight.setBorder(new EmptyBorder(0,10,0,0));
-        statPanel.add(inventoryWeight);
-    }
-
-    /*
-       metodo che mostra il numero di pozioni del giocatore
-       pagina: gameScreen
-    */
-    private void setPotionLabel(){
-        potionLabel  = new JLabel("Potion: ");
-        potionLabel.setForeground(Color.white);
-        potionLabel.setEnabled(false);
-        potionLabel.setFont(normalFont);
-        potionLabel.setBorder(new EmptyBorder(0,10,0,0));
-        statPanel.add(potionLabel);
-    }
-
-    /*
-        metodo che mostra l'arma del giocatore
-        pagina: gameScreen
-    */
-    private void setWeaponLabel(){
-        weaponLabel  = new JLabel("Weapon: ");
-        weaponLabel.setForeground(Color.white);
-        weaponLabel.setEnabled(false);
-        weaponLabel.setFont(normalFont);
-        weaponLabel.setBorder(new EmptyBorder(0,10,0,0));
-        statPanel.add(weaponLabel);
-    }
-
-    /*
-       metodo che mostra i soldi del giocatore
-       pagina: gameScreen
-    */
-    private void setMoneyLabel(){
-        moneyLabel  = new JLabel("Money: ");
-        moneyLabel.setForeground(Color.white);
-        moneyLabel.setEnabled(false);
-        moneyLabel.setFont(normalFont);
-        moneyLabel.setBorder(new EmptyBorder(0,10,0,0));
-        statPanel.add(moneyLabel);
-    }
-
-    /*
-       metodo che mostra la stanza in cui si trova il giocatore
-       pagina: gameScreen
-    */
-    private void setRoomNumberLabel(){
-        roomNumberLabel  = new JLabel("Room: ");
-        roomNumberLabel.setForeground(Color.white);
-        roomNumberLabel.setEnabled(false);
-        roomNumberLabel.setFont(normalFont);
-        roomNumberLabel.setBorder(new EmptyBorder(0,10,0,0));
-        statPanel.add(roomNumberLabel);
-    }
-
     private void setCounterLoadLabel(){
         counterLoadLabel = new JLabel();
         counterLoadLabel.setBorder(new EmptyBorder(0,10,0,0));
