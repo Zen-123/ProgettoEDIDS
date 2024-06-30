@@ -186,32 +186,24 @@ public class choiceHandler implements ActionListener {
                 break;
 
             case "save 1":
-                temp = "src/main/java/Board/Stanzeold/stanza_"+reference.currentStanza.ID_Stanza+".txt";
-                reference.filereader.fileToWrite(reference.currentStanza.cellestanza, temp );
                 setFileSaveOverwrite(fileNameArray[0]);
                 vManager.showMenuScreen();
 
                 break;
 
             case "save 2":
-                temp = "src/main/java/Board/Stanzeold/stanza_"+reference.currentStanza.ID_Stanza+".txt";
-                reference.filereader.fileToWrite(reference.currentStanza.cellestanza, temp );
                 setFileSaveOverwrite(fileNameArray[1]);
                 vManager.showMenuScreen();
 
                 break;
 
             case "save 3":
-                temp = "src/main/java/Board/Stanzeold/stanza_"+reference.currentStanza.ID_Stanza+".txt";
-                reference.filereader.fileToWrite(reference.currentStanza.cellestanza, temp );
                 setFileSaveOverwrite(fileNameArray[2]);
                 vManager.showMenuScreen();
 
                 break;
 
             case "save 4":
-                temp = "src/main/java/Board/Stanzeold/stanza_"+reference.currentStanza.ID_Stanza+".txt";
-                reference.filereader.fileToWrite(reference.currentStanza.cellestanza, temp );
                 setFileSaveOverwrite(fileNameArray[3]);
                 vManager.showMenuScreen();
 
@@ -277,8 +269,7 @@ public class choiceHandler implements ActionListener {
                     "Armour: " + reference.player.getArmourName() + "\n" +
                     "key: " + reference.player.getGoldkey()+ "\n" +
                     "Max_damage: " + reference.player.getDannoMaxSpada() + "\n" +
-                    "Min_damage: " + reference.player.getDannoMinSpada() + "\n" +
-                    "Current_room: " + reference.currentStanza.ID_Stanza
+                    "Min_damage: " + reference.player.getDannoMinSpada()
             );
             printWriter.close();
             //caricamento del nuovo file su aws
@@ -311,8 +302,7 @@ public class choiceHandler implements ActionListener {
                     "Armour: " + reference.player.getArmourName() + "\n" +
                     "key: " + reference.player.getGoldkey()+ "\n" +
                     "Max_damage: " + reference.player.getDannoMaxSpada() + "\n" +
-                    "Min_damage: " + reference.player.getDannoMinSpada()+ "\n" +
-                    "Current_room: " + reference.currentStanza.ID_Stanza
+                    "Min_damage: " + reference.player.getDannoMinSpada()
             );
             printWriter.close();
             //caricamento del file sovrascritto

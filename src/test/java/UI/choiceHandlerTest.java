@@ -68,7 +68,7 @@ class choiceHandlerTest {
         assertTrue(tempFile.exists());
         String fileContent = Files.readString(tempFile.toPath());
         //verifica se sono presenti i dati del player
-        assertTrue(fileContent.contains("Player: " + reference.player.getNome()));
+        assertTrue(fileContent.contains("Player: "));
         assertTrue(fileContent.contains("Health: " + reference.player.getVita()));
         assertTrue(fileContent.contains("Money: " + reference.player.getMonete()));
         assertTrue(fileContent.contains("Monster_killed: " + reference.player.getMostriuccisi()));

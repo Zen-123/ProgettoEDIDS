@@ -5,25 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8687f848-436d-40fd-95fb-3a95deb22072" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DungeonUnipd.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FileDownload/Filesave 1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/FileDownload/Filesave 1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FileLoad/Filesave 1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/FileLoad/Filesave 1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Board/Stanzeold/stanza_2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Board/Stanzeold/testStanza.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/UI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/UI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/UI/choiceHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/choiceHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UI/gameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/gameBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UI/visibilityManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/visibilityManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Board/func.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Board/func.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/UI/gameBoard$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/UI/gameBoard$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/UI/gameBoard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/UI/gameBoard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/UI/choiceHandlerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/UI/choiceHandlerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/UI/UI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/UI/UI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/UI/choiceHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/UI/choiceHandler.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />

@@ -37,7 +37,7 @@ public class UI {
     private JRadioButton warriorButton, archerButton, thiefButton;
     public JTextArea messageTextArea;
     public ButtonGroup mainCharacterButtonPanel;
-    public JTextField textField, commandTextField, commandLoadTextField;
+    public JTextField commandTextField, commandLoadTextField,textField;
     private Font titleFont = new Font("Serif", Font.PLAIN, 70);
     private  Font normalFont = new Font("Serif",Font.PLAIN, 26);
     choiceHandler handler = new choiceHandler(this);
@@ -423,7 +423,6 @@ public class UI {
 
         Font textFont = new Font("SansSerif", Font.BOLD, 15);
         textField = new JTextField( 30);
-        textField.setPreferredSize(new Dimension(30, 15));
         textField.setBackground(Color.darkGray);
         textField.setPreferredSize(new Dimension(100, 30));
         textField.setFont(textFont);
@@ -572,12 +571,12 @@ public class UI {
      */
     private void setMainTextPanel(){
         mainTextPanel = new JPanel();
-        mainTextPanel.setBounds(-10, 200, 600, 100);
+        mainTextPanel.setBounds(-10, 180, 600, 50);
         mainTextPanel.setBackground(Color.black);
         window.add(mainTextPanel);
 
         mainTextArea = new JLabel("Give a name to your character: ");
-        mainTextArea.setBounds(0, 100, 600, 50);
+        mainTextArea.setBounds(0, 100, 600, 30);
         mainTextArea.setBackground(Color.black);
         mainTextArea.setForeground(Color.white);
         mainTextArea.setFont(normalFont);
