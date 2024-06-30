@@ -1,10 +1,11 @@
 package Player;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.RepeatedTest;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class ItemTest {
 
@@ -17,7 +18,7 @@ class ItemTest {
         //creazione oggetto Item di default
         defaultItem = new Item();
         //creazione oggetto Item personalizzato
-        customItem = new Item("Spada", 10, 5, 3, true, 1, false);
+        customItem = new Item("Spada", 10, 5, 3, true, 1, false,20);
     }
 
     @Test

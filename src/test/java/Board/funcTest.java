@@ -108,8 +108,8 @@ class funcTest {
     }
     @Test
     void testPlayerIsAttacking(){
-        reference.player.addSpada(new Item("spadagiocatore", 8, 8, 0, true, 12, true));
-        reference.player.addArmour(new Item("armaturagiocatore", 0, 0, 1, false, 12, true));
+        reference.player.addSpada(new Item("spadagiocatore", 8, 8, 0, true, 12, true,20));
+        reference.player.addArmour(new Item("armaturagiocatore", 0, 0, 1, false, 12, true,30));
         reference.player.setVita(100);
         int beforebattle = reference.mostrorun.getVita();
         reference.functions.playerIsAttacking();
@@ -157,8 +157,8 @@ class funcTest {
     @Test
     void testMonsterEncounter(){
         mostro monster = new mostro("vampiro",18,18,1,30,12);
-        reference.player.addSpada(new Item("spadagiocatore", 8, 8, 0, true, 12, true));
-        reference.player.addArmour(new Item("armaturagiocatore", 0, 0, 1, false, 12, true));
+        reference.player.addSpada(new Item("spadagiocatore", 8, 8, 0, true, 12, true,20));
+        reference.player.addArmour(new Item("armaturagiocatore", 0, 0, 1, false, 12, true,30));
         reference.player.setVita(100);
         reference.functions.monsterEncounter(2, monster,0, true);
         assertEquals(83, reference.player.getVita());
@@ -168,12 +168,12 @@ class funcTest {
         //posizione iniziale giocatore 3,3 item 3,2 mostro 2,3
         assertEquals(1, reference.currentStanza.lista_item.size());
         assertEquals(1, reference.currentStanza.lista_mostri.size());
-        reference.player.addSpada(new Item("spadagiocatore", 8, 4, 0, true, 12, true));
-        reference.player.addArmour(new Item("armaturagiocatore", 0, 0, 0, false, 12, true));
+        reference.player.addSpada(new Item("spadagiocatore", 8, 4, 0, true, 12, true,20));
+        reference.player.addArmour(new Item("armaturagiocatore", 0, 0, 0, false, 12, true,30));
         reference.player.setHasArmour(true);
         assertEquals("spadagiocatore", reference.player.getSpada().getNome());
         assertEquals("armaturagiocatore", reference.player.getArmour().getNome());
-        if(reference.currentStanza.lista_item.get(0).getNome() == "spada"){
+        if(reference.currentStanza.lista_item.get(0).getNome().compareTo("spada") == 0){
             reference.functions.takeItem();
             assertEquals("spada", reference.player.getSpada().getNome());
             assertEquals(3, reference.player.getX());
@@ -181,7 +181,7 @@ class funcTest {
             assertEquals(3, reference.currentStanza.lista_item.get(0).getX());
             assertEquals(3, reference.currentStanza.lista_item.get(0).getY());
             assertEquals("spadagiocatore", reference.currentStanza.lista_item.get(0).getNome());
-        }else if (reference.currentStanza.lista_item.get(0).getNome() == "armatura") {
+        }else if (reference.currentStanza.lista_item.get(0).getNome().compareTo("armatura") == 0) {
             reference.functions.takeItem();
             assertEquals("armatura", reference.player.getArmour().getNome());
             assertEquals(3, reference.player.getX());

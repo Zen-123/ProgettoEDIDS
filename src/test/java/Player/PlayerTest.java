@@ -1,8 +1,10 @@
 package Player;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
 
@@ -34,7 +36,7 @@ class PlayerTest {
     //test addSpada
     void testAddSpada() {
         //creazione di oggetto di tipo Item personalizzato, in questo caso una spada
-        Item spada = new Item("Spada", 10, 5, 0, true, 1, false);
+        Item spada = new Item("Spada", 10, 5, 0, true, 1, false,20);
         //test metodo addSpada
         player.addSpada(spada);
         //verifica se peso di inventario giocatore aggiornato dopo aver raccolto la spada
@@ -48,7 +50,7 @@ class PlayerTest {
     //test addArmour
     void testAddArmour() {
         //creazione di oggetto di tipo Item personalizzato, in questo caso una armatura
-        Item armatura = new Item("Armatura", 0, 0, 5, false, 1, false);
+        Item armatura = new Item("Armatura", 0, 0, 5, false, 1, false,30);
         //test metodo addArmour
         player.addArmour(armatura);
         //verifica che armatura aggiunta ad inventario giocatore, aggiornando peso di inventario

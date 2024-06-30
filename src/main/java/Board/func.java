@@ -142,7 +142,7 @@ public class func{
     }
     //metodo che gestisce l'azione di quando player ha deciso di raccogliere item armatura o spada
     public void takeItem(){
-        if(reference.item.getNome() == "spada" && reference.player.isHasSword()){
+        if((reference.item.getNome().compareTo("spada") == 0) && reference.player.isHasSword()){
             //allora dovra buttare la sua spada a terra
             Item spadadaposare;
             reference.currentStanza.cellestanza.get(reference.item.getY()).set(reference.item.getX(),Cell.PLAYER);
@@ -164,7 +164,7 @@ public class func{
                     reference.currentStanza.lista_item.remove(i);
             }
             reference.currentStanza.lista_item.add(spadadaposare);
-        }else if(reference.item.getNome() == "spada" && reference.player.isHasSword() == false){
+        }else if((reference.item.getNome().compareTo("spada") == 0) && reference.player.isHasSword() == false){
             reference.player.takeItem(reference.item);
             reference.currentStanza.cellestanza.get(reference.item.getY()).set(reference.item.getX(),Cell.PLAYER);
             reference.currentStanza.cellestanza.get(reference.player.getY()).set(reference.player.getX(),Cell.FREE);
@@ -173,7 +173,7 @@ public class func{
             reference.item = new Item();
             reference.ui.messageTextArea.setText("...\n...\n...");
         }
-        if(reference.item.getNome() == "armatura" && reference.player.isHasArmour() == true){
+        if((reference.item.getNome().compareTo("armatura") == 0) && reference.player.isHasArmour() == true){
             //allora dovra buttare la sua spada a terra
             Item armaturadaposare = new Item();
             reference.currentStanza.cellestanza.get(reference.item.getY()).set(reference.item.getX(),Cell.PLAYER);
@@ -195,7 +195,7 @@ public class func{
                     reference.currentStanza.lista_item.remove(i);
             }
             reference.currentStanza.lista_item.add(armaturadaposare);
-        }else if(reference.item.getNome() == "armatura" && reference.player.isHasArmour() == false){
+        }else if((reference.item.getNome().compareTo("armatura") == 0) && reference.player.isHasArmour() == false){
             reference.player.takeItem(reference.item);
             reference.currentStanza.cellestanza.get(reference.item.getY()).set(reference.item.getX(),Cell.PLAYER);
             reference.currentStanza.cellestanza.get(reference.player.getY()).set(reference.player.getX(),Cell.FREE);
