@@ -26,12 +26,15 @@ public class uploadFile {
      * @param filename nome del file da scaricare
      * @throws IOException
      */
+    
     public uploadFile(String repositoryname, String filename) throws IOException {
         //oggetto che prende i dati contenuti da un file nel file system
         System.out.print(filename); 
         InputStream file =  new FileInputStream("FileLoad/"+repositoryname+"/"+filename);  //qui manca file di testo dopo percorso che passero sotto voce getname
         //Interfaccia che permette di accedere ai web service di aws s3
         AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(region).build();
+
+        
 
         //Rappresenta i metadata che sono salvati con aws s3
         ObjectMetadata metadata  = new ObjectMetadata();
@@ -43,7 +46,7 @@ public class uploadFile {
          */
         try{
             //Carica il file fileName.txt nel bucket aws
-            PutObjectRequest request = new PutObjectRequest(bucketName, filename, file, metadata);
+            PutObjectRequest request = new PutObjectRequest(bucketName,repositoryname+"/"+filename, file, metadata);
             s3Client.putObject(request);
 
             System.out.println("Salvataggio avvenuto con successo!");
