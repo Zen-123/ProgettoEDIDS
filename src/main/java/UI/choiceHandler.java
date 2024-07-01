@@ -98,7 +98,7 @@ public class choiceHandler implements ActionListener {
              */
             case "Load":
                 vManager.showLoadScreen();
-                // setLoad();
+                setLoad("Filesave1");
                 break;
             /*
                 gestisce il bottone: loadMessageButton
@@ -665,6 +665,35 @@ public class choiceHandler implements ActionListener {
         reloadFile = false;
 
     }
+    //metodo che quando schiacci load lui carica tutti i file dal bucket
+    /* public void setLoadAll(String name) {
+        File fileLoad;
+        int i=1;
+        userInterfaceHandler.counterLoadLabel.setText("Save n. " + (counterFile+1));
+        //array che scorre i nomi di tutti i file di bucket aws
+        for (String s : fileNameArray) {
+            fileLoad = new File("FileDownload/"+s+"/"+name);
+
+            //se un file non esiste in locale ma è presente nel bucket viene scaricato
+            if (!fileLoad.exists() || reloadFile) {
+                if(reloadFile){
+                    fileLoad.delete();
+                    reloadFile = false;
+                }
+                DownloadFile downloadFIle = new DownloadFile(s,name, userInterfaceHandler);
+            } else {
+                //dovro fare il controllo tra il numero di file salvati sul bucket e quelli in locale e dici 
+                //gia presente o meno
+                counterFileFirstLoad++;
+                
+                i++;
+            }
+
+        }
+
+        reloadFile = false;
+
+    } */
 //metodo per salvare i dati ottenuti dai file scaricati dal bucket aws
     public void setupLoad(int k)  {
         setNewGame();
