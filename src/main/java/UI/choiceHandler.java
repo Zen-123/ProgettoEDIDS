@@ -71,10 +71,10 @@ public class choiceHandler implements ActionListener {
                 apre il menù di selezione del personaggio
              */
             case "Start":
-                // setNewGame();
+                
                 vManager.checkLoad = false;
                 vManager.showStartScreen();
-
+                setNewGame();
 
                 break;
             /*
@@ -783,7 +783,8 @@ public class choiceHandler implements ActionListener {
         reference.mostrorun = new mostro();
         reference.functions = new func();
         reference.item = new Item();
-        // reference.currentStanza = new Board(1);
+        reference.currentStanza = new Board(1);
+        reference.filereader.ResetDirectory();
     }
 
     private void checkSlotExistence(String directory, int i){

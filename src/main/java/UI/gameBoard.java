@@ -219,6 +219,7 @@ public class gameBoard extends JPanel implements KeyListener {
                                     handler.setFileSaveStanze(fileNameArray[i]);
                                     handler.setFileSaveMostri(fileNameArray[i]);
                                     handler.setFileSaveItem(fileNameArray[i]);
+                                    reference.filereader.ResetDirectory();
                                     break;
                                 }
                             }

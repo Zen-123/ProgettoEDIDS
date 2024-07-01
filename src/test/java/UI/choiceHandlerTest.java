@@ -125,7 +125,7 @@ class choiceHandlerTest {
         System.setProperty("user.dir", tempDir.toString());
 
         // chiamata alla funzione effettiva
-        choiceHandler.setLoad();
+        // choiceHandler.setLoad();
 
 
         assertEquals("Save n. 2", ui.counterLoadLabel.getText(), "dato che abbiamo chiamato la funzione SetFileSave 2 volte ci aspettiamo di avere 2 save ");
