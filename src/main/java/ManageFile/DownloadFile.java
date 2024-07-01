@@ -23,8 +23,6 @@ public class DownloadFile {
     public DownloadFile(String directory, UI ui) {
         //Imposta la regione del bucket
         Region region = Region.EU_WEST_3;
-
-
         try (S3Client s3 = S3Client.builder().region(region).build()) {
             uiManager = ui;
 
