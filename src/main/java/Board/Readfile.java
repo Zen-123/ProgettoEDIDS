@@ -53,6 +53,26 @@ public class Readfile {
             e.getStackTrace();
         }
     }
+    public void fileToWriteAWS(ArrayList<ArrayList<Cell>> stanza, String filename){
+        try{
+            writer = new FileWriter(filename);
+            for (int i = 0; i <= stanza.size()-1; i++) {
+                for (int j = 0; j < stanza.get(0).size(); j++) {
+                    if(i == (stanza.size()-1))
+                        writer.write(reference.currentStanza.ss.get(i).charAt(j));
+                    else if(stanza.get(i).get(j).getSymbol() == 'A'){
+                        writer.write('A');
+                    }else{
+                        writer.write(stanza.get(i).get(j).getSymbol());
+                    }
+                }
+                writer.write("\n");
+            }
+            writer.close();
+        }catch(Exception e){
+            e.getStackTrace();
+        }
+    }
     //elimina tutti i file nella cartella stanzeold, solo all'avvio del gioco, server per pulire i dati
     public void ResetDirectory(){
 
