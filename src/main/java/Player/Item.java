@@ -33,6 +33,20 @@ public class Item extends entity{
         this.canAttack=false;
         this.peso = peso;
     }
+    public Item(String nome,int attacco_max, int attacco_min, int difesa,boolean sword,int id,boolean preso,int peso,int x, int y , char symbol){
+        this.nome = nome;
+        this.attacco_max = attacco_max;
+        this.attacco_min = attacco_min;
+        this.difesa = difesa;
+        this.isSword = sword;
+        this.id_stanza = id;
+        this.hasTake = preso;
+        this.canAttack=false;
+        this.peso = peso;
+        super.x = x;
+        super.y = y;
+        super.symbol = symbol;
+    }
     public boolean CanAttack(){
         return this.canAttack;
     }

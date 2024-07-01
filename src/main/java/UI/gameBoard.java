@@ -16,7 +16,7 @@ import Board.reference;
 public class gameBoard extends JPanel implements KeyListener {
     private visibilityManager vManager = new visibilityManager(reference.ui);
     private choiceHandler handler = new choiceHandler(reference.ui);
-    private final String[] fileNameArray = {"Filesave 1.txt", "Filesave 2.txt", "Filesave 3.txt", "Filesave 4.txt"};
+    private final String[] fileNameArray = {"Filesave1", "Filesave2", "Filesave3", "Filesave4"};
 
     public gameBoard(){
         addKeyListener(this);
@@ -133,8 +133,6 @@ public class gameBoard extends JPanel implements KeyListener {
    public void MakeaMove(){
     reference.ui.commandTextField.addKeyListener(new KeyAdapter() {
         public void keyPressed(KeyEvent e) {
-            String temp;
-
             if(e.getKeyCode() == KeyEvent.VK_ENTER) {
                 switch(reference.ui.commandTextField.getText().toLowerCase()) {
                     case "take":
@@ -143,7 +141,6 @@ public class gameBoard extends JPanel implements KeyListener {
                     }else{
                         reference.ui.commandTextField.setText(""); 
                     }
-                    
                     break;
                     case "no": 
                         if(reference.player.isAttacking() || reference.player.getSpada().CanAttack()){
@@ -155,13 +152,6 @@ public class gameBoard extends JPanel implements KeyListener {
                             reference.ui.messageTextArea.setText("...\n...\n...");
                             reference.ui.gameB.requestFocus();
                         }
-                    break;
-                    case "apri":
-                        reference.functions.updateMonsterPosition();
-                        reference.ui.gameB.requestFocus();
-                    break;
-                    case "non aprire":
-                        reference.ui.gameB.requestFocus();
                     break;
                     case "pozione":
                         reference.functions.playerUsingPotion();
@@ -201,29 +191,34 @@ public class gameBoard extends JPanel implements KeyListener {
                         if(handler.counterFileFirstLoad<4 && choiceHandler.counterFile<4){
                             //for che scorre i file scaricati da aws
                             for (int i = choiceHandler.counterFile; i < fileNameArray.length + 1; i++) {
-                                fileLoad = new File("FileDownload/" + fileNameArray[i]);
-                                if (fileLoad.exists()) {
+                                fileLoad = new File("FileDownload/"+fileNameArray[i]+"/");
+                                if(fileLoad.exists() && fileLoad.listFiles().length > 0) {
                                     reference.ui.counterLoadLabel.setText("Save n. " + (choiceHandler.counterFile+1));
                                     /*se lo slot salvataggio è già occupato si chiede all'utente se vuole sovrascriverlo
                                      * oppure usare un altro slot disponibile */
                                     if (reference.ui.setAlertMenu(0) == 0) {
                                         //utente decide tramite l'alert di sovrascrivere il salvataggio precedente
-                                        handler.setFileSaveOverwrite(fileNameArray[i]);
+                                        //dovremo poi fare questa parte
+                                        handler.setFileSavePlayerOverwrite(fileNameArray[i]);
+                                        handler.setFileSaveStanzeOverwrite(fileNameArray[i]);
+                                        handler.setFileSaveMostriOverwrite(fileNameArray[i]);
+                                        handler.setFileSaveItemOverwrite(fileNameArray[i]);
                                         vManager.showMenuScreen();
                                         break;
                                     } else {
                                         //utente decide di non sovrascrivere salvataggio precedente
-                                        vManager.showGameScreen();
+                                        //perche vai qua dio lurido?
+                                        // vManager.showGameScreen();
                                         break;
                                     }
-
                                 } else {
-                            /*se lo slot è libero, ovvero non è stato trovato tra i file scaricati da aws un file
-                            con il nome cercato, allora viene creato un nuovo file salvataggio
-                            * */
-                                    // handler.setFileSave(fileNameArray[i]);
-                                    handler.setFileSavePlayer(fileNameArray[i],i);
-                                    handler.setFileSaveStanze(fileNameArray[i],i);
+                                /*se lo slot è libero, ovvero non è stato trovato tra i file scaricati da aws un file
+                                con il nome cercato, allora viene creato un nuovo file salvataggio
+                                * */
+                                    handler.setFileSavePlayer(fileNameArray[i]);
+                                    handler.setFileSaveStanze(fileNameArray[i]);
+                                    handler.setFileSaveMostri(fileNameArray[i]);
+                                    handler.setFileSaveItem(fileNameArray[i]);
                                     break;
                                 }
                             }
@@ -241,25 +236,35 @@ public class gameBoard extends JPanel implements KeyListener {
                         break;
 
                     case "save 1":
-                        handler.setFileSaveOverwrite(fileNameArray[0]);
+                        handler.setFileSavePlayerOverwrite(fileNameArray[0]);
+                        handler.setFileSaveStanzeOverwrite(fileNameArray[0]);
+                        handler.setFileSaveMostriOverwrite(fileNameArray[0]);
+                        handler.setFileSaveItemOverwrite(fileNameArray[0]);
                         vManager.showMenuScreen();
 
                         break;
 
                     case "save 2":
-                        handler.setFileSaveOverwrite(fileNameArray[1]);
+                        handler.setFileSavePlayerOverwrite(fileNameArray[1]);
+                        handler.setFileSaveStanzeOverwrite(fileNameArray[1]);
+                        handler.setFileSaveMostriOverwrite(fileNameArray[1]);
+                        handler.setFileSaveItemOverwrite(fileNameArray[1]);
                         vManager.showMenuScreen();
-
                         break;
-
                     case "save 3":
-                        handler.setFileSaveOverwrite(fileNameArray[2]);
+                        handler.setFileSavePlayerOverwrite(fileNameArray[2]);
+                        handler.setFileSaveStanzeOverwrite(fileNameArray[2]);
+                        handler.setFileSaveMostriOverwrite(fileNameArray[2]);
+                        handler.setFileSaveItemOverwrite(fileNameArray[2]);
                         vManager.showMenuScreen();
 
                         break;
 
                     case "save 4":
-                        handler.setFileSaveOverwrite(fileNameArray[3]);
+                        handler.setFileSavePlayerOverwrite(fileNameArray[3]);
+                        handler.setFileSaveStanzeOverwrite(fileNameArray[3]);
+                        handler.setFileSaveMostriOverwrite(fileNameArray[3]);
+                        handler.setFileSaveItemOverwrite(fileNameArray[3]);
                         vManager.showMenuScreen();
 
                         break;

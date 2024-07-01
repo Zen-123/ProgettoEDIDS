@@ -29,11 +29,12 @@ class UploadFileTest {
     //test del costruttore con nome del file
     void testUploadFileConstructor() throws IOException {
         //file .txt usato per testing
+        String directory = "testDirUpload";
         String fileName = "testFileUpload.txt";
         Path filePath = fileLoadDir.resolve(fileName);
         Files.write(filePath, "Test content".getBytes());
 
-        uploadFile uploader = new uploadFile(fileName);
+        uploadFile uploader = new uploadFile(directory,fileName);
         //verifica che oggetto sia creato correttamente
         assertNotNull(uploader);
     }
@@ -42,18 +43,20 @@ class UploadFileTest {
     //test per verificare lancio di eccezione in caso di caricamento di file con nome illecito
     void testUploadFileIOException() {
         String nonExistentFile = "nonexistent.txt";
+        String nonExistentDir = "nonexistentdir";
         // ci aspettiamo una eccezione
-        assertThrows(IOException.class, () -> new uploadFile(nonExistentFile));
+        assertThrows(IOException.class, () -> new uploadFile(nonExistentDir,nonExistentFile));
     }
 
     @Test
     //test di caricamento del file nel bucket aws
     void testBucketNameAndRegion() throws Exception {
+        String directory = "testDirUpload";
         String fileName = "testFileUpload.txt";
         Path filePath = fileLoadDir.resolve(fileName);
         Files.write(filePath, "Test content".getBytes());
 
-        uploadFile uploader = new uploadFile(fileName);
+        uploadFile uploader = new uploadFile(directory,fileName);
 
         Field bucketNameField = uploadFile.class.getDeclaredField("bucketName");
         bucketNameField.setAccessible(true);

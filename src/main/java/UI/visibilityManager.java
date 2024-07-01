@@ -103,13 +103,6 @@ public class visibilityManager {
             if(checkLoad == false) {
                 try {
                     switch (ui.mainCharacterButtonPanel.getSelection().getActionCommand()) {
-                        case "warrior":
-                            reference.player.setMonete(0);
-                            reference.player.addNum_pozioni(0);
-                            reference.player.addSpada(new Item("spada", 13, 5, 0, true, reference.curr_stanza, true,20));
-                            reference.player.addArmour(new Item("armatura", 0, 0, 5, false, reference.curr_stanza, true,30));
-                            reference.player.setHasArmour(true);
-                            break;
                         case "archer":
                             reference.player.setCategory("archer");
                             reference.player.setMonete(10);
@@ -136,7 +129,6 @@ public class visibilityManager {
                             reference.player.setHasArmour(true);
                             break;
                     }
-
                     reference.player.setCategory(ui.mainCharacterButtonPanel.getSelection().getActionCommand());
                     reference.player.setNome(ui.textField.getText());
                 } catch (Exception e) {

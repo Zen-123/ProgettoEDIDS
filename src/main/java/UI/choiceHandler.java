@@ -8,15 +8,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Spliterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.xml.stream.events.Characters;
 
 import Board.Board;
 import Board.Cell;
 import Board.Readfile;
+import Board.func;
 import Board.reference;
 import ManageFile.DownloadFile;
 import ManageFile.uploadFile;
+import Player.Item;
 import Player.Player;
 import Player.mostro;
 
@@ -36,7 +41,7 @@ public class choiceHandler implements ActionListener {
     private File fileSave;
 
     private PrintWriter printWriter;
-    private final String[] fileNameArray = {"Filesave 1.txt", "Filesave 2.txt", "Filesave 3.txt", "Filesave 4.txt"};
+    private final String[] fileNameArray = {"Filesave1", "Filesave2", "Filesave3", "Filesave4"};
     public boolean reloadFile = false;
 
     /**
@@ -66,7 +71,7 @@ public class choiceHandler implements ActionListener {
                 apre il menù di selezione del personaggio
              */
             case "Start":
-                setNewGame();
+                // setNewGame();
                 vManager.checkLoad = false;
                 vManager.showStartScreen();
 
@@ -129,101 +134,102 @@ public class choiceHandler implements ActionListener {
      * metodo che gestisce gli input testuali da parte dell'utente nel commandTextField
      * @param textInput stringa che identifica il comando scritto dall'utente
      */
-    public void manageTextInput(String textInput) {
+    
+    // public void manageTextInput(String textInput) {
 
-        /*
-        Switch che gestisce i vari comandi scritti dall'utente
-        "save" permette di salvare la partita attuale e caricare il salvataggio su asw s3
-        "exit" permette di tornare alla pagina di menu
-        "save 1-4" permettono di salvare la partita in uno specifico slot, usati solo per sovrascrivere altri salvataggi precedenti
-         */
-        String temp;
-        switch (textInput) {
+    //     /*
+    //     Switch che gestisce i vari comandi scritti dall'utente
+    //     "save" permette di salvare la partita attuale e caricare il salvataggio su asw s3
+    //     "exit" permette di tornare alla pagina di menu
+    //     "save 1-4" permettono di salvare la partita in uno specifico slot, usati solo per sovrascrivere altri salvataggi precedenti
+    //      */
+    //     String temp;
+    //     switch (textInput) {
 
-            case "save":
+    //         case "save":
 
-                File fileLoad;
-                /*
-                if che controlla che i salvataggi scaricati dal bucket prima dell'avvio del gioco
-                siano inferiori al numero massimo di slot, inoltre controlla che i salvataggi durante
-                la partita non superino i 4.
-                 */
+    //             File fileLoad;
+    //             /*
+    //             if che controlla che i salvataggi scaricati dal bucket prima dell'avvio del gioco
+    //             siano inferiori al numero massimo di slot, inoltre controlla che i salvataggi durante
+    //             la partita non superino i 4.
+    //              */
 
-                if (counterFileFirstLoad < 4 && counterFile < 4) {
-                    //for che scorre i file scaricati da aws
-                    for (int i = counterFile; i < fileNameArray.length + 1; i++) {
-                        fileLoad = new File("FileDownload/" + fileNameArray[i]);
-                        if (fileLoad.exists()) {
-                            userInterfaceHandler.counterLoadLabel.setText("Save n. " + (counterFile+1));
-                            /*se lo slot salvataggio è già occupato si chiede all'utente se vuole sovrascriverlo
-                             * oppure usare un altro slot disponibile */
-                            if (userInterfaceHandler.setAlertMenu(0) == 0) {
-                                //utente decide tramite l'alert di sovrascrivere il salvataggio precedente
-                                setFileSaveOverwrite(fileNameArray[i]);
-                                vManager.showMenuScreen();
-                                break;
-                            } else {
-                                //utente decide di non sovrascrivere salvataggio precedente
-                                vManager.showGameScreen();
-                                break;
-                            }
+    //             if (counterFileFirstLoad < 4 && counterFile < 4) {
+    //                 //for che scorre i file scaricati da aws
+    //                 for (int i = counterFile; i < fileNameArray.length + 1; i++) {
+    //                     fileLoad = new File("FileDownload/" + fileNameArray[i]);
+    //                     if (fileLoad.exists()) {
+    //                         userInterfaceHandler.counterLoadLabel.setText("Save n. " + (counterFile+1));
+    //                         /*se lo slot salvataggio è già occupato si chiede all'utente se vuole sovrascriverlo
+    //                          * oppure usare un altro slot disponibile */
+    //                         if (userInterfaceHandler.setAlertMenu(0) == 0) {
+    //                             //utente decide tramite l'alert di sovrascrivere il salvataggio precedente
+    //                             setFileSaveOverwrite(fileNameArray[i]);
+    //                             vManager.showMenuScreen();
+    //                             break;
+    //                         } else {
+    //                             //utente decide di non sovrascrivere salvataggio precedente
+    //                             vManager.showGameScreen();
+    //                             break;
+    //                         }
 
-                        } else {
-                            /*se lo slot è libero, ovvero non è stato trovato tra i file scaricati da aws un file
-                            con il nome cercato, allora viene creato un nuovo file salvataggio
-                            * */
-                            // setFileSave(fileNameArray[i]);
+    //                     } else {
+    //                         /*se lo slot è libero, ovvero non è stato trovato tra i file scaricati da aws un file
+    //                         con il nome cercato, allora viene creato un nuovo file salvataggio
+    //                         * */
+    //                         // setFileSave(fileNameArray[i]);
 
-                            setFileSavePlayer(fileNameArray[i],i);
-                            setFileSaveStanze(fileNameArray[i],i);
-                            // setFileSaveMostri(fileNameArray[i]);
-                            // setFileSaveItem(fileNameArray[i]);
-                            break;
-                        }
-                    }
-                    counterFile++;
-                } else {
-                    //l'utente viene informato che gli slot salvataggio sono finiti tramite un alert
-                    userInterfaceHandler.setAlertMenu(1);
-                }
-                //finite le operazioni si ritorna alla schermata iniziale
+    //                         // setFileSavePlayer(fileNameArray[i],i);
+    //                         // setFileSaveStanze(fileNameArray[i],i);
+    //                         // setFileSaveMostri(fileNameArray[i]);
+    //                         // setFileSaveItem(fileNameArray[i]);
+    //                         break;
+    //                     }
+    //                 }
+    //                 counterFile++;
+    //             } else {
+    //                 //l'utente viene informato che gli slot salvataggio sono finiti tramite un alert
+    //                 userInterfaceHandler.setAlertMenu(1);
+    //             }
+    //             //finite le operazioni si ritorna alla schermata iniziale
 
-                vManager.showMenuScreen();
-                break;
+    //             vManager.showMenuScreen();
+    //             break;
 
-            case "exit":
-                vManager.showMenuScreen();
-                break;
+    //         case "exit":
+    //             vManager.showMenuScreen();
+    //             break;
 
-            case "save 1":
-                setFileSaveOverwrite(fileNameArray[0]);
-                vManager.showMenuScreen();
+    //         case "save 1":
+    //             setFileSaveOverwrite(fileNameArray[0]);
+    //             vManager.showMenuScreen();
 
-                break;
+    //             break;
 
-            case "save 2":
-                setFileSaveOverwrite(fileNameArray[1]);
-                vManager.showMenuScreen();
+    //         case "save 2":
+    //             setFileSaveOverwrite(fileNameArray[1]);
+    //             vManager.showMenuScreen();
 
-                break;
+    //             break;
 
-            case "save 3":
-                setFileSaveOverwrite(fileNameArray[2]);
-                vManager.showMenuScreen();
+    //         case "save 3":
+    //             setFileSaveOverwrite(fileNameArray[2]);
+    //             vManager.showMenuScreen();
 
-                break;
+    //             break;
 
-            case "save 4":
-                setFileSaveOverwrite(fileNameArray[3]);
-                vManager.showMenuScreen();
+    //         case "save 4":
+    //             setFileSaveOverwrite(fileNameArray[3]);
+    //             vManager.showMenuScreen();
 
-                break;
+    //             break;
 
-            case "win":
-                vManager.showWinPanel();
-                break;
-        }
-    }
+    //         case "win":
+    //             vManager.showWinPanel();
+    //             break;
+    //     }
+    // }
 
     /**
      * Metodo che gestice gli input testuali nella pagina di load dei salvataggi
@@ -239,8 +245,6 @@ public class choiceHandler implements ActionListener {
 
         if(input.toLowerCase().equals("slot 1")){
             checkSlotExistence(fileNameArray[0], 1);
-
-
         }
         if(input.toLowerCase().equals("slot 2")){
             checkSlotExistence(fileNameArray[1], 2);
@@ -259,94 +263,44 @@ public class choiceHandler implements ActionListener {
      * Metodo che gestice il salvataggio dei dati in un nuovo file
      * @param fileName nome del file di salvataggio
      */
-    void setFileSave(String fileName) {
-        try {
-            //salvataggio del file sulla cartella FileLoad
-            fileSave = new File("FileLoad/" + fileName);
-            //creazione del file
-            fileSave.createNewFile();
-            printWriter = new PrintWriter(fileSave);
-            //scrittura sul file
-            printWriter.println(
-                    "Player: " + reference.player.getNome() + "\n" +
-                    "Health: " + reference.player.getVita()+ "\n" +
-                    "Money: " + reference.player.getMonete()+ "\n" +
-                    "Monster_killed: " + reference.player.getMostriuccisi()+ "\n" +
-                    "Category: " + reference.player.getCategory()+ "\n" +
-                    "Weapon: " + reference.player.getSpadaName()+ "\n" +
-                    "Potions: " + reference.player.getNumpozioni() + "\n" +
-                    "Weight_Inventory: " + reference.player.getPeso() + "\n" +
-                    "Armour: " + reference.player.getArmourName() + "\n" +
-                    "key: " + reference.player.getGoldkey()+ "\n" +
-                    "Max_damage: " + reference.player.getDannoMaxSpada() + "\n" +
-                    "Min_damage: " + reference.player.getDannoMinSpada()
-
-                    //devi quando salvi salvare nella cartella Filesave 1(quindi creare 4 cartelle x 4 slot) tutti i parametri di gioco
-                    //del giocatore però poi dovrai salvare anche tutte le stanze(quindi prendi file txt) che si trovano all'interno della
-                    //cartella stanze old e per ciascun file di testo salvato in stanzeOld salvare il corrispettivo currentstanza.listaitem e
-                    //currentstanza.listamostri
-                    //quindi se tu per esempio attraversi stanza 1 e 2 e poi decidi di salvare sullo slot 1 avrai:
-                    //cartella slot 1 chiamata filesave1 con:
-                    //1 file di testo con tutti i parametri del giocatore
-                    //1 file di testo della stanza 1(presa da stanze old)
-                    //1 file di testo con lista mostri e rispettivi parametri di ogni mostro della lista e un altro con lista item uguale a mostri della stanza 1
-                    //1 file di testo della stanza 2(presa da stanze old)
-                    //1 file di testo con lista mostri e rispettivi parametri di ogni mostro della lista e un altro con lista item uguale a mostri della stanza 2
-
-            );
-            printWriter.close();
-            //caricamento del nuovo file su aws
-            upload = new uploadFile(fileName);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
     //CONTROLA QUI 
-    void setFileSavePlayer(String fileName,int i) {
+    void setFileSavePlayer(String repository) {
         try {
-            //salvataggio del file sulla cartella FileLoad
-            fileSave = new File("FileLoad/Filesave1/" + "paramplayer.txt");
+            //salvataggio del file sulla cartella FileLoad, se esiste cartella Filesave2 = filename
+            fileSave = new File("FileLoad/"+repository+"/paramplayer.txt");
             //creazione del file
             fileSave.createNewFile();
             printWriter = new PrintWriter(fileSave);
             //scrittura sul file
+            //manca proprio da salvare l'oggetto del player
             printWriter.println(
                     "Player: " + reference.player.getNome() + "\n" +
                     "Health: " + reference.player.getVita()+ "\n" +
                     "Money: " + reference.player.getMonete()+ "\n" +
                     "Monster_killed: " + reference.player.getMostriuccisi()+ "\n" +
                     "Category: " + reference.player.getCategory()+ "\n" +
-                    "Weapon: " + reference.player.getSpadaName()+ "\n" +
                     "Potions: " + reference.player.getNumpozioni() + "\n" +
                     "Weight_Inventory: " + reference.player.getPeso() + "\n" +
-                    "Armour: " + reference.player.getArmourName() + "\n" +
                     "key: " + reference.player.getGoldkey()+ "\n" +
                     "Max_damage: " + reference.player.getDannoMaxSpada() + "\n" +
-                    "Min_damage: " + reference.player.getDannoMinSpada()
-
-                    //devi quando salvi salvare nella cartella Filesave 1(quindi creare 4 cartelle x 4 slot) tutti i parametri di gioco
-                    //del giocatore però poi dovrai salvare anche tutte le stanze(quindi prendi file txt) che si trovano all'interno della
-                    //cartella stanze old e per ciascun file di testo salvato in stanzeOld salvare il corrispettivo currentstanza.listaitem e
-                    //currentstanza.listamostri
-                    //quindi se tu per esempio attraversi stanza 1 e 2 e poi decidi di salvare sullo slot 1 avrai:
-                    //cartella slot 1 chiamata filesave1 con:
-                    //1 file di testo con tutti i parametri del giocatore
-                    //1 file di testo della stanza 1(presa da stanze old)
-                    //1 file di testo con lista mostri e rispettivi parametri di ogni mostro della lista e un altro con lista item uguale a mostri della stanza 1
-                    //1 file di testo della stanza 2(presa da stanze old)
-                    //1 file di testo con lista mostri e rispettivi parametri di ogni mostro della lista e un altro con lista item uguale a mostri della stanza 2
-
+                    "Min_damage: " + reference.player.getDannoMinSpada() + "\n" +
+                    "Defense: " + reference.player.getArmour().getDifesa()+ "\n" +
+                    "Armour: " + reference.player.getArmourName() + "\n" +
+                    "Weapon: " + reference.player.getSpadaName()+ "\n" +
+                    "X: " + reference.player.getX() + "\n" +
+                    "Y: " + reference.player.getY() + "\n" +
+                    "Stanza: " + reference.curr_stanza + "\n" +
+                    "Goldkey: " + reference.player.getGoldkey()
             );
             printWriter.close();
             //caricamento del nuovo file su aws
-            upload = new uploadFile(fileName);
+            upload = new uploadFile(repository,"paramplayer.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
-    void setFileSaveStanze(String fileName,int n) {
+    void setFileSaveStanze(String repository) {
         try {
             //salvataggio del file sulla cartella FileLoad
             File fileSave;
@@ -357,7 +311,7 @@ public class choiceHandler implements ActionListener {
             File path = new File("src/main/java/Board/Stanzeold/");
             if (!path.exists())
                 throw new IllegalArgumentException("La Directory non esiste: ");
-
+            //prendo tutti i file nella cartella stanzeold
             File []allfiles = path.listFiles();
             if(allfiles.length > 0){
                 for(int i = 0; i < allfiles.length; i++) {
@@ -365,7 +319,7 @@ public class choiceHandler implements ActionListener {
                         throw new IllegalArgumentException("E presente una directory illegale: ");
                     }else{
                         //devo copiare contenuto da stanzeold in filesave
-                        fileSave = new File("FileLoad/Filesave1/"+allfiles[i].getName());
+                        fileSave = new File("FileLoad/"+repository+"/"+allfiles[i].getName());
                         fileSave.createNewFile();
                         ArrayList<String> ss = new ArrayList<String>();
                         ss = reference.filereader.fileToRead("src/main/java/Board/Stanzeold/"+allfiles[i].getName()); 
@@ -376,50 +330,179 @@ public class choiceHandler implements ActionListener {
                                 if((j+1) != ss.size())
                                     writer.write("\n");    
                             }
-                        
-                        upload = new uploadFile(allfiles[i].getName());
+                        upload = new uploadFile(repository,allfiles[i].getName());
                         }  
                         writer.close();
                     }
-                
                 }
-                
             //caricamento del nuovo file su aws
         } 
         } catch (IOException e) {
             fileSave = new File("");
             e.printStackTrace();
         }
+    }
+    void setFileDaLoadAstanzeOld(String repository) {
+        try {
+            //salvataggio del file sulla cartella FileLoad
+            File fileSave;
+            reference.lista_stanze = new ArrayList<>();
+            //salvo la stanza in cui sono con queste modifiche
+            //creazione del file
+            
+            File path = new File(repository);
+            if (!path.exists())
+                throw new IllegalArgumentException("La Directory non esiste: ");
+            //prendo tutti i file nella cartella stanzeold
+            File []allfiles = path.listFiles();
+            if(allfiles.length > 0){
+                for(int i = 0; i < allfiles.length; i++) {
+                    if(allfiles[i].isDirectory()){
+                        throw new IllegalArgumentException("E presente una directory illegale: ");
+                    }else if(allfiles[i].getName().compareTo("stanza_") > 0){
+                        //devo copiare contenuto da stanzeold in filesave
+                        fileSave = new File("src/main/java/Board/Stanzeold/"+allfiles[i].getName());
+                        fileSave.createNewFile();
+                        ArrayList<String> ss = new ArrayList<String>();
+                        ss = reference.filereader.fileToRead(repository+allfiles[i].getName()); 
+                        FileWriter writer = new FileWriter(fileSave);
+                        if(ss.size() > 0){
+                            for (int j = 0; j < ss.size(); j++) {
+                                writer.write(ss.get(j));
+                                if((j+1) != ss.size())
+                                    writer.write("\n");    
+                            }
+                        }  
+                        writer.close();
+                        
+                        // non mi piace questa conversione pero dovrebbe andare bene
+                        if(Board.convertASCIItoNumber((int)(allfiles[i].getName().charAt(7))) != (reference.player.getID())){
+                            Board b = new Board(Board.convertASCIItoNumber((int)(allfiles[i].getName().charAt(7))),true);
+                            reference.lista_stanze.add(b);
+                        }
+                            
+                    }
+                }
+                Board playerboard = new Board(reference.player.getID(),true);
+                reference.lista_stanze.add(playerboard);
+                reference.currentStanza = playerboard;
+            //caricamento del nuovo file su aws
+        } 
+        } catch (IOException e) {
+            fileSave = new File("");
+            e.printStackTrace();
+        }
+    }
+    void setFileSaveMostri(String repository) {
+        try {
+            //salvataggio del file sulla cartella FileLoad, se esiste cartella Filesave2 = filename
+            fileSave = new File("FileLoad/"+repository+"/listamonster.txt");
+            //creazione del file
+
+            //controlla che ci siano stanze
+            fileSave.createNewFile();
+            if(reference.lista_stanze.size() > 0){
+
+                printWriter = new PrintWriter(fileSave);
+                for (int i = 0; i < reference.lista_stanze.size(); i++) {
+                    //ora controllo che ci siano mostri nella stanza
+                    if(reference.lista_stanze.get(i).lista_mostri.size() > 0){
+                        //se ci sono procedo con il salvataggio sul file
+                        for (int j = 0; j < reference.lista_stanze.get(i).lista_mostri.size(); j++) {
+                            mostro mos = reference.lista_stanze.get(i).lista_mostri.get(j);
+                            //scrittura sul file
+                            //ordine di salvataggio del mostro
+                            //nome,health,maxdam,mindam,defense,stanza,x,y,symbol
+                            printWriter.println(mos.getNome() + "," + mos.getDanno_max() + "," + mos.getDanno_min() + "," + mos.getDifesa() + "," + mos.getVita() + "," + mos.getIdstanza() + "," + mos.getX() + "," + mos.getY() + "," + mos.getSymbol());
+                        }   
+                    }
+                }
+            }
+            printWriter.close();
+            //caricamento del nuovo file su aws
+            upload = new uploadFile(repository,"listamonster.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
+    void setFileSaveItem(String repository) {
+        try {
+            //salvataggio del file sulla cartella FileLoad, se esiste cartella Filesave2 = filename
+            fileSave = new File("FileLoad/"+repository+"/listaitem.txt");
+            //creazione del file
 
+            //controlla che ci siano stanze
+            fileSave.createNewFile();
+            if(reference.lista_stanze.size() > 0){
+                printWriter = new PrintWriter(fileSave);
+                for (int i = 0; i < reference.lista_stanze.size(); i++) {
+                    //ora controllo che ci siano mostri nella stanza
+                    if(reference.lista_stanze.get(i).lista_item.size() > 0){
+                        //se ci sono procedo con il salvataggio sul file
+                        for (int j = 0; j < reference.lista_stanze.get(i).lista_item.size(); j++) {
+                            Item it = reference.lista_stanze.get(i).lista_item.get(j);
+                            //scrittura sul file
+                            printWriter.println(
+                                it.getNome() + "," +
+                                it.getAttacco_max() + "," +
+                                it.getAttacco_min() + "," +
+                                it.getDifesa() + "," +
+                                it.isIsSword()+ "," +
+                                it.getId_stanza() +"," +
+                                it.isHasTake()+ "," +
+                                it.getPeso()+ "," +
+                                it.getX() + "," +
+                                it.getY() + "," +
+                                it.getSymbol()
+                            );
+                        }   
+                    }
+                }
+            }
+            printWriter.close();
+            //caricamento del nuovo file su aws
+            upload = new uploadFile(repository,"listaitem.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
     /**
      * Metodo che gestisce la sovrascrittura di file già esistenti
      * @param name  nome del file da sovrascrivere
      */
-    void setFileSaveOverwrite(String name) {
+    void setFileSavePlayerOverwrite(String repository) {
         try {
-            fileSave = new File("FileLoad/" + name);
+            //salvataggio del file sulla cartella FileLoad, se esiste cartella Filesave2 = filename
+            fileSave = new File("FileLoad/"+repository+"/paramplayer.txt");
+            //creazione del file
+            fileSave.createNewFile();
             printWriter = new PrintWriter(fileSave);
-            //scrittura su file
+            //scrittura sul file
+            //manca proprio da salvare l'oggetto del player
             printWriter.println(
                     "Player: " + reference.player.getNome() + "\n" +
                     "Health: " + reference.player.getVita()+ "\n" +
                     "Money: " + reference.player.getMonete()+ "\n" +
                     "Monster_killed: " + reference.player.getMostriuccisi()+ "\n" +
                     "Category: " + reference.player.getCategory()+ "\n" +
-                    "Weapon: " + reference.player.getSpadaName()+ "\n" +
                     "Potions: " + reference.player.getNumpozioni() + "\n" +
                     "Weight_Inventory: " + reference.player.getPeso() + "\n" +
-                    "Armour: " + reference.player.getArmourName() + "\n" +
                     "key: " + reference.player.getGoldkey()+ "\n" +
                     "Max_damage: " + reference.player.getDannoMaxSpada() + "\n" +
                     "Min_damage: " + reference.player.getDannoMinSpada() + "\n" +
-                    "Current_room: " + reference.currentStanza.ID_Stanza
+                    "Defense: " + reference.player.getArmour().getDifesa()+ "\n" +
+                    "Armour: " + reference.player.getArmourName() + "\n" +
+                    "Weapon: " + reference.player.getSpadaName()+ "\n" +
+                    "X: " + reference.player.getX() + "\n" +
+                    "Y: " + reference.player.getY() + "\n" +
+                    "Stanza: " + reference.curr_stanza + "\n" +
+                    "Goldkey: " + reference.player.getGoldkey()
             );
             printWriter.close();
-            //caricamento del file sovrascritto
-            upload = new uploadFile(name);
+            //caricamento del nuovo file su aws
+            upload = new uploadFile(repository,"paramplayer.txt");
             System.out.println("File sovrascritto");
             reloadFile = true;
             setLoad();
@@ -427,7 +510,129 @@ public class choiceHandler implements ActionListener {
             e.printStackTrace();
         }
     }
+    void setFileSaveStanzeOverwrite(String repository) {
+        try {
+            //salvataggio del file sulla cartella FileLoad
+            File fileSave;
+            //salvo la stanza in cui sono con queste modifiche
+            reference.filereader.fileToWriteAWS(reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt");
+            //creazione del file
+            
+            File path = new File("src/main/java/Board/Stanzeold/");
+            if (!path.exists())
+                throw new IllegalArgumentException("La Directory non esiste: ");
+            //prendo tutti i file nella cartella stanzeold
+            File []allfiles = path.listFiles();
+            if(allfiles.length > 0){
+                for(int i = 0; i < allfiles.length; i++) {
+                    if(allfiles[i].isDirectory()){
+                        throw new IllegalArgumentException("E presente una directory illegale: ");
+                    }else{
+                        //devo copiare contenuto da stanzeold in filesave
+                        fileSave = new File("FileLoad/"+repository+"/"+allfiles[i].getName());
+                        fileSave.createNewFile();
+                        ArrayList<String> ss = new ArrayList<String>();
+                        ss = reference.filereader.fileToRead("src/main/java/Board/Stanzeold/"+allfiles[i].getName()); 
+                        FileWriter writer = new FileWriter(fileSave);
+                        if(ss.size() > 0){
+                            for (int j = 0; j < ss.size(); j++) {
+                                writer.write(ss.get(j));
+                                if((j+1) != ss.size())
+                                    writer.write("\n");    
+                            }
+                        upload = new uploadFile(repository,allfiles[i].getName());
+                        }  
+                        writer.close();
+                    }
+                }
+            reloadFile = true;
+            setLoad();
+            //caricamento del nuovo file su aws
+        } 
+        } catch (IOException e) {
+            fileSave = new File("");
+            e.printStackTrace();
+        }
+    }
+    void setFileSaveMostriOverwrite(String repository) {
+        try {
+            //salvataggio del file sulla cartella FileLoad, se esiste cartella Filesave2 = filename
+            fileSave = new File("FileLoad/"+repository+"/listamonster.txt");
+            //creazione del file
 
+            //controlla che ci siano stanze
+            fileSave.createNewFile();
+            if(reference.lista_stanze.size() > 0){
+
+                printWriter = new PrintWriter(fileSave);
+                for (int i = 0; i < reference.lista_stanze.size(); i++) {
+                    //ora controllo che ci siano mostri nella stanza
+                    if(reference.lista_stanze.get(i).lista_mostri.size() > 0){
+                        //se ci sono procedo con il salvataggio sul file
+                        for (int j = 0; j < reference.lista_stanze.get(i).lista_mostri.size(); j++) {
+                            mostro mos = reference.lista_stanze.get(i).lista_mostri.get(j);
+                            //scrittura sul file
+                            //ordine di salvataggio del mostro
+                            //nome,health,maxdam,mindam,defense,stanza,x,y,symbol
+                            printWriter.println(mos.getNome() + "," + mos.getDanno_max() + "," + mos.getDanno_min() + "," + mos.getDifesa() + "," + mos.getVita() + "," + mos.getIdstanza() + "," + mos.getX() + "," + mos.getY() + "," + mos.getSymbol());
+                        }   
+                    }
+                }
+            }
+            printWriter.close();
+            //caricamento del nuovo file su aws
+            upload = new uploadFile(repository,"listamonster.txt");
+            reloadFile = true;
+            setLoad();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    void setFileSaveItemOverwrite(String repository) {
+        try {
+            //salvataggio del file sulla cartella FileLoad, se esiste cartella Filesave2 = filename
+            fileSave = new File("FileLoad/"+repository+"/listaitem.txt");
+            //creazione del file
+
+            //controlla che ci siano stanze
+            fileSave.createNewFile();
+            if(reference.lista_stanze.size() > 0){
+                printWriter = new PrintWriter(fileSave);
+                for (int i = 0; i < reference.lista_stanze.size(); i++) {
+                    //ora controllo che ci siano mostri nella stanza
+                    if(reference.lista_stanze.get(i).lista_item.size() > 0){
+                        //se ci sono procedo con il salvataggio sul file
+                        for (int j = 0; j < reference.lista_stanze.get(i).lista_item.size(); j++) {
+                            Item it = reference.lista_stanze.get(i).lista_item.get(j);
+                            //scrittura sul file
+                            printWriter.println(
+                                it.getNome() + "," +
+                                it.getAttacco_max() + "," +
+                                it.getAttacco_min() + "," +
+                                it.getDifesa() + "," +
+                                it.isIsSword()+ "," +
+                                it.getId_stanza() +"," +
+                                it.isHasTake()+ "," +
+                                it.getPeso()+ "," +
+                                it.getX() + "," +
+                                it.getY() + "," +
+                                it.getSymbol()
+                            );
+                        }   
+                    }
+                }
+            }
+            printWriter.close();
+            //caricamento del nuovo file su aws
+            upload = new uploadFile(repository,"listaitem.txt");
+            reloadFile = true;
+            setLoad();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    
+    }
     /**
      * Metoco che controlla quali file sono già stati scaricati in precedenza e aggiorna la
      * variabile counterFileFirstLoad se un file è già presente
@@ -438,7 +643,7 @@ public class choiceHandler implements ActionListener {
         userInterfaceHandler.counterLoadLabel.setText("Save n. " + (counterFile+1));
         //array che scorre i nomi di tutti i file di bucket aws
         for (String s : fileNameArray) {
-            fileLoad = new File("FileDownload/" + s);
+            fileLoad = new File("FileDownload/"+s+"/");
 
             //se un file non esiste in locale ma è presente nel bucket viene scaricato
             if (!fileLoad.exists() || reloadFile) {
@@ -448,9 +653,10 @@ public class choiceHandler implements ActionListener {
                 }
                 DownloadFile downloadFIle = new DownloadFile(s, userInterfaceHandler);
             } else {
-
+                //dovro fare il controllo tra il numero di file salvati sul bucket e quelli in locale e dici 
+                //gia presente o meno
                 counterFileFirstLoad++;
-                System.out.println("File " + s + " già presente!");
+                
                 i++;
             }
 
@@ -461,18 +667,25 @@ public class choiceHandler implements ActionListener {
     }
 //metodo per salvare i dati ottenuti dai file scaricati dal bucket aws
     public void setupLoad(int k)  {
-
+        setNewGame();
         try {
             int counter = 1;
-            File file = new File("FileLoad/Filesave "+k+".txt");
+            //carico parametri giocatore
+            File fileplayer = new File("FileLoad/Filesave"+k+"/paramplayer.txt");
             Pattern pattern = Pattern.compile(": (.+)");
-            BufferedReader br = new BufferedReader(new FileReader(file));
-                String line;
-                //viene letta ogni riga del file e per ogni riga viene settato il valore corrispondente nelle stats del player
-                while ((line = br.readLine()) != null) {
-                    Matcher matcher = pattern.matcher(line);
-                    if (matcher.find()) {
+            BufferedReader br = new BufferedReader(new FileReader(fileplayer));
 
+            File fileitem = new File("FileLoad/Filesave"+k+"/listaitem.txt");
+            BufferedReader britem = new BufferedReader(new FileReader(fileitem));
+
+            File filemonster = new File("FileLoad/Filesave"+k+"/listamonster.txt");
+            BufferedReader brmonster = new BufferedReader(new FileReader(filemonster));
+
+            String lineplayer;
+            int difesaplayer = 0;
+            while ((lineplayer = br.readLine()) != null) {
+                Matcher matcher = pattern.matcher(lineplayer);
+                if (matcher.find()) {
                     if(counter == 1)
                         reference.player.setNome(matcher.group(1));
                     else if(counter == 2)
@@ -484,153 +697,79 @@ public class choiceHandler implements ActionListener {
                     else if(counter == 5)
                         reference.player.setCategory(matcher.group(1));
                     else if(counter == 6)
-                        reference.player.setSpadaName(matcher.group(1));
+                        reference.player.setNum_pozioni(Integer.parseInt(matcher.group(1)));  
                     else if(counter == 7)
-                        reference.player.setNum_pozioni(Integer.parseInt(matcher.group(1)));
+                        reference.player.setPeso(0);
                     else if(counter == 8)
-                        reference.player.setPeso(Integer.parseInt(matcher.group(1)));
-                    else if(counter == 9)
-                        reference.player.setArmourName((matcher.group(1)));
-                    else if(counter == 10)
                         reference.player.setKeyLoad(Integer.parseInt((matcher.group(1))));
-                    else if(counter == 11)
+                    else if(counter == 9)
                         reference.player.setMaxDamage(Integer.parseInt((matcher.group(1))));
-                    else if(counter == 12)
+                    else if(counter == 10)
                         reference.player.setMinDamage(Integer.parseInt((matcher.group(1))));
-                    else if(counter == 13){
+                    else if(counter == 11)
+                        difesaplayer = Integer.parseInt((matcher.group(1)));
+                    else if(counter == 12)
+                        reference.player.addArmour(new Item("armatura",0,0,difesaplayer,false,reference.curr_stanza,true,30));
+                    else if(counter == 13)
+                        reference.player.addSpada(new Item("spada", reference.player.getDannoMaxSpada(), reference.player.getDannoMinSpada(), 0, true, reference.curr_stanza, true,20));
+                    else if(counter == 14)
+                        reference.player.setX(Integer.parseInt((matcher.group(1))));
+                    else if(counter == 15)
+                        reference.player.setY(Integer.parseInt((matcher.group(1))));
+                    else if(counter == 16)
+                        reference.player.setID(Integer.parseInt((matcher.group(1))));
+                    else if(counter == 17)
+                        reference.player.setGoldkeyAWS(Integer.parseInt((matcher.group(1))));
+               }
+               counter++;
+            }
+            br.close();
+            //lista mostri e lista item uguale a player stesso modus operandi
+            File filedirectory = new File("FileLoad/Filesave"+k+"/");
+            File[] all_files = filedirectory.listFiles();
+            ArrayList<mostro> listamostri = new ArrayList<>();
+            ArrayList<Item> listaitem = new ArrayList<>();
 
-                        reference.currentStanza = new Board(Integer.parseInt((matcher.group(1))), true);
-                        //Forse problema con board parametrizzata con flag
-                        //se si usa board senza flag problema: non salva i file stanza_n.txt ma salva le statistiche del giocatore
-                        reference.curr_stanza = Integer.parseInt((matcher.group(1)));
-                        if( reference.curr_stanza == 2){
-                            for (int row = 0; row < reference.currentStanza.cellestanza.size(); row++) {
-                                for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
-                                    Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
-                                    if (cell.getSymbol() == 'E' ) {
-                                        reference.player.setX(col-1);
-                                        reference.player.setY(row);
-                                        reference.player.setspawnTo('E');
-                                        reference.currentStanza.cellestanza.get(row).set(col-1,Cell.PLAYER);
-                                        break;
-                                    }
-                                }
-                            }
-                        }else if( reference.curr_stanza == 3){
-                            for (int row = 0; row < reference.currentStanza.cellestanza.size(); row++) {
-                                for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
-                                    Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
-                                    if (cell.getSymbol() == 'S' ) {
-                                        reference.player.setX(col);
-                                        reference.player.setY(row-1);
-                                        reference.player.setspawnTo('S');
-                                        reference.currentStanza.cellestanza.get(row-1).set(col,Cell.PLAYER);
-
-                                        break;
-                                    }
-                                }
-                            }
-                        }else if( reference.curr_stanza == 4){
-                            for (int row = 0; row < reference.currentStanza.cellestanza.size(); row++) {
-                                for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
-                                    Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
-                                    if (cell.getSymbol() == 'E' ) {
-                                        reference.player.setX(col-1);
-                                        reference.player.setY(row);
-                                        reference.player.setspawnTo('E');
-                                        reference.currentStanza.cellestanza.get(row).set(col-1,Cell.PLAYER);
-                                        break;
-                                    }
-                                }
-                            }
+            if(all_files.length > 0){
+                reference.filereader.ResetDirectory();
+                for (int i = 0; i < all_files.length; i++) {
+                    
+                    if(all_files[i].getName().compareTo("listamonster.txt") == 0){
+                        //qui spostiamo riempimento mostri
+                        String linemonster;
+                        while ((linemonster=brmonster.readLine()) != null) {
+                            String[] temp2 = linemonster.split(",");
+                            mostro m = new mostro(temp2[0],Integer.parseInt(temp2[1]),Integer.parseInt(temp2[2]),Integer.parseInt(temp2[3]),Integer.parseInt(temp2[4]),Integer.parseInt(temp2[5]),Integer.parseInt(temp2[6]),Integer.parseInt(temp2[7]),temp2[8].charAt(0));
+                            listamostri.add(m);
                         }
-                        else if( reference.curr_stanza == 5){
-                            for (int row = 0; row < reference.currentStanza.cellestanza.size(); row++) {
-                                for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
-                                    Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
-                                    if (cell.getSymbol() == 'S' ) {
-                                        reference.player.setX(col);
-                                        reference.player.setY(row-1);
-                                        reference.player.setspawnTo('S');
-                                        reference.currentStanza.cellestanza.get(row-1).set(col,Cell.PLAYER);
-                                        break;
-                                    }
-                                }
-                            }
-                        }else if( reference.curr_stanza == 6){
-                            for (int row = 0; row < reference.currentStanza.cellestanza.size(); row++) {
-                                for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
-                                    Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
-                                    if (cell.getSymbol() == 'E' ) {
-                                        reference.player.setX(col-1);
-                                        reference.player.setY(row);
-                                        reference.player.setspawnTo('E');
-                                        reference.currentStanza.cellestanza.get(row).set(col-1,Cell.PLAYER);
-                                        break;
-                                    }
-                                }
-                            }
-                        }else if( reference.curr_stanza == 7){
-                            for (int row = 0; row < reference.currentStanza.cellestanza.size(); row++) {
-                                for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
-                                    Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
-                                    if (cell.getSymbol() == 'E' ) {
-                                        reference.player.setX(col-1);
-                                        reference.player.setY(row);
-                                        reference.player.setspawnTo('E');
-                                        reference.currentStanza.cellestanza.get(row).set(col-1,Cell.PLAYER);
-                                        break;
-                                    }
-                                }
-                            }
-                        }else if( reference.curr_stanza == 8){
-                            for (int row = 0; row < reference.currentStanza.cellestanza.size(); row++) {
-                                for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
-                                    Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
-                                    if (cell.getSymbol() == 'S' ) {
-                                        reference.player.setX(col);
-                                        reference.player.setY(row-1);
-                                        reference.player.setspawnTo('S');
-                                        reference.currentStanza.cellestanza.get(row-1).set(col,Cell.PLAYER);
-                                        break;
-                                    }
-                                }
-                            }
-                        }else if( reference.curr_stanza == 9){
-                            for (int row = 0; row < reference.currentStanza.cellestanza.size(); row++) {
-                                for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
-                                    Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
-                                    if (cell.getSymbol() == 'S' ) {
-                                        reference.player.setX(col-1);
-                                        reference.player.setY(row-1);
-                                        reference.player.setspawnTo('S');
-                                        reference.currentStanza.cellestanza.get(row-1).set(col-1,Cell.PLAYER);
-                                        break;
-                                    }
-                                }
-                            }
-                        }else if( reference.curr_stanza == 0){
-                            for (int row = 0; row < reference.currentStanza.cellestanza.size(); row++) {
-                                for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
-                                    Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
-                                    if (cell.getSymbol() == 'G' ) {
-                                        reference.player.setX(col-1);
-                                        reference.player.setY(row);
-                                        reference.player.setspawnTo('G');
-                                        reference.currentStanza.cellestanza.get(row).set(col-1,Cell.PLAYER);
-                                        break;
-                                    }
-                                }
-                            }
+                    }else if(all_files[i].getName().compareTo("listaitem.txt") == 0){
+                        //qui spostiamo riempimento item
+                        String lineitem;
+                        while ((lineitem=britem.readLine()) != null) {
+                            String[] temp2 = lineitem.split(",");
+                            Item m = new Item(temp2[0],Integer.parseInt(temp2[1]),Integer.parseInt(temp2[2]),Integer.parseInt(temp2[3]),Boolean.parseBoolean(temp2[4]),Integer.parseInt(temp2[5]),Boolean.parseBoolean(temp2[6]),Integer.parseInt(temp2[7]),Integer.parseInt(temp2[8]),Integer.parseInt(temp2[9]),temp2[10].charAt(0));
+                            listaitem.add(m);
                         }
-                        System.out.println("final room: " + reference.currentStanza.ID_Stanza);
-
-
                     }
-                    counter++;
+                }
+                britem.close();
+                brmonster.close();
+                setFileDaLoadAstanzeOld("FileLoad/Filesave"+k+"/");
+            }
+            if(reference.lista_stanze.size() > 0){
+                for (int i = 0; i < reference.lista_stanze.size(); i++) {
+                    for (int j = 0; j < listamostri.size(); j++) {
+                        if(reference.lista_stanze.get(i).getid() == listamostri.get(j).getIdstanza())
+                            reference.lista_stanze.get(i).lista_mostri.add(listamostri.get(j));
+                    }
+                    for (int j = 0; j < listaitem.size(); j++) {
+                        if(reference.lista_stanze.get(i).getid() == listaitem.get(j).getId_stanza())
+                            reference.lista_stanze.get(i).lista_item.add(listaitem.get(j));
+                    }
                 }
             }
-        reference.functions.updateMonsterPosition();
+            //qui ovviamente scrive tutte le stanze in stanzeold
+            
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -642,11 +781,13 @@ public class choiceHandler implements ActionListener {
         reference.player = new Player();
         reference.filereader = new Readfile();
         reference.mostrorun = new mostro();
-        reference.currentStanza = new Board(1);
+        reference.functions = new func();
+        reference.item = new Item();
+        // reference.currentStanza = new Board(1);
     }
 
-    private void checkSlotExistence(String fileName, int i){
-        File fileExistCheck = new File("FileLoad/" + fileName);
+    private void checkSlotExistence(String directory, int i){
+        File fileExistCheck = new File("FileLoad/" + directory);
         try {
             if(fileExistCheck.exists()){
                 vManager.checkLoad = true;

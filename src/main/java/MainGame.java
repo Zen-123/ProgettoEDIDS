@@ -4,9 +4,9 @@ import Board.func;
 import Board.reference;
 import Player.Player;
 import Player.mostro;
-import UI.visibilityManager;
-import UI.choiceHandler;
 import UI.UI;
+import UI.choiceHandler;
+import UI.visibilityManager;
 
 
 /**
@@ -43,6 +43,6 @@ public class MainGame {
         reference.mostrorun = new mostro();
         reference.currentStanza = new Board(reference.curr_stanza);
         reference.functions = new func();
-        //reference.filereader.ResetDirectory();
+        reference.filereader.ResetDirectory();
     }
 }

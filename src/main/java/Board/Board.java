@@ -34,8 +34,8 @@ public class Board{
     public Board(int id_stanza, boolean verification){
         reference.alreadybeen = verification;
         this.ss = new ArrayList<String>();
-        String temp = "src/main/java/Board/Stanzeold/stanza_"+id_stanza+".txt";
         this.ID_Stanza = id_stanza;
+        String temp = "src/main/java/Board/Stanzeold/stanza_"+id_stanza+".txt";
         reference.curr_stanza = id_stanza;
         ss = reference.filereader.fileToRead(temp); 
         this.column = ss.size()-1;
@@ -175,7 +175,7 @@ public class Board{
     public void setDrive_to_S(int drive_to_S) {
         this.drive_to_S = convertASCIItoNumber(drive_to_S);
     }
-    public int convertASCIItoNumber(int asciinumber){
+    public static int convertASCIItoNumber(int asciinumber){
         int converted;
         switch(asciinumber) {
             case 48:
@@ -209,7 +209,7 @@ public class Board{
                 converted=9;    
                 break;
             default:
-                converted = 0;
+                converted = asciinumber;
                 break;
         }
         return converted;

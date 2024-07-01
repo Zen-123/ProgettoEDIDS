@@ -16,6 +16,7 @@ public class Player extends entity{
     private int goldkey;
     private char spawnInto;
     private boolean canAttack;
+    private int id;
 
     public Player(){
         this.nome = " ";
@@ -45,11 +46,13 @@ public class Player extends entity{
         item.setCanAttack(false);
         this.peso += item.getPeso();
         this.spada = item;
+        this.hasSword = true;
     }
     public void addArmour(Item item){
         item.setCanAttack(false);
         this.peso += item.getPeso();
         this.armatura = item;
+        this.hasArmour = true;
     }
     public void removeKey(){
         this.key -= 1;
@@ -187,7 +190,9 @@ public class Player extends entity{
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public void setNum_pozioni(int pozioni) {this.num_pozioni = pozioni;}
+    public void setNum_pozioni(int pozioni) {
+        this.num_pozioni = pozioni;
+    }
     public String getCategory() {
         return this.category;
     }
@@ -215,4 +220,13 @@ public class Player extends entity{
         this.mostri_uccisi = killed;
     }
 
+    public void setGoldkeyAWS(int goldkey) {
+        this.goldkey = goldkey;
+    }
+    public int getID(){
+        return this.id;
+    }
+    public void setID(int a){
+        this.id = a;
+    }
 }

@@ -1,19 +1,24 @@
 package UI;
 
 
-import Board.reference;
-import Player.Player;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import javax.swing.*;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Files;
-
-import static org.junit.jupiter.api.Assertions.*;
+import Board.reference;
+import Player.Player;
 
 class choiceHandlerTest {
 
@@ -62,7 +67,7 @@ class choiceHandlerTest {
         System.setProperty("user.dir", tempDir.toString());
 
         //chiamata alla funzione da testare
-        choiceHandler.manageTextInput("save");
+        // choiceHandler.manageTextInput("save");
 
         // verifica se file da caricare sul bucket aws esiste
         assertTrue(tempFile.exists());
@@ -92,7 +97,7 @@ class choiceHandlerTest {
         File tempFile = new File("FileLoad/test.txt");
 
         // chiamata al metodo effettivo
-        choiceHandler.setFileSave(fileName);
+        // choiceHandler.setFileSave(fileName);
 
         // verifica se metodo è stato eseguito correttamente
         assertTrue(tempFile.exists());

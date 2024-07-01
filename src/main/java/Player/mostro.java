@@ -19,6 +19,17 @@ public class mostro extends entity{
         this.vita = vita;
         this.idstanza= id_stanza;
     }
+    public mostro(String nome, int danno_max,int danno_min, int difesa, int vita, int id_stanza, int x, int y , char symbol){
+        this.nome=nome;
+        this.difesa=difesa;
+        this.danno_max = danno_max;
+        this.danno_min = danno_min;
+        this.vita = vita;
+        this.idstanza= id_stanza;
+        super.x = x;
+        super.y = y;
+        super.symbol = symbol;
+    }
     public String getNome() {
         return nome;
     }

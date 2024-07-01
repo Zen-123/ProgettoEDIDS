@@ -26,10 +26,10 @@ public class uploadFile {
      * @param filename nome del file da scaricare
      * @throws IOException
      */
-    public uploadFile(String filename) throws IOException {
+    public uploadFile(String repositoryname, String filename) throws IOException {
         //oggetto che prende i dati contenuti da un file nel file system
-        System.out.print(filename);
-        InputStream file =  new FileInputStream("FileLoad/Filesave1/"+filename);
+        System.out.print(filename); 
+        InputStream file =  new FileInputStream("FileLoad/"+repositoryname+"/"+filename);  //qui manca file di testo dopo percorso che passero sotto voce getname
         //Interfaccia che permette di accedere ai web service di aws s3
         AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(region).build();
 
