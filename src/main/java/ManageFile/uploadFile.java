@@ -29,7 +29,7 @@ public class uploadFile {
     public uploadFile(String filename) throws IOException {
         //oggetto che prende i dati contenuti da un file nel file system
         System.out.print(filename);
-        InputStream file =  new FileInputStream("FileLoad/"+filename);
+        InputStream file =  new FileInputStream("FileLoad/Filesave1/"+filename);
         //Interfaccia che permette di accedere ai web service di aws s3
         AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(region).build();
 

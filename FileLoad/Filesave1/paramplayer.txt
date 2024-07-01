@@ -1,13 +1,12 @@
-Player: d
+Player: dsf
 Health: 100
-Money: 22
+Money: 0
 Monster_killed: 0
 Category: warrior
 Weapon: spada
-Potions: 0
-Weight_Inventory: 50
+Potions: 1
+Weight_Inventory: 55
 Armour: armatura
 key: 0
 Max_damage: 13
 Min_damage: 5
-Current_room: 2

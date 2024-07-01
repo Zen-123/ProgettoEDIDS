@@ -10,7 +10,6 @@ import java.io.File;
 
 import javax.swing.JPanel;
 
-import UI.visibilityManager;
 import Board.Cell;
 import Board.reference;
 
@@ -223,7 +222,9 @@ public class gameBoard extends JPanel implements KeyListener {
                             /*se lo slot è libero, ovvero non è stato trovato tra i file scaricati da aws un file
                             con il nome cercato, allora viene creato un nuovo file salvataggio
                             * */
-                                    handler.setFileSave(fileNameArray[i]);
+                                    // handler.setFileSave(fileNameArray[i]);
+                                    handler.setFileSavePlayer(fileNameArray[i],i);
+                                    handler.setFileSaveStanze(fileNameArray[i],i);
                                     break;
                                 }
                             }
