@@ -1,0 +1,139 @@
+@startuml
+
+class Entity {
+    - int x
+    - int y
+    - char symbol
+    + getX(): int
+    + getY(): int
+    + getSymbol(): char
+    + setSymbol(char): void
+    + setY(int): void
+    + setX(int): void
+    + setCoordinate(int, int): void
+}
+
+class Item {
+    - String nome
+    - int attacco_max
+    - int attacco_min
+    - int difesa
+    - boolean isSword
+    - int id_stanza
+    - boolean hasTake
+    - boolean canAttack
+    + Item()
+    + Item(String, int, int, int, boolean, int, boolean)
+    + CanAttack(): boolean
+    + setCanAttack(boolean): void
+    + getDanno(): int
+    + getNome(): String
+    + getAttacco_max(): int
+    + getAttacco_min(): int
+    + getDifesa(): int
+    + isIsSword(): boolean
+    + getId_stanza(): int
+    + setId_stanza(int): void
+    + isHasTake(): boolean
+    + setHasTake(boolean): void
+}
+
+class Player {
+    - String nome
+    - int vita
+    - int peso
+    - String category
+    - int num_pozioni
+    - int monete
+    - int mostri_uccisi
+    - Item spada
+    - Item armatura
+    - boolean hasSword
+    - boolean hasArmour
+    - int key
+    - int goldkey
+    - char spawnInto
+    - boolean canAttack
+    + Player()
+    + getDannoMaxSpada(): int
+    + getDannoMinSpada(): int
+    + getNome(): String
+    + addSpada(Item): void
+    + addArmour(Item): void
+    + removeKey(): void
+    + setspawnTo(char): void
+    + spawnTo(): char
+    + removeGoldKey(): void
+    + getSpada(): Item
+    + getSpadaName(): String
+    + getArmourName(): String
+    + setSpadaName(String): void
+    + setArmourName(String): void
+    + setMaxDamage(int): void
+    + setMinDamage(int): void
+    + getArmour(): Item
+    + getVita(): int
+    + getPeso(): int
+    + setPeso(int): void
+    + getNumpozioni(): int
+    + addPozioni(): void
+    + usePozioni(): void
+    + isAttacking(): boolean
+    + setCanAttack(boolean): void
+    + takeItem(Item): void
+    + getMonete(): int
+    + getMostriuccisi(): int
+    + isHasSword(): boolean
+    + isAlive(): boolean
+    + setMoneteLoad(int): void
+    + setMonete(int): void
+    + setKey(): void
+    + setKeyLoad(int): void
+    + setGoldKey(): void
+    + addNum_pozioni(int): void
+    + getKey(): int
+    + getGoldkey(): int
+    + setNome(String): void
+    + setNum_pozioni(int): void
+    + getCategory(): String
+    + setCategory(String): void
+    + isHasArmour(): boolean
+    + setHasArmour(boolean): void
+    + setVita(int): void
+    + takeDamage(int): void
+    + setMostri_uccisi(): void
+    + setMostriUccisiLoad(int): void
+}
+
+class Mostro {
+    - String nome
+    - int danno_max
+    - int danno_min
+    - int difesa
+    - int vita
+    - int idstanza
+    + Mostro()
+    + Mostro(String, int, int, int, int, int)
+    + getNome(): String
+    + setNome(String): void
+    + getDanno(): int
+    + getDifesa(): int
+    + setDifesa(int): void
+    + getVita(): int
+    + setVita(int): void
+    + takeDamage(int): void
+    + getIdstanza(): int
+    + setIdstanza(int): void
+    + getDanno_max(): int
+    + setDanno_max(int): void
+    + getDanno_min(): int
+    + setDanno_min(int): void
+}
+
+Entity <|-- Player
+Entity <|-- Mostro
+Entity <|-- Item
+Player --> Item : spada
+Player --> Item : armatura
+
+@enduml
