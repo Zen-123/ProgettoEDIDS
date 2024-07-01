@@ -28,6 +28,8 @@ Lo scopo del gioco è quello di sconfiggere il boss e conquistare il dungeon.
 - [Amazon aws API]  version: 1.12.733
 - [Amazon aws s3 cloud service]
 - Jupiter version: 5.11.0-M2
+- [ChatGPT 4]
+- [Claude 3.5 Sonnet ai]
 
 > Il salvataggio dei file di testo contenenti i dati avviene tramite le api di amazon aws, per poter caricare e/o scaricare eventuali file dal bucket è necessaria una connessione ad internet
 
@@ -35,7 +37,8 @@ Lo scopo del gioco è quello di sconfiggere il boss e conquistare il dungeon.
 [Maven]: <https://mvnrepository.com/>
 [Amazon aws API]: <https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3>
 [Amazon aws s3 cloud service]: <https://aws.amazon.com/pm/serv-s3/?gclid=CjwKCAjwp4m0BhBAEiwAsdc4aF26ZOv6PuYAxJjI4VFSovc2K0MLmS86Qs0JGo-zJdFDZqPMBDfdvRoCNQ8QAvD_BwE&trk=fe2078a2-393b-4713-b274-14590f118a9d&sc_channel=ps&ef_id=CjwKCAjwp4m0BhBAEiwAsdc4aF26ZOv6PuYAxJjI4VFSovc2K0MLmS86Qs0JGo-zJdFDZqPMBDfdvRoCNQ8QAvD_BwE:G:s&s_kwcid=AL!4422!3!536324415084!e!!g!!amazon%20s3!12196406601!115425125885>
-
+[ChatGPT 4]: <https://chatgpt.com/>
+[Claude 3.5 Sonnet ai]: <https://claude.ai/new>
 
 ## Installazione software
 
