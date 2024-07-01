@@ -98,7 +98,7 @@ public class choiceHandler implements ActionListener {
              */
             case "Load":
                 vManager.showLoadScreen();
-                setLoad();
+                // setLoad();
                 break;
             /*
                 gestisce il bottone: loadMessageButton
@@ -505,7 +505,7 @@ public class choiceHandler implements ActionListener {
             upload = new uploadFile(repository,"paramplayer.txt");
             System.out.println("File sovrascritto");
             reloadFile = true;
-            setLoad();
+            setLoad("paramplayer.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -541,12 +541,12 @@ public class choiceHandler implements ActionListener {
                                     writer.write("\n");    
                             }
                         upload = new uploadFile(repository,allfiles[i].getName());
+                        reloadFile = true;
+                        setLoad(allfiles[i].getName());
                         }  
                         writer.close();
                     }
                 }
-            reloadFile = true;
-            setLoad();
             //caricamento del nuovo file su aws
         } 
         } catch (IOException e) {
@@ -583,7 +583,7 @@ public class choiceHandler implements ActionListener {
             //caricamento del nuovo file su aws
             upload = new uploadFile(repository,"listamonster.txt");
             reloadFile = true;
-            setLoad();
+            setLoad("listamonster.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -627,7 +627,7 @@ public class choiceHandler implements ActionListener {
             //caricamento del nuovo file su aws
             upload = new uploadFile(repository,"listaitem.txt");
             reloadFile = true;
-            setLoad();
+            setLoad("listaitem.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -637,13 +637,13 @@ public class choiceHandler implements ActionListener {
      * Metoco che controlla quali file sono già stati scaricati in precedenza e aggiorna la
      * variabile counterFileFirstLoad se un file è già presente
      */
-    public void setLoad() {
+    public void setLoad(String name) {
         File fileLoad;
         int i=1;
         userInterfaceHandler.counterLoadLabel.setText("Save n. " + (counterFile+1));
         //array che scorre i nomi di tutti i file di bucket aws
         for (String s : fileNameArray) {
-            fileLoad = new File("FileDownload/"+s+"/");
+            fileLoad = new File("FileDownload/"+s+"/"+name);
 
             //se un file non esiste in locale ma è presente nel bucket viene scaricato
             if (!fileLoad.exists() || reloadFile) {

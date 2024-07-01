@@ -33,7 +33,7 @@ public class MainGame {
     public MainGame(){
         reference.ui.createUI();
         manager.showMenuScreen();
-        handler.setLoad();
+        // handler.setLoad();
     }
 
     //inizializzazione var globali
