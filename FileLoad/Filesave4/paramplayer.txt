@@ -1,0 +1,17 @@
+Player:  
+Health: 100
+Money: 20
+Monster_killed: 0
+Category: thief
+Potions: 4
+Weight_Inventory: 50
+key: 0
+Max_damage: 8
+Min_damage: 4
+Defense: 0
+Armour: armatura
+Weapon: spada
+X: 3
+Y: 8
+Stanza: 2
+Goldkey: 0
