@@ -56,7 +56,7 @@ class DownloadFileTest {
     @ParameterizedTest
     @ValueSource(strings = {"Filesave1", "Filesave2", "Filesave3", "Filesave4"})
     //test con costruttore parametrizzato e tutti i nomi del file leciti
-    void testConstructorWithAllValidFileNames(String dirname, String dirname) {
+    void testConstructorWithAllValidFileNames(String dirname) {
         DownloadFile downloadFile = new DownloadFile(dirname, "listamostri.txt", ui);
         // verifica della creazione di ogetto senza lancio di eccezioni
         assertNotNull(downloadFile);
