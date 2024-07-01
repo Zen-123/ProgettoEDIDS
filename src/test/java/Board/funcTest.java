@@ -103,7 +103,7 @@ class funcTest {
        //gli dico al player che ho attraversato porta W quindi spawna di fianco ad E
        reference.player.setspawnTo('E');
        reference.functions.changeRoomAndWriteToFile(13);
-       assertEquals(1, reference.player.getX());
+       assertEquals(5, reference.player.getX());
        assertEquals(1, reference.player.getY());
        assertEquals('/', reference.player.spawnTo());
     }

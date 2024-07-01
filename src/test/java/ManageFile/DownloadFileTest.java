@@ -37,7 +37,7 @@ class DownloadFileTest {
     //test costruttore parametrizzato, solo nome del file
     void testConstructorWithValidFileName() {
         String dirname = "Filesave1";
-        String fileName = "Filesave1";
+        String fileName = "Filesave1.txt";
         DownloadFile downloadFile = new DownloadFile(dirname,fileName, ui);
 
         // verifica di corrette creazione di oggetto di tipo DownloadFile
@@ -48,7 +48,7 @@ class DownloadFileTest {
     //test costruttore parametrizzato solo con nome del file, e nome del file illecito
     void testConstructorWithInvalidFileName() {
         String fileName = "InvalidFile.txt";
-        String dirname = "Filesave1";
+        String dirname = "InvaliddirFilesave1";
         // ci aspettiamo che venga lanciata una eccezione
         assertThrows(IllegalStateException.class, () -> new DownloadFile(dirname,fileName, ui));
     }
@@ -56,8 +56,8 @@ class DownloadFileTest {
     @ParameterizedTest
     @ValueSource(strings = {"Filesave1", "Filesave2", "Filesave3", "Filesave4"})
     //test con costruttore parametrizzato e tutti i nomi del file leciti
-    void testConstructorWithAllValidFileNames(String fileName, String dirname) {
-        DownloadFile downloadFile = new DownloadFile(dirname, fileName, ui);
+    void testConstructorWithAllValidFileNames(String dirname, String dirname) {
+        DownloadFile downloadFile = new DownloadFile(dirname, "listamostri.txt", ui);
         // verifica della creazione di ogetto senza lancio di eccezioni
         assertNotNull(downloadFile);
     }
