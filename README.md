@@ -52,7 +52,13 @@ mvn compile
 
 java -cp target/classes MainGame
 ```
-
+Per generare gli unit test utilizzare i comandi:
+```sh
+mvn test
+```
+## Nota:
+> Il progetto è stato sviluppato usando OpenJDK 22 e contiene dipendenze maven che potrebbero non essere compatibili con altre versioni di JDK.
+> Per poter eseguire il software, ci si deve assicurare che le dipendenze maven siano coerenti con la versione JDK utilizzata 
 
 ## Comandi di gioco 
 ### 1) Bottoni menu
