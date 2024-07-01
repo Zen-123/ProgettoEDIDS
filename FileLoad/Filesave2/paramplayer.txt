@@ -1,10 +1,10 @@
-Player: dsf
+Player: sa
 Health: 100
 Money: 10
 Monster_killed: 0
 Category: archer
-Potions: 3
-Weight_Inventory: 50
+Potions: 2
+Weight_Inventory: 60
 key: 0
 Max_damage: 10
 Min_damage: 3
@@ -12,6 +12,6 @@ Defense: 1
 Armour: armatura
 Weapon: spada
 X: 2
-Y: 2
-Stanza: 1
+Y: 8
+Stanza: 2
 Goldkey: 0

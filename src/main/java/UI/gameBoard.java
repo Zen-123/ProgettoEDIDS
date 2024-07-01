@@ -241,6 +241,7 @@ public class gameBoard extends JPanel implements KeyListener {
                         handler.setFileSaveStanzeOverwrite(fileNameArray[0]);
                         handler.setFileSaveMostriOverwrite(fileNameArray[0]);
                         handler.setFileSaveItemOverwrite(fileNameArray[0]);
+                        reference.ui.loadLabel1.setText("Save slot 1");
                         vManager.showMenuScreen();
 
                         break;
@@ -250,6 +251,8 @@ public class gameBoard extends JPanel implements KeyListener {
                         handler.setFileSaveStanzeOverwrite(fileNameArray[1]);
                         handler.setFileSaveMostriOverwrite(fileNameArray[1]);
                         handler.setFileSaveItemOverwrite(fileNameArray[1]);
+                        reference.ui.loadLabel2.setText("Save slot 2");
+
                         vManager.showMenuScreen();
                         break;
                     case "save 3":
@@ -257,6 +260,8 @@ public class gameBoard extends JPanel implements KeyListener {
                         handler.setFileSaveStanzeOverwrite(fileNameArray[2]);
                         handler.setFileSaveMostriOverwrite(fileNameArray[2]);
                         handler.setFileSaveItemOverwrite(fileNameArray[2]);
+                        reference.ui.loadLabel3.setText("Save slot 3");
+
                         vManager.showMenuScreen();
 
                         break;
@@ -266,6 +271,8 @@ public class gameBoard extends JPanel implements KeyListener {
                         handler.setFileSaveStanzeOverwrite(fileNameArray[3]);
                         handler.setFileSaveMostriOverwrite(fileNameArray[3]);
                         handler.setFileSaveItemOverwrite(fileNameArray[3]);
+                        reference.ui.loadLabel4.setText("Save slot 4");
+
                         vManager.showMenuScreen();
 
                         break;

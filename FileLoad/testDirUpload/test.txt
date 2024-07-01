@@ -1,12 +1,1 @@
-Player:  
-Health: 100
-Money: 0
-Monster_killed: 0
-Category:  
-Weapon: 
-Potions: 0
-Weight_Inventory: 0
-Armour: 
-key: 0
-Max_damage: 0
-Min_damage: 0
+Test content
