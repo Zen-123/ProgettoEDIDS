@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: Board.funcTest
+Test set: Player.ItemTest
 -------------------------------------------------------------------------------
-Tests run: 87, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.698 s -- in Board.funcTest
+Tests run: 106, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.166 s -- in Player.ItemTest

@@ -1,0 +1,1 @@
+/usr/lib/jvm/java-21-openjdk-21.0.3.0.9-1.fc40.x86_64/bin/javadoc @options @packages @argfile

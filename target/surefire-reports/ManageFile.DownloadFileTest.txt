@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: Board.funcTest
+Test set: ManageFile.DownloadFileTest
 -------------------------------------------------------------------------------
-Tests run: 87, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.698 s -- in Board.funcTest
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.786 s -- in ManageFile.DownloadFileTest
