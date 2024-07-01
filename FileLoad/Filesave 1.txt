@@ -1,11 +1,11 @@
-Player: d
-Health: 100
-Money: 22
+Player: fds
+Health: 95
+Money: 144
 Monster_killed: 0
 Category: warrior
 Weapon: spada
-Potions: 0
-Weight_Inventory: 50
+Potions: 2
+Weight_Inventory: 65
 Armour: armatura
 key: 0
 Max_damage: 13

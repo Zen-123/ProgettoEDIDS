@@ -392,31 +392,53 @@ public class choiceHandler implements ActionListener {
                         //Forse problema con board parametrizzata con flag
                         //se si usa board senza flag problema: non salva i file stanza_n.txt ma salva le statistiche del giocatore
                         reference.curr_stanza = Integer.parseInt((matcher.group(1)));
-                        if( reference.curr_stanza == 2){
+                        if(reference.curr_stanza == 1) {
+                            for (int row = 0; row < reference.currentStanza.cellestanza.size(); row++) {
+                                for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
+                                    Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
+                                    if (cell.getSymbol() == 'W') {
+                                        reference.functions.changeRoomAndWriteToFile(reference.currentStanza.getDrive_to_E());
+                                        reference.player.setX(col + 1);
+                                        reference.player.setY(row);
+                                        reference.player.setspawnTo('W');
+                                        reference.currentStanza.cellestanza.get(row).set(col + 1, Cell.PLAYER);
+                                    }
+                                    if (cell.getSymbol() == 'M') {
+                                        reference.currentStanza.lista_mostri.add(reference.functions.generateMonster(col, row));
+                                    }
+
+                                }
+                            }
+                        }else  if( reference.curr_stanza == 2){
                             for (int row = 0; row < reference.currentStanza.cellestanza.size(); row++) {
                                 for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
                                     Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
                                     if (cell.getSymbol() == 'E' ) {
+                                        reference.functions.changeRoomAndWriteToFile(reference.currentStanza.getDrive_to_W());
                                         reference.player.setX(col-1);
                                         reference.player.setY(row);
                                         reference.player.setspawnTo('E');
                                         reference.currentStanza.cellestanza.get(row).set(col-1,Cell.PLAYER);
-                                        break;
                                     }
-                                }
+                                    if(cell.getSymbol() == 'M') {
+                                        reference.currentStanza.lista_mostri.add(reference.functions.generateMonster(col, row));
+                                    }}
+
                             }
                         }else if( reference.curr_stanza == 3){
                             for (int row = 0; row < reference.currentStanza.cellestanza.size(); row++) {
                                 for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
                                     Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
                                     if (cell.getSymbol() == 'S' ) {
+                                        reference.functions.changeRoomAndWriteToFile(reference.currentStanza.getDrive_to_N());
                                         reference.player.setX(col);
                                         reference.player.setY(row-1);
                                         reference.player.setspawnTo('S');
                                         reference.currentStanza.cellestanza.get(row-1).set(col,Cell.PLAYER);
 
-                                        break;
                                     }
+                                    if(cell.getSymbol() == 'M')
+                                        reference.currentStanza.lista_mostri.add(reference.functions.generateMonster(col,row));
                                 }
                             }
                         }else if( reference.curr_stanza == 4){
@@ -424,12 +446,15 @@ public class choiceHandler implements ActionListener {
                                 for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
                                     Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
                                     if (cell.getSymbol() == 'E' ) {
+                                        reference.functions.changeRoomAndWriteToFile(reference.currentStanza.getDrive_to_W());
                                         reference.player.setX(col-1);
                                         reference.player.setY(row);
                                         reference.player.setspawnTo('E');
                                         reference.currentStanza.cellestanza.get(row).set(col-1,Cell.PLAYER);
-                                        break;
+
                                     }
+                                    if(cell.getSymbol() == 'M')
+                                        reference.currentStanza.lista_mostri.add(reference.functions.generateMonster(col,row));
                                 }
                             }
                         }
@@ -438,11 +463,14 @@ public class choiceHandler implements ActionListener {
                                 for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
                                     Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
                                     if (cell.getSymbol() == 'S' ) {
+                                        reference.functions.changeRoomAndWriteToFile(reference.currentStanza.getDrive_to_N());
                                         reference.player.setX(col);
                                         reference.player.setY(row-1);
                                         reference.player.setspawnTo('S');
                                         reference.currentStanza.cellestanza.get(row-1).set(col,Cell.PLAYER);
-                                        break;
+
+                                    }    if (cell.getSymbol() == 'M') {
+                                        reference.currentStanza.lista_mostri.add(reference.functions.generateMonster(col, row));
                                     }
                                 }
                             }
@@ -451,11 +479,15 @@ public class choiceHandler implements ActionListener {
                                 for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
                                     Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
                                     if (cell.getSymbol() == 'E' ) {
+                                        reference.functions.changeRoomAndWriteToFile(reference.currentStanza.getDrive_to_W());
                                         reference.player.setX(col-1);
                                         reference.player.setY(row);
                                         reference.player.setspawnTo('E');
                                         reference.currentStanza.cellestanza.get(row).set(col-1,Cell.PLAYER);
-                                        break;
+
+                                    }
+                                    if (cell.getSymbol() == 'M') {
+                                        reference.currentStanza.lista_mostri.add(reference.functions.generateMonster(col, row));
                                     }
                                 }
                             }
@@ -464,11 +496,15 @@ public class choiceHandler implements ActionListener {
                                 for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
                                     Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
                                     if (cell.getSymbol() == 'E' ) {
+                                        reference.functions.changeRoomAndWriteToFile(reference.currentStanza.getDrive_to_W());
                                         reference.player.setX(col-1);
                                         reference.player.setY(row);
                                         reference.player.setspawnTo('E');
                                         reference.currentStanza.cellestanza.get(row).set(col-1,Cell.PLAYER);
-                                        break;
+
+                                    }
+                                    if (cell.getSymbol() == 'M') {
+                                        reference.currentStanza.lista_mostri.add(reference.functions.generateMonster(col, row));
                                     }
                                 }
                             }
@@ -477,11 +513,14 @@ public class choiceHandler implements ActionListener {
                                 for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
                                     Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
                                     if (cell.getSymbol() == 'S' ) {
+                                        reference.functions.changeRoomAndWriteToFile(reference.currentStanza.getDrive_to_N());
                                         reference.player.setX(col);
                                         reference.player.setY(row-1);
                                         reference.player.setspawnTo('S');
                                         reference.currentStanza.cellestanza.get(row-1).set(col,Cell.PLAYER);
-                                        break;
+
+                                    }    if (cell.getSymbol() == 'M') {
+                                        reference.currentStanza.lista_mostri.add(reference.functions.generateMonster(col, row));
                                     }
                                 }
                             }
@@ -490,11 +529,15 @@ public class choiceHandler implements ActionListener {
                                 for (int col = 0; col < reference.currentStanza.cellestanza.get(row).size() ; col++) {
                                     Cell cell = reference.currentStanza.cellestanza.get(row).get(col);
                                     if (cell.getSymbol() == 'S' ) {
+                                        reference.functions.changeRoomAndWriteToFile(reference.currentStanza.getDrive_to_N());
                                         reference.player.setX(col-1);
                                         reference.player.setY(row-1);
                                         reference.player.setspawnTo('S');
                                         reference.currentStanza.cellestanza.get(row-1).set(col-1,Cell.PLAYER);
-                                        break;
+
+                                    }
+                                    if (cell.getSymbol() == 'M') {
+                                        reference.currentStanza.lista_mostri.add(reference.functions.generateMonster(col, row));
                                     }
                                 }
                             }

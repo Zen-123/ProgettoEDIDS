@@ -1,6 +1,6 @@
 Player: t4
-Health: 100
-Money: 12
+Health: 80
+Money: 22
 Monster_killed: 0
 Category: warrior
 Weapon: spada
@@ -10,4 +10,4 @@ Armour: armatura
 key: 0
 Max_damage: 13
 Min_damage: 5
-Current_room: 4
+Current_room: 3

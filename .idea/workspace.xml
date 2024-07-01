@@ -6,18 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="8687f848-436d-40fd-95fb-3a95deb22072" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileDownload/Filesave 1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileDownload/Filesave 2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileDownload/Filesave 4.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileLoad/Filesave 1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileLoad/Filesave 2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileLoad/Filesave 4.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Board/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Board/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MainGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MainGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileDownload/Filesave 1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/FileDownload/Filesave 1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileLoad/Filesave 1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/FileLoad/Filesave 1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileLoad/Filesave 2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/FileLoad/Filesave 2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileLoad/Filesave 3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/FileLoad/Filesave 3.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Board/Stanzeold/stanza_2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Board/Stanzeold/stanza_2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Board/Stanzeold/stanza_3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Board/Stanzeold/stanza_3.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Board/Stanzeold/stanza_4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Board/Stanzeold/stanza_4.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/UI/choiceHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/choiceHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/UI/gameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/gameBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Board/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Board/Board.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/MainGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/MainGame.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/UI/choiceHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/UI/choiceHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/UI/gameBoard$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/UI/gameBoard$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/UI/gameBoard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/UI/gameBoard.class" afterDir="false" />
@@ -51,16 +48,16 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.MainGame.executor": "Run",
-    "JUnit.java in DungeonUnipd.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "LoadDataAndMap",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/andreazanin/IdeaProjects/DungeonUnipd/src/main/java/Board/Stanzeold"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.MainGame.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.java in DungeonUnipd.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;LoadDataAndMap&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/andreazanin/IdeaProjects/DungeonUnipd/src/main/java/Board/Stanzeold&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/Board/Stanzeold" />
