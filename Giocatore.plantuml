@@ -1,0 +1,40 @@
+@startuml
+
+left to right direction
+
+actor Giocatore
+rectangle "Gioco di Avventura nel Dungeon" {
+  usecase "Muoversi tra le stanze" as move_rooms
+  usecase "Raccogliere oggetti" as collect_items
+  usecase "Usare oggetti" as use_items
+  usecase "Randomizzare oggetti" as randomize_items
+  usecase "Esplorare stanze" as explore_rooms
+  usecase "Gestire inventario" as manage_inventory
+  usecase "Controllare salute e punteggio" as check_health_score
+  usecase "Salvataggio e caricamento" as save_load_game
+  usecase "Tornare indietro" as go_back
+  usecase "Gestire menu di gioco" as manage_game_menu
+  usecase "Iniziare il gioco" as start_game
+  usecase "Finire il gioco" as finish_game
+
+  Giocatore -- move_rooms
+  Giocatore -- collect_items
+  Giocatore -- use_items
+  Giocatore -- explore_rooms
+  Giocatore -- manage_inventory
+  Giocatore -- check_health_score
+  Giocatore -- save_load_game
+  Giocatore -- go_back
+  Giocatore -- manage_game_menu
+  Giocatore -- start_game
+  Giocatore -- finish_game
+
+  move_rooms -[dashed]-> go_back: <<extend>>
+  collect_items -[dashed]-> manage_inventory: <<include>>
+  use_items -[dashed]-> manage_inventory: <<include>>
+  explore_rooms -[dashed]-> collect_items: <<include>>
+  save_load_game -[dashed]-> start_game: <<include>>
+  save_load_game -[dashed]-> randomize_items: <<include>>
+}
+
+@enduml
