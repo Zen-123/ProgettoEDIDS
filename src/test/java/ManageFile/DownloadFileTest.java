@@ -30,7 +30,7 @@ class DownloadFileTest {
     @Test
     //test costruttore parametrizzato, solo nome del file
     void testConstructorWithValidFileName() {
-        String fileName = "Filesave 1.txt";
+        String fileName = "Filesave1";
         DownloadFile downloadFile = new DownloadFile(fileName, ui);
 
         // verifica di corrette creazione di oggetto di tipo DownloadFile
@@ -47,7 +47,7 @@ class DownloadFileTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"Filesave 1.txt", "Filesave 2.txt", "Filesave 3.txt", "Filesave 4.txt"})
+    @ValueSource(strings = {"Filesave1", "Filesave2", "Filesave3", "Filesave4"})
     //test con costruttore parametrizzato e tutti i nomi del file leciti
     void testConstructorWithAllValidFileNames(String fileName) {
         DownloadFile downloadFile = new DownloadFile(fileName, ui);
@@ -58,7 +58,7 @@ class DownloadFileTest {
     @Test
     //test per verificare se file scaricato dal bucket di aws viene messo nella giusta directory
     void testBucketNameAndDownloadDir() throws NoSuchFieldException, IllegalAccessException {
-        DownloadFile downloadFile = new DownloadFile("Filesave 1.txt", ui);
+        DownloadFile downloadFile = new DownloadFile("Filesave1", ui);
         Field bucketNameField = DownloadFile.class.getDeclaredField("bucketName");
         bucketNameField.setAccessible(true);
         //nome del bucket aws

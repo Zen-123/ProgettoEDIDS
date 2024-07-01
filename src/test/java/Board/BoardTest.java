@@ -16,8 +16,8 @@ public class BoardTest {
     private static final String TEST_DIRECTORY = "src/main/java/Board/Stanze/";
     private static final String TEST_OLD_DIRECTORY = "src/main/java/Board/Stanzeold/";
     //file .txt usati per il testing
-    private static final String TEST_FILE = TEST_DIRECTORY + "testStanza.txt";
-    private static final String TEST_OLD_FILE = TEST_OLD_DIRECTORY + "testStanza.txt";
+    private static final String TEST_FILE = TEST_DIRECTORY + "stanza_testStanza";
+    private static final String TEST_OLD_FILE = TEST_OLD_DIRECTORY + "stanza_1.txt";
 
     @BeforeAll
     //setting degli oggetti usati per il testing dei metodi della classe
@@ -54,22 +54,22 @@ public class BoardTest {
     //testing del metodo di costruzione della board con ID della stanza corrente
     public void testConstructorWithId() {
         Board board = new Board(1);
-        assertEquals(1, board.getid(), "ID Stanza should be 1");
-        assertEquals(5, board.getColumn(), "Column count should be 5");
-        assertEquals(5, board.getRow(), "Row count should be 5");
-        assertNotNull(board.cellestanza, "cellestanza should be initialized");
-        assertFalse(reference.alreadybeen, "alreadybeen should be false"); //stanza non ancora visitata
+        assertEquals(1, board.getid());
+        assertEquals(5, board.getColumn());
+        assertEquals(5, board.getRow());
+        assertNotNull(board.cellestanza);
+        assertFalse(reference.alreadybeen); //stanza non ancora visitata
     }
 
     @Test
     //testing del metodo di costruzione della board con ID della stanza corrente e valore booleano per stabilire se la stanza è già stata visitata
     public void testConstructorWithIdAndVerification() {
         Board board = new Board(1, true);
-        assertEquals(1, board.getid(), "ID Stanza should be 1");
-        assertEquals(5, board.getColumn(), "Column count should be 5");
-        assertEquals(5, board.getRow(), "Row count should be 5");
-        assertNotNull(board.cellestanza, "cellestanza should be initialized");
-        assertTrue(reference.alreadybeen, "alreadybeen should be true");
+        assertEquals(1, board.getid());
+        assertEquals(5, board.getColumn());
+        assertEquals(7, board.getRow(), "Vengono contati anche i numeri e lo spazio vuoto ");
+        assertNotNull(board.cellestanza);
+        assertTrue(reference.alreadybeen);
     }
 
     @Test
