@@ -45,18 +45,15 @@ Lo scopo del gioco è quello di sconfiggere il boss e conquistare il dungeon.
 
 Per poter eseguire il software è necessario prima di tutto scaricare il progetto contenuto nella branch ***Main***
 
-```sh
-cd dillinger
-npm i
-node app
-```
-
-For production environments...
+Una volta entrati nel terminale con la path relativa alla directory scaricata utilizzare i comandi:
 
 ```sh
-npm install --production
-NODE_ENV=production node app
+mvn compile
+
+java -cp target/classes MainGame
 ```
+
+
 ## Comandi di gioco 
 ### 1) Bottoni menu
 > Bottone **START** permette di iniziare una nuova partita e apre la pagina di creazione del personaggio
