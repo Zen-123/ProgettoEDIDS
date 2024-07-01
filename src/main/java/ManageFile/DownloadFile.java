@@ -20,17 +20,17 @@ public class DownloadFile {
      * @param fileName  il nome del file da scaricare dal bucket di aws
      * @param ui  oggetto della classe UI che permette di gestire alcune label grafiche
      */
-    public DownloadFile(String directory, UI ui) {
+    public DownloadFile(String directory,String name, UI ui) {
         //Imposta la regione del bucket
         Region region = Region.EU_WEST_3;
         try (S3Client s3 = S3Client.builder().region(region).build()) {
             uiManager = ui;
 
             //Permette di scaricare degli oggetti tra aws S3
-            GetObjectRequest getObjectRequest = GetObjectRequest.builder().bucket(bucketName).key(directory).build();
+            GetObjectRequest getObjectRequest = GetObjectRequest.builder().bucket(bucketName).key(directory+"/"+name).build();
 
             //Service client per accedere ad aws s3
-            s3.getObject(getObjectRequest, Paths.get(downloadDir+directory+"/"));
+            s3.getObject(getObjectRequest, Paths.get(directory+"/"+name));
 
             /*
             Switch usato per la gestione dei file scaricati da aws s3.

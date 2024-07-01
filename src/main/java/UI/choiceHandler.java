@@ -651,7 +651,7 @@ public class choiceHandler implements ActionListener {
                     fileLoad.delete();
                     reloadFile = false;
                 }
-                DownloadFile downloadFIle = new DownloadFile(s, userInterfaceHandler);
+                DownloadFile downloadFIle = new DownloadFile(s,name, userInterfaceHandler);
             } else {
                 //dovro fare il controllo tra il numero di file salvati sul bucket e quelli in locale e dici 
                 //gia presente o meno
