@@ -1,563 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="ManageFile.UploadFileTest" time="1.209" tests="3" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="ManageFile.UploadFileTest" time="0.863" tests="3" errors="0" skipped="0" failures="0">
   <properties>
-    <property name="java.specification.version" value="22"/>
-    <property name="sun.cpu.isalist" value="amd64"/>
-    <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.class.path" value="C:\Users\mocev\Documents\GitHub\ProgettoEDIDS\target\test-classes;C:\Users\mocev\Documents\GitHub\ProgettoEDIDS\target\classes;C:\Users\mocev\.m2\repository\com\amazonaws\aws-java-sdk-core\1.12.733\aws-java-sdk-core-1.12.733.jar;C:\Users\mocev\.m2\repository\commons-logging\commons-logging\1.1.3\commons-logging-1.1.3.jar;C:\Users\mocev\.m2\repository\commons-codec\commons-codec\1.15\commons-codec-1.15.jar;C:\Users\mocev\.m2\repository\org\apache\httpcomponents\httpclient\4.5.13\httpclient-4.5.13.jar;C:\Users\mocev\.m2\repository\org\apache\httpcomponents\httpcore\4.4.13\httpcore-4.4.13.jar;C:\Users\mocev\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.12.7.2\jackson-databind-2.12.7.2.jar;C:\Users\mocev\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.12.7\jackson-annotations-2.12.7.jar;C:\Users\mocev\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.12.7\jackson-core-2.12.7.jar;C:\Users\mocev\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-cbor\2.12.6\jackson-dataformat-cbor-2.12.6.jar;C:\Users\mocev\.m2\repository\joda-time\joda-time\2.12.7\joda-time-2.12.7.jar;C:\Users\mocev\.m2\repository\com\amazonaws\aws-java-sdk-s3\1.12.733\aws-java-sdk-s3-1.12.733.jar;C:\Users\mocev\.m2\repository\com\amazonaws\aws-java-sdk-kms\1.12.411\aws-java-sdk-kms-1.12.411.jar;C:\Users\mocev\.m2\repository\com\amazonaws\jmespath-java\1.12.411\jmespath-java-1.12.411.jar;C:\Users\mocev\.m2\repository\org\slf4j\slf4j-api\1.7.32\slf4j-api-1.7.32.jar;C:\Users\mocev\.m2\repository\org\slf4j\slf4j-simple\1.7.32\slf4j-simple-1.7.32.jar;C:\Users\mocev\.m2\repository\javax\xml\bind\jaxb-api\2.4.0-b180830.0359\jaxb-api-2.4.0-b180830.0359.jar;C:\Users\mocev\.m2\repository\javax\activation\javax.activation-api\1.2.0\javax.activation-api-1.2.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\s3\2.22.0\s3-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\aws-xml-protocol\2.22.0\aws-xml-protocol-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\aws-query-protocol\2.22.0\aws-query-protocol-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\protocol-core\2.22.0\protocol-core-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\arns\2.22.0\arns-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\profiles\2.22.0\profiles-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\crt-core\2.22.0\crt-core-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\http-auth\2.22.0\http-auth-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\identity-spi\2.22.0\identity-spi-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\http-auth-spi\2.22.0\http-auth-spi-2.22.0.jar;C:\Users\mocev\.m2\repository\org\reactivestreams\reactive-streams\1.0.4\reactive-streams-1.0.4.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\http-auth-aws\2.22.0\http-auth-aws-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\checksums\2.22.0\checksums-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\checksums-spi\2.22.0\checksums-spi-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\sdk-core\2.22.0\sdk-core-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\auth\2.22.0\auth-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\eventstream\eventstream\1.0.1\eventstream-1.0.1.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\http-client-spi\2.22.0\http-client-spi-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\regions\2.22.0\regions-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\annotations\2.22.0\annotations-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\utils\2.22.0\utils-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\aws-core\2.22.0\aws-core-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\metrics-spi\2.22.0\metrics-spi-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\json-utils\2.22.0\json-utils-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\third-party-jackson-core\2.22.0\third-party-jackson-core-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\endpoints-spi\2.22.0\endpoints-spi-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\apache-client\2.22.0\apache-client-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\netty-nio-client\2.22.0\netty-nio-client-2.22.0.jar;C:\Users\mocev\.m2\repository\io\netty\netty-codec-http\4.1.100.Final\netty-codec-http-4.1.100.Final.jar;C:\Users\mocev\.m2\repository\io\netty\netty-codec-http2\4.1.100.Final\netty-codec-http2-4.1.100.Final.jar;C:\Users\mocev\.m2\repository\io\netty\netty-codec\4.1.100.Final\netty-codec-4.1.100.Final.jar;C:\Users\mocev\.m2\repository\io\netty\netty-transport\4.1.100.Final\netty-transport-4.1.100.Final.jar;C:\Users\mocev\.m2\repository\io\netty\netty-common\4.1.100.Final\netty-common-4.1.100.Final.jar;C:\Users\mocev\.m2\repository\io\netty\netty-buffer\4.1.100.Final\netty-buffer-4.1.100.Final.jar;C:\Users\mocev\.m2\repository\io\netty\netty-handler\4.1.100.Final\netty-handler-4.1.100.Final.jar;C:\Users\mocev\.m2\repository\io\netty\netty-transport-native-unix-common\4.1.100.Final\netty-transport-native-unix-common-4.1.100.Final.jar;C:\Users\mocev\.m2\repository\io\netty\netty-transport-classes-epoll\4.1.100.Final\netty-transport-classes-epoll-4.1.100.Final.jar;C:\Users\mocev\.m2\repository\io\netty\netty-resolver\4.1.100.Final\netty-resolver-4.1.100.Final.jar;C:\Users\mocev\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0-M2\junit-jupiter-api-5.11.0-M2.jar;C:\Users\mocev\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\mocev\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0-M2\junit-platform-commons-1.11.0-M2.jar;C:\Users\mocev\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\mocev\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\mocev\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\mocev\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.0-M1\junit-jupiter-params-5.11.0-M1.jar;"/>
+    <property name="java.specification.version" value="21"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="sun.awt.enableExtraMouseButtons" value="true"/>
-    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.class.path" value="/home/andreazanin/IdeaProjects/DungeonUnipd/target/test-classes:/home/andreazanin/IdeaProjects/DungeonUnipd/target/classes:/home/andreazanin/.m2/repository/software/amazon/awssdk/s3/2.22.0/s3-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/aws-xml-protocol/2.22.0/aws-xml-protocol-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/aws-query-protocol/2.22.0/aws-query-protocol-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/protocol-core/2.22.0/protocol-core-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/arns/2.22.0/arns-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/profiles/2.22.0/profiles-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/crt-core/2.22.0/crt-core-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/http-auth/2.22.0/http-auth-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/identity-spi/2.22.0/identity-spi-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/http-auth-spi/2.22.0/http-auth-spi-2.22.0.jar:/home/andreazanin/.m2/repository/org/reactivestreams/reactive-streams/1.0.4/reactive-streams-1.0.4.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/http-auth-aws/2.22.0/http-auth-aws-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/checksums/2.22.0/checksums-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/checksums-spi/2.22.0/checksums-spi-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/sdk-core/2.22.0/sdk-core-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/auth/2.22.0/auth-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/eventstream/eventstream/1.0.1/eventstream-1.0.1.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/http-client-spi/2.22.0/http-client-spi-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/regions/2.22.0/regions-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/annotations/2.22.0/annotations-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/utils/2.22.0/utils-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/aws-core/2.22.0/aws-core-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/metrics-spi/2.22.0/metrics-spi-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/json-utils/2.22.0/json-utils-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/third-party-jackson-core/2.22.0/third-party-jackson-core-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/endpoints-spi/2.22.0/endpoints-spi-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/apache-client/2.22.0/apache-client-2.22.0.jar:/home/andreazanin/.m2/repository/org/apache/httpcomponents/httpclient/4.5.13/httpclient-4.5.13.jar:/home/andreazanin/.m2/repository/org/apache/httpcomponents/httpcore/4.4.13/httpcore-4.4.13.jar:/home/andreazanin/.m2/repository/commons-codec/commons-codec/1.15/commons-codec-1.15.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/netty-nio-client/2.22.0/netty-nio-client-2.22.0.jar:/home/andreazanin/.m2/repository/io/netty/netty-codec-http/4.1.100.Final/netty-codec-http-4.1.100.Final.jar:/home/andreazanin/.m2/repository/io/netty/netty-codec-http2/4.1.100.Final/netty-codec-http2-4.1.100.Final.jar:/home/andreazanin/.m2/repository/io/netty/netty-codec/4.1.100.Final/netty-codec-4.1.100.Final.jar:/home/andreazanin/.m2/repository/io/netty/netty-transport/4.1.100.Final/netty-transport-4.1.100.Final.jar:/home/andreazanin/.m2/repository/io/netty/netty-common/4.1.100.Final/netty-common-4.1.100.Final.jar:/home/andreazanin/.m2/repository/io/netty/netty-buffer/4.1.100.Final/netty-buffer-4.1.100.Final.jar:/home/andreazanin/.m2/repository/io/netty/netty-handler/4.1.100.Final/netty-handler-4.1.100.Final.jar:/home/andreazanin/.m2/repository/io/netty/netty-transport-native-unix-common/4.1.100.Final/netty-transport-native-unix-common-4.1.100.Final.jar:/home/andreazanin/.m2/repository/io/netty/netty-transport-classes-epoll/4.1.100.Final/netty-transport-classes-epoll-4.1.100.Final.jar:/home/andreazanin/.m2/repository/io/netty/netty-resolver/4.1.100.Final/netty-resolver-4.1.100.Final.jar:/home/andreazanin/.m2/repository/com/amazonaws/aws-java-sdk-s3/1.12.733/aws-java-sdk-s3-1.12.733.jar:/home/andreazanin/.m2/repository/com/amazonaws/aws-java-sdk-kms/1.12.733/aws-java-sdk-kms-1.12.733.jar:/home/andreazanin/.m2/repository/com/amazonaws/aws-java-sdk-core/1.12.733/aws-java-sdk-core-1.12.733.jar:/home/andreazanin/.m2/repository/commons-logging/commons-logging/1.1.3/commons-logging-1.1.3.jar:/home/andreazanin/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.12.7.2/jackson-databind-2.12.7.2.jar:/home/andreazanin/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.12.7/jackson-annotations-2.12.7.jar:/home/andreazanin/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.12.7/jackson-core-2.12.7.jar:/home/andreazanin/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-cbor/2.12.6/jackson-dataformat-cbor-2.12.6.jar:/home/andreazanin/.m2/repository/joda-time/joda-time/2.12.7/joda-time-2.12.7.jar:/home/andreazanin/.m2/repository/com/amazonaws/jmespath-java/1.12.733/jmespath-java-1.12.733.jar:/home/andreazanin/.m2/repository/aws/sdk/kotlin/aws-config-jvm/1.2.46/aws-config-jvm-1.2.46.jar:/home/andreazanin/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib/1.9.23/kotlin-stdlib-1.9.23.jar:/home/andreazanin/.m2/repository/org/jetbrains/annotations/13.0/annotations-13.0.jar:/home/andreazanin/.m2/repository/aws/sdk/kotlin/aws-core-jvm/1.2.46/aws-core-jvm-1.2.46.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/aws-credentials-jvm/1.2.11/aws-credentials-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/http-client-jvm/1.2.11/http-client-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/http-jvm/1.2.11/http-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/http-auth-jvm/1.2.11/http-auth-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/http-auth-api-jvm/1.2.11/http-auth-api-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/telemetry-api-jvm/1.2.11/telemetry-api-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/http-client-engine-default-jvm/1.2.11/http-client-engine-default-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/http-client-engine-okhttp-jvm/1.2.11/http-client-engine-okhttp-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/com/squareup/okhttp3/okhttp/5.0.0-alpha.14/okhttp-5.0.0-alpha.14.jar:/home/andreazanin/.m2/repository/com/squareup/okhttp3/okhttp-coroutines/5.0.0-alpha.14/okhttp-coroutines-5.0.0-alpha.14.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/serde-json-jvm/1.2.11/serde-json-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/aws-protocol-core-jvm/1.2.11/aws-protocol-core-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/aws-signing-common-jvm/1.2.11/aws-signing-common-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/aws-signing-default-jvm/1.2.11/aws-signing-default-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/http-auth-aws-jvm/1.2.11/http-auth-aws-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/identity-api-jvm/1.2.11/identity-api-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/runtime-core-jvm/1.2.11/runtime-core-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/com/squareup/okio/okio-jvm/3.9.0/okio-jvm-3.9.0.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/serde-jvm/1.2.11/serde-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/smithy-client-jvm/1.2.11/smithy-client-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/telemetry-defaults-jvm/1.2.11/telemetry-defaults-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/logging-slf4j2-jvm/1.2.11/logging-slf4j2-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/sdk/kotlin/aws-endpoint-jvm/1.2.46/aws-endpoint-jvm-1.2.46.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/serde-xml-jvm/1.2.11/serde-xml-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/serde-form-url-jvm/1.2.11/serde-form-url-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/aws-xml-protocols-jvm/1.2.11/aws-xml-protocols-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/aws-json-protocols-jvm/1.2.11/aws-json-protocols-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.7.3/kotlinx-coroutines-core-jvm-1.7.3.jar:/home/andreazanin/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-common/1.8.20/kotlin-stdlib-common-1.8.20.jar:/home/andreazanin/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-jdk8/1.8.20/kotlin-stdlib-jdk8-1.8.20.jar:/home/andreazanin/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-jdk7/1.8.20/kotlin-stdlib-jdk7-1.8.20.jar:/home/andreazanin/.m2/repository/aws/sdk/kotlin/aws-http-jvm/1.2.46/aws-http-jvm-1.2.46.jar:/home/andreazanin/.m2/repository/org/slf4j/slf4j-api/1.7.32/slf4j-api-1.7.32.jar:/home/andreazanin/.m2/repository/org/slf4j/slf4j-simple/1.7.32/slf4j-simple-1.7.32.jar:/home/andreazanin/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.0-M2/junit-jupiter-api-5.11.0-M2.jar:/home/andreazanin/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/andreazanin/.m2/repository/org/junit/platform/junit-platform-commons/1.11.0-M2/junit-platform-commons-1.11.0-M2.jar:/home/andreazanin/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/andreazanin/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.0-M1/junit-jupiter-params-5.11.0-M1.jar:/home/andreazanin/.m2/repository/junit/junit/4.12/junit-4.12.jar:/home/andreazanin/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
+    <property name="java.vm.vendor" value="Red Hat, Inc."/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="user.variant" value=""/>
-    <property name="java.vendor.url" value="https://java.oracle.com/"/>
-    <property name="user.timezone" value="Europe/Rome"/>
-    <property name="user.country.format" value="IT"/>
-    <property name="os.name" value="Windows 11"/>
-    <property name="java.vm.specification.version" value="22"/>
+    <property name="java.vendor.url" value="https://www.redhat.com/"/>
+    <property name="os.name" value="Linux"/>
+    <property name="java.vm.specification.version" value="21"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
-    <property name="user.country" value="GB"/>
-    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-22\bin"/>
-    <property name="sun.java.command" value="C:\Users\mocev\AppData\Local\Temp\surefire16863811625028016007\surefirebooter-20240705140107898_3.jar C:\Users\mocev\AppData\Local\Temp\surefire16863811625028016007 2024-07-05T14-01-07_701-jvmRun1 surefire-20240705140107898_1tmp surefire_0-20240705140107898_2tmp"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-21-openjdk-21.0.3.0.9-1.fc40.x86_64/lib"/>
+    <property name="sun.java.command" value="/home/andreazanin/IdeaProjects/DungeonUnipd/target/surefire/surefirebooter-20240705224939071_3.jar /home/andreazanin/IdeaProjects/DungeonUnipd/target/surefire 2024-07-05T22-49-38_921-jvmRun1 surefire-20240705224939071_1tmp surefire_0-20240705224939071_2tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="C:\Users\mocev\Documents\GitHub\ProgettoEDIDS\target\test-classes;C:\Users\mocev\Documents\GitHub\ProgettoEDIDS\target\classes;C:\Users\mocev\.m2\repository\com\amazonaws\aws-java-sdk-core\1.12.733\aws-java-sdk-core-1.12.733.jar;C:\Users\mocev\.m2\repository\commons-logging\commons-logging\1.1.3\commons-logging-1.1.3.jar;C:\Users\mocev\.m2\repository\commons-codec\commons-codec\1.15\commons-codec-1.15.jar;C:\Users\mocev\.m2\repository\org\apache\httpcomponents\httpclient\4.5.13\httpclient-4.5.13.jar;C:\Users\mocev\.m2\repository\org\apache\httpcomponents\httpcore\4.4.13\httpcore-4.4.13.jar;C:\Users\mocev\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.12.7.2\jackson-databind-2.12.7.2.jar;C:\Users\mocev\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.12.7\jackson-annotations-2.12.7.jar;C:\Users\mocev\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.12.7\jackson-core-2.12.7.jar;C:\Users\mocev\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-cbor\2.12.6\jackson-dataformat-cbor-2.12.6.jar;C:\Users\mocev\.m2\repository\joda-time\joda-time\2.12.7\joda-time-2.12.7.jar;C:\Users\mocev\.m2\repository\com\amazonaws\aws-java-sdk-s3\1.12.733\aws-java-sdk-s3-1.12.733.jar;C:\Users\mocev\.m2\repository\com\amazonaws\aws-java-sdk-kms\1.12.411\aws-java-sdk-kms-1.12.411.jar;C:\Users\mocev\.m2\repository\com\amazonaws\jmespath-java\1.12.411\jmespath-java-1.12.411.jar;C:\Users\mocev\.m2\repository\org\slf4j\slf4j-api\1.7.32\slf4j-api-1.7.32.jar;C:\Users\mocev\.m2\repository\org\slf4j\slf4j-simple\1.7.32\slf4j-simple-1.7.32.jar;C:\Users\mocev\.m2\repository\javax\xml\bind\jaxb-api\2.4.0-b180830.0359\jaxb-api-2.4.0-b180830.0359.jar;C:\Users\mocev\.m2\repository\javax\activation\javax.activation-api\1.2.0\javax.activation-api-1.2.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\s3\2.22.0\s3-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\aws-xml-protocol\2.22.0\aws-xml-protocol-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\aws-query-protocol\2.22.0\aws-query-protocol-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\protocol-core\2.22.0\protocol-core-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\arns\2.22.0\arns-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\profiles\2.22.0\profiles-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\crt-core\2.22.0\crt-core-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\http-auth\2.22.0\http-auth-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\identity-spi\2.22.0\identity-spi-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\http-auth-spi\2.22.0\http-auth-spi-2.22.0.jar;C:\Users\mocev\.m2\repository\org\reactivestreams\reactive-streams\1.0.4\reactive-streams-1.0.4.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\http-auth-aws\2.22.0\http-auth-aws-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\checksums\2.22.0\checksums-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\checksums-spi\2.22.0\checksums-spi-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\sdk-core\2.22.0\sdk-core-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\auth\2.22.0\auth-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\eventstream\eventstream\1.0.1\eventstream-1.0.1.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\http-client-spi\2.22.0\http-client-spi-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\regions\2.22.0\regions-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\annotations\2.22.0\annotations-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\utils\2.22.0\utils-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\aws-core\2.22.0\aws-core-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\metrics-spi\2.22.0\metrics-spi-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\json-utils\2.22.0\json-utils-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\third-party-jackson-core\2.22.0\third-party-jackson-core-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\endpoints-spi\2.22.0\endpoints-spi-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\apache-client\2.22.0\apache-client-2.22.0.jar;C:\Users\mocev\.m2\repository\software\amazon\awssdk\netty-nio-client\2.22.0\netty-nio-client-2.22.0.jar;C:\Users\mocev\.m2\repository\io\netty\netty-codec-http\4.1.100.Final\netty-codec-http-4.1.100.Final.jar;C:\Users\mocev\.m2\repository\io\netty\netty-codec-http2\4.1.100.Final\netty-codec-http2-4.1.100.Final.jar;C:\Users\mocev\.m2\repository\io\netty\netty-codec\4.1.100.Final\netty-codec-4.1.100.Final.jar;C:\Users\mocev\.m2\repository\io\netty\netty-transport\4.1.100.Final\netty-transport-4.1.100.Final.jar;C:\Users\mocev\.m2\repository\io\netty\netty-common\4.1.100.Final\netty-common-4.1.100.Final.jar;C:\Users\mocev\.m2\repository\io\netty\netty-buffer\4.1.100.Final\netty-buffer-4.1.100.Final.jar;C:\Users\mocev\.m2\repository\io\netty\netty-handler\4.1.100.Final\netty-handler-4.1.100.Final.jar;C:\Users\mocev\.m2\repository\io\netty\netty-transport-native-unix-common\4.1.100.Final\netty-transport-native-unix-common-4.1.100.Final.jar;C:\Users\mocev\.m2\repository\io\netty\netty-transport-classes-epoll\4.1.100.Final\netty-transport-classes-epoll-4.1.100.Final.jar;C:\Users\mocev\.m2\repository\io\netty\netty-resolver\4.1.100.Final\netty-resolver-4.1.100.Final.jar;C:\Users\mocev\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0-M2\junit-jupiter-api-5.11.0-M2.jar;C:\Users\mocev\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\mocev\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0-M2\junit-platform-commons-1.11.0-M2.jar;C:\Users\mocev\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\mocev\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\mocev\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\mocev\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.0-M1\junit-jupiter-params-5.11.0-M1.jar;"/>
+    <property name="surefire.test.class.path" value="/home/andreazanin/IdeaProjects/DungeonUnipd/target/test-classes:/home/andreazanin/IdeaProjects/DungeonUnipd/target/classes:/home/andreazanin/.m2/repository/software/amazon/awssdk/s3/2.22.0/s3-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/aws-xml-protocol/2.22.0/aws-xml-protocol-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/aws-query-protocol/2.22.0/aws-query-protocol-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/protocol-core/2.22.0/protocol-core-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/arns/2.22.0/arns-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/profiles/2.22.0/profiles-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/crt-core/2.22.0/crt-core-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/http-auth/2.22.0/http-auth-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/identity-spi/2.22.0/identity-spi-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/http-auth-spi/2.22.0/http-auth-spi-2.22.0.jar:/home/andreazanin/.m2/repository/org/reactivestreams/reactive-streams/1.0.4/reactive-streams-1.0.4.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/http-auth-aws/2.22.0/http-auth-aws-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/checksums/2.22.0/checksums-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/checksums-spi/2.22.0/checksums-spi-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/sdk-core/2.22.0/sdk-core-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/auth/2.22.0/auth-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/eventstream/eventstream/1.0.1/eventstream-1.0.1.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/http-client-spi/2.22.0/http-client-spi-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/regions/2.22.0/regions-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/annotations/2.22.0/annotations-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/utils/2.22.0/utils-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/aws-core/2.22.0/aws-core-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/metrics-spi/2.22.0/metrics-spi-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/json-utils/2.22.0/json-utils-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/third-party-jackson-core/2.22.0/third-party-jackson-core-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/endpoints-spi/2.22.0/endpoints-spi-2.22.0.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/apache-client/2.22.0/apache-client-2.22.0.jar:/home/andreazanin/.m2/repository/org/apache/httpcomponents/httpclient/4.5.13/httpclient-4.5.13.jar:/home/andreazanin/.m2/repository/org/apache/httpcomponents/httpcore/4.4.13/httpcore-4.4.13.jar:/home/andreazanin/.m2/repository/commons-codec/commons-codec/1.15/commons-codec-1.15.jar:/home/andreazanin/.m2/repository/software/amazon/awssdk/netty-nio-client/2.22.0/netty-nio-client-2.22.0.jar:/home/andreazanin/.m2/repository/io/netty/netty-codec-http/4.1.100.Final/netty-codec-http-4.1.100.Final.jar:/home/andreazanin/.m2/repository/io/netty/netty-codec-http2/4.1.100.Final/netty-codec-http2-4.1.100.Final.jar:/home/andreazanin/.m2/repository/io/netty/netty-codec/4.1.100.Final/netty-codec-4.1.100.Final.jar:/home/andreazanin/.m2/repository/io/netty/netty-transport/4.1.100.Final/netty-transport-4.1.100.Final.jar:/home/andreazanin/.m2/repository/io/netty/netty-common/4.1.100.Final/netty-common-4.1.100.Final.jar:/home/andreazanin/.m2/repository/io/netty/netty-buffer/4.1.100.Final/netty-buffer-4.1.100.Final.jar:/home/andreazanin/.m2/repository/io/netty/netty-handler/4.1.100.Final/netty-handler-4.1.100.Final.jar:/home/andreazanin/.m2/repository/io/netty/netty-transport-native-unix-common/4.1.100.Final/netty-transport-native-unix-common-4.1.100.Final.jar:/home/andreazanin/.m2/repository/io/netty/netty-transport-classes-epoll/4.1.100.Final/netty-transport-classes-epoll-4.1.100.Final.jar:/home/andreazanin/.m2/repository/io/netty/netty-resolver/4.1.100.Final/netty-resolver-4.1.100.Final.jar:/home/andreazanin/.m2/repository/com/amazonaws/aws-java-sdk-s3/1.12.733/aws-java-sdk-s3-1.12.733.jar:/home/andreazanin/.m2/repository/com/amazonaws/aws-java-sdk-kms/1.12.733/aws-java-sdk-kms-1.12.733.jar:/home/andreazanin/.m2/repository/com/amazonaws/aws-java-sdk-core/1.12.733/aws-java-sdk-core-1.12.733.jar:/home/andreazanin/.m2/repository/commons-logging/commons-logging/1.1.3/commons-logging-1.1.3.jar:/home/andreazanin/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.12.7.2/jackson-databind-2.12.7.2.jar:/home/andreazanin/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.12.7/jackson-annotations-2.12.7.jar:/home/andreazanin/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.12.7/jackson-core-2.12.7.jar:/home/andreazanin/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-cbor/2.12.6/jackson-dataformat-cbor-2.12.6.jar:/home/andreazanin/.m2/repository/joda-time/joda-time/2.12.7/joda-time-2.12.7.jar:/home/andreazanin/.m2/repository/com/amazonaws/jmespath-java/1.12.733/jmespath-java-1.12.733.jar:/home/andreazanin/.m2/repository/aws/sdk/kotlin/aws-config-jvm/1.2.46/aws-config-jvm-1.2.46.jar:/home/andreazanin/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib/1.9.23/kotlin-stdlib-1.9.23.jar:/home/andreazanin/.m2/repository/org/jetbrains/annotations/13.0/annotations-13.0.jar:/home/andreazanin/.m2/repository/aws/sdk/kotlin/aws-core-jvm/1.2.46/aws-core-jvm-1.2.46.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/aws-credentials-jvm/1.2.11/aws-credentials-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/http-client-jvm/1.2.11/http-client-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/http-jvm/1.2.11/http-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/http-auth-jvm/1.2.11/http-auth-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/http-auth-api-jvm/1.2.11/http-auth-api-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/telemetry-api-jvm/1.2.11/telemetry-api-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/http-client-engine-default-jvm/1.2.11/http-client-engine-default-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/http-client-engine-okhttp-jvm/1.2.11/http-client-engine-okhttp-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/com/squareup/okhttp3/okhttp/5.0.0-alpha.14/okhttp-5.0.0-alpha.14.jar:/home/andreazanin/.m2/repository/com/squareup/okhttp3/okhttp-coroutines/5.0.0-alpha.14/okhttp-coroutines-5.0.0-alpha.14.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/serde-json-jvm/1.2.11/serde-json-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/aws-protocol-core-jvm/1.2.11/aws-protocol-core-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/aws-signing-common-jvm/1.2.11/aws-signing-common-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/aws-signing-default-jvm/1.2.11/aws-signing-default-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/http-auth-aws-jvm/1.2.11/http-auth-aws-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/identity-api-jvm/1.2.11/identity-api-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/runtime-core-jvm/1.2.11/runtime-core-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/com/squareup/okio/okio-jvm/3.9.0/okio-jvm-3.9.0.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/serde-jvm/1.2.11/serde-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/smithy-client-jvm/1.2.11/smithy-client-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/telemetry-defaults-jvm/1.2.11/telemetry-defaults-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/logging-slf4j2-jvm/1.2.11/logging-slf4j2-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/sdk/kotlin/aws-endpoint-jvm/1.2.46/aws-endpoint-jvm-1.2.46.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/serde-xml-jvm/1.2.11/serde-xml-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/serde-form-url-jvm/1.2.11/serde-form-url-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/aws-xml-protocols-jvm/1.2.11/aws-xml-protocols-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/aws/smithy/kotlin/aws-json-protocols-jvm/1.2.11/aws-json-protocols-jvm-1.2.11.jar:/home/andreazanin/.m2/repository/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.7.3/kotlinx-coroutines-core-jvm-1.7.3.jar:/home/andreazanin/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-common/1.8.20/kotlin-stdlib-common-1.8.20.jar:/home/andreazanin/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-jdk8/1.8.20/kotlin-stdlib-jdk8-1.8.20.jar:/home/andreazanin/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-jdk7/1.8.20/kotlin-stdlib-jdk7-1.8.20.jar:/home/andreazanin/.m2/repository/aws/sdk/kotlin/aws-http-jvm/1.2.46/aws-http-jvm-1.2.46.jar:/home/andreazanin/.m2/repository/org/slf4j/slf4j-api/1.7.32/slf4j-api-1.7.32.jar:/home/andreazanin/.m2/repository/org/slf4j/slf4j-simple/1.7.32/slf4j-simple-1.7.32.jar:/home/andreazanin/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.0-M2/junit-jupiter-api-5.11.0-M2.jar:/home/andreazanin/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/andreazanin/.m2/repository/org/junit/platform/junit-platform-commons/1.11.0-M2/junit-platform-commons-1.11.0-M2.jar:/home/andreazanin/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/andreazanin/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.0-M1/junit-jupiter-params-5.11.0-M1.jar:/home/andreazanin/.m2/repository/junit/junit/4.12/junit-4.12.jar:/home/andreazanin/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
-    <property name="user.home" value="C:\Users\mocev"/>
+    <property name="user.home" value="/home/andreazanin"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="java.version.date" value="2024-04-16"/>
-    <property name="java.home" value="C:\Program Files\Java\jdk-22"/>
-    <property name="file.separator" value="\"/>
-    <property name="basedir" value="C:\Users\mocev\Documents\GitHub\ProgettoEDIDS"/>
+    <property name="java.home" value="/usr/lib/jvm/java-21-openjdk-21.0.3.0.9-1.fc40.x86_64"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/home/andreazanin/IdeaProjects/DungeonUnipd"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="line.separator" value="&#10;"/>
-    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\mocev\AppData\Local\Temp\surefire16863811625028016007\surefirebooter-20240705140107898_3.jar"/>
-    <property name="user.script" value=""/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="surefire.real.class.path" value="/home/andreazanin/IdeaProjects/DungeonUnipd/target/surefire/surefirebooter-20240705224939071_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="java.runtime.version" value="22.0.1+8-16"/>
-    <property name="user.name" value="mocev"/>
-    <property name="stdout.encoding" value="Cp1252"/>
-    <property name="path.separator" value=";"/>
-    <property name="os.version" value="10.0"/>
-    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="java.runtime.version" value="21.0.3+9"/>
+    <property name="user.name" value="andreazanin"/>
+    <property name="stdout.encoding" value="UTF-8"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="6.9.7-200.fc40.x86_64"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="file.encoding" value="UTF-8"/>
-    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
-    <property name="localRepository" value="C:\Users\mocev\.m2\repository"/>
-    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
-    <property name="java.io.tmpdir" value="C:\Users\mocev\AppData\Local\Temp\"/>
-    <property name="java.version" value="22.0.1"/>
-    <property name="user.dir" value="C:\Users\mocev\Documents\GitHub\ProgettoEDIDS"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="(Red_Hat-21.0.3.0.9-1)"/>
+    <property name="localRepository" value="/home/andreazanin/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://bugzilla.redhat.com/enter_bug.cgi?product=Fedora&amp;component=java-21-openjdk&amp;version=38"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="java.version" value="21.0.3"/>
+    <property name="user.dir" value="/home/andreazanin/IdeaProjects/DungeonUnipd"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.language.format" value="it"/>
-    <property name="sun.os.patch.level" value=""/>
-    <property name="native.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk-22\bin;C:\windows\Sun\Java\bin;C:\windows\system32;C:\windows;C:\Program Files (x86)\Razer\ChromaBroadcast\bin;C:\Program Files\Razer\ChromaBroadcast\bin;C:\Program Files (x86)\Razer Chroma SDK\bin;C:\Program Files\Razer Chroma SDK\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Users\mocev\Desktop\server.jar;C:\Users\mocev\Desktop\javserver\server.jar;C:\Users\mocev\AppData\Local\Programs\Microsoft VS Code\bin;C:\msys64\ucrt64\bin;C:\windows\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Git\cmd;C:\Users\mocev\Downloads\apache-maven-4.0.0-beta-3-bin\apache-maven-4.0.0-beta-3\bin;C:\Users\mocev\Desktop\javserver\server.jar;C:\Users\mocev\AppData\Local\Programs\Microsoft VS Code\bin;C:\msys64\ucrt64\bin;C:\Program Files\JetBrains\IntelliJ IDEA 2024.1.2\bin;;C:\Users\mocev\Downloads\apache-maven-4.0.0-beta-3-bin\apache-maven-4.0.0-beta-3\bin;;."/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
-    <property name="stderr.encoding" value="Cp1252"/>
-    <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="java.vm.version" value="22.0.1+8-16"/>
+    <property name="stderr.encoding" value="UTF-8"/>
+    <property name="java.vendor" value="Red Hat, Inc."/>
+    <property name="java.vm.version" value="21.0.3+9"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
-    <property name="java.class.version" value="66.0"/>
+    <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testUploadFileConstructor" classname="ManageFile.UploadFileTest" time="0.922">
-    <system-out><![CDATA[testFileUpload.txtSalvataggio avvenuto con successo!
+  <testcase name="testUploadFileConstructor" classname="ManageFile.UploadFileTest" time="0.42">
+    <system-out><![CDATA[Salvataggio avvenuto con successo!
 ]]></system-out>
-    <system-err><![CDATA[lug 05, 2024 2:01:10 PM com.amazonaws.internal.InstanceMetadataServiceResourceFetcher handleException
-WARNING: Fail to retrieve token 
-com.amazonaws.SdkClientException: Failed to connect to service endpoint: 
-	at com.amazonaws.internal.EC2ResourceFetcher.doReadResource(EC2ResourceFetcher.java:119)
-	at com.amazonaws.internal.InstanceMetadataServiceResourceFetcher.getToken(InstanceMetadataServiceResourceFetcher.java:106)
-	at com.amazonaws.internal.InstanceMetadataServiceResourceFetcher.readResource(InstanceMetadataServiceResourceFetcher.java:77)
-	at com.amazonaws.internal.EC2ResourceFetcher.readResource(EC2ResourceFetcher.java:66)
-	at com.amazonaws.auth.InstanceMetadataServiceCredentialsFetcher.getCredentialsEndpoint(InstanceMetadataServiceCredentialsFetcher.java:61)
-	at com.amazonaws.auth.InstanceMetadataServiceCredentialsFetcher.getCredentialsResponse(InstanceMetadataServiceCredentialsFetcher.java:49)
-	at com.amazonaws.auth.BaseCredentialsFetcher.fetchCredentials(BaseCredentialsFetcher.java:154)
-	at com.amazonaws.auth.BaseCredentialsFetcher.getCredentials(BaseCredentialsFetcher.java:96)
-	at com.amazonaws.auth.InstanceProfileCredentialsProvider.getCredentials(InstanceProfileCredentialsProvider.java:174)
-	at com.amazonaws.auth.EC2ContainerCredentialsProviderWrapper.getCredentials(EC2ContainerCredentialsProviderWrapper.java:75)
-	at com.amazonaws.auth.AWSCredentialsProviderChain.getCredentials(AWSCredentialsProviderChain.java:118)
-	at com.amazonaws.services.s3.S3CredentialsProviderChain.getCredentials(S3CredentialsProviderChain.java:36)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.getCredentialsFromContext(AmazonHttpClient.java:1269)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.runBeforeRequestHandlers(AmazonHttpClient.java:845)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.doExecute(AmazonHttpClient.java:794)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.executeWithTimer(AmazonHttpClient.java:781)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.execute(AmazonHttpClient.java:755)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.access$500(AmazonHttpClient.java:715)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutionBuilderImpl.execute(AmazonHttpClient.java:697)
-	at com.amazonaws.http.AmazonHttpClient.execute(AmazonHttpClient.java:561)
-	at com.amazonaws.http.AmazonHttpClient.execute(AmazonHttpClient.java:541)
-	at com.amazonaws.services.s3.AmazonS3Client.invoke(AmazonS3Client.java:5558)
-	at com.amazonaws.services.s3.AmazonS3Client.invoke(AmazonS3Client.java:5505)
-	at com.amazonaws.services.s3.AmazonS3Client.access$300(AmazonS3Client.java:423)
-	at com.amazonaws.services.s3.AmazonS3Client$PutObjectStrategy.invokeServiceCall(AmazonS3Client.java:6639)
-	at com.amazonaws.services.s3.AmazonS3Client.uploadObject(AmazonS3Client.java:1892)
-	at com.amazonaws.services.s3.AmazonS3Client.putObject(AmazonS3Client.java:1852)
-	at ManageFile.uploadFile.<init>(uploadFile.java:50)
-	at ManageFile.UploadFileTest.testUploadFileConstructor(uploadFileTest.java:37)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:765)
-	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:218)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:214)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:139)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:69)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
-	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
-	at org.apache.maven.surefire.junitplatform.LazyLauncher.execute(LazyLauncher.java:56)
-	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:184)
-	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:148)
-	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:122)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
-	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
-	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
-Caused by: java.net.SocketException: Network is unreachable: getsockopt
-	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
-	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
-	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542)
-	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592)
-	at java.base/java.net.Socket.connect(Socket.java:752)
-	at java.base/sun.net.NetworkClient.doConnect(NetworkClient.java:178)
-	at java.base/sun.net.www.http.HttpClient.openServer(HttpClient.java:531)
-	at java.base/sun.net.www.http.HttpClient.openServer(HttpClient.java:636)
-	at java.base/sun.net.www.http.HttpClient.<init>(HttpClient.java:280)
-	at java.base/sun.net.www.http.HttpClient.New(HttpClient.java:386)
-	at java.base/sun.net.www.http.HttpClient.New(HttpClient.java:408)
-	at java.base/sun.net.www.protocol.http.HttpURLConnection.getNewHttpClient(HttpURLConnection.java:1310)
-	at java.base/sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1288)
-	at java.base/sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1129)
-	at java.base/sun.net.www.protocol.http.HttpURLConnection.connect(HttpURLConnection.java:1058)
-	at com.amazonaws.internal.ConnectionUtils.connectToEndpoint(ConnectionUtils.java:95)
-	at com.amazonaws.internal.EC2ResourceFetcher.doReadResource(EC2ResourceFetcher.java:85)
-	... 97 more
-
-lug 05, 2024 2:01:10 PM com.amazonaws.internal.InstanceMetadataServiceResourceFetcher handleException
-WARNING: Fail to retrieve token 
-com.amazonaws.SdkClientException: Failed to connect to service endpoint: 
-	at com.amazonaws.internal.EC2ResourceFetcher.doReadResource(EC2ResourceFetcher.java:119)
-	at com.amazonaws.internal.InstanceMetadataServiceResourceFetcher.getToken(InstanceMetadataServiceResourceFetcher.java:106)
-	at com.amazonaws.internal.InstanceMetadataServiceResourceFetcher.readResource(InstanceMetadataServiceResourceFetcher.java:77)
-	at com.amazonaws.internal.EC2ResourceFetcher.readResource(EC2ResourceFetcher.java:66)
-	at com.amazonaws.auth.InstanceMetadataServiceCredentialsFetcher.getCredentialsEndpoint(InstanceMetadataServiceCredentialsFetcher.java:61)
-	at com.amazonaws.auth.InstanceMetadataServiceCredentialsFetcher.getCredentialsResponse(InstanceMetadataServiceCredentialsFetcher.java:49)
-	at com.amazonaws.auth.BaseCredentialsFetcher.fetchCredentials(BaseCredentialsFetcher.java:154)
-	at com.amazonaws.auth.BaseCredentialsFetcher.getCredentials(BaseCredentialsFetcher.java:96)
-	at com.amazonaws.auth.InstanceProfileCredentialsProvider.getCredentials(InstanceProfileCredentialsProvider.java:174)
-	at com.amazonaws.auth.EC2ContainerCredentialsProviderWrapper.getCredentials(EC2ContainerCredentialsProviderWrapper.java:75)
-	at com.amazonaws.auth.AWSCredentialsProviderChain.getCredentials(AWSCredentialsProviderChain.java:118)
-	at com.amazonaws.services.s3.S3CredentialsProviderChain.getCredentials(S3CredentialsProviderChain.java:36)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.getCredentialsFromContext(AmazonHttpClient.java:1269)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.executeOneRequest(AmazonHttpClient.java:1290)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.executeHelper(AmazonHttpClient.java:1157)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.doExecute(AmazonHttpClient.java:814)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.executeWithTimer(AmazonHttpClient.java:781)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.execute(AmazonHttpClient.java:755)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.access$500(AmazonHttpClient.java:715)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutionBuilderImpl.execute(AmazonHttpClient.java:697)
-	at com.amazonaws.http.AmazonHttpClient.execute(AmazonHttpClient.java:561)
-	at com.amazonaws.http.AmazonHttpClient.execute(AmazonHttpClient.java:541)
-	at com.amazonaws.services.s3.AmazonS3Client.invoke(AmazonS3Client.java:5558)
-	at com.amazonaws.services.s3.AmazonS3Client.invoke(AmazonS3Client.java:5505)
-	at com.amazonaws.services.s3.AmazonS3Client.access$300(AmazonS3Client.java:423)
-	at com.amazonaws.services.s3.AmazonS3Client$PutObjectStrategy.invokeServiceCall(AmazonS3Client.java:6639)
-	at com.amazonaws.services.s3.AmazonS3Client.uploadObject(AmazonS3Client.java:1892)
-	at com.amazonaws.services.s3.AmazonS3Client.putObject(AmazonS3Client.java:1852)
-	at ManageFile.uploadFile.<init>(uploadFile.java:50)
-	at ManageFile.UploadFileTest.testUploadFileConstructor(uploadFileTest.java:37)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:765)
-	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:218)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:214)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:139)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:69)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
-	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
-	at org.apache.maven.surefire.junitplatform.LazyLauncher.execute(LazyLauncher.java:56)
-	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:184)
-	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:148)
-	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:122)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
-	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
-	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
-Caused by: java.net.SocketException: Network is unreachable: getsockopt
-	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
-	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
-	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542)
-	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592)
-	at java.base/java.net.Socket.connect(Socket.java:752)
-	at java.base/sun.net.NetworkClient.doConnect(NetworkClient.java:178)
-	at java.base/sun.net.www.http.HttpClient.openServer(HttpClient.java:531)
-	at java.base/sun.net.www.http.HttpClient.openServer(HttpClient.java:636)
-	at java.base/sun.net.www.http.HttpClient.<init>(HttpClient.java:280)
-	at java.base/sun.net.www.http.HttpClient.New(HttpClient.java:386)
-	at java.base/sun.net.www.http.HttpClient.New(HttpClient.java:408)
-	at java.base/sun.net.www.protocol.http.HttpURLConnection.getNewHttpClient(HttpURLConnection.java:1310)
-	at java.base/sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1288)
-	at java.base/sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1129)
-	at java.base/sun.net.www.protocol.http.HttpURLConnection.connect(HttpURLConnection.java:1058)
-	at com.amazonaws.internal.ConnectionUtils.connectToEndpoint(ConnectionUtils.java:95)
-	at com.amazonaws.internal.EC2ResourceFetcher.doReadResource(EC2ResourceFetcher.java:85)
-	... 98 more
-
-]]></system-err>
   </testcase>
-  <testcase name="testBucketNameAndRegion" classname="ManageFile.UploadFileTest" time="0.282">
-    <system-out><![CDATA[testFileUpload.txtSalvataggio avvenuto con successo!
+  <testcase name="testBucketNameAndRegion" classname="ManageFile.UploadFileTest" time="0.423">
+    <system-out><![CDATA[Salvataggio avvenuto con successo!
 ]]></system-out>
-    <system-err><![CDATA[lug 05, 2024 2:01:10 PM com.amazonaws.internal.InstanceMetadataServiceResourceFetcher handleException
-WARNING: Fail to retrieve token 
-com.amazonaws.SdkClientException: Failed to connect to service endpoint: 
-	at com.amazonaws.internal.EC2ResourceFetcher.doReadResource(EC2ResourceFetcher.java:119)
-	at com.amazonaws.internal.InstanceMetadataServiceResourceFetcher.getToken(InstanceMetadataServiceResourceFetcher.java:106)
-	at com.amazonaws.internal.InstanceMetadataServiceResourceFetcher.readResource(InstanceMetadataServiceResourceFetcher.java:77)
-	at com.amazonaws.internal.EC2ResourceFetcher.readResource(EC2ResourceFetcher.java:66)
-	at com.amazonaws.auth.InstanceMetadataServiceCredentialsFetcher.getCredentialsEndpoint(InstanceMetadataServiceCredentialsFetcher.java:61)
-	at com.amazonaws.auth.InstanceMetadataServiceCredentialsFetcher.getCredentialsResponse(InstanceMetadataServiceCredentialsFetcher.java:49)
-	at com.amazonaws.auth.BaseCredentialsFetcher.fetchCredentials(BaseCredentialsFetcher.java:154)
-	at com.amazonaws.auth.BaseCredentialsFetcher.getCredentials(BaseCredentialsFetcher.java:96)
-	at com.amazonaws.auth.InstanceProfileCredentialsProvider.getCredentials(InstanceProfileCredentialsProvider.java:174)
-	at com.amazonaws.auth.EC2ContainerCredentialsProviderWrapper.getCredentials(EC2ContainerCredentialsProviderWrapper.java:75)
-	at com.amazonaws.auth.AWSCredentialsProviderChain.getCredentials(AWSCredentialsProviderChain.java:118)
-	at com.amazonaws.services.s3.S3CredentialsProviderChain.getCredentials(S3CredentialsProviderChain.java:36)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.getCredentialsFromContext(AmazonHttpClient.java:1269)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.runBeforeRequestHandlers(AmazonHttpClient.java:845)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.doExecute(AmazonHttpClient.java:794)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.executeWithTimer(AmazonHttpClient.java:781)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.execute(AmazonHttpClient.java:755)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.access$500(AmazonHttpClient.java:715)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutionBuilderImpl.execute(AmazonHttpClient.java:697)
-	at com.amazonaws.http.AmazonHttpClient.execute(AmazonHttpClient.java:561)
-	at com.amazonaws.http.AmazonHttpClient.execute(AmazonHttpClient.java:541)
-	at com.amazonaws.services.s3.AmazonS3Client.invoke(AmazonS3Client.java:5558)
-	at com.amazonaws.services.s3.AmazonS3Client.invoke(AmazonS3Client.java:5505)
-	at com.amazonaws.services.s3.AmazonS3Client.access$300(AmazonS3Client.java:423)
-	at com.amazonaws.services.s3.AmazonS3Client$PutObjectStrategy.invokeServiceCall(AmazonS3Client.java:6639)
-	at com.amazonaws.services.s3.AmazonS3Client.uploadObject(AmazonS3Client.java:1892)
-	at com.amazonaws.services.s3.AmazonS3Client.putObject(AmazonS3Client.java:1852)
-	at ManageFile.uploadFile.<init>(uploadFile.java:50)
-	at ManageFile.UploadFileTest.testBucketNameAndRegion(uploadFileTest.java:59)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:765)
-	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:218)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:214)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:139)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:69)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
-	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
-	at org.apache.maven.surefire.junitplatform.LazyLauncher.execute(LazyLauncher.java:56)
-	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:184)
-	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:148)
-	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:122)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
-	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
-	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
-Caused by: java.net.SocketException: Network is unreachable: getsockopt
-	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
-	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
-	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542)
-	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592)
-	at java.base/java.net.Socket.connect(Socket.java:752)
-	at java.base/sun.net.NetworkClient.doConnect(NetworkClient.java:178)
-	at java.base/sun.net.www.http.HttpClient.openServer(HttpClient.java:531)
-	at java.base/sun.net.www.http.HttpClient.openServer(HttpClient.java:636)
-	at java.base/sun.net.www.http.HttpClient.<init>(HttpClient.java:280)
-	at java.base/sun.net.www.http.HttpClient.New(HttpClient.java:386)
-	at java.base/sun.net.www.http.HttpClient.New(HttpClient.java:408)
-	at java.base/sun.net.www.protocol.http.HttpURLConnection.getNewHttpClient(HttpURLConnection.java:1310)
-	at java.base/sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1288)
-	at java.base/sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1129)
-	at java.base/sun.net.www.protocol.http.HttpURLConnection.connect(HttpURLConnection.java:1058)
-	at com.amazonaws.internal.ConnectionUtils.connectToEndpoint(ConnectionUtils.java:95)
-	at com.amazonaws.internal.EC2ResourceFetcher.doReadResource(EC2ResourceFetcher.java:85)
-	... 97 more
-
-lug 05, 2024 2:01:10 PM com.amazonaws.internal.InstanceMetadataServiceResourceFetcher handleException
-WARNING: Fail to retrieve token 
-com.amazonaws.SdkClientException: Failed to connect to service endpoint: 
-	at com.amazonaws.internal.EC2ResourceFetcher.doReadResource(EC2ResourceFetcher.java:119)
-	at com.amazonaws.internal.InstanceMetadataServiceResourceFetcher.getToken(InstanceMetadataServiceResourceFetcher.java:106)
-	at com.amazonaws.internal.InstanceMetadataServiceResourceFetcher.readResource(InstanceMetadataServiceResourceFetcher.java:77)
-	at com.amazonaws.internal.EC2ResourceFetcher.readResource(EC2ResourceFetcher.java:66)
-	at com.amazonaws.auth.InstanceMetadataServiceCredentialsFetcher.getCredentialsEndpoint(InstanceMetadataServiceCredentialsFetcher.java:61)
-	at com.amazonaws.auth.InstanceMetadataServiceCredentialsFetcher.getCredentialsResponse(InstanceMetadataServiceCredentialsFetcher.java:49)
-	at com.amazonaws.auth.BaseCredentialsFetcher.fetchCredentials(BaseCredentialsFetcher.java:154)
-	at com.amazonaws.auth.BaseCredentialsFetcher.getCredentials(BaseCredentialsFetcher.java:96)
-	at com.amazonaws.auth.InstanceProfileCredentialsProvider.getCredentials(InstanceProfileCredentialsProvider.java:174)
-	at com.amazonaws.auth.EC2ContainerCredentialsProviderWrapper.getCredentials(EC2ContainerCredentialsProviderWrapper.java:75)
-	at com.amazonaws.auth.AWSCredentialsProviderChain.getCredentials(AWSCredentialsProviderChain.java:118)
-	at com.amazonaws.services.s3.S3CredentialsProviderChain.getCredentials(S3CredentialsProviderChain.java:36)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.getCredentialsFromContext(AmazonHttpClient.java:1269)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.executeOneRequest(AmazonHttpClient.java:1290)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.executeHelper(AmazonHttpClient.java:1157)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.doExecute(AmazonHttpClient.java:814)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.executeWithTimer(AmazonHttpClient.java:781)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.execute(AmazonHttpClient.java:755)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.access$500(AmazonHttpClient.java:715)
-	at com.amazonaws.http.AmazonHttpClient$RequestExecutionBuilderImpl.execute(AmazonHttpClient.java:697)
-	at com.amazonaws.http.AmazonHttpClient.execute(AmazonHttpClient.java:561)
-	at com.amazonaws.http.AmazonHttpClient.execute(AmazonHttpClient.java:541)
-	at com.amazonaws.services.s3.AmazonS3Client.invoke(AmazonS3Client.java:5558)
-	at com.amazonaws.services.s3.AmazonS3Client.invoke(AmazonS3Client.java:5505)
-	at com.amazonaws.services.s3.AmazonS3Client.access$300(AmazonS3Client.java:423)
-	at com.amazonaws.services.s3.AmazonS3Client$PutObjectStrategy.invokeServiceCall(AmazonS3Client.java:6639)
-	at com.amazonaws.services.s3.AmazonS3Client.uploadObject(AmazonS3Client.java:1892)
-	at com.amazonaws.services.s3.AmazonS3Client.putObject(AmazonS3Client.java:1852)
-	at ManageFile.uploadFile.<init>(uploadFile.java:50)
-	at ManageFile.UploadFileTest.testBucketNameAndRegion(uploadFileTest.java:59)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:765)
-	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:218)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:214)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:139)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:69)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
-	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
-	at org.apache.maven.surefire.junitplatform.LazyLauncher.execute(LazyLauncher.java:56)
-	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:184)
-	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:148)
-	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:122)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
-	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
-	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
-Caused by: java.net.SocketException: Network is unreachable: getsockopt
-	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
-	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
-	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542)
-	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592)
-	at java.base/java.net.Socket.connect(Socket.java:752)
-	at java.base/sun.net.NetworkClient.doConnect(NetworkClient.java:178)
-	at java.base/sun.net.www.http.HttpClient.openServer(HttpClient.java:531)
-	at java.base/sun.net.www.http.HttpClient.openServer(HttpClient.java:636)
-	at java.base/sun.net.www.http.HttpClient.<init>(HttpClient.java:280)
-	at java.base/sun.net.www.http.HttpClient.New(HttpClient.java:386)
-	at java.base/sun.net.www.http.HttpClient.New(HttpClient.java:408)
-	at java.base/sun.net.www.protocol.http.HttpURLConnection.getNewHttpClient(HttpURLConnection.java:1310)
-	at java.base/sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1288)
-	at java.base/sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1129)
-	at java.base/sun.net.www.protocol.http.HttpURLConnection.connect(HttpURLConnection.java:1058)
-	at com.amazonaws.internal.ConnectionUtils.connectToEndpoint(ConnectionUtils.java:95)
-	at com.amazonaws.internal.EC2ResourceFetcher.doReadResource(EC2ResourceFetcher.java:85)
-	... 98 more
-
-]]></system-err>
   </testcase>
-  <testcase name="testUploadFileIOException" classname="ManageFile.UploadFileTest" time="0.002">
-    <system-out><![CDATA[nonexistent.txt]]></system-out>
+  <testcase name="testUploadFileIOException" classname="ManageFile.UploadFileTest" time="0.005">
+    <system-out><![CDATA[File non valido!
+]]></system-out>
   </testcase>
 </testsuite>

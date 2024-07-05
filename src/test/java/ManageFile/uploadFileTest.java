@@ -3,6 +3,7 @@ package ManageFile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import software.amazon.awssdk.regions.Region;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -65,7 +66,7 @@ class UploadFileTest {
 
         Field regionField = uploadFile.class.getDeclaredField("region");
         regionField.setAccessible(true);
-        assertEquals(com.amazonaws.regions.Regions.EU_WEST_3, regionField.get(uploader));
+        assertEquals(Region.EU_WEST_3, regionField.get(uploader));
     }
 
 

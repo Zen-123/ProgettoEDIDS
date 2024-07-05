@@ -4,58 +4,30 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.AmazonS3Exception;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.core.sync.RequestBody;
 
-/**
- * Classe utilizzata per la gestione del caricamento di file di salvataggio sul bucket di aws s3
- */
 public class uploadFile {
-    //variabili private della classe
     private final String bucketName = "test-dungeonunipd";
-    private final Regions region = Regions.EU_WEST_3;
+    private final Region region = Region.EU_WEST_3;
 
-    /**
-     * Costruttore della classe
-     * Il caricamento sul bucket aws dei file di salvataggio viene gestito con una cartella di supporto FileLoad in cui
-     * sono contenuti i dati in locale prima di essere caricati.
-     * @param filename nome del file da scaricare
-     * @throws IOException
-     */
-    
     public uploadFile(String repositoryname, String filename) throws IOException {
-        //oggetto che prende i dati contenuti da un file nel file system
-        System.out.print(filename); 
-        InputStream file =  new FileInputStream("FileLoad/"+repositoryname+"/"+filename);  //qui manca file di testo dopo percorso che passero sotto voce getname
-        //Interfaccia che permette di accedere ai web service di aws s3
-        AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(region).build();
+        try (InputStream file = new FileInputStream("FileLoad/" + repositoryname + "/" + filename);
+             S3Client s3Client = S3Client.builder().region(region).build()) {
 
-        
+            PutObjectRequest request = PutObjectRequest.builder()
+                    .bucket(bucketName)
+                    .key(repositoryname + "/" + filename)
+                    .build();
 
-        //Rappresenta i metadata che sono salvati con aws s3
-        ObjectMetadata metadata  = new ObjectMetadata();
-        metadata.setContentLength(file.available());
-        metadata.setContentType("file.txt");
-
-        /*
-        Gestione delle eccezioni che possono essere lanciate da s3Client
-         */
-        try{
-            //Carica il file fileName.txt nel bucket aws
-            PutObjectRequest request = new PutObjectRequest(bucketName,repositoryname+"/"+filename, file, metadata);
-            s3Client.putObject(request);
+            s3Client.putObject(request, RequestBody.fromInputStream(file, file.available()));
 
             System.out.println("Salvataggio avvenuto con successo!");
-        }catch (AmazonS3Exception e){
-            e.printStackTrace();
-        } finally {
-            file.close();
+        } catch (IOException e) {
+            System.out.println("File non valido!");
+            throw e;
         }
     }
-
-
 }

@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: Player.MostroTest
 -------------------------------------------------------------------------------
-Tests run: 110, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.049 s -- in Player.MostroTest
+Tests run: 110, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.204 s -- in Player.MostroTest

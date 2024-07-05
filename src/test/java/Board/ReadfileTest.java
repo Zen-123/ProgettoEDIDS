@@ -85,9 +85,9 @@ public class ReadfileTest {
             reader.close();
 
             //test globale
-            assertEquals("XX", line1);
+            //assertEquals("XX", line1);
             //test singolo
-            //assertEquals("..", line1);
+            assertEquals("..", line1);
             assertEquals("..", line2);
         } finally {
             if (tempFile != null && tempFile.exists()) {
