@@ -3,6 +3,8 @@ package Board;
 import java.util.ArrayList;
 import Player.Item;
 import Player.mostro;
+import java.io.File;
+
 public class Board{
     public ArrayList<ArrayList<Cell>> cellestanza;
     public ArrayList<String> ss;
@@ -19,6 +21,7 @@ public class Board{
     //questo costruttore è per i file nuovi che vengono aperti
     public Board(int id_stanza){
         this.ss = new ArrayList<String>();
+        
         String temp = "src/main/java/Board/Stanze/stanza_"+id_stanza+".txt";
         this.ID_Stanza = id_stanza;
         reference.curr_stanza = id_stanza;

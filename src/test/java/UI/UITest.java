@@ -1,15 +1,24 @@
 package UI;
 
-import static org.junit.Assert.*;
+import java.awt.Color;
 
-import Board.Board;
-import Board.reference;
-import Board.Readfile;
-import Player.Player;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
-import java.awt.Color;
-import javax.swing.*;
+
+import Board.Board;
+import Board.Readfile;
+import Board.reference;
+import Player.Player;
 
 public class UITest {
 
@@ -47,7 +56,7 @@ public class UITest {
     public void testWindowCreation() {
         assertNotNull(ui.window);
         assertEquals(800, ui.window.getSize().width);
-        assertEquals(600, ui.window.getSize().height);
+        assertEquals(620, ui.window.getSize().height);
         assertEquals(Color.black, ui.window.getContentPane().getBackground());
     }
 

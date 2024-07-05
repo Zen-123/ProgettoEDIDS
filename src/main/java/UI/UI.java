@@ -1,6 +1,4 @@
 package UI;
-import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.metal.MetalToggleButtonUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -69,7 +67,7 @@ public class UI {
 
     void setWindow(){
         window = new JFrame();
-        window.setSize(800, 600);
+        window.setSize(800, 620);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setBackground(Color.black);
         window.setLayout(null);
@@ -826,6 +824,10 @@ public class UI {
     public int setAlertMenu(int value){
         if (value == 1){
             JOptionPane.showMessageDialog(commandPanel, "You have run out of available save slots, use \"save (1-4)\" to overwrite the available save slots", "Confirmation", JOptionPane.WARNING_MESSAGE );
+            return -1;
+        }
+        if (value == 2){
+            JOptionPane.showMessageDialog(commandPanel, "You are unallowed to save inside the Boss Room! You must fight him.", "Remember", JOptionPane.WARNING_MESSAGE );
             return -1;
         }
 

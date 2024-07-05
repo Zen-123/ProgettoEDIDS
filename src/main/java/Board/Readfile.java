@@ -33,13 +33,13 @@ public class Readfile {
         }
         return strings;
     }
-    public void fileToWrite(ArrayList<ArrayList<Cell>> stanza, String filename){
+    public void fileToWrite(ArrayList<String> ss, ArrayList<ArrayList<Cell>> stanza, String filename){
         try{
             writer = new FileWriter(filename);
             for (int i = 0; i <= stanza.size()-1; i++) {
                 for (int j = 0; j < stanza.get(0).size(); j++) {
                     if(i == (stanza.size()-1))
-                        writer.write(reference.currentStanza.ss.get(i).charAt(j));
+                        writer.write(ss.get(i).charAt(j));
                     else if(stanza.get(i).get(j).getSymbol() == 'A'){
                         writer.write('.');
                     }else{
@@ -53,13 +53,13 @@ public class Readfile {
             e.getStackTrace();
         }
     }
-    public void fileToWriteAWS(ArrayList<ArrayList<Cell>> stanza, String filename){
+    public void fileToWriteAWS(ArrayList<String> ss, ArrayList<ArrayList<Cell>> stanza, String filename){
         try{
             writer = new FileWriter(filename);
             for (int i = 0; i <= stanza.size()-1; i++) {
                 for (int j = 0; j < stanza.get(0).size(); j++) {
                     if(i == (stanza.size()-1))
-                        writer.write(reference.currentStanza.ss.get(i).charAt(j));
+                        writer.write(ss.get(i).charAt(j));
                     else if(stanza.get(i).get(j).getSymbol() == 'A'){
                         writer.write('A');
                     }else{
@@ -77,9 +77,10 @@ public class Readfile {
     public void ResetDirectory(){
 
         File path = new File("src/main/java/Board/Stanzeold/");
-        if (!path.exists())
-            throw new IllegalArgumentException("La Directory non esiste: ");
-        
+        if (!path.exists()){
+            File folder = new File("src/main/java/Board/Stanzeold");
+            folder.mkdir();
+        }
         File []allfiles = path.listFiles();
         if(allfiles.length > 0){
             for(int i = 0; i < allfiles.length; i++) {

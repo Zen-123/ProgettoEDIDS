@@ -1,0 +1,17 @@
+Player: asd
+Health: 100
+Money: 0
+Monster_killed: 0
+Category: warrior
+Potions: 1
+Weight_Inventory: 55
+key: 0
+Max_damage: 13
+Min_damage: 5
+Defense: 5
+Armour: armatura
+Weapon: spada
+X: 2
+Y: 2
+Stanza: 1
+Goldkey: 0

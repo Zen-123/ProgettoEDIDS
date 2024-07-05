@@ -1,0 +1,15 @@
+UI\UITest.class
+Board\referenceTest.class
+Player\entityTest.class
+Player\PlayerTest.class
+Board\CellTest.class
+UI\visibilityManagerTest.class
+ManageFile\DownloadFileTest.class
+Board\funcTest.class
+Player\MostroTest.class
+MainGameTest.class
+Board\ReadfileTest.class
+UI\choiceHandlerTest.class
+ManageFile\UploadFileTest.class
+Board\BoardTest.class
+Player\ItemTest.class

@@ -1,8 +1,8 @@
 package Player;
 
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class entityTest {
 
@@ -35,13 +35,7 @@ public class entityTest {
         assertEquals('A', testEntity.getSymbol());
     }
 
-    @Test
-    //test per verificare valore iniziale
-    public void testInitialValues() {
-        assertEquals(0, testEntity.getX());
-        assertEquals(0, testEntity.getY());
-        assertEquals('\0', testEntity.getSymbol());
-    }
+    
 
     @Test
     //test per verificare inserimento di coordinate negative

@@ -98,6 +98,7 @@ public class choiceHandler implements ActionListener {
              */
             case "Load":
                 vManager.showLoadScreen();
+                reference.filereader.ResetDirectory();
                 setLoad("Filesave1");
                 break;
             /*
@@ -115,18 +116,9 @@ public class choiceHandler implements ActionListener {
                 gestisce il bottone: commandButton
                 gestisce gli input scritti dall'utente sul commandTextField presente nel MainCharacterSelectionPanel
              */
-            /*
-            case "input":
-                String inputText = userInterfaceHandler.commandTextField.getText();
-                if (!Objects.equals(inputText, "")) {
-                    manageTextInput(inputText);
-                }
-                break;*/
-
             case "returnToMainMenu":
                 vManager.showMenuScreen();
                 break;
-
         }
     }
 
@@ -140,7 +132,6 @@ public class choiceHandler implements ActionListener {
      * @param input stringa di testo che contiene i comandi
      */
     void manageLoadTextInput(String input) {
-        File fileExistCheck;
         userInterfaceHandler.commandLoadTextField.setText("");
         //torna alla pagina iniziale
         if (input.toLowerCase().equals("back") || input.toLowerCase().equals("exit")) {
@@ -173,6 +164,7 @@ public class choiceHandler implements ActionListener {
             //salvataggio del file sulla cartella FileLoad, se esiste cartella Filesave2 = filename
             fileSave = new File("FileLoad/"+repository+"/paramplayer.txt");
             //creazione del file
+            checkExistingRepository("FileLoad",repository);
             fileSave.createNewFile();
             printWriter = new PrintWriter(fileSave);
             //scrittura sul file
@@ -209,7 +201,8 @@ public class choiceHandler implements ActionListener {
             //salvataggio del file sulla cartella FileLoad
             File fileSave;
             //salvo la stanza in cui sono con queste modifiche
-            reference.filereader.fileToWriteAWS(reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt");
+            checkExistingRepository("FileLoad",repository);
+            reference.filereader.fileToWriteAWS(reference.currentStanza.ss,reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt");
             //creazione del file
             
             File path = new File("src/main/java/Board/Stanzeold/");
@@ -253,7 +246,8 @@ public class choiceHandler implements ActionListener {
             reference.lista_stanze = new ArrayList<>();
             //salvo la stanza in cui sono con queste modifiche
             //creazione del file
-            
+            checkExistingRepository("FileLoad",repository);
+
             File path = new File(repository);
             if (!path.exists())
                 throw new IllegalArgumentException("La Directory non esiste: ");
@@ -302,7 +296,7 @@ public class choiceHandler implements ActionListener {
             //salvataggio del file sulla cartella FileLoad, se esiste cartella Filesave2 = filename
             fileSave = new File("FileLoad/"+repository+"/listamonster.txt");
             //creazione del file
-
+            checkExistingRepository("FileLoad",repository);
             //controlla che ci siano stanze
             fileSave.createNewFile();
             if(reference.lista_stanze.size() > 0){
@@ -332,6 +326,8 @@ public class choiceHandler implements ActionListener {
     }
     void setFileSaveItem(String repository) {
         try {
+            //se non esiste folder Fileload la crea e poi controlla se esiste la repository selezionata la crea
+            checkExistingRepository("FileLoad",repository);
             //salvataggio del file sulla cartella FileLoad, se esiste cartella Filesave2 = filename
             fileSave = new File("FileLoad/"+repository+"/listaitem.txt");
             //creazione del file
@@ -381,6 +377,7 @@ public class choiceHandler implements ActionListener {
             //salvataggio del file sulla cartella FileLoad, se esiste cartella Filesave2 = filename
             fileSave = new File("FileLoad/"+repository+"/paramplayer.txt");
             //creazione del file
+            checkExistingRepository("FileLoad",repository);
             fileSave.createNewFile();
             printWriter = new PrintWriter(fileSave);
             //scrittura sul file
@@ -419,9 +416,9 @@ public class choiceHandler implements ActionListener {
             //salvataggio del file sulla cartella FileLoad
             File fileSave;
             //salvo la stanza in cui sono con queste modifiche
-            reference.filereader.fileToWriteAWS(reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt");
+            reference.filereader.fileToWriteAWS(reference.currentStanza.ss, reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt");
             //creazione del file
-            
+            checkExistingRepository("FileLoad",repository);
             File path = new File("src/main/java/Board/Stanzeold/");
             if (!path.exists())
                 throw new IllegalArgumentException("La Directory non esiste: ");
@@ -463,7 +460,7 @@ public class choiceHandler implements ActionListener {
             //salvataggio del file sulla cartella FileLoad, se esiste cartella Filesave2 = filename
             fileSave = new File("FileLoad/"+repository+"/listamonster.txt");
             //creazione del file
-
+            checkExistingRepository("FileLoad",repository);
             //controlla che ci siano stanze
             fileSave.createNewFile();
             if(reference.lista_stanze.size() > 0){
@@ -498,7 +495,7 @@ public class choiceHandler implements ActionListener {
             //salvataggio del file sulla cartella FileLoad, se esiste cartella Filesave2 = filename
             fileSave = new File("FileLoad/"+repository+"/listaitem.txt");
             //creazione del file
-
+            checkExistingRepository("FileLoad",repository);
             //controlla che ci siano stanze
             fileSave.createNewFile();
             if(reference.lista_stanze.size() > 0){
@@ -542,13 +539,14 @@ public class choiceHandler implements ActionListener {
      * variabile counterFileFirstLoad se un file è già presente
      */
     public void setLoad(String name) {
+
         File fileLoad;
-        int i=1;
         userInterfaceHandler.counterLoadLabel.setText("Save n. " + (counterFile+1));
         //array che scorre i nomi di tutti i file di bucket aws
+        
         for (String s : fileNameArray) {
             fileLoad = new File("FileDownload/"+s+"/"+name);
-
+            checkExistingRepository("FileDownload",s);
             //se un file non esiste in locale ma è presente nel bucket viene scaricato
             if (!fileLoad.exists() || reloadFile) {
                 if(reloadFile){
@@ -560,8 +558,6 @@ public class choiceHandler implements ActionListener {
                 //dovro fare il controllo tra il numero di file salvati sul bucket e quelli in locale e dici 
                 //gia presente o meno
                 counterFileFirstLoad++;
-                
-                i++;
             }
 
         }
@@ -572,7 +568,6 @@ public class choiceHandler implements ActionListener {
     //metodo che quando schiacci load lui carica tutti i file dal bucket
     /* public void setLoadAll(String name) {
         File fileLoad;
-        int i=1;
         userInterfaceHandler.counterLoadLabel.setText("Save n. " + (counterFile+1));
         //array che scorre i nomi di tutti i file di bucket aws
         for (String s : fileNameArray) {
@@ -589,8 +584,6 @@ public class choiceHandler implements ActionListener {
                 //dovro fare il controllo tra il numero di file salvati sul bucket e quelli in locale e dici 
                 //gia presente o meno
                 counterFileFirstLoad++;
-                
-                i++;
             }
 
         }
@@ -598,6 +591,19 @@ public class choiceHandler implements ActionListener {
         reloadFile = false;
 
     } */
+   //
+   // Controlla che le repository esistano, se non esistono o subiscono modifiche ne creo di nuove
+   //
+   public static void checkExistingRepository(String mainrep, String repository){
+        File path = new File(mainrep);
+        if (!path.exists()){
+            path.mkdir();
+        }
+        File rep = new File(mainrep+"/"+repository);
+        if (!rep.exists()){
+            rep.mkdir();
+        }
+   }
 //metodo per salvare i dati ottenuti dai file scaricati dal bucket aws
     public void setupLoad(int k)  {
         setNewGame();
@@ -701,8 +707,6 @@ public class choiceHandler implements ActionListener {
                     }
                 }
             }
-            //qui ovviamente scrive tutte le stanze in stanzeold
-            
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -711,6 +715,7 @@ public class choiceHandler implements ActionListener {
 
     private void setNewGame(){
         userInterfaceHandler.textField.setText("");
+        reference.ui.mainCharacterButtonPanel.clearSelection();
         reference.player = new Player();
         reference.filereader = new Readfile();
         reference.mostrorun = new mostro();
@@ -721,6 +726,8 @@ public class choiceHandler implements ActionListener {
     }
 
     private void checkSlotExistence(String directory, int i){
+
+        checkExistingRepository("FileLoad",directory);
         File fileExistCheck = new File("FileLoad/" + directory);
         try {
             if(fileExistCheck.exists()){

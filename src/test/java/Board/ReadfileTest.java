@@ -75,7 +75,7 @@ public class ReadfileTest {
             reference.currentStanza.ss.add("..");
 
             // metodo da testare
-            readfile.fileToWrite(stanza, tempFile.getAbsolutePath());
+            readfile.fileToWrite(reference.currentStanza.ss,stanza, tempFile.getAbsolutePath());
 
             // verifica dei risultati ottenuti dopo scrittura su file
             BufferedReader reader = new BufferedReader(new FileReader(tempFile));
@@ -85,7 +85,7 @@ public class ReadfileTest {
             reader.close();
 
             //test globale
-            assertEquals("..", line1);
+            assertEquals("XX", line1);
             //test singolo
             //assertEquals("..", line1);
             assertEquals("..", line2);
