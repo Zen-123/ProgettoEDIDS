@@ -23,7 +23,7 @@ public class uploadFile {
                     .build();
 
             s3Client.putObject(request, RequestBody.fromInputStream(file, file.available()));
-
+            System.out.println("File " + filename + " caricato.");
             System.out.println("Salvataggio avvenuto con successo!");
         } catch (IOException e) {
             System.out.println("File non valido!");

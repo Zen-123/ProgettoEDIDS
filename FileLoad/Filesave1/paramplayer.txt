@@ -1,4 +1,4 @@
-Player: hh
+Player: t1
 Health: 100
 Money: 0
 Monster_killed: 0
