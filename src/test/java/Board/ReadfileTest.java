@@ -1,11 +1,17 @@
 package Board;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import Player.Player;
-import org.junit.jupiter.api.*;
-import java.io.*;
-import java.util.ArrayList;
 
 public class ReadfileTest {
 
@@ -69,7 +75,7 @@ public class ReadfileTest {
             reference.currentStanza.ss.add("..");
 
             // metodo da testare
-            readfile.fileToWrite(stanza, tempFile.getAbsolutePath());
+            readfile.fileToWrite(reference.currentStanza.ss,stanza, tempFile.getAbsolutePath());
 
             // verifica dei risultati ottenuti dopo scrittura su file
             BufferedReader reader = new BufferedReader(new FileReader(tempFile));

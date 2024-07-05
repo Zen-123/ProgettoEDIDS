@@ -1,13 +1,19 @@
 package ManageFile;
 
 
-import UI.UI;
-import org.junit.jupiter.api.*;
+import java.lang.reflect.Field;
+
+import javax.swing.JLabel;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import javax.swing.*;
-import java.lang.reflect.Field;
-import static org.junit.jupiter.api.Assertions.*;
+
+import UI.UI;
 
 class DownloadFileTest {
 
@@ -30,8 +36,9 @@ class DownloadFileTest {
     @Test
     //test costruttore parametrizzato, solo nome del file
     void testConstructorWithValidFileName() {
-        String fileName = "Filesave1";
-        DownloadFile downloadFile = new DownloadFile(fileName, ui);
+        String dirname = "Filesave1";
+        String fileName = "Filesave1.txt";
+        DownloadFile downloadFile = new DownloadFile(dirname,fileName, ui);
 
         // verifica di corrette creazione di oggetto di tipo DownloadFile
         assertNotNull(downloadFile);
@@ -41,16 +48,16 @@ class DownloadFileTest {
     //test costruttore parametrizzato solo con nome del file, e nome del file illecito
     void testConstructorWithInvalidFileName() {
         String fileName = "InvalidFile.txt";
-
+        String dirname = "InvaliddirFilesave1";
         // ci aspettiamo che venga lanciata una eccezione
-        assertThrows(IllegalStateException.class, () -> new DownloadFile(fileName, ui));
+        assertThrows(IllegalStateException.class, () -> new DownloadFile(dirname,fileName, ui));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"Filesave1", "Filesave2", "Filesave3", "Filesave4"})
     //test con costruttore parametrizzato e tutti i nomi del file leciti
-    void testConstructorWithAllValidFileNames(String fileName) {
-        DownloadFile downloadFile = new DownloadFile(fileName, ui);
+    void testConstructorWithAllValidFileNames(String dirname) {
+        DownloadFile downloadFile = new DownloadFile(dirname, "listamostri.txt", ui);
         // verifica della creazione di ogetto senza lancio di eccezioni
         assertNotNull(downloadFile);
     }
@@ -58,7 +65,7 @@ class DownloadFileTest {
     @Test
     //test per verificare se file scaricato dal bucket di aws viene messo nella giusta directory
     void testBucketNameAndDownloadDir() throws NoSuchFieldException, IllegalAccessException {
-        DownloadFile downloadFile = new DownloadFile("Filesave1", ui);
+        DownloadFile downloadFile = new DownloadFile("Filesave1","Filesave.txt", ui);
         Field bucketNameField = DownloadFile.class.getDeclaredField("bucketName");
         bucketNameField.setAccessible(true);
         //nome del bucket aws

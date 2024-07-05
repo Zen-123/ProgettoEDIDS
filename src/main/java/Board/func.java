@@ -164,7 +164,7 @@ public class func{
                     reference.currentStanza.lista_item.remove(i);
             }
             reference.currentStanza.lista_item.add(spadadaposare);
-        }else if((reference.item.getNome().compareTo("spada") == 0) && reference.player.isHasSword() == false){
+        }/* else if((reference.item.getNome().compareTo("spada") == 0) && reference.player.isHasSword() == false){
             reference.player.takeItem(reference.item);
             reference.currentStanza.cellestanza.get(reference.item.getY()).set(reference.item.getX(),Cell.PLAYER);
             reference.currentStanza.cellestanza.get(reference.player.getY()).set(reference.player.getX(),Cell.FREE);
@@ -172,7 +172,7 @@ public class func{
             reference.ui.commandTextField.setText("");
             reference.item = new Item();
             reference.ui.messageTextArea.setText("...\n...\n...");
-        }
+        } */
         if((reference.item.getNome().compareTo("armatura") == 0) && reference.player.isHasArmour() == true){
             //allora dovra buttare la sua spada a terra
             Item armaturadaposare = new Item();
@@ -195,7 +195,7 @@ public class func{
                     reference.currentStanza.lista_item.remove(i);
             }
             reference.currentStanza.lista_item.add(armaturadaposare);
-        }else if((reference.item.getNome().compareTo("armatura") == 0) && reference.player.isHasArmour() == false){
+        }/* else if((reference.item.getNome().compareTo("armatura") == 0) && reference.player.isHasArmour() == false){
             reference.player.takeItem(reference.item);
             reference.currentStanza.cellestanza.get(reference.item.getY()).set(reference.item.getX(),Cell.PLAYER);
             reference.currentStanza.cellestanza.get(reference.player.getY()).set(reference.player.getX(),Cell.FREE);
@@ -203,14 +203,14 @@ public class func{
             reference.ui.commandTextField.setText("");
             reference.item = new Item();
             reference.ui.messageTextArea.setText("...\n...\n...");
-        }
+        } */
         reference.ui.gameB.requestFocus();
         updateMonsterPosition();
     }
     //cambia stanza e applica modifiche al file della stanza in qui era presente || new crea file
     //controllo se new stanza in qui sta andando è gia presente o meno
     public void changeRoomAndWriteToFile(int drive_to){
-        reference.filereader.fileToWrite(reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt");
+        reference.filereader.fileToWrite(reference.currentStanza.ss,reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt");
 
          // stanza vecchia prendi dal file
          for (int i = 0; i < reference.lista_stanze.size(); i++) {

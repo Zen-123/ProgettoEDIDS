@@ -187,96 +187,118 @@ public class gameBoard extends JPanel implements KeyListener {
                         reference.functions.playerIsLooking();
                     break;
                     case "save":
-                        File fileLoad;
-                        if(handler.counterFileFirstLoad<4 && choiceHandler.counterFile<4){
-                            //for che scorre i file scaricati da aws
-                            for (int i = choiceHandler.counterFile; i < fileNameArray.length + 1; i++) {
-                                fileLoad = new File("FileDownload/"+fileNameArray[i]+"/");
-                                if(fileLoad.exists() && fileLoad.listFiles().length > 0) {
-                                    reference.ui.counterLoadLabel.setText("Save n. " + (choiceHandler.counterFile+1));
-                                    /*se lo slot salvataggio è già occupato si chiede all'utente se vuole sovrascriverlo
-                                     * oppure usare un altro slot disponibile */
-                                    if (reference.ui.setAlertMenu(0) == 0) {
-                                        //utente decide tramite l'alert di sovrascrivere il salvataggio precedente
-                                        //dovremo poi fare questa parte
-                                        handler.setFileSavePlayerOverwrite(fileNameArray[i]);
-                                        handler.setFileSaveStanzeOverwrite(fileNameArray[i]);
-                                        handler.setFileSaveMostriOverwrite(fileNameArray[i]);
-                                        handler.setFileSaveItemOverwrite(fileNameArray[i]);
-                                        vManager.showMenuScreen();
-                                        break;
+                        if(reference.curr_stanza == 0){
+                            reference.ui.setAlertMenu(2);
+                            reference.ui.gameB.requestFocus();
+                            reference.ui.commandTextField.setText("");
+                        }else{
+                            File fileLoad;
+                            if(handler.counterFileFirstLoad<4 && choiceHandler.counterFile<4){
+                                //for che scorre i file scaricati da aws
+                                for (int i = choiceHandler.counterFile; i < fileNameArray.length + 1; i++) {
+                                    fileLoad = new File("FileDownload/"+fileNameArray[i]+"/");
+                                    if(fileLoad.exists() && fileLoad.listFiles().length > 0) {
+                                        reference.ui.counterLoadLabel.setText("Save n. " + (choiceHandler.counterFile+1));
+                                        /*se lo slot salvataggio è già occupato si chiede all'utente se vuole sovrascriverlo
+                                         * oppure usare un altro slot disponibile */
+                                        if (reference.ui.setAlertMenu(0) == 0) {
+                                            //utente decide tramite l'alert di sovrascrivere il salvataggio precedente
+                                            handler.setFileSavePlayerOverwrite(fileNameArray[i]);
+                                            handler.setFileSaveStanzeOverwrite(fileNameArray[i]);
+                                            handler.setFileSaveMostriOverwrite(fileNameArray[i]);
+                                            handler.setFileSaveItemOverwrite(fileNameArray[i]);
+                                            vManager.showMenuScreen();
+                                            break;
+                                        } else {
+                                            
+                                            // vManager.showGameScreen();
+                                            break;
+                                        }
                                     } else {
-                                        //utente decide di non sovrascrivere salvataggio precedente
-                                        //perche vai qua dio lurido?
-                                        // vManager.showGameScreen();
+                                    /*se lo slot è libero, ovvero non è stato trovato tra i file scaricati da aws un file
+                                    con il nome cercato, allora viene creato un nuovo file salvataggio
+                                    * */
+                                        handler.setFileSavePlayer(fileNameArray[i]);
+                                        handler.setFileSaveStanze(fileNameArray[i]);
+                                        handler.setFileSaveMostri(fileNameArray[i]);
+                                        handler.setFileSaveItem(fileNameArray[i]);
+                                        reference.filereader.ResetDirectory();
                                         break;
                                     }
-                                } else {
-                                /*se lo slot è libero, ovvero non è stato trovato tra i file scaricati da aws un file
-                                con il nome cercato, allora viene creato un nuovo file salvataggio
-                                * */
-                                    handler.setFileSavePlayer(fileNameArray[i]);
-                                    handler.setFileSaveStanze(fileNameArray[i]);
-                                    handler.setFileSaveMostri(fileNameArray[i]);
-                                    handler.setFileSaveItem(fileNameArray[i]);
-                                    reference.filereader.ResetDirectory();
-                                    break;
                                 }
+                                choiceHandler.counterFile++;
+                            } else {
+                                //l'utente viene informato che gli slot salvataggio sono finiti tramite un alert
+                                reference.ui.setAlertMenu(1);
                             }
-                            choiceHandler.counterFile++;
-                        } else {
-                            //l'utente viene informato che gli slot salvataggio sono finiti tramite un alert
-                            reference.ui.setAlertMenu(1);
+                            //finite le operazioni si ritorna alla schermata iniziale
+                            vManager.showMenuScreen();
                         }
-                        //finite le operazioni si ritorna alla schermata iniziale
-
-                        vManager.showMenuScreen();
                         break;
                     case "exit":
                         vManager.showMenuScreen();
                         break;
 
                     case "save 1":
-                        handler.setFileSavePlayerOverwrite(fileNameArray[0]);
-                        handler.setFileSaveStanzeOverwrite(fileNameArray[0]);
-                        handler.setFileSaveMostriOverwrite(fileNameArray[0]);
-                        handler.setFileSaveItemOverwrite(fileNameArray[0]);
-                        reference.ui.loadLabel1.setText("Save slot 1");
-                        vManager.showMenuScreen();
+                        if(reference.curr_stanza == 0){
+                            reference.ui.setAlertMenu(2);
+                            reference.ui.gameB.requestFocus();
+                            reference.ui.commandTextField.setText("");
+                        }else{
 
+                            handler.setFileSavePlayerOverwrite(fileNameArray[0]);
+                            handler.setFileSaveStanzeOverwrite(fileNameArray[0]);
+                            handler.setFileSaveMostriOverwrite(fileNameArray[0]);
+                            handler.setFileSaveItemOverwrite(fileNameArray[0]);
+                            reference.ui.loadLabel1.setText("Save slot 1");
+                            vManager.showMenuScreen();
+                        }
                         break;
 
                     case "save 2":
-                        handler.setFileSavePlayerOverwrite(fileNameArray[1]);
-                        handler.setFileSaveStanzeOverwrite(fileNameArray[1]);
-                        handler.setFileSaveMostriOverwrite(fileNameArray[1]);
-                        handler.setFileSaveItemOverwrite(fileNameArray[1]);
-                        reference.ui.loadLabel2.setText("Save slot 2");
-
-                        vManager.showMenuScreen();
+                        if(reference.curr_stanza == 0){
+                            reference.ui.setAlertMenu(2);
+                            reference.ui.gameB.requestFocus();
+                            reference.ui.commandTextField.setText("");
+                        }else{
+                            handler.setFileSavePlayerOverwrite(fileNameArray[1]);
+                            handler.setFileSaveStanzeOverwrite(fileNameArray[1]);
+                            handler.setFileSaveMostriOverwrite(fileNameArray[1]);
+                            handler.setFileSaveItemOverwrite(fileNameArray[1]);
+                            reference.ui.loadLabel2.setText("Save slot 2");
+                            vManager.showMenuScreen();
+                        }
                         break;
                     case "save 3":
-                        handler.setFileSavePlayerOverwrite(fileNameArray[2]);
-                        handler.setFileSaveStanzeOverwrite(fileNameArray[2]);
-                        handler.setFileSaveMostriOverwrite(fileNameArray[2]);
-                        handler.setFileSaveItemOverwrite(fileNameArray[2]);
-                        reference.ui.loadLabel3.setText("Save slot 3");
+                        if(reference.curr_stanza == 0){
+                            reference.ui.setAlertMenu(2);
+                            reference.ui.gameB.requestFocus();
+                            reference.ui.commandTextField.setText("");
+                        }else{
+                            handler.setFileSavePlayerOverwrite(fileNameArray[2]);
+                            handler.setFileSaveStanzeOverwrite(fileNameArray[2]);
+                            handler.setFileSaveMostriOverwrite(fileNameArray[2]);
+                            handler.setFileSaveItemOverwrite(fileNameArray[2]);
+                            reference.ui.loadLabel3.setText("Save slot 3");
 
-                        vManager.showMenuScreen();
-
+                            vManager.showMenuScreen();
+                        }
                         break;
 
                     case "save 4":
-                        handler.setFileSavePlayerOverwrite(fileNameArray[3]);
-                        handler.setFileSaveStanzeOverwrite(fileNameArray[3]);
-                        handler.setFileSaveMostriOverwrite(fileNameArray[3]);
-                        handler.setFileSaveItemOverwrite(fileNameArray[3]);
-                        reference.ui.loadLabel4.setText("Save slot 4");
-
-                        vManager.showMenuScreen();
-
+                        if(reference.curr_stanza == 0){
+                            reference.ui.setAlertMenu(2);
+                            reference.ui.gameB.requestFocus();
+                            reference.ui.commandTextField.setText("");
+                        }else{
+                            handler.setFileSavePlayerOverwrite(fileNameArray[3]);
+                            handler.setFileSaveStanzeOverwrite(fileNameArray[3]);
+                            handler.setFileSaveMostriOverwrite(fileNameArray[3]);
+                            handler.setFileSaveItemOverwrite(fileNameArray[3]);
+                            reference.ui.loadLabel4.setText("Save slot 4");
+                            vManager.showMenuScreen();
+                        }
                         break;
-
                     default:
                         reference.ui.commandTextField.setText("");
                 }
@@ -288,7 +310,6 @@ public class gameBoard extends JPanel implements KeyListener {
                     reference.ui.gameB.requestFocus();
                     reference.ui.messageTextArea.setText("...\n...\n...");
                 }
-
             }
         }
     });

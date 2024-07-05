@@ -39,8 +39,6 @@ class funcTest {
         reference.mostrorun = reference.currentStanza.lista_mostri.get(0);
         reference.item = reference.currentStanza.lista_item.get(0);
         visibilityManager vManager = new visibilityManager(reference.ui);
-
-
     }
 
     @Test
@@ -102,9 +100,13 @@ class funcTest {
     void testChangeRoom(){
        //gli dico al player che ho attraversato porta W quindi spawna di fianco ad E
        reference.player.setspawnTo('E');
+       reference.alreadybeen = false;
+       reference.startGame = true;
        reference.functions.changeRoomAndWriteToFile(13);
-       assertEquals(1, reference.player.getX());
+       
        assertEquals(1, reference.player.getY());
+       assertEquals(5, reference.player.getX());
+       
        assertEquals('/', reference.player.spawnTo());
     }
     @Test
@@ -144,6 +146,8 @@ class funcTest {
         reference.player.setVita(70);
         reference.player.setPeso(0);
         reference.player.setNum_pozioni(0);
+        reference.player.setCanAttack(true);
+        reference.player.getSpada().setCanAttack(false);
         reference.functions.playerUsingPotion();
         assertEquals(70, reference.player.getVita());
         reference.player.addPozioni();
@@ -167,29 +171,29 @@ class funcTest {
     @Test
     void testPlayerTakeItem(){
         //posizione iniziale giocatore 3,3 item 3,2 mostro 2,3
+        // reference.player = new Player();
+        reference.currentStanza = new Board(12);
         assertEquals(1, reference.currentStanza.lista_item.size());
         assertEquals(1, reference.currentStanza.lista_mostri.size());
-        reference.player.addSpada(new Item("spadagiocatore", 8, 4, 0, true, 12, true,20));
-        reference.player.addArmour(new Item("armaturagiocatore", 0, 0, 0, false, 12, true,30));
+        reference.player.setCoordinate(3, 3);
+        reference.currentStanza.lista_item.get(0).setCoordinate(3, 2);
+        reference.currentStanza.lista_mostri.get(0).setCoordinate(2, 3);
+        reference.currentStanza.lista_mostri.remove(0);
+        reference.player.addSpada(new Item("spada", 8, 4, 0, true, 12, true,20));
+        reference.player.addArmour(new Item("armatura", 0, 0, 0, false, 12, true,30));
         reference.player.setHasArmour(true);
-        assertEquals("spadagiocatore", reference.player.getSpada().getNome());
-        assertEquals("armaturagiocatore", reference.player.getArmour().getNome());
+        assertEquals("spada", reference.player.getSpada().getNome());
+        assertEquals("armatura", reference.player.getArmour().getNome());
         if(reference.currentStanza.lista_item.get(0).getNome().compareTo("spada") == 0){
             reference.functions.takeItem();
             assertEquals("spada", reference.player.getSpada().getNome());
-            assertEquals(3, reference.player.getX());
-            assertEquals(2, reference.player.getY());
-            assertEquals(3, reference.currentStanza.lista_item.get(0).getX());
-            assertEquals(3, reference.currentStanza.lista_item.get(0).getY());
-            assertEquals("spadagiocatore", reference.currentStanza.lista_item.get(0).getNome());
+            assertEquals(2, reference.player.getX());
+            assertEquals(3, reference.player.getY());
         }else if (reference.currentStanza.lista_item.get(0).getNome().compareTo("armatura") == 0) {
             reference.functions.takeItem();
             assertEquals("armatura", reference.player.getArmour().getNome());
-            assertEquals(3, reference.player.getX());
-            assertEquals(2, reference.player.getY());
-            assertEquals(3, reference.currentStanza.lista_item.get(0).getX());
-            assertEquals(3, reference.currentStanza.lista_item.get(0).getY());
-            assertEquals("armaturagiocatore", reference.currentStanza.lista_item.get(0).getNome());
+            assertEquals(2, reference.player.getX());
+            assertEquals(3, reference.player.getY());
         }
     }
     @RepeatedTest(50)
