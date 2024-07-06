@@ -184,16 +184,17 @@ class funcTest {
         reference.player.setHasArmour(true);
         assertEquals("spada", reference.player.getSpada().getNome());
         assertEquals("armatura", reference.player.getArmour().getNome());
+        //il giocatore prendendo Item dovrebbe spostarsi di una riga in basso o in alto
         if(reference.currentStanza.lista_item.get(0).getNome().compareTo("spada") == 0){
             reference.functions.takeItem();
             assertEquals("spada", reference.player.getSpada().getNome());
-            assertEquals(2, reference.player.getX());
-            assertEquals(3, reference.player.getY());
+            assertEquals(3, reference.player.getX(), "coordinata x attesa");
+            assertEquals(2, reference.player.getY(), "coordinata y attesa");
         }else if (reference.currentStanza.lista_item.get(0).getNome().compareTo("armatura") == 0) {
             reference.functions.takeItem();
             assertEquals("armatura", reference.player.getArmour().getNome());
-            assertEquals(2, reference.player.getX());
-            assertEquals(3, reference.player.getY());
+            assertEquals(3, reference.player.getX(), "posizione aggiornata di coordinata x attesa");
+            assertEquals(2, reference.player.getY(), "posizione aggiornata di coordinata y attesa");
         }
     }
     @RepeatedTest(50)

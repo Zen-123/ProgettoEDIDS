@@ -1,9 +1,9 @@
 package Player;
 //classe x gestire le entita che possono muoversi all'interno del gioco player,monster
 public class entity {
-    protected static int x;
-    protected static int y;
-    protected static char symbol;
+    protected  int x;
+    protected  int y;
+    protected  char symbol;
 
     /* public entity(){
         this.x = 0;

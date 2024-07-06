@@ -4,8 +4,8 @@ UI/choiceHandlerTest.class
 Board/CellTest.class
 Board/funcTest.class
 ManageFile/DownloadFileTest.class
-Player/entityTest.class
 MainGameTest.class
+Player/entityTest.class
 Board/BoardTest.class
 Player/PlayerTest.class
 Player/MostroTest.class

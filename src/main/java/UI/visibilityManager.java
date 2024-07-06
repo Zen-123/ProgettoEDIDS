@@ -133,7 +133,6 @@ public class visibilityManager {
                     reference.player.setNome(ui.textField.getText());
                 } catch (Exception e) {
                     System.out.println("Guarda che non hai selezionato una categoria: default warrior");
-                    reference.player.setNome(ui.textField.getText());
                     reference.player.setCategory("warrior");
                     reference.player.setMonete(0);
                     reference.player.setPeso(0);

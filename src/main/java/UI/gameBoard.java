@@ -153,7 +153,7 @@ public class gameBoard extends JPanel implements KeyListener {
                             reference.ui.gameB.requestFocus();
                         }
                     break;
-                    case "pozione":
+                    case "potion":
                         reference.functions.playerUsingPotion();
                     break;
                     case "nord":

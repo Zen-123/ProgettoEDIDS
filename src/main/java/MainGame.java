@@ -19,7 +19,7 @@ public class MainGame {
     UI ui = new UI();
     visibilityManager manager = new visibilityManager(reference.ui);
     choiceHandler handler = new choiceHandler(reference.ui);
-
+//test update 2
 
     public static void main(String[] args) {
         //inizio gioco
@@ -34,7 +34,7 @@ public class MainGame {
     public MainGame(){
         reference.ui.createUI();
         manager.showMenuScreen();
-        handler.setLoad("stanza_1.txt");
+
     }
 
     //inizializzazione var globali

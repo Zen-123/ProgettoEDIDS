@@ -38,7 +38,7 @@ class DownloadFileTest {
     void testConstructorWithValidFileName() {
         String dirname = "Filesave1";
         String fileName = "Filesave1.txt";
-        DownloadFile downloadFile = new DownloadFile(dirname,fileName, ui);
+        DownloadFile downloadFile = new DownloadFile(dirname, ui);
 
         // verifica di corrette creazione di oggetto di tipo DownloadFile
         assertNotNull(downloadFile);
@@ -50,14 +50,14 @@ class DownloadFileTest {
         String fileName = "InvalidFile.txt";
         String dirname = "InvaliddirFilesave1";
         // ci aspettiamo che venga lanciata una eccezione
-        assertThrows(IllegalStateException.class, () -> new DownloadFile(dirname,fileName, ui));
+        assertThrows(IllegalStateException.class, () -> new DownloadFile(dirname, ui));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"Filesave1", "Filesave2", "Filesave3", "Filesave4"})
     //test con costruttore parametrizzato e tutti i nomi del file leciti
     void testConstructorWithAllValidFileNames(String dirname) {
-        DownloadFile downloadFile = new DownloadFile(dirname, "listamostri.txt", ui);
+        DownloadFile downloadFile = new DownloadFile(dirname, ui);
         // verifica della creazione di ogetto senza lancio di eccezioni
         assertNotNull(downloadFile);
     }
@@ -65,7 +65,7 @@ class DownloadFileTest {
     @Test
     //test per verificare se file scaricato dal bucket di aws viene messo nella giusta directory
     void testBucketNameAndDownloadDir() throws NoSuchFieldException, IllegalAccessException {
-        DownloadFile downloadFile = new DownloadFile("Filesave1","Filesave.txt", ui);
+        DownloadFile downloadFile = new DownloadFile("Filesave1", ui);
         Field bucketNameField = DownloadFile.class.getDeclaredField("bucketName");
         bucketNameField.setAccessible(true);
         //nome del bucket aws

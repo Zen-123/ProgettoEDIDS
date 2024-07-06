@@ -1,8 +1,6 @@
 package ManageFile;
 
 import java.io.File;
-import java.nio.file.FileAlreadyExistsException;
-import java.nio.file.FileSystem;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -31,51 +29,66 @@ public class DownloadFile {
             ListObjectsV2Response listResponse = s3.listObjectsV2(listRequest);
             List<S3Object> contents = listResponse.contents();
 
-            if (contents.isEmpty()) {
+            if (contents.isEmpty() || allDirectories(contents)) {
                 System.out.println("Directory vuota o inesistente: " + directory);
                 updateUILabel(directory, false);
                 return;
             }
 
+            boolean anyFileDownloaded = false;
             for (S3Object s3Object : contents) {
                 String key = s3Object.key();
                 if (!key.endsWith("/")) {  // Ignora le directory vuote
                     File destinationFile = new File(downloadDir + key);
 
-                    try {
-                        GetObjectRequest getObjectRequest = GetObjectRequest.builder()
-                                .bucket(bucketName)
-                                .key(key)
-                                .build();
+                    if (!destinationFile.exists()) {
+                        try {
+                            Files.createDirectories(Paths.get(destinationFile.getParent()));
 
-                        s3.getObject(getObjectRequest, ResponseTransformer.toFile(destinationFile));
-                        System.out.println("File scaricato: " + key);
-                    } catch (S3Exception e) {
-                        System.err.println("Errore nel download del file " + key);
+                            GetObjectRequest getObjectRequest = GetObjectRequest.builder()
+                                    .bucket(bucketName)
+                                    .key(key)
+                                    .build();
+
+                            s3.getObject(getObjectRequest, ResponseTransformer.toFile(destinationFile));
+                            System.out.println("File scaricato: " + key);
+                            anyFileDownloaded = true;
+                        } catch (Exception e) {
+                            System.err.println("Errore nel download del file " + key + ": " + e.getMessage());
+                        }
+                    } else {
+                        System.out.println("File già esistente: " + key);
                     }
                 }
             }
 
+            if (anyFileDownloaded) {
+                System.out.println("Directory scaricata con successo: " + directory);
+            } else {
+                System.out.println("Nessun nuovo file da scaricare nella directory: " + directory);
+            }
             updateUILabel(directory, true);
-            System.out.println("Directory scaricata con successo: " + directory);
         } catch (S3Exception e) {
             System.err.println("Errore S3: " + e.awsErrorDetails().errorMessage());
-            updateUILabel(directory, true);
+            updateUILabel(directory, false);
         } catch (Exception e) {
             System.err.println("Errore generico: " + e.getMessage());
             e.printStackTrace();
-            updateUILabel(directory, true);
+            updateUILabel(directory, false);
         }
     }
 
     private void updateUILabel(String directory, boolean success) {
         String labelText = success ? "Save slot " : "-";
         switch (directory) {
-            case "Filesave1" -> uiManager.loadLabel1.setText(labelText + "1");
-            case "Filesave2" -> uiManager.loadLabel2.setText(labelText + "2");
-            case "Filesave3" -> uiManager.loadLabel3.setText(labelText + "3");
-            case "Filesave4" -> uiManager.loadLabel4.setText(labelText + "4");
+            case "Filesave1" -> uiManager.loadLabel1.setText(success ? labelText + "1" : labelText);
+            case "Filesave2" -> uiManager.loadLabel2.setText(success ? labelText + "2" : labelText);
+            case "Filesave3" -> uiManager.loadLabel3.setText(success ? labelText + "3" : labelText);
+            case "Filesave4" -> uiManager.loadLabel4.setText(success ? labelText + "4" : labelText);
             default -> throw new IllegalStateException("Unexpected directory: " + directory);
         }
+    }
+    private boolean allDirectories(List<S3Object> contents) {
+        return contents.stream().allMatch(obj -> obj.key().endsWith("/"));
     }
 }

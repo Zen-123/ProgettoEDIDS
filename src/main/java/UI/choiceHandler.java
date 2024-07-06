@@ -98,7 +98,7 @@ public class choiceHandler implements ActionListener {
              */
             case "Load":
                 vManager.showLoadScreen();
-                reference.filereader.ResetDirectory();
+                //reference.filereader.ResetDirectory();
                 setLoad("Filesave1");
                 break;
             /*
@@ -727,8 +727,8 @@ public class choiceHandler implements ActionListener {
 
     private void checkSlotExistence(String directory, int i){
 
-        checkExistingRepository("FileLoad",directory);
-        File fileExistCheck = new File("FileLoad/" + directory);
+        checkExistingRepository("FileDownload",directory);
+        File fileExistCheck = new File("FileDownload/" + directory + "/stanza_1.txt");
         try {
             if(fileExistCheck.exists()){
                 vManager.checkLoad = true;

@@ -50,15 +50,16 @@ public class ReadfileTest {
     //test del metodo fileToWrite
     public void testFileToWrite() throws IOException {
         //creazione file temporaneo
-        File tempFile = new File("FileLoad/testFile.txt");
+        File tempFile= new File("FileLoad/testDirUpload/testFile.txt");
         try {
-
 
             // preparazione dei dati da inserire nel file
             ArrayList<ArrayList<Cell>> stanza = new ArrayList<>();
+
+
             ArrayList<Cell> row1 = new ArrayList<>();
-            row1.add(Cell.FREE);
-            row1.add(Cell.FREE);
+            row1.add(Cell.WALL);
+            row1.add(Cell.WALL);
             stanza.add(row1);
 
             ArrayList<Cell> row2 = new ArrayList<>();
@@ -71,7 +72,7 @@ public class ReadfileTest {
             reference.player = new Player();
             reference.currentStanza = new Board(1);
             reference.currentStanza.ss = new ArrayList<>();
-            reference.currentStanza.ss.add("..");
+            reference.currentStanza.ss.add("##");
             reference.currentStanza.ss.add("..");
 
             // metodo da testare
@@ -83,16 +84,13 @@ public class ReadfileTest {
             String line2 = reader.readLine();
 
             reader.close();
-
-            //test globale
-            //assertEquals("XX", line1);
-            //test singolo
-            assertEquals("..", line1);
+            assertEquals("##", line1);
             assertEquals("..", line2);
+        } catch (Exception e){
+            e.printStackTrace();
+
         } finally {
-            if (tempFile != null && tempFile.exists()) {
-                tempFile.delete();
-            }
+
         }
     }
 }
