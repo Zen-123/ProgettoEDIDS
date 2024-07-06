@@ -4,13 +4,23 @@ import Player.Item;
 import Player.mostro;
 import UI.visibilityManager;
 
-//classe x gestire metodi globali per il funzionamento del gioco
+/**
+ * Classe che gestisce le funzionalità globali del gioco.
+ */
 public class func{
 
     private visibilityManager vManager = new visibilityManager(reference.ui);
+    /**
+     * Costruttore della classe func.
+     */
     public func(){
     }
-    //genera un item e lo aggiunge alla lista della stanza, chiamato in fase di lettura del file, return item generato
+    /**
+     * Genera un item casuale e lo aggiunge alla lista della stanza.
+     * @param x Coordinata x dell'item.
+     * @param y Coordinata y dell'item.
+     * @return L'item generato.
+     */
     public static Item generateItem(int x, int y){
         int choose = (int)(Math.random() * 99);
         Item a;
@@ -27,7 +37,9 @@ public class func{
         }
         return a;
     }
-    //sposta tutti i mostri nella stanza di una coordinata random,richiamato ad ogni azione
+    /**
+     * Aggiorna la posizione di tutti i mostri nella stanza corrente in modo randomico.
+     */
     public void updateMonsterPosition(){
         if(reference.currentStanza.lista_mostri.size() > 0){
             for (int i = 0; i < reference.currentStanza.lista_mostri.size(); i++) {
@@ -140,7 +152,9 @@ public class func{
             }
         }
     }
-    //metodo che gestisce l'azione di quando player ha deciso di raccogliere item armatura o spada
+    /**
+     * Gestisce l'azione di raccolta di un item da parte del giocatore.
+     */
     public void takeItem(){
         if((reference.item.getNome().compareTo("spada") == 0) && reference.player.isHasSword()){
             //allora dovra buttare la sua spada a terra
@@ -164,15 +178,7 @@ public class func{
                     reference.currentStanza.lista_item.remove(i);
             }
             reference.currentStanza.lista_item.add(spadadaposare);
-        }/* else if((reference.item.getNome().compareTo("spada") == 0) && reference.player.isHasSword() == false){
-            reference.player.takeItem(reference.item);
-            reference.currentStanza.cellestanza.get(reference.item.getY()).set(reference.item.getX(),Cell.PLAYER);
-            reference.currentStanza.cellestanza.get(reference.player.getY()).set(reference.player.getX(),Cell.FREE);
-            reference.player.setCoordinate(reference.item.getX(), reference.item.getY());
-            reference.ui.commandTextField.setText("");
-            reference.item = new Item();
-            reference.ui.messageTextArea.setText("...\n...\n...");
-        } */
+        }
         if((reference.item.getNome().compareTo("armatura") == 0) && reference.player.isHasArmour() == true){
             //allora dovra buttare la sua spada a terra
             Item armaturadaposare = new Item();
@@ -195,20 +201,14 @@ public class func{
                     reference.currentStanza.lista_item.remove(i);
             }
             reference.currentStanza.lista_item.add(armaturadaposare);
-        }/* else if((reference.item.getNome().compareTo("armatura") == 0) && reference.player.isHasArmour() == false){
-            reference.player.takeItem(reference.item);
-            reference.currentStanza.cellestanza.get(reference.item.getY()).set(reference.item.getX(),Cell.PLAYER);
-            reference.currentStanza.cellestanza.get(reference.player.getY()).set(reference.player.getX(),Cell.FREE);
-            reference.player.setCoordinate(reference.item.getX(), reference.item.getY());
-            reference.ui.commandTextField.setText("");
-            reference.item = new Item();
-            reference.ui.messageTextArea.setText("...\n...\n...");
-        } */
+        }
         reference.ui.gameB.requestFocus();
         updateMonsterPosition();
     }
-    //cambia stanza e applica modifiche al file della stanza in qui era presente || new crea file
-    //controllo se new stanza in qui sta andando è gia presente o meno
+    /**
+     * Gestisce il cambio di stanza e l'aggiornamento dei file.
+     * @param drive_to ID della stanza di destinazione.
+     */
     public void changeRoomAndWriteToFile(int drive_to){
         reference.filereader.fileToWrite(reference.currentStanza.ss,reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt");
 
@@ -224,8 +224,8 @@ public class func{
             }
         }
         //se stanza è nuova prendila dal file
-        if(reference.alreadybeen == false){
-            if(reference.startGame == false){
+        if(!reference.alreadybeen){
+            if(!reference.startGame){
                 reference.lista_stanze.add(reference.currentStanza);
                 reference.startGame = true;
                 reference.ui.messageTextArea.setText("Una nuova stanza...\n...\nHai la sensazione di non trovarti da solo....");
@@ -273,7 +273,12 @@ public class func{
         reference.ui.gameB.requestFocus();
 
     }
-    //genera mostri presi dalla stringa letta dal textfile
+    /**
+     * Genera un mostro casuale.
+     * @param x Coordinata x del mostro.
+     * @param y Coordinata y del mostro.
+     * @return Il mostro generato.
+     */
     public static mostro generateMonster(int x, int y){
         mostro m;
         int choose = (int)(Math.random() * 5);
@@ -301,7 +306,12 @@ public class func{
         m.setSymbol('M');
         return m;
     }
-    //genera boss preso dalla stringa letta dal textfile
+    /**
+     * Genera il boss del gioco.
+     * @param x Coordinata x del boss.
+     * @param y Coordinata y del boss.
+     * @return Il boss generato.
+     */
     public static mostro generateBoss(int x, int y){
         mostro m;
         m = new mostro("Piovra",30,15,10,50,reference.curr_stanza);
@@ -310,7 +320,9 @@ public class func{
         m.setSymbol('B');
         return m;
     }
-    //metodo che gestisce turno del player quando sta attaccando dal commandtextfield
+    /**
+     * Gestisce l'azione di attacco del giocatore.
+     */
     public void playerIsAttacking(){
         int dannoplayer = reference.player.getSpada().getDanno();
         int blockprobability;
@@ -342,7 +354,9 @@ public class func{
         }
         reference.ui.commandTextField.setText("");
     }
-    //metodo che gestisce turno del player quando sta scappando dal commandtextfield
+    /**
+     * Gestisce l'azione di fuga del giocatore.
+     */
     public void playerIsRunning(){
         if(reference.player.isAttacking() && reference.player.getSpada().CanAttack()){
             //se io incontro mostro e decido di scappare ricevo danni
@@ -367,8 +381,10 @@ public class func{
             reference.ui.gameB.requestFocus();
         }
     }
-    //metodo che gestisce turno del player quando sta controllando item nella stanza dal commandtextfield
-    //inclusi solo oggetti I quindi spade e armature
+
+    /**
+     * Gestisce l'azione di osservazione della stanza da parte del giocatore.
+     */
     public void playerIsLooking(){
         String temp = "Ti guardi intorno...\n";
                         if(reference.currentStanza.lista_item.size() > 0){
@@ -388,7 +404,9 @@ public class func{
                         reference.ui.gameB.requestFocus();
                         reference.ui.commandTextField.setText("");
     }
-    //metodo che gestisce turno del player quando sta usado pozione dal commandtextfield
+    /**
+     * Gestisce l'utilizzo di una pozione da parte del giocatore.
+     */
     public void playerUsingPotion(){
         if(reference.player.getNumpozioni() > 0){
             //se è true è il turno del player bevi pozione ma vieni attaccato e torna il tuo turno,non muovi gli altri mostri
@@ -409,7 +427,12 @@ public class func{
             reference.ui.commandTextField.setText("");
         }
     }
-    //metodo che gestisce turno del player quando si imbatte in una cella,return true allora player si puo spostare altrimenti no
+    /**
+     * Controlla cosa il giocatore ha incontrato nella nuova posizione.
+     * @param x Coordinata x della nuova posizione.
+     * @param y Coordinata y della nuova posizione.
+     * @return true se il giocatore può spostarsi, false altrimenti.
+     */
     public boolean checkwhatyoubumped(int x, int y){
         switch(reference.currentStanza.getSsymbol(x,y)) {
             case '#':
@@ -533,8 +556,13 @@ public class func{
         }
         return false;
     }
-    //gestisce l'eventualità del encounter con mostro, viene richiamato sia nel turno del player che del mostro
-    //a seconda che è chiamato in playerIsAttacking || updateMonsterPosition
+    /**
+     * Gestisce l'incontro con un mostro.
+     * @param dannoplayer Danno inflitto dal giocatore.
+     * @param monster Mostro incontrato.
+     * @param blockprobabilitymonster Probabilità di blocco del mostro.
+     * @param attack_turn true se è il turno di attacco del mostro, false altrimenti.
+     */
     public void monsterEncounter(int dannoplayer,mostro monster,int blockprobabilitymonster, boolean attack_turn){
         if(monster.getVita() > 0){
             reference.ui.commandTextField.requestFocus();

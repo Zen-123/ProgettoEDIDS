@@ -6,16 +6,19 @@ import Board.reference;
 import Player.Item;
 
 /**
- * Classe che gestisce la visibilità o meno di certi componenti nella user interface
- * permette di cambiare da una schermata ad un altra
+ * Classe che gestisce la visibilità dei componenti dell'interfaccia utente.
+ * Permette di passare da una schermata all'altra del gioco.
  */
 public class visibilityManager {
 
+    /** Riferimento all'interfaccia utente principale. */
     UI ui;
+    /** Flag per indicare se si sta caricando un gioco salvato. */
     public boolean checkLoad = false;
     /**
-     * Costruttore della classe visibilityManager
-     * @param userInterface  oggetto della classe UI usato nel MainGame per la gestione delle schermate
+     * Costruttore della classe visibilityManager.
+     *
+     * @param userInterface Oggetto della classe UI usato nel MainGame per la gestione delle schermate.
      */
     public visibilityManager(UI userInterface) {
         ui = userInterface;
@@ -23,8 +26,8 @@ public class visibilityManager {
     }
 
     /**
-     * Metodo per gestire la schermata di menu
-     * mostrati solo titleNamePanel,menuButtonPanel
+     * Mostra la schermata del menu principale.
+     * Rende visibili solo titleNamePanel e menuButtonPanel.
      */
     public void showMenuScreen(){
         //componenti visibili
@@ -46,8 +49,8 @@ public class visibilityManager {
 
     }
     /**
-     * Metodo per gestire la schermata di selezione del personaggio
-     * mostrati titleNamePanel,mainTextPanel,mainTextFieldPanel,mainCharacterSelectionPanel
+     * Mostra la schermata di selezione del personaggio.
+     * Rende visibili titleNamePanel, mainTextPanel, mainTextFieldPanel e mainCharacterSelectionPanel.
      */
     public void showStartScreen(){
         //componenti visibili
@@ -74,8 +77,9 @@ public class visibilityManager {
 
     }
     /**
-     * Metodo per gestire la schermata di gioco
-     * mostrati statPanel,messageTextPanel,commandPanel,mapPanel
+     * Mostra la schermata di gioco principale.
+     * Rende visibili statPanel, messageTextPanel, commandPanel e mapPanel.
+     * Inizializza anche i dati del giocatore se si sta iniziando una nuova partita.
      */
     public void showGameScreen(){
         //componenti visibili
@@ -146,8 +150,8 @@ public class visibilityManager {
     }
 
     /**
-     * Metodo per gestire la schermata di caricamento
-     * mostrati loadMessagePanel,commandLoadTextField,loadTextFieldPanel
+     * Mostra la schermata di caricamento del gioco.
+     * Rende visibili loadMessagePanel, commandLoadTextField e loadTextFieldPanel.
      */
     public void showLoadScreen(){
         //componenti visibili
@@ -168,7 +172,10 @@ public class visibilityManager {
         ui.messageTextPanel.setVisible(false);
         ui.winPanel.setVisible(false);
     }
-
+    /**
+     * Mostra la schermata di fine gioco (vittoria o sconfitta).
+     * Visualizza le statistiche finali del giocatore e il risultato del gioco.
+     */
     public void showWinPanel(){
         ui.winPanel.setVisible(true);
         reference.ui.namePlayerLabel.setText("Player: " + reference.player.getNome());

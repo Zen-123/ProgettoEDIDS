@@ -1,4 +1,4 @@
-Player: t2
+Player: fff
 Health: 100
 Money: 10
 Monster_killed: 0
@@ -11,7 +11,7 @@ Min_damage: 3
 Defense: 1
 Armour: armatura
 Weapon: spada
-X: 3
+X: 2
 Y: 3
 Stanza: 1
 Goldkey: 0

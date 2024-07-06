@@ -11,16 +11,18 @@ import UI.visibilityManager;
 
 
 /**
- * Classe MainGame che permette di far partire il software
- * Utilizza altre classi presenti nel pacchetto UI per generare la user interface
+ * Classe MainGame che permette di avviare il software.
+ * Utilizza altre classi presenti nel pacchetto UI per generare l'interfaccia utente.
  */
 
 public class MainGame {
-    UI ui = new UI();
     visibilityManager manager = new visibilityManager(reference.ui);
     choiceHandler handler = new choiceHandler(reference.ui);
-//test update 2
 
+    /**
+     * Metodo principale che avvia il gioco.
+     * @param args Argomenti della linea di comando (non utilizzati).
+     */
     public static void main(String[] args) {
         //inizio gioco
         initialGame();
@@ -28,8 +30,8 @@ public class MainGame {
     }
 
     /**
-     * Costruttore della classe MainGame
-     * permette di settare la user interface e il menu di gioco, inoltre scarica tutti i salvataggi presenti su aws
+     * Costruttore della classe MainGame.
+     * Configura l'interfaccia utente e il menu di gioco.
      */
     public MainGame(){
         reference.ui.createUI();
@@ -37,7 +39,12 @@ public class MainGame {
 
     }
 
-    //inizializzazione var globali
+    /**
+     * Inizializza le variabili globali del gioco.
+     * Crea nuove istanze per il giocatore, il lettore di file, il mostro,
+     * la stanza corrente e le funzioni di utilità.
+     * Inoltre, reimposta la directory di lavoro.
+     */
     public static void initialGame(){
         reference.player = new Player();
         reference.filereader = new Readfile();

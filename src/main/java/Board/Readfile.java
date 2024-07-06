@@ -6,11 +6,20 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
-//gestisce lettura e scrittura del file e li salva nella cartella Stanze & Stanzeold
+/**
+ * Classe che gestisce la lettura e la scrittura dei file per le stanze del gioco.
+ * I file vengono salvati nelle cartelle Stanze e Stanzeold.
+ */
 public class Readfile {
 
     private static BufferedReader reader;
     FileWriter writer;
+
+    /**
+     * Legge il contenuto di un file e lo restituisce come lista di stringhe.
+     * @param filename Il nome del file da leggere.
+     * @return Una lista di stringhe contenente le righe del file.
+     */
     public ArrayList<String> fileToRead(String filename){
         
         String str="";
@@ -33,6 +42,12 @@ public class Readfile {
         }
         return strings;
     }
+    /**
+     * Scrive il contenuto di una stanza su un file.
+     * @param ss Lista di stringhe contenente informazioni aggiuntive sulla stanza.
+     * @param stanza Matrice di celle rappresentante la stanza.
+     * @param filename Il nome del file su cui scrivere.
+     */
     public void fileToWrite(ArrayList<String> ss, ArrayList<ArrayList<Cell>> stanza, String filename){
         try{
             writer = new FileWriter(filename);
@@ -52,7 +67,13 @@ public class Readfile {
         }catch(Exception e){
             e.getStackTrace();
         }
-    }
+    }  /**
+     * Scrive il contenuto di una stanza su un file per AWS.
+     * Simile a fileToWrite, ma gestisce diversamente il simbolo 'A'.
+     * @param ss Lista di stringhe contenente informazioni aggiuntive sulla stanza.
+     * @param stanza Matrice di celle rappresentante la stanza.
+     * @param filename Il nome del file su cui scrivere.
+     */
     public void fileToWriteAWS(ArrayList<String> ss, ArrayList<ArrayList<Cell>> stanza, String filename){
         try{
             writer = new FileWriter(filename);
@@ -73,8 +94,11 @@ public class Readfile {
             e.getStackTrace();
         }
     }
-    //elimina tutti i file nella cartella stanzeold, solo all'avvio del gioco, server per pulire i dati
-    public void ResetDirectory(){
+    /**
+     * Resetta la directory Stanzeold eliminando tutti i file al suo interno.
+     * Questo metodo viene chiamato all'avvio del gioco per pulire i dati precedenti.
+     * @throws IllegalArgumentException se viene trovata una directory illegale.
+     */    public void ResetDirectory(){
 
         File path = new File("src/main/java/Board/Stanzeold/");
         if (!path.exists()){

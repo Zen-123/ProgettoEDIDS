@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: UI.choiceHandlerTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.379 s -- in UI.choiceHandlerTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.141 s -- in UI.choiceHandlerTest

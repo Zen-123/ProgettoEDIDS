@@ -26,27 +26,60 @@ import Player.Player;
 import Player.mostro;
 
 /**
- * Classe che gestice gli eventi sulla UI, implementa la classe astratta ActionListener per la gestione degli eventi
+ * Classe che gestice gli eventi sulla UI
+ * Implementa l'interfaccia ActionListener per gestire le azioni degli elementi dell'interfaccia.
  */
 public class choiceHandler implements ActionListener {
-    //variabili private
 
-    //contatore generale per i 4 slot di salvataggio
+    /**
+     * Contatore generale per i 4 slot di salvataggio.
+     */
     public static int counterFile = 0;
-    //contatore che va a contare i file già scaricati al primo caricamento del gioco
+
+    /**
+     * Contatore per i file già scaricati al primo caricamento del gioco.
+     */
     public int counterFileFirstLoad = 0;
+
+    /**
+     * Riferimento all'handler dell'interfaccia utente.
+     */
     private final UI userInterfaceHandler;
+
+    /**
+     * Gestore della visibilità degli elementi dell'interfaccia ui.
+     */
     visibilityManager vManager;
+
+    /**
+     * Gestore per il caricamento dei file.
+     */
     uploadFile upload;
+
+    /**
+     * File di salvataggio corrente.
+     */
     private File fileSave;
 
+    /**
+     * Writer per la scrittura su file.
+     */
     private PrintWriter printWriter;
-    private final String[] fileNameArray = {"Filesave1", "Filesave2", "Filesave3", "Filesave4"};
+
+    /**
+     * Array contenente i nomi delle directory di salvataggio.
+     */
+    private final String[] dirNameArray = {"Filesave1", "Filesave2", "Filesave3", "Filesave4"};
+
+    /**
+     * Flag per indicare se ricaricare un file quando viene aggiornato su aws.
+     */
     public boolean reloadFile = false;
 
     /**
-     * Costruttore parametrizzato della classe choiceHandler
-     * @param ui oggetto della classe UI utilizzato per modificare varie parti dell'interfaccia a seguito di alcuni eventi
+     * Costruttore della classe choiceHandler.
+     *
+     * @param ui Oggetto della classe UI utilizzato per modificare varie parti dell'interfaccia a seguito di alcuni eventi.
      */
     public choiceHandler(UI ui) {
         userInterfaceHandler = ui;
@@ -54,8 +87,9 @@ public class choiceHandler implements ActionListener {
     }
 
     /**
-     * Override della classe actionPerdormed per la gestione di specifici eventi
-     * @param e the event to be processed
+     * Gestisce gli eventi generati dai pulsanti dell'interfaccia utente.
+     *
+     * @param e L'evento da processare.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -98,7 +132,6 @@ public class choiceHandler implements ActionListener {
              */
             case "Load":
                 vManager.showLoadScreen();
-                //reference.filereader.ResetDirectory();
                 setLoad("Filesave1");
                 break;
             /*
@@ -122,14 +155,12 @@ public class choiceHandler implements ActionListener {
         }
     }
 
-    /**
-     * metodo che gestisce gli input testuali da parte dell'utente nel commandTextField
-     * @param textInput stringa che identifica il comando scritto dall'utente
-     */
+
 
     /**
-     * Metodo che gestice gli input testuali nella pagina di load dei salvataggi
-     * @param input stringa di testo che contiene i comandi
+     * Gestisce gli input testuali nella pagina di caricamento dei salvataggi.
+     *
+     * @param input Stringa di testo che contiene i comandi.
      */
     void manageLoadTextInput(String input) {
         userInterfaceHandler.commandLoadTextField.setText("");
@@ -139,26 +170,26 @@ public class choiceHandler implements ActionListener {
         }
 
         if(input.toLowerCase().equals("slot 1")){
-            checkSlotExistence(fileNameArray[0], 1);
+            checkSlotExistence(dirNameArray[0], 1);
         }
         if(input.toLowerCase().equals("slot 2")){
-            checkSlotExistence(fileNameArray[1], 2);
+            checkSlotExistence(dirNameArray[1], 2);
         }
         if(input.toLowerCase().equals("slot 3")){
-            checkSlotExistence(fileNameArray[2],3);
+            checkSlotExistence(dirNameArray[2],3);
 
         }
         if(input.toLowerCase().equals("slot 4")){
-            checkSlotExistence(fileNameArray[3],4);
+            checkSlotExistence(dirNameArray[3],4);
         }
 
     }
 
     /**
-     * Metodo che gestice il salvataggio dei dati in un nuovo file
-     * @param fileName nome del file di salvataggio
+     * Salva i dati del giocatore in un nuovo file.
+     *
+     * @param repository Nome della repository in cui salvare il file.
      */
-    //CONTROLA QUI 
     void setFileSavePlayer(String repository) {
         try {
             //salvataggio del file sulla cartella FileLoad, se esiste cartella Filesave2 = filename
@@ -196,6 +227,11 @@ public class choiceHandler implements ActionListener {
         }
 
     }
+    /**
+     * Salva i dati delle stanze in un file.
+     *
+     * @param repository Nome della repository in cui salvare il file.
+     */
     void setFileSaveStanze(String repository) {
         try {
             //salvataggio del file sulla cartella FileLoad
@@ -239,6 +275,11 @@ public class choiceHandler implements ActionListener {
             e.printStackTrace();
         }
     }
+    /**
+     * Salva i dati delle stanzeOld in un nuovo file
+     *
+     * @param repository Nome della repository da cui caricare i file.
+     */
     void setFileDaLoadAstanzeOld(String repository) {
         try {
             //salvataggio del file sulla cartella FileLoad
@@ -291,6 +332,11 @@ public class choiceHandler implements ActionListener {
             e.printStackTrace();
         }
     }
+    /**
+     * Salva i dati dei mostri in un file.
+     *
+     * @param repository Nome della repository in cui salvare il file.
+     */
     void setFileSaveMostri(String repository) {
         try {
             //salvataggio del file sulla cartella FileLoad, se esiste cartella Filesave2 = filename
@@ -324,6 +370,11 @@ public class choiceHandler implements ActionListener {
         }
 
     }
+    /**
+     * Salva i dati degli item in un file.
+     *
+     * @param repository Nome della repository in cui salvare il file.
+     */
     void setFileSaveItem(String repository) {
         try {
             //se non esiste folder Fileload la crea e poi controlla se esiste la repository selezionata la crea
@@ -369,8 +420,9 @@ public class choiceHandler implements ActionListener {
 
     }
     /**
-     * Metodo che gestisce la sovrascrittura di file già esistenti
-     * @param name  nome del file da sovrascrivere
+     * Sovrascrive il file di salvataggio del giocatore.
+     *
+     * @param repository Nome della repository in cui sovrascrivere il file.
      */
     void setFileSavePlayerOverwrite(String repository) {
         try {
@@ -411,6 +463,11 @@ public class choiceHandler implements ActionListener {
             e.printStackTrace();
         }
     }
+    /**
+     * Sovrascrive i file di salvataggio delle stanze.
+     *
+     * @param repository Nome della repository in cui sovrascrivere i file.
+     */
     void setFileSaveStanzeOverwrite(String repository) {
         try {
             //salvataggio del file sulla cartella FileLoad
@@ -455,6 +512,11 @@ public class choiceHandler implements ActionListener {
             e.printStackTrace();
         }
     }
+    /**
+     * Sovrascrive il file di salvataggio dei mostri.
+     *
+     * @param repository Nome della repository in cui sovrascrivere il file.
+     */
     void setFileSaveMostriOverwrite(String repository) {
         try {
             //salvataggio del file sulla cartella FileLoad, se esiste cartella Filesave2 = filename
@@ -490,6 +552,11 @@ public class choiceHandler implements ActionListener {
         }
 
     }
+    /**
+     * Sovrascrive il file di salvataggio degli oggetti.
+     *
+     * @param repository Nome della repository in cui sovrascrivere il file.
+     */
     void setFileSaveItemOverwrite(String repository) {
         try {
             //salvataggio del file sulla cartella FileLoad, se esiste cartella Filesave2 = filename
@@ -535,8 +602,9 @@ public class choiceHandler implements ActionListener {
     
     }
     /**
-     * Metoco che controlla quali file sono già stati scaricati in precedenza e aggiorna la
-     * variabile counterFileFirstLoad se un file è già presente
+     * Imposta il caricamento di un file specifico.
+     *
+     * @param name Nome del file da caricare.
      */
     public void setLoad(String name) {
 
@@ -544,7 +612,7 @@ public class choiceHandler implements ActionListener {
         userInterfaceHandler.counterLoadLabel.setText("Save n. " + (counterFile+1));
         //array che scorre i nomi di tutti i file di bucket aws
         
-        for (String s : fileNameArray) {
+        for (String s : dirNameArray) {
             fileLoad = new File("FileDownload/"+s+"/"+name);
             checkExistingRepository("FileDownload",s);
             //se un file non esiste in locale ma è presente nel bucket viene scaricato
@@ -565,35 +633,12 @@ public class choiceHandler implements ActionListener {
         reloadFile = false;
 
     }
-    //metodo che quando schiacci load lui carica tutti i file dal bucket
-    /* public void setLoadAll(String name) {
-        File fileLoad;
-        userInterfaceHandler.counterLoadLabel.setText("Save n. " + (counterFile+1));
-        //array che scorre i nomi di tutti i file di bucket aws
-        for (String s : fileNameArray) {
-            fileLoad = new File("FileDownload/"+s+"/"+name);
-
-            //se un file non esiste in locale ma è presente nel bucket viene scaricato
-            if (!fileLoad.exists() || reloadFile) {
-                if(reloadFile){
-                    fileLoad.delete();
-                    reloadFile = false;
-                }
-                DownloadFile downloadFIle = new DownloadFile(s,name, userInterfaceHandler);
-            } else {
-                //dovro fare il controllo tra il numero di file salvati sul bucket e quelli in locale e dici 
-                //gia presente o meno
-                counterFileFirstLoad++;
-            }
-
-        }
-
-        reloadFile = false;
-
-    } */
-   //
-   // Controlla che le repository esistano, se non esistono o subiscono modifiche ne creo di nuove
-   //
+    /**
+     * Controlla l'esistenza delle repository e le crea se necessario.
+     *
+     * @param mainrep Nome della repository principale.
+     * @param repository Nome della sotto-repository.
+     */
    public static void checkExistingRepository(String mainrep, String repository){
         File path = new File(mainrep);
         if (!path.exists()){
@@ -604,7 +649,11 @@ public class choiceHandler implements ActionListener {
             rep.mkdir();
         }
    }
-//metodo per salvare i dati ottenuti dai file scaricati dal bucket aws
+    /**
+     * Carica i dati scaricati su giocatore attuale
+     *
+     * @param k Indice della directory di salvataggio da caricare.
+     */
     public void setupLoad(int k)  {
         setNewGame();
         try {
@@ -695,7 +744,7 @@ public class choiceHandler implements ActionListener {
                 brmonster.close();
                 setFileDaLoadAstanzeOld("FileLoad/Filesave"+k+"/");
             }
-            if(reference.lista_stanze.size() > 0){
+            if(!reference.lista_stanze.isEmpty()){
                 for (int i = 0; i < reference.lista_stanze.size(); i++) {
                     for (int j = 0; j < listamostri.size(); j++) {
                         if(reference.lista_stanze.get(i).getid() == listamostri.get(j).getIdstanza())
@@ -708,11 +757,13 @@ public class choiceHandler implements ActionListener {
                 }
             }
         }catch (Exception e){
-            e.printStackTrace();
+            System.out.println("File già scaricato");
         }
 
     }
-
+    /**
+     * Imposta un nuovo gioco, resettando tutti i dati.
+     */
     private void setNewGame(){
         userInterfaceHandler.textField.setText("");
         reference.ui.mainCharacterButtonPanel.clearSelection();
@@ -724,7 +775,12 @@ public class choiceHandler implements ActionListener {
         reference.currentStanza = new Board(1);
         reference.filereader.ResetDirectory();
     }
-
+    /**
+     * Verifica l'esistenza di uno slot di salvataggio e lo carica se presente.
+     *
+     * @param directory Nome della directory del salvataggio.
+     * @param i Indice dello slot di salvataggio.
+     */
     private void checkSlotExistence(String directory, int i){
 
         checkExistingRepository("FileDownload",directory);

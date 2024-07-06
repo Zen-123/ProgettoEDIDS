@@ -6,26 +6,44 @@ import Player.Player;
 import Player.mostro;
 import UI.UI;
 
-//variabili globali x gestione metodi
+/**
+ * Classe che contiene variabili globali per la gestione dei metodi e dello stato del gioco.
+ */
 public class reference {
-    //set variabili per gestione gioco player,lettura file e ui=il pannello di gioco
+
+    /** Il giocatore attuale. */
     public static Player player;
+
+    /** L'interfaccia utente del gioco. */
     public static UI ui = new UI();
+
+    /** Oggetto per la lettura dei file. */
     public static Readfile filereader;
-    //var temporali x gestione metodi
+
+    /** Item presente in gioco */
     public static Item item;
+
+    /** Mostro presente in gioco. */
     public static mostro mostro;
+
+    /** Mostro che esegue azione di run   */
     public static mostro mostrorun;
-    //array di stanze serve x mantenere parametri delle stanze gia completate se si ritorna
+
+    /** Lista delle stanze già visitate, per mantenere i parametri delle stanze completate. */
     public static ArrayList<Board> lista_stanze = new ArrayList<Board>();
-    //stanza momentaneamente presente e id della astanza
+
+    /** La stanza attuale in cui si trova il giocatore. */
     public static Board currentStanza;
+
+    /** L'ID della stanza attuale. */
     public static int curr_stanza = 1;
-    // functions gestisce tutti i metodi implementati che servono per lo sviluppo e le interazioni di gioco
+
+    /** Oggetto che gestisce tutti i metodi implementati per lo sviluppo e le interazioni di gioco. */
     public static func functions;
 
-    //variabili di controllo x fare check se si è stati gia in una stanza o meno(se si load dei parametri vecchi)
+    /** Flag che indica se il giocatore è già stato in una stanza. */
     public static boolean alreadybeen = false;
-    public static boolean startGame = false;
 
+    /** Flag che indica se il gioco è iniziato. */
+    public static boolean startGame = false;
 }

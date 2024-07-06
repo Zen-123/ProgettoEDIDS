@@ -4,23 +4,37 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-
+import UI.choiceHandler;
+import Board.reference;
 import UI.UI;
 import software.amazon.awssdk.core.sync.ResponseTransformer;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.*;
 
+/**
+ * Classe per gestire il download di file da un bucket Amazon S3.
+ * Questa classe si occupa di scaricare una directory da un bucket S3 specificato
+ * e aggiorna poi l'interfaccia utente in base al risultato dell'operazione.
+ */
 public class DownloadFile {
     private final String bucketName = "test-dungeonunipd";
     private final String downloadDir = "FileDownload/";
     private UI uiManager;
+    private choiceHandler handler;
 
+    /**
+     * Costruttore della classe DownloadFile.
+     * Inizializza il download dei file dalla directory specificata nel bucket S3.
+     *
+     * @param directory La directory nel bucket S3 da cui scaricare i file.
+     * @param ui L'oggetto UI per gestire l'interfaccia utente.
+     */
     public DownloadFile(String directory, UI ui) {
         Region region = Region.EU_WEST_3;
         try (S3Client s3 = S3Client.builder().region(region).build()) {
             uiManager = ui;
-
+            handler = new choiceHandler(ui);
             ListObjectsV2Request listRequest = ListObjectsV2Request.builder()
                     .bucket(bucketName)
                     .prefix(directory + "/")
@@ -77,17 +91,39 @@ public class DownloadFile {
             updateUILabel(directory, false);
         }
     }
-
+    /**
+     * Aggiorna le label nella schermata Load in base al risultato del download.
+     *
+     * @param directory La directory di cui si sta aggiornando lo stato.
+     * @param success Indica se il download è avvenuto con successo.
+     */
     private void updateUILabel(String directory, boolean success) {
         String labelText = success ? "Save slot " : "-";
+        if(success){
+            if(directory.contains("1")) {
+                handler.setupLoad(1);
+            }else if (directory.contains("2")) {
+                handler.setupLoad(2);
+            }else if(directory.contains("3")){
+                handler.setupLoad(3);
+            }else if(directory.contains("4")){
+                handler.setupLoad(4);
+            }
+        }
         switch (directory) {
-            case "Filesave1" -> uiManager.loadLabel1.setText(success ? labelText + "1" : labelText);
-            case "Filesave2" -> uiManager.loadLabel2.setText(success ? labelText + "2" : labelText);
-            case "Filesave3" -> uiManager.loadLabel3.setText(success ? labelText + "3" : labelText);
-            case "Filesave4" -> uiManager.loadLabel4.setText(success ? labelText + "4" : labelText);
+            case "Filesave1" -> uiManager.loadLabel1.setText(success ? labelText + "1 -- Name: "+ reference.player.getNome() : labelText);
+            case "Filesave2" -> uiManager.loadLabel2.setText(success ? labelText + "2 -- Name: " + reference.player.getNome(): labelText);
+            case "Filesave3" -> uiManager.loadLabel3.setText(success ? labelText + "3 -- Name: " + reference.player.getNome() : labelText);
+            case "Filesave4" -> uiManager.loadLabel4.setText(success ? labelText + "4 -- Name: " + reference.player.getNome(): labelText);
             default -> throw new IllegalStateException("Unexpected directory: " + directory);
         }
     }
+    /**
+     * Verifica se tutti gli oggetti nella lista sono directory.
+     *
+     * @param contents Lista di oggetti S3 da controllare.
+     * @return true se tutti gli oggetti sono directory, false altrimenti.
+     */
     private boolean allDirectories(List<S3Object> contents) {
         return contents.stream().allMatch(obj -> obj.key().endsWith("/"));
     }

@@ -13,18 +13,30 @@ import javax.swing.JPanel;
 import Board.Cell;
 import Board.reference;
 
+/**
+ * Classe che gestisce le meccaniche di gioco.
+ * Gestisce la visualizzazione della mappa, le statistiche del giocatore e gli input da tastiera.
+ */
 public class gameBoard extends JPanel implements KeyListener {
     private visibilityManager vManager = new visibilityManager(reference.ui);
     private choiceHandler handler = new choiceHandler(reference.ui);
-    private final String[] fileNameArray = {"Filesave1", "Filesave2", "Filesave3", "Filesave4"};
+    private final String[] dirNameArray = {"Filesave1", "Filesave2", "Filesave3", "Filesave4"};
 
+    /**
+     * Costruttore della classe gameBoard.
+     * Inizializza il pannello di gioco e gestisce input da tastiera.
+     */
     public gameBoard(){
         addKeyListener(this);
         this.setFocusable(true);
         MakeaMove();
     }
-    //metodo che colora la mappa ogni volta che cè un cambiamento
-    @Override
+    /**
+     * Metodo per disegnare la schermata di gioco.
+     * Visualizza la mappa, le statistiche del giocatore e altri elementi grafici.
+     *
+     * @param g Oggetto Graphics utilizzato per disegnare.
+     */
 	protected void paintComponent(Graphics g) {
 		//metodi che si richiamano su se stessi per ricolorare ogni volta che ce un evento che avviene
         super.paintComponent(g);
@@ -72,7 +84,12 @@ public class gameBoard extends JPanel implements KeyListener {
             y+=25;
         }
     }
-    //gestisce key even quando premi le frecce
+    /**
+     * Gestisce gli eventi di pressione dei tasti.
+     * Controlla i movimenti del giocatore e aggiorna la posizione dei mostri.
+     *
+     * @param e Evento della tastiera.
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         if(reference.player.isAlive()){
@@ -129,7 +146,11 @@ public class gameBoard extends JPanel implements KeyListener {
     @Override
     public void keyTyped(KeyEvent e){
     }
-    //gestisce movimento mostri e interazioni del player sul commandtext
+    /**
+     * Gestisce i comandi inseriti dall'utente nel campo di testo.
+     * Implementa le azioni di gioco come raccogliere oggetti, usare pozioni, attaccare, ecc.
+     * Viene gestito anche il movimento dei mostri
+     */
    public void MakeaMove(){
     reference.ui.commandTextField.addKeyListener(new KeyAdapter() {
         public void keyPressed(KeyEvent e) {
@@ -195,18 +216,18 @@ public class gameBoard extends JPanel implements KeyListener {
                             File fileLoad;
                             if(handler.counterFileFirstLoad<4 && choiceHandler.counterFile<4){
                                 //for che scorre i file scaricati da aws
-                                for (int i = choiceHandler.counterFile; i < fileNameArray.length + 1; i++) {
-                                    fileLoad = new File("FileDownload/"+fileNameArray[i]+"/");
+                                for (int i = choiceHandler.counterFile; i < dirNameArray.length + 1; i++) {
+                                    fileLoad = new File("FileDownload/"+dirNameArray[i]+"/");
                                     if(fileLoad.exists() && fileLoad.listFiles().length > 0) {
                                         reference.ui.counterLoadLabel.setText("Save n. " + (choiceHandler.counterFile+1));
                                         /*se lo slot salvataggio è già occupato si chiede all'utente se vuole sovrascriverlo
                                          * oppure usare un altro slot disponibile */
                                         if (reference.ui.setAlertMenu(0) == 0) {
                                             //utente decide tramite l'alert di sovrascrivere il salvataggio precedente
-                                            handler.setFileSavePlayerOverwrite(fileNameArray[i]);
-                                            handler.setFileSaveStanzeOverwrite(fileNameArray[i]);
-                                            handler.setFileSaveMostriOverwrite(fileNameArray[i]);
-                                            handler.setFileSaveItemOverwrite(fileNameArray[i]);
+                                            handler.setFileSavePlayerOverwrite(dirNameArray[i]);
+                                            handler.setFileSaveStanzeOverwrite(dirNameArray[i]);
+                                            handler.setFileSaveMostriOverwrite(dirNameArray[i]);
+                                            handler.setFileSaveItemOverwrite(dirNameArray[i]);
                                             vManager.showMenuScreen();
                                             break;
                                         } else {
@@ -218,10 +239,10 @@ public class gameBoard extends JPanel implements KeyListener {
                                     /*se lo slot è libero, ovvero non è stato trovato tra i file scaricati da aws un file
                                     con il nome cercato, allora viene creato un nuovo file salvataggio
                                     * */
-                                        handler.setFileSavePlayer(fileNameArray[i]);
-                                        handler.setFileSaveStanze(fileNameArray[i]);
-                                        handler.setFileSaveMostri(fileNameArray[i]);
-                                        handler.setFileSaveItem(fileNameArray[i]);
+                                        handler.setFileSavePlayer(dirNameArray[i]);
+                                        handler.setFileSaveStanze(dirNameArray[i]);
+                                        handler.setFileSaveMostri(dirNameArray[i]);
+                                        handler.setFileSaveItem(dirNameArray[i]);
                                         reference.filereader.ResetDirectory();
                                         break;
                                     }
@@ -246,10 +267,10 @@ public class gameBoard extends JPanel implements KeyListener {
                             reference.ui.commandTextField.setText("");
                         }else{
 
-                            handler.setFileSavePlayerOverwrite(fileNameArray[0]);
-                            handler.setFileSaveStanzeOverwrite(fileNameArray[0]);
-                            handler.setFileSaveMostriOverwrite(fileNameArray[0]);
-                            handler.setFileSaveItemOverwrite(fileNameArray[0]);
+                            handler.setFileSavePlayerOverwrite(dirNameArray[0]);
+                            handler.setFileSaveStanzeOverwrite(dirNameArray[0]);
+                            handler.setFileSaveMostriOverwrite(dirNameArray[0]);
+                            handler.setFileSaveItemOverwrite(dirNameArray[0]);
                             reference.ui.loadLabel1.setText("Save slot 1");
                             vManager.showMenuScreen();
                         }
@@ -261,10 +282,10 @@ public class gameBoard extends JPanel implements KeyListener {
                             reference.ui.gameB.requestFocus();
                             reference.ui.commandTextField.setText("");
                         }else{
-                            handler.setFileSavePlayerOverwrite(fileNameArray[1]);
-                            handler.setFileSaveStanzeOverwrite(fileNameArray[1]);
-                            handler.setFileSaveMostriOverwrite(fileNameArray[1]);
-                            handler.setFileSaveItemOverwrite(fileNameArray[1]);
+                            handler.setFileSavePlayerOverwrite(dirNameArray[1]);
+                            handler.setFileSaveStanzeOverwrite(dirNameArray[1]);
+                            handler.setFileSaveMostriOverwrite(dirNameArray[1]);
+                            handler.setFileSaveItemOverwrite(dirNameArray[1]);
                             reference.ui.loadLabel2.setText("Save slot 2");
                             vManager.showMenuScreen();
                         }
@@ -275,10 +296,10 @@ public class gameBoard extends JPanel implements KeyListener {
                             reference.ui.gameB.requestFocus();
                             reference.ui.commandTextField.setText("");
                         }else{
-                            handler.setFileSavePlayerOverwrite(fileNameArray[2]);
-                            handler.setFileSaveStanzeOverwrite(fileNameArray[2]);
-                            handler.setFileSaveMostriOverwrite(fileNameArray[2]);
-                            handler.setFileSaveItemOverwrite(fileNameArray[2]);
+                            handler.setFileSavePlayerOverwrite(dirNameArray[2]);
+                            handler.setFileSaveStanzeOverwrite(dirNameArray[2]);
+                            handler.setFileSaveMostriOverwrite(dirNameArray[2]);
+                            handler.setFileSaveItemOverwrite(dirNameArray[2]);
                             reference.ui.loadLabel3.setText("Save slot 3");
 
                             vManager.showMenuScreen();
@@ -291,10 +312,10 @@ public class gameBoard extends JPanel implements KeyListener {
                             reference.ui.gameB.requestFocus();
                             reference.ui.commandTextField.setText("");
                         }else{
-                            handler.setFileSavePlayerOverwrite(fileNameArray[3]);
-                            handler.setFileSaveStanzeOverwrite(fileNameArray[3]);
-                            handler.setFileSaveMostriOverwrite(fileNameArray[3]);
-                            handler.setFileSaveItemOverwrite(fileNameArray[3]);
+                            handler.setFileSavePlayerOverwrite(dirNameArray[3]);
+                            handler.setFileSaveStanzeOverwrite(dirNameArray[3]);
+                            handler.setFileSaveMostriOverwrite(dirNameArray[3]);
+                            handler.setFileSaveItemOverwrite(dirNameArray[3]);
                             reference.ui.loadLabel4.setText("Save slot 4");
                             vManager.showMenuScreen();
                         }

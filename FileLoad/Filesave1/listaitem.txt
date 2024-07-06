@@ -1,4 +1,0 @@
-armatura,0,0,15,false,2,false,30,1,2,I
-armatura,0,0,7,false,3,false,30,12,1,I
-armatura,0,0,21,false,3,false,30,8,4,I
-armatura,0,0,15,false,3,false,30,3,8,I

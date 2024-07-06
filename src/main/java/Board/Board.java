@@ -5,20 +5,50 @@ import Player.Item;
 import Player.mostro;
 import java.io.File;
 
+/**
+ * Rappresenta la struttura e la logica di una stanza del gioco.
+ * Gestisce la disposizione delle celle, degli oggetti e dei mostri all'interno della stanza.
+ */
 public class Board{
+    /** Matrice di celle che compongono la stanza. */
     public ArrayList<ArrayList<Cell>> cellestanza;
+
+    /** Lista di stringhe rappresentanti la struttura della stanza. */
     public ArrayList<String> ss;
+
+    /** Lista degli oggetti presenti nella stanza. */
     public ArrayList<Item> lista_item;
+
+    /** Lista dei mostri presenti nella stanza. */
     public ArrayList<mostro> lista_mostri;
+
+    /** Numero di righe della stanza. */
     public int row;
+
+    /** Numero di colonne della stanza. */
     public int column;
+
+    /** Identificativo univoco della stanza. */
     public int ID_Stanza;
-    private int drive_to_N; 
+
+    /** Identificativo della stanza a nord. */
+    private int drive_to_N;
+
+    /** Identificativo della stanza a est. */
     private int drive_to_E;
-    private int drive_to_W; 
+
+    /** Identificativo della stanza a ovest. */
+    private int drive_to_W;
+
+    /** Identificativo della stanza a sud. */
     private int drive_to_S;
-    private static int drive_to_boss=0;
-    //questo costruttore è per i file nuovi che vengono aperti
+
+    /** Identificativo della stanza del boss. */
+    private static int drive_to_boss = 0;
+    /**
+     * Costruttore per creare una nuova stanza.
+     * @param id_stanza Identificativo della stanza da creare.
+     */
     public Board(int id_stanza){
         this.ss = new ArrayList<String>();
         
@@ -33,7 +63,11 @@ public class Board{
         this.lista_mostri = new ArrayList<mostro>();
         populateBoard(ss,false);
     }
-    //questo costruttore è per i file vecchi, ossia le stanze che abbiamo già visitato e che hanno subito modifiche
+    /**
+     * Costruttore per caricare una stanza già visitata.
+     * @param id_stanza Identificativo della stanza da caricare.
+     * @param verification Flag che indica se la stanza è già stata visitata.
+     */
     public Board(int id_stanza, boolean verification){
         reference.alreadybeen = verification;
         this.ss = new ArrayList<String>();
@@ -48,8 +82,11 @@ public class Board{
         this.lista_mostri = new ArrayList<mostro>();
         populateBoard(ss,true);
     }
-    //riempie la board=arraylist di celle,che poi verra stampata da printcomponent
-    //ver == false allora viene letto da un nuovo file , ver == true controlla file vecchio
+    /**
+     * Popola la board con celle, oggetti e mostri.
+     * @param strings Lista di stringhe che rappresentano la struttura della stanza.
+     * @param ver Flag che indica se si sta caricando una stanza già visitata (true) oppure una stanza nuova (false).
+     */
     public void populateBoard(ArrayList<String> strings,boolean ver){
         //serve x assegnare alla stanza presente che porta ti porta nella next stanza
         this.setDrive_to_N(strings.get(strings.size()-1).charAt(0));
@@ -132,52 +169,117 @@ public class Board{
             } 
         }   
     }
+    /**
+     * Restituisce il simbolo di una cella specifica.
+     * @param x Coordinata x della cella.
+     * @param y Coordinata y della cella.
+     * @return Il carattere che rappresenta il simbolo della cella.
+     */
     public char getSsymbol(int x, int y){
         return cellestanza.get(y).get(x).getSymbol();
     }
+    /**
+     * Imposta il simbolo di una cella specifica.
+     * @param x Coordinata x della cella.
+     * @param y Coordinata y della cella.
+     * @param simbol Il nuovo simbolo da assegnare alla cella.
+     */
     public void setSsymbol(int x, int y,char simbol){
         this.cellestanza.get(y).get(x).setSymbol(simbol);
     }
+
+    /**
+     * Ritorna la riga della stanza
+     * @return riga della stanza
+     */
     public int getRow(){
         return row;
     }
+    /**
+     * Ritorna la colonna della stanza
+     * @return colonna della stanza
+     */
     public int getColumn(){
         return column;
     }
+
+    /**
+     * Ritorna l'ID della stanza'
+     * @return ID_stanza della stanza
+     */
     public int getid(){
         return ID_Stanza;
     }
+
+    /**
+     * Ritorna identificatore della stanza a nord
+     * @return identificatore stanza a nord
+     */
     public int getDrive_to_N() {
         return drive_to_N;
     }
+    /**
+     * Ritorna identificatore della stanza a est
+     * @return identificatore stanza a est
+     */
     public int getDrive_to_E() {
         return drive_to_E;
     }
+    /**
+     * Ritorna identificatore della stanza a sud
+     * @return identificatore stanza a sud
+     */
     public int getDrive_to_S() {
         return drive_to_S;
     }
+    /**
+     * Ritorna identificatore della stanza a ovest
+     * @return identificatore stanza a ovest
+     */
     public int getDrive_to_W() {
         return drive_to_W;
     }
+    /**
+     * Ritorna identificatore della stanza del boss
+     * @return identificatore stanza del boss
+     */
     public static int getDrive_to_boss() {
         return drive_to_boss;
     }
-    //metodi che ti dicono in quale stanza deve spostarsi player
+
+    /**
+     * Imposta la stanza in cui deve spostarsi il giocatore, in questo caso la stanza a nord
+     * @param drive_to_N  identifica la stanza a nord
+     */
     public void setDrive_to_N(int drive_to_N) {
         this.drive_to_N = convertASCIItoNumber(drive_to_N);
     }
-
+    /**
+     * Imposta la stanza in cui deve spostarsi il giocatore, in questo caso la stanza a est
+     * @param drive_to_E  identifica la stanza a est
+     */
     public void setDrive_to_E(int drive_to_E) {
         this.drive_to_E = convertASCIItoNumber(drive_to_E);
     }
-
+    /**
+     * Imposta la stanza in cui deve spostarsi il giocatore, in questo caso la stanza a ovest
+     * @param drive_to_W  identifica la stanza a ovest
+     */
     public void setDrive_to_W(int drive_to_W) {
         this.drive_to_W = convertASCIItoNumber(drive_to_W);
     }
-
+    /**
+     * Imposta la stanza in cui deve spostarsi il giocatore, in questo caso la stanza a sud
+     * @param drive_to_S  identifica la stanza
+     */
     public void setDrive_to_S(int drive_to_S) {
         this.drive_to_S = convertASCIItoNumber(drive_to_S);
     }
+    /**
+     * Converte un carattere ASCII in un numero intero.
+     * @param asciinumber Il valore ASCII da convertire.
+     * @return Il numero intero corrispondente.
+     */
     public static int convertASCIItoNumber(int asciinumber){
         int converted;
         switch(asciinumber) {

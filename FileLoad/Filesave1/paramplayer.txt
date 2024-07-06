@@ -1,6 +1,6 @@
-Player: fs
+Player: testName1
 Health: 100
-Money: 0
+Money: 10
 Monster_killed: 0
 Category: warrior
 Potions: 0
@@ -11,7 +11,7 @@ Min_damage: 5
 Defense: 5
 Armour: armatura
 Weapon: spada
-X: 3
-Y: 3
-Stanza: 1
+X: 2
+Y: 8
+Stanza: 2
 Goldkey: 0
