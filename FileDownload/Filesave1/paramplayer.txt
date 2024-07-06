@@ -1,6 +1,6 @@
-Player: uh
+Player: fs
 Health: 100
-Money: 11
+Money: 0
 Monster_killed: 0
 Category: warrior
 Potions: 0
@@ -11,7 +11,7 @@ Min_damage: 5
 Defense: 5
 Armour: armatura
 Weapon: spada
-X: 8
-Y: 12
-Stanza: 3
+X: 3
+Y: 3
+Stanza: 1
 Goldkey: 0
