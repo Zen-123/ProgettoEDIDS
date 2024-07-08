@@ -392,7 +392,7 @@ public class func{
                             temp = temp + "{ ";
                             for (int i = 0; i < reference.currentStanza.lista_item.size(); i++) {
                                 if((i+1) == reference.currentStanza.lista_item.size())
-                                    temp = temp + reference.currentStanza.lista_item.get(i).getNome();
+                                    temp = temp + reference.currentStanza.lista_item.get(i).getNome()+" }";
 
                                 temp = temp + reference.currentStanza.lista_item.get(i).getNome() + ", ";
                             }
