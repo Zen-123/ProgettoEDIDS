@@ -31,6 +31,7 @@ Lo scopo del gioco è quello di sconfiggere il boss e conquistare il dungeon.
 - [ChatGPT 4]
 - [Claude 3.5 Sonnet ai]
 - [Jira] per le user stories
+- IDE: IntelliJ IDEA community edition e VS Code
 
 > Il salvataggio dei file di testo contenenti i dati avviene tramite le api di amazon aws, per poter caricare e/o scaricare eventuali file dal bucket è necessaria una connessione ad internet
 
@@ -48,9 +49,9 @@ Per poter eseguire il software è necessario prima di tutto scaricare il progett
 Una volta entrati nel terminale con la path relativa alla directory scaricata utilizzare i comandi:
 
 ```sh
-mvn compile
+mvn clean install
 
-java -cp target/classes MainGame
+java -jar target/DungeonUnipd-1.0-SNAPSHOT.jar 
 ```
 Per generare gli unit test utilizzare i comandi:
 ```sh
@@ -76,13 +77,13 @@ mvn test
 ### 3) Comandi testuali player 
 > Tasti **WASD** permettono di far muovere il player nella stanza
 >
-> Comandi **"Sud"**, **"Nord"**,**"Est"**,**"Ovest"** permettono al giocatore di cambiare stanza quando incontra rispettivamente i simboli **S**, **N**,**E**,**O** sulla mappa
+> Comandi **"sud"**, **"nord"**,**"est"**,**"ovest"** permettono al giocatore di cambiare stanza quando incontra rispettivamente i simboli **S**, **N**,**E**,**O** sulla mappa
 >
 > Comando **"take"** permette al giocatore di raccogliere un item
 >
 > Comando **"look"** permette al giocatore di avere un elenco generale degli oggetti presenti nella stanza
 >
-> Comando **"Potion"** permette al giocatore di utilizzare una pozione curativa, se la possiede
+> Comando **"potion"** permette al giocatore di utilizzare una pozione curativa, se la possiede
 >
 > Comando **"attack"** permette al giocatore di attaccare un mostro, se possiede una spada
 >
