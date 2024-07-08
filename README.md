@@ -53,10 +53,16 @@ mvn clean install
 
 java -jar target/DungeonUnipd-1.0-SNAPSHOT.jar 
 ```
-Per generare gli unit test utilizzare i comandi:
+Per generare il sito javadoc utilizzare i comandi:
+```sh
+mvn javadoc:javadoc
+```
+Per generare il sito dei system test utilizzare i comandi:
 ```sh
 mvn test
+mvn site
 ```
+
 ## Nota:
 > Il progetto è stato sviluppato usando OpenJDK 22 e contiene dipendenze maven che potrebbero non essere compatibili con altre versioni di JDK.
 > Per poter eseguire il software, ci si deve assicurare che le dipendenze maven siano coerenti con la versione JDK utilizzata 
