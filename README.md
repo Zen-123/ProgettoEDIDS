@@ -65,7 +65,9 @@ mvn site
 
 ## Nota:
 > Il progetto è stato sviluppato usando OpenJDK 22 e contiene dipendenze maven che potrebbero non essere compatibili con altre versioni di JDK.
-> Per poter eseguire il software, ci si deve assicurare che le dipendenze maven siano coerenti con la versione JDK utilizzata 
+> Per poter eseguire il software, ci si deve assicurare che le dipendenze maven siano coerenti con la versione JDK utilizzata
+>
+> Attenzione, il software potrebbe lanciare errori o eccezioni se mancano le cartelle Filesave1, Filesave2, Filesave3, Filesave4 all'interno di FileLoad e la cartella FileDownload con le sue quattro sottocartelle FileLoad(1-4)  nel progetto, se questo avviene crearle manualmente nella directory principale (facendo ls da terminale si devono vedere src, target, ecc).
 
 ## Comandi di gioco 
 ### 1) Bottoni menu
