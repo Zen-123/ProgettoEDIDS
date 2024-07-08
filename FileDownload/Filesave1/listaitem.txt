@@ -1,1 +1,0 @@
-spada,10,3,0,true,2,false,20,1,2,I

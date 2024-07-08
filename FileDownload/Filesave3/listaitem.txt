@@ -1,2 +1,0 @@
-spada,25,5,0,true,2,false,20,1,2,I
-spada,15,2,0,true,4,false,20,8,1,I
