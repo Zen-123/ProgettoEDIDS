@@ -8,10 +8,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
 
+
 import javax.swing.JPanel;
 
 import Board.Cell;
 import Board.reference;
+
 
 /**
  * Classe che gestisce le meccaniche di gioco.
@@ -158,12 +160,12 @@ public class gameBoard extends JPanel implements KeyListener {
                 switch(reference.ui.commandTextField.getText().toLowerCase()) {
                     case "take":
                     if(reference.item != null){
-                        reference.functions.takeItem();  
+                        reference.functions.takeItem();
                     }else{
-                        reference.ui.commandTextField.setText(""); 
+                        reference.ui.commandTextField.setText("");
                     }
                     break;
-                    case "no": 
+                    case "no":
                         if(reference.player.isAttacking() || reference.player.getSpada().CanAttack()){
                             reference.ui.commandTextField.setText("");
                         }
@@ -192,6 +194,7 @@ public class gameBoard extends JPanel implements KeyListener {
                     case "ovest":
                         reference.player.setspawnTo('E');
                         reference.functions.changeRoomAndWriteToFile(reference.currentStanza.getDrive_to_W());
+
                         break;
                     case "attack":
                         if(reference.currentStanza.lista_mostri.size() > 0 && reference.player.getSpada().CanAttack()){
@@ -199,7 +202,7 @@ public class gameBoard extends JPanel implements KeyListener {
                         }else{
                             reference.ui.gameB.requestFocus();
                             reference.ui.commandTextField.setText("");
-                        }  
+                        }
                         break;
                     case "run":
                         reference.functions.playerIsRunning();
@@ -231,7 +234,7 @@ public class gameBoard extends JPanel implements KeyListener {
                                             vManager.showMenuScreen();
                                             break;
                                         } else {
-                                            
+
                                             // vManager.showGameScreen();
                                             break;
                                         }
@@ -257,6 +260,7 @@ public class gameBoard extends JPanel implements KeyListener {
                         }
                         break;
                     case "exit":
+                        reference.filereader.ResetDirectory();
                         vManager.showMenuScreen();
                         break;
 

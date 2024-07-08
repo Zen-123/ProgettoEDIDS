@@ -36,7 +36,6 @@ public class MainGame {
     public MainGame(){
         reference.ui.createUI();
         manager.showMenuScreen();
-
     }
 
     /**

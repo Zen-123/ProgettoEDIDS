@@ -47,8 +47,10 @@ public class Readfile {
      * @param ss Lista di stringhe contenente informazioni aggiuntive sulla stanza.
      * @param stanza Matrice di celle rappresentante la stanza.
      * @param filename Il nome del file su cui scrivere.
+     * @param aws flag che gestisce il salvataggio di dati in base alla destinazione del file (bucket aws oppure cartella locale)
      */
-    public void fileToWrite(ArrayList<String> ss, ArrayList<ArrayList<Cell>> stanza, String filename){
+    public void fileToWrite(ArrayList<String> ss, ArrayList<ArrayList<Cell>> stanza, String filename,boolean aws){
+
         try{
             writer = new FileWriter(filename);
             for (int i = 0; i <= stanza.size()-1; i++) {
@@ -56,33 +58,10 @@ public class Readfile {
                     if(i == (stanza.size()-1))
                         writer.write(ss.get(i).charAt(j));
                     else if(stanza.get(i).get(j).getSymbol() == 'A'){
-                        writer.write('.');
-                    }else{
-                        writer.write(stanza.get(i).get(j).getSymbol());
-                    }
-                }
-                writer.write("\n");
-            }
-            writer.close();
-        }catch(Exception e){
-            e.getStackTrace();
-        }
-    }  /**
-     * Scrive il contenuto di una stanza su un file per AWS.
-     * Simile a fileToWrite, ma gestisce diversamente il simbolo 'A'.
-     * @param ss Lista di stringhe contenente informazioni aggiuntive sulla stanza.
-     * @param stanza Matrice di celle rappresentante la stanza.
-     * @param filename Il nome del file su cui scrivere.
-     */
-    public void fileToWriteAWS(ArrayList<String> ss, ArrayList<ArrayList<Cell>> stanza, String filename){
-        try{
-            writer = new FileWriter(filename);
-            for (int i = 0; i <= stanza.size()-1; i++) {
-                for (int j = 0; j < stanza.get(0).size(); j++) {
-                    if(i == (stanza.size()-1))
-                        writer.write(ss.get(i).charAt(j));
-                    else if(stanza.get(i).get(j).getSymbol() == 'A'){
-                        writer.write('A');
+                        if(aws)
+                            writer.write('A');
+                        else
+                            writer.write('.');
                     }else{
                         writer.write(stanza.get(i).get(j).getSymbol());
                     }
@@ -94,11 +73,13 @@ public class Readfile {
             e.getStackTrace();
         }
     }
+
     /**
      * Resetta la directory Stanzeold eliminando tutti i file al suo interno.
      * Questo metodo viene chiamato all'avvio del gioco per pulire i dati precedenti.
      * @throws IllegalArgumentException se viene trovata una directory illegale.
-     */    public void ResetDirectory(){
+     */
+    public void ResetDirectory(){
 
         File path = new File("src/main/java/Board/Stanzeold/");
         if (!path.exists()){
@@ -112,7 +93,7 @@ public class Readfile {
                     throw new IllegalArgumentException("E presente una directory illegale: ");
                 }else{
                     allfiles[i].delete();
-                }    
+                }
             }
         }
     }

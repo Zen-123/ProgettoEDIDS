@@ -8,14 +8,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Spliterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.xml.stream.events.Characters;
-
 import Board.Board;
-import Board.Cell;
 import Board.Readfile;
 import Board.func;
 import Board.reference;
@@ -35,7 +30,6 @@ public class choiceHandler implements ActionListener {
      * Contatore generale per i 4 slot di salvataggio.
      */
     public static int counterFile = 0;
-
     /**
      * Contatore per i file già scaricati al primo caricamento del gioco.
      */
@@ -105,11 +99,11 @@ public class choiceHandler implements ActionListener {
                 apre il menù di selezione del personaggio
              */
             case "Start":
-                
+
                 vManager.checkLoad = false;
                 vManager.showStartScreen();
                 setNewGame();
-
+                reference.filereader.ResetDirectory();
                 break;
             /*
                 gestisce il bottone: exitButton,
@@ -132,7 +126,14 @@ public class choiceHandler implements ActionListener {
              */
             case "Load":
                 vManager.showLoadScreen();
+
+                reloadFile = true;
+
                 setLoad("Filesave1");
+                setLoad("Filesave2");
+                setLoad("Filesave3");
+                setLoad("Filesave4");
+                reloadFile = false;
                 break;
             /*
                 gestisce il bottone: loadMessageButton
@@ -166,20 +167,25 @@ public class choiceHandler implements ActionListener {
         userInterfaceHandler.commandLoadTextField.setText("");
         //torna alla pagina iniziale
         if (input.toLowerCase().equals("back") || input.toLowerCase().equals("exit")) {
+            reference.filereader.ResetDirectory();
             vManager.showMenuScreen();
         }
 
         if(input.toLowerCase().equals("slot 1")){
+            reference.filereader.ResetDirectory();
             checkSlotExistence(dirNameArray[0], 1);
         }
         if(input.toLowerCase().equals("slot 2")){
+            reference.filereader.ResetDirectory();
             checkSlotExistence(dirNameArray[1], 2);
         }
         if(input.toLowerCase().equals("slot 3")){
+            reference.filereader.ResetDirectory();
             checkSlotExistence(dirNameArray[2],3);
 
         }
         if(input.toLowerCase().equals("slot 4")){
+            reference.filereader.ResetDirectory();
             checkSlotExistence(dirNameArray[3],4);
         }
 
@@ -238,7 +244,7 @@ public class choiceHandler implements ActionListener {
             File fileSave;
             //salvo la stanza in cui sono con queste modifiche
             checkExistingRepository("FileLoad",repository);
-            reference.filereader.fileToWriteAWS(reference.currentStanza.ss,reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt");
+            reference.filereader.fileToWrite(reference.currentStanza.ss,reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt",true);
             //creazione del file
             
             File path = new File("src/main/java/Board/Stanzeold/");
@@ -256,15 +262,15 @@ public class choiceHandler implements ActionListener {
                         fileSave.createNewFile();
                         ArrayList<String> ss = new ArrayList<String>();
                         ss = reference.filereader.fileToRead("src/main/java/Board/Stanzeold/"+allfiles[i].getName()); 
+                        upload = new uploadFile(repository,allfiles[i].getName());
                         FileWriter writer = new FileWriter(fileSave);
                         if(ss.size() > 0){
                             for (int j = 0; j < ss.size(); j++) {
                                 writer.write(ss.get(j));
                                 if((j+1) != ss.size())
-                                    writer.write("\n");    
+                                    writer.write("\n");
                             }
-                        upload = new uploadFile(repository,allfiles[i].getName());
-                        }  
+                        }
                         writer.close();
                     }
                 }
@@ -322,7 +328,7 @@ public class choiceHandler implements ActionListener {
                             
                     }
                 }
-                Board playerboard = new Board(reference.player.getID(),true);
+                Board playerboard = new Board(reference.player.getID(),false);
                 reference.lista_stanze.add(playerboard);
                 reference.currentStanza = playerboard;
             //caricamento del nuovo file su aws
@@ -458,7 +464,6 @@ public class choiceHandler implements ActionListener {
             upload = new uploadFile(repository,"paramplayer.txt");
             System.out.println("File sovrascritto");
             reloadFile = true;
-            setLoad("paramplayer.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -473,7 +478,7 @@ public class choiceHandler implements ActionListener {
             //salvataggio del file sulla cartella FileLoad
             File fileSave;
             //salvo la stanza in cui sono con queste modifiche
-            reference.filereader.fileToWriteAWS(reference.currentStanza.ss, reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt");
+            reference.filereader.fileToWrite(reference.currentStanza.ss, reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt",true);
             //creazione del file
             checkExistingRepository("FileLoad",repository);
             File path = new File("src/main/java/Board/Stanzeold/");
@@ -488,20 +493,18 @@ public class choiceHandler implements ActionListener {
                     }else{
                         //devo copiare contenuto da stanzeold in filesave
                         fileSave = new File("FileLoad/"+repository+"/"+allfiles[i].getName());
-                        fileSave.createNewFile();
-                        ArrayList<String> ss = new ArrayList<String>();
-                        ss = reference.filereader.fileToRead("src/main/java/Board/Stanzeold/"+allfiles[i].getName()); 
+                        ArrayList<String>  ss = reference.filereader.fileToRead("src/main/java/Board/Stanzeold/"+allfiles[i].getName());
                         FileWriter writer = new FileWriter(fileSave);
+                        upload = new uploadFile(repository,allfiles[i].getName());
                         if(ss.size() > 0){
                             for (int j = 0; j < ss.size(); j++) {
                                 writer.write(ss.get(j));
                                 if((j+1) != ss.size())
-                                    writer.write("\n");    
+                                    writer.write("\n");
                             }
-                        upload = new uploadFile(repository,allfiles[i].getName());
-                        reloadFile = true;
-                        setLoad(allfiles[i].getName());
-                        }  
+                            reloadFile = true;
+                        //setLoad(allfiles[i].getName());
+                        }
                         writer.close();
                     }
                 }
@@ -546,7 +549,6 @@ public class choiceHandler implements ActionListener {
             //caricamento del nuovo file su aws
             upload = new uploadFile(repository,"listamonster.txt");
             reloadFile = true;
-            setLoad("listamonster.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -595,7 +597,6 @@ public class choiceHandler implements ActionListener {
             //caricamento del nuovo file su aws
             upload = new uploadFile(repository,"listaitem.txt");
             reloadFile = true;
-            setLoad("listaitem.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -618,9 +619,9 @@ public class choiceHandler implements ActionListener {
             //se un file non esiste in locale ma è presente nel bucket viene scaricato
             if (!fileLoad.exists() || reloadFile) {
                 if(reloadFile){
-                    fileLoad.delete();
-                    reloadFile = false;
-                }
+                    deleteDirectory(new File("FileDownload/"+s));
+
+                    }
                 DownloadFile downloadFIle = new DownloadFile(s, userInterfaceHandler);
             } else {
                 //dovro fare il controllo tra il numero di file salvati sul bucket e quelli in locale e dici 
@@ -632,6 +633,20 @@ public class choiceHandler implements ActionListener {
 
         reloadFile = false;
 
+    }
+
+    /**
+     * Elimina la directory corrente compresi tutti i file al suo interno
+     * @param directoryToBeDeleted la directory da eliminare
+     */
+    public static boolean deleteDirectory(File directoryToBeDeleted) {
+        File[] allContents = directoryToBeDeleted.listFiles();
+        if (allContents != null) {
+            for (File file : allContents) {
+                deleteDirectory(file);
+            }
+        }
+        return directoryToBeDeleted.delete();
     }
     /**
      * Controlla l'esistenza delle repository e le crea se necessario.
@@ -685,7 +700,7 @@ public class choiceHandler implements ActionListener {
                     else if(counter == 5)
                         reference.player.setCategory(matcher.group(1));
                     else if(counter == 6)
-                        reference.player.setNum_pozioni(Integer.parseInt(matcher.group(1)));  
+                        reference.player.setNum_pozioni(Integer.parseInt(matcher.group(1)));
                     else if(counter == 7)
                         reference.player.setPeso(0);
                     else if(counter == 8)
@@ -708,8 +723,8 @@ public class choiceHandler implements ActionListener {
                         reference.player.setID(Integer.parseInt((matcher.group(1))));
                     else if(counter == 17)
                         reference.player.setGoldkeyAWS(Integer.parseInt((matcher.group(1))));
-               }
-               counter++;
+                }
+                counter++;
             }
             br.close();
             //lista mostri e lista item uguale a player stesso modus operandi
@@ -721,7 +736,7 @@ public class choiceHandler implements ActionListener {
             if(all_files.length > 0){
                 reference.filereader.ResetDirectory();
                 for (int i = 0; i < all_files.length; i++) {
-                    
+
                     if(all_files[i].getName().compareTo("listamonster.txt") == 0){
                         //qui spostiamo riempimento mostri
                         String linemonster;
@@ -744,7 +759,7 @@ public class choiceHandler implements ActionListener {
                 brmonster.close();
                 setFileDaLoadAstanzeOld("FileLoad/Filesave"+k+"/");
             }
-            if(!reference.lista_stanze.isEmpty()){
+            if(reference.lista_stanze.size() > 0){
                 for (int i = 0; i < reference.lista_stanze.size(); i++) {
                     for (int j = 0; j < listamostri.size(); j++) {
                         if(reference.lista_stanze.get(i).getid() == listamostri.get(j).getIdstanza())
@@ -757,7 +772,7 @@ public class choiceHandler implements ActionListener {
                 }
             }
         }catch (Exception e){
-            System.out.println("File già scaricato");
+            System.out.println("File già scaricato!");
         }
 
     }
@@ -774,7 +789,10 @@ public class choiceHandler implements ActionListener {
         reference.item = new Item();
         reference.currentStanza = new Board(1);
         reference.filereader.ResetDirectory();
+        reference.lista_stanze = new ArrayList<Board>();
+        reference.startGame = false;
     }
+
     /**
      * Verifica l'esistenza di uno slot di salvataggio e lo carica se presente.
      *

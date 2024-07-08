@@ -4,13 +4,18 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import UI.choiceHandler;
-import Board.reference;
 import UI.UI;
+import UI.choiceHandler;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.core.sync.ResponseTransformer;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.*;
+import software.amazon.awssdk.services.s3.model.GetObjectRequest;
+import software.amazon.awssdk.services.s3.model.ListObjectsV2Request;
+import software.amazon.awssdk.services.s3.model.ListObjectsV2Response;
+import software.amazon.awssdk.services.s3.model.S3Exception;
+import software.amazon.awssdk.services.s3.model.S3Object;
 
 /**
  * Classe per gestire il download di file da un bucket Amazon S3.
@@ -21,7 +26,8 @@ public class DownloadFile {
     private final String bucketName = "test-dungeonunipd";
     private final String downloadDir = "FileDownload/";
     private UI uiManager;
-    private choiceHandler handler;
+    private static final String AWS_ACCESS_KEY_ID = "AKIAXYKJU6P4MEEC5C76";
+    private static final String AWS_SECRET_ACCESS_KEY = "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";
 
     /**
      * Costruttore della classe DownloadFile.
@@ -31,10 +37,10 @@ public class DownloadFile {
      * @param ui L'oggetto UI per gestire l'interfaccia utente.
      */
     public DownloadFile(String directory, UI ui) {
+        AwsBasicCredentials awsCreds = AwsBasicCredentials.create(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY);
         Region region = Region.EU_WEST_3;
-        try (S3Client s3 = S3Client.builder().region(region).build()) {
+        try (S3Client s3 = S3Client.builder().region(region).credentialsProvider(StaticCredentialsProvider.create(awsCreds)).build()) {
             uiManager = ui;
-            handler = new choiceHandler(ui);
             ListObjectsV2Request listRequest = ListObjectsV2Request.builder()
                     .bucket(bucketName)
                     .prefix(directory + "/")
@@ -97,24 +103,14 @@ public class DownloadFile {
      * @param directory La directory di cui si sta aggiornando lo stato.
      * @param success Indica se il download è avvenuto con successo.
      */
+
     private void updateUILabel(String directory, boolean success) {
         String labelText = success ? "Save slot " : "-";
-        if(success){
-            if(directory.contains("1")) {
-                handler.setupLoad(1);
-            }else if (directory.contains("2")) {
-                handler.setupLoad(2);
-            }else if(directory.contains("3")){
-                handler.setupLoad(3);
-            }else if(directory.contains("4")){
-                handler.setupLoad(4);
-            }
-        }
         switch (directory) {
-            case "Filesave1" -> uiManager.loadLabel1.setText(success ? labelText + "1 -- Name: "+ reference.player.getNome() : labelText);
-            case "Filesave2" -> uiManager.loadLabel2.setText(success ? labelText + "2 -- Name: " + reference.player.getNome(): labelText);
-            case "Filesave3" -> uiManager.loadLabel3.setText(success ? labelText + "3 -- Name: " + reference.player.getNome() : labelText);
-            case "Filesave4" -> uiManager.loadLabel4.setText(success ? labelText + "4 -- Name: " + reference.player.getNome(): labelText);
+            case "Filesave1" -> uiManager.loadLabel1.setText(success ? labelText + "1" : labelText);
+            case "Filesave2" -> uiManager.loadLabel2.setText(success ? labelText + "2" : labelText);
+            case "Filesave3" -> uiManager.loadLabel3.setText(success ? labelText + "3" : labelText);
+            case "Filesave4" -> uiManager.loadLabel4.setText(success ? labelText + "4" : labelText);
             default -> throw new IllegalStateException("Unexpected directory: " + directory);
         }
     }

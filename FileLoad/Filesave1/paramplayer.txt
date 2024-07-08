@@ -1,6 +1,6 @@
-Player: testName1
+Player: t1
 Health: 100
-Money: 10
+Money: 0
 Monster_killed: 0
 Category: warrior
 Potions: 0

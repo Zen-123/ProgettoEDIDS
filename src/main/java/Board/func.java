@@ -210,7 +210,7 @@ public class func{
      * @param drive_to ID della stanza di destinazione.
      */
     public void changeRoomAndWriteToFile(int drive_to){
-        reference.filereader.fileToWrite(reference.currentStanza.ss,reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt");
+        reference.filereader.fileToWrite(reference.currentStanza.ss,reference.currentStanza.cellestanza,"src/main/java/Board/Stanzeold/stanza_"+reference.curr_stanza+".txt",false);
 
          // stanza vecchia prendi dal file
          for (int i = 0; i < reference.lista_stanze.size(); i++) {
@@ -224,8 +224,8 @@ public class func{
             }
         }
         //se stanza è nuova prendila dal file
-        if(!reference.alreadybeen){
-            if(!reference.startGame){
+        if(reference.alreadybeen == false){
+            if(reference.startGame == false){
                 reference.lista_stanze.add(reference.currentStanza);
                 reference.startGame = true;
                 reference.ui.messageTextArea.setText("Una nuova stanza...\n...\nHai la sensazione di non trovarti da solo....");

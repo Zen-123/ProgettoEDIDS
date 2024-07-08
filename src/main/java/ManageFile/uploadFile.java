@@ -4,10 +4,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
+import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
-import software.amazon.awssdk.core.sync.RequestBody;
 
 /**
  * Classe per gestire il caricamento di una directory e di un file su un bucket Amazon S3.
@@ -20,17 +22,14 @@ public class uploadFile {
 
     /** Regione AWS in cui si trova il bucket S3. */
     private final Region region = Region.EU_WEST_3;
-    /**
-     * Costruttore della classe uploadFile.
-     * Inizializza il caricamento di un file e di una directory specifica su Amazon S3.
-     *
-     * @param repositoryname Il nome della directory da caricare sul bucket aws
-     * @param filename Il nome del file da caricare sul bucket aws
-     * @throws IOException Se si verifica un errore durante la lettura o il caricamento del file.
-     */
+    /**Credenziali per accesso al bucket aws*/
+    private static final String AWS_ACCESS_KEY_ID = "AKIAXYKJU6P4MEEC5C76";
+    private static final String AWS_SECRET_ACCESS_KEY = "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";
+
     public uploadFile(String repositoryname, String filename) throws IOException {
+        AwsBasicCredentials awsCreds = AwsBasicCredentials.create(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY);
         try (InputStream file = new FileInputStream("FileLoad/" + repositoryname + "/" + filename);
-             S3Client s3Client = S3Client.builder().region(region).build()) {
+             S3Client s3Client = S3Client.builder().region(region).credentialsProvider(StaticCredentialsProvider.create(awsCreds)).build()) {
 
             PutObjectRequest request = PutObjectRequest.builder()
                     .bucket(bucketName)
