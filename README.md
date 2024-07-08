@@ -2,20 +2,22 @@
 
 ## Breve descrizione del gioco:
 
-DUNGEON UNIPD è un text adventure ambientato in un dungeon avente otto stanze più una nona stanza segreta.
+DUNGEON UNIPD è un text adventure ambientato in un dungeon avente nove stanze più una decima stanza segreta.
 Lo scopo del gioco è quello di sconfiggere il boss e conquistare il dungeon.
 
 ## Caratteristiche del gioco:
 - Il gioco permette di selezionare tra 3 divese classi: **"Warrior"**, **"Archer"**, **"Thief"** ognuna con le sue specifice caratteristiche 
-- Il giocatore può muoversi liberamente all'interno di ogni stanza usando i comandi da tastiera ***WASD*** 
+- Il giocatore può muoversi liberamente all'interno di ogni stanza usando i comandi da tastiera ***WASD*** o con le frecce direzionali
 - Il giocatore durante l'esplorazione delle stanze può incontrare delle porte che gli permettono di cambiare stanza usando i comandi: **"Nord"**,**"Sud"**,**"Est"**,**"Ovest"** in base alla porta trovata.
 - Nelle stanze si possono trovare dei mostri, generati casualmente, che possono attaccare il giocatore quando si avvicina
 - Il giocatore, se possiede una spada, può rispondere all'attacco con il comando **"attack"** oppure scappare con il comando **"run"**
-- Il giocatore può raccogliere degli oggetti presenti nelle stanze con il comando **"take"**
+- Il giocatore può raccogliere degli oggetti presenti nelle stanze con il comando **"take"** oppure passandoci sopra
+- Il giocatore può curarsi con il comando **"potion"**
+- Il giocatore può controllare se ci sono alcuni oggetti per la stanza con il comando **"look"**
 - Ogni oggetto ha un suo peso specifico
 - L'inventario del giocatore ha una capienza massima di 100
 - Tutti gli oggetti e i mostri che si possono trovare nelle stanze del dungeon sono generati casualmente 
-- Il giocatore perde la partita quando la sua vita arriva a 0
+- Il giocatore perde la partita quando la sua vita scende a 0
 - Il giocatore vince la partita quando sconfigge il boss finale 
 - Il gioco permette di avere fino a 4 slot salvataggi utilizzabili con il comando **"slot (1-4)"**
 - Il gioco permette di salvare la partita in uno dei 4 slot salvataggio liberi con il comando **"save (1 -4)"** oppure sovrascrivendo un precedente slot 
@@ -46,7 +48,7 @@ Lo scopo del gioco è quello di sconfiggere il boss e conquistare il dungeon.
 
 Per poter eseguire il software è necessario prima di tutto scaricare il progetto contenuto nella branch ***Main***
 
-Una volta entrati nel terminale con la path relativa alla directory scaricata utilizzare i comandi:
+Una volta entrati nel terminale con il percorso relativo alla directory scaricata, o in alternativa se in ambiente Windows cercare la cartella scaricata e aprire il terminale direttamente dalla cartella cosi vi sarà fornito il percorso direttamente, utilizzare i comandi:
 
 ```sh
 mvn clean install
@@ -83,9 +85,10 @@ mvn site
 > Comando **"back" / "exit"** permette di tornare indietro dalla finestra di **LOAD** al menu di gioco
 
 ### 3) Comandi testuali player 
-> Tasti **WASD** permettono di far muovere il player nella stanza
+> Tutti i comandi del pannello di gioco vanno confermati premendo il tasto invio
+> Tasti **WASD** o frecce direzionali permettono di far muovere il player nella stanza
 >
-> Comandi **"sud"**, **"nord"**,**"est"**,**"ovest"** permettono al giocatore di cambiare stanza quando incontra rispettivamente i simboli **S**, **N**,**E**,**O** sulla mappa
+> Comandi **"sud"**, **"nord"**,**"est"**,**"ovest"** permettono al giocatore di cambiare stanza quando incontra rispettivamente i simboli **S**, **N**,**E**,**W** sulla mappa
 >
 > Comando **"take"** permette al giocatore di raccogliere un item
 >
@@ -97,6 +100,10 @@ mvn site
 >
 > Comando **"run"** permette al giocatore di scappare da un mostro
 >
+> Comando **"look"** permette al giocatore guardare se sono presenti degli oggetti nella stanza
+>
+> Comando **"no"** permette di rifiutare di compiere un azione se si ha cambiato idea
+> 
 > Comando **"save (1-4)"** permette al giocatore di salvare la partita in uno dei 4 slot di salvataggio disponibili, es. **save 1** salva la partita nello slot salvataggio 1
 >
 > Comando **"exit"** permette al giocatore di ritornare al menu principale senza salvare la partita corrente
