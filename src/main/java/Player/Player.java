@@ -108,6 +108,7 @@ public class Player extends entity{
      */
     public void removeGoldKey(){
         this.goldkey -= 1;
+        this.peso -= 10;
     }
     /**
      * Restituisce l'oggetto spada del giocatore.

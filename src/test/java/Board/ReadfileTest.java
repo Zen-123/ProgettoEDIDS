@@ -76,7 +76,7 @@ public class ReadfileTest {
             reference.currentStanza.ss.add("..");
 
             // metodo da testare
-            readfile.fileToWrite(reference.currentStanza.ss,stanza, tempFile.getAbsolutePath(), false);
+            readfile.fileToWrite(reference.currentStanza.ss,stanza, tempFile.getAbsolutePath(),false);
 
             // verifica dei risultati ottenuti dopo scrittura su file
             BufferedReader reader = new BufferedReader(new FileReader(tempFile));

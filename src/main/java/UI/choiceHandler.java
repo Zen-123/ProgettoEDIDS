@@ -665,7 +665,7 @@ public class choiceHandler implements ActionListener {
         }
    }
     /**
-     * Carica i dati scaricati su giocatore attuale
+     * Carica i dati scaricati dal bucket aws sul giocatore attuale
      *
      * @param k Indice della directory di salvataggio da caricare.
      */
@@ -723,8 +723,8 @@ public class choiceHandler implements ActionListener {
                         reference.player.setID(Integer.parseInt((matcher.group(1))));
                     else if(counter == 17)
                         reference.player.setGoldkeyAWS(Integer.parseInt((matcher.group(1))));
-                }
-                counter++;
+               }
+               counter++;
             }
             br.close();
             //lista mostri e lista item uguale a player stesso modus operandi

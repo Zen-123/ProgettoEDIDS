@@ -3,6 +3,7 @@ package Board;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -118,27 +119,25 @@ class funcTest {
         int beforebattle = reference.mostro.getVita();
         reference.functions.playerIsAttacking();
         int afterbattle = reference.mostro.getVita();
-        assertEquals(true, afterbattle <= beforebattle);
-        
+        assertTrue(afterbattle <= beforebattle);
     }
     @Test
     void testCheckWhatYouBumped(){
         reference.player.setPeso(0);
         reference.player.setGoldKey();
         reference.player.setKeyLoad(2);
-        assertEquals(true, reference.functions.checkwhatyoubumped(0, 0));
-        assertEquals(true, reference.functions.checkwhatyoubumped(1, 0));
-        assertEquals(true, reference.functions.checkwhatyoubumped(3, 0));
-        assertEquals(false, reference.functions.checkwhatyoubumped(4, 0));
-        assertEquals(true, reference.functions.checkwhatyoubumped(4, 1));
+        assertTrue(reference.functions.checkwhatyoubumped(0, 0));
+        assertTrue(reference.functions.checkwhatyoubumped(1, 0));
+        assertTrue(reference.functions.checkwhatyoubumped(3, 0));
+        assertFalse(reference.functions.checkwhatyoubumped(4, 0));
+        assertTrue(reference.functions.checkwhatyoubumped(4, 1));
+        assertFalse(reference.functions.checkwhatyoubumped(0, 1));
+        assertFalse(reference.functions.checkwhatyoubumped(1, 1));
+        assertFalse(reference.functions.checkwhatyoubumped(2, 1));
+        assertFalse(reference.functions.checkwhatyoubumped(3, 1));
 
-        assertEquals(false, reference.functions.checkwhatyoubumped(0, 1));
-        assertEquals(false, reference.functions.checkwhatyoubumped(1, 1));
-        assertEquals(false, reference.functions.checkwhatyoubumped(2, 1));
-        assertEquals(false, reference.functions.checkwhatyoubumped(3, 1));
-
-        assertEquals(false, reference.functions.checkwhatyoubumped(3, 2));
-        assertEquals(false, reference.functions.checkwhatyoubumped(2, 3));
+        assertFalse(reference.functions.checkwhatyoubumped(3, 2));
+        assertFalse(reference.functions.checkwhatyoubumped(2, 3));
 
     }
     @RepeatedTest(10)
@@ -209,6 +208,6 @@ class funcTest {
         //mi aspetto che mostro ogni volta cambia posizione
         int x_after = reference.currentStanza.lista_mostri.get(0).getX();
         int y_after = reference.currentStanza.lista_mostri.get(0).getY();
-        assertEquals(true, (x_before != x_after) || (y_before != y_after));
+        assertTrue((x_before != x_after) || (y_before != y_after));
     }
 }

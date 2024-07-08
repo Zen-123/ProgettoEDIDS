@@ -420,6 +420,7 @@ public class func{
                 reference.ui.messageTextArea.setText("Bevi l'intruglio magico\n...\nTi senti molto meglio ora");
                 reference.ui.commandTextField.setText("");
                 reference.functions.updateMonsterPosition();
+                reference.ui.gameB.requestFocus();
             }
             
         }else{
@@ -439,6 +440,8 @@ public class func{
                 reference.ui.messageTextArea.setText("Hai trovato un muro\n...\n...");
                 return false;
             case '.':
+                reference.player.setCanAttack(false);
+                reference.player.getSpada().setCanAttack(false);
                 reference.ui.messageTextArea.setText("...\n...\n...");
                 return true;
             case 'C':
@@ -451,6 +454,7 @@ public class func{
                     reference.ui.messageTextArea.setText("Uno strano luccichio ... hai trovato una chiave\n...\n...");
                     return true;
                 }else
+                    reference.ui.messageTextArea.setText("Hai l'inventario pieno!\nDevi liberarti di qualcosa prima di poterlo raccogliere");
                     return false;
 
             case 'F':
@@ -459,14 +463,17 @@ public class func{
                     reference.ui.messageTextArea.setText("Uno strano luccichio ... hai trovato una chiave d'orata\nchissa che cosa aprirà?\n...");
                     return true;
                 }else
+                    reference.ui.messageTextArea.setText("Hai l'inventario pieno!\nDevi liberarti di qualcosa prima di poterlo raccogliere");
                     return false;
             case 'H':
                 if(reference.player.getPeso() <= 95){
                     reference.player.addPozioni();
                     reference.ui.messageTextArea.setText("Hai trovato una pozione\nHai raccolto la pozione\n...");
                     return true;
-                }else
+                }else{
+                    reference.ui.messageTextArea.setText("Hai l'inventario pieno!\nDevi liberarti di qualcosa prima di poterlo raccogliere");
                     return false;
+                }
             case 'N':
                 if(reference.currentStanza.getDrive_to_N() != 0){
                     reference.ui.messageTextArea.setText("Questa è la porta Nord!\nVuoi attraversarla?\nScrivi [Nord] per entrare altrimenti [no] ");
@@ -531,7 +538,7 @@ public class func{
                 for (int i = 0; i < reference.currentStanza.lista_mostri.size(); i++) {
                     if(reference.currentStanza.lista_mostri.get(i).getX() == x && reference.currentStanza.lista_mostri.get(i).getY() == y){
                         reference.mostro = reference.currentStanza.lista_mostri.get(i);
-                        reference.ui.messageTextArea.setText("Hai incontrato un "+reference.mostro.getNome()+"!\nVuoi attaccarlo o scappare?\n"+reference.mostro.getNome()+" danno "+reference.mostro.getDanno_max()+" - "+reference.mostro.getDanno_min()+" difesa "+reference.mostro.getDifesa()+" vita "+reference.mostro.getVita()+"");
+                        reference.ui.messageTextArea.setText("Hai incontrato un "+reference.mostro.getNome()+"!\nVuoi attaccarlo [attack] o scappare [run] ?\n"+reference.mostro.getNome()+" danno "+reference.mostro.getDanno_max()+" - "+reference.mostro.getDanno_min()+" difesa "+reference.mostro.getDifesa()+" vita "+reference.mostro.getVita()+"");
                         reference.player.getSpada().setCanAttack(true);
                         reference.player.setCanAttack(true);
                         reference.mostrorun = reference.currentStanza.lista_mostri.get(i);
@@ -578,7 +585,7 @@ public class func{
                 blockprobability = reference.player.getArmour().getDifesa();
 
             if(attack_turn)
-                reference.ui.messageTextArea.setText(monster.getNome()+" ti ha inflitto "+danno+" danni, hai bloccato "+blockprobability+" danni\n");
+                reference.ui.messageTextArea.setText(monster.getNome()+" ti ha inflitto "+danno+" danni, hai bloccato "+blockprobability+" danni\nVuoi attaccarlo [attack] o scappare [run] via?");
             else
                 reference.ui.messageTextArea.setText(monster.getNome()+" ti ha inflitto "+danno+" danni, hai bloccato "+blockprobability+" danni\nHai inflitto "+dannoplayer+" danni il "+monster.getNome()+" ha bloccato "+blockprobabilitymonster+" danni\n"+monster.getNome()+" vita: "+monster.getVita());
 
