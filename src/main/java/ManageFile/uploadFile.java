@@ -23,11 +23,9 @@ public class uploadFile {
     /** Regione AWS in cui si trova il bucket S3. */
     private final Region region = Region.EU_WEST_3;
     /**Credenziali per accesso al bucket aws*/
-    private static final String AWS_ACCESS_KEY_ID = "YourKey";
-    private static final String AWS_SECRET_ACCESS_KEY = "YourSecretKey";
+
 
     public uploadFile(String repositoryname, String filename) throws IOException {
-        AwsBasicCredentials awsCreds = AwsBasicCredentials.create(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY);
         try (InputStream file = new FileInputStream("FileLoad/" + repositoryname + "/" + filename);
              S3Client s3Client = S3Client.builder().region(region).credentialsProvider(StaticCredentialsProvider.create(awsCreds)).build()) {
 
