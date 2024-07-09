@@ -23,8 +23,8 @@ public class uploadFile {
     /** Regione AWS in cui si trova il bucket S3. */
     private final Region region = Region.EU_WEST_3;
     /**Credenziali per accesso al bucket aws*/
-    private static final String AWS_ACCESS_KEY_ID = "AKIAXYKJU6P4MEEC5C76";
-    private static final String AWS_SECRET_ACCESS_KEY = "MvcFjfBidxBelSJW/3YhmFO3wWXC7Z2QBU3uKrhk";
+    private static final String AWS_ACCESS_KEY_ID = "YourKey";
+    private static final String AWS_SECRET_ACCESS_KEY = "YourSecretKey";
 
     public uploadFile(String repositoryname, String filename) throws IOException {
         AwsBasicCredentials awsCreds = AwsBasicCredentials.create(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY);
