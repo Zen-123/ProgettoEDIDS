@@ -26,8 +26,7 @@ public class DownloadFile {
     private final String bucketName = "test-dungeonunipd";
     private final String downloadDir = "FileDownload/";
     private UI uiManager;
-    private static final String AWS_ACCESS_KEY_ID = "YourkeyID";
-    private static final String AWS_SECRET_ACCESS_KEY = "YourSecreAccesKey";
+    
 
     /**
      * Costruttore della classe DownloadFile.
@@ -37,7 +36,6 @@ public class DownloadFile {
      * @param ui L'oggetto UI per gestire l'interfaccia utente.
      */
     public DownloadFile(String directory, UI ui) {
-        AwsBasicCredentials awsCreds = AwsBasicCredentials.create(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY);
         Region region = Region.EU_WEST_3;
         try (S3Client s3 = S3Client.builder().region(region).credentialsProvider(StaticCredentialsProvider.create(awsCreds)).build()) {
             uiManager = ui;
