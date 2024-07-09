@@ -26,8 +26,8 @@ public class DownloadFile {
     private final String bucketName = "test-dungeonunipd";
     private final String downloadDir = "FileDownload/";
     private UI uiManager;
-    private static final String AWS_ACCESS_KEY_ID = "AKIAXYKJU6P4MEEC5C76";
-    private static final String AWS_SECRET_ACCESS_KEY = "MvcFjfBidxBelSJW/3YhmFO3wWXC7Z2QBU3uKrhk";
+    private static final String AWS_ACCESS_KEY_ID = "YourkeyID";
+    private static final String AWS_SECRET_ACCESS_KEY = "YourSecreAccesKey";
 
     /**
      * Costruttore della classe DownloadFile.
